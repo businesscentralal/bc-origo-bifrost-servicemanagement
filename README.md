@@ -51,7 +51,7 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 
 | Folder | Content |
 | --- | --- |
-| `app/` | The AppSource app (`Bifrost Service Management`), no AL code yet |
+| `app/` | The AppSource app (`Bifrost Service Management`), registration and permission sets, no message types yet |
 | `test/` | Test app (`Bifrost Service Management - Tests`) |
 | `tools/` | Pipeline guard scripts |
 | `.AL-Go/`, `.github/`, `.alpaca/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
