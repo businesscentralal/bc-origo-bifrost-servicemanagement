@@ -1,0 +1,58 @@
+{
+  "id": "f74e6852-7965-4c14-afb7-1102e080cda7",
+  "name": "Bifrost Service Management",
+  "publisher": "Origo",
+  "version": "28.0.0.0",
+  "brief": "Bifrost Service Management - message types for service management",
+  "description": "Bifröst message types for the Service Management area of Business Central (service orders, service items, service contracts, service quotes), so an agent can operate it end to end.",
+  "url": "https://www.origo.is/",
+  "help": "https://docs.bifrost.origo.is/en-us/service-management/",
+  "privacyStatement": "https://docs.bifrost.origo.is/en-us/licensing/privacy/",
+  "EULA": "https://docs.bifrost.origo.is/en-us/licensing/eula/",
+  "applicationInsightsConnectionString": "InstrumentationKey=af411133-5e22-486f-b23a-081b79ed4168;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=c4476f32-5dfb-490a-8ad0-fb8ffad1c050",
+  "contextSensitiveHelpUrl": "https://docs.bifrost.origo.is/{0}/service-management/",
+  "keyVaultUrls": [],
+  "supportedLocales": [
+    "en-US",
+    "is-IS"
+  ],
+  "logo": "assets/Logo250x250.png",
+  "dependencies": [
+    {
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "publisher": "Origo",
+      "version": "28.0.5.590"
+    }
+  ],
+  "internalsVisibleTo": [
+    {
+      "id": "d39af77f-6b49-426f-a2ba-830ec3f35e21",
+      "name": "Bifrost Service Management - Tests",
+      "publisher": "Origo"
+    }
+  ],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.5.0.0",
+  "idRanges": [
+    {
+      "from": 10076035,
+      "to": 10076184
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "target": "Cloud",
+  "features": [
+    "TranslationFile"
+  ],
+  "propagateDependencies": false,
+  "runtime": "17.0",
+  "suppressWarnings": [
+    "AS0081"
+  ]
+}
