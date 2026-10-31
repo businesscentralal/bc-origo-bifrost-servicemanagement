@@ -15,7 +15,18 @@ Tests: 97700-97799
 
 Note: 10076035-10076134 was formerly claimed by the archived, never-released Cloud Events Orchestrator (`OrigoSoftwareSolutions/bc-cloudevents-orchestrator`); reused here by Gunnar's decision on 31.10.2026.
 
-No objects are allocated yet. Record every allocated id here as objects are created.
+Allocated ids (record every new id here):
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076035 | codeunit | Svc Registration ori |
+| 10076036 | permissionset | BIFROST Svc ori |
+| 10076037 | permissionsetextension | BIFROST SvcFull ori |
+| 10076038 | permissionsetextension | BIFROST SvcRead ori |
+| 97700 | codeunit (test) | Svc Test Install ori |
+| 97701 | codeunit (test) | Svc Test Upgrade ori |
+| 97702 | codeunit (test) | Svc Registration Tst ori |
+| 97703 | permissionset (test) | Svc Platform Tst ori |
 
 ## Microsoft source
 Business Central Service Management (service orders, service items, service contracts, service quotes) lives in the **Base Application**; BC 28 has no separate Microsoft service app to depend on. Source: https://github.com/microsoft/BCApps/tree/main/src/Layers/W1/BaseApp/Service
