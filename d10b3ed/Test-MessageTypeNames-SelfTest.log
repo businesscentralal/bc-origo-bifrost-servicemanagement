@@ -1,0 +1,1 @@
+Self-test passed: three-part names are accepted; 2-, 4- and 5-part names, empty parts, an unquoted name and a name with spaces are reported; comments, other enums and the test folder are ignored.

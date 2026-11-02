@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-02T03:06:27.908632+00:00",
+  "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+  "containerId": "f0b5efcc1df3",
+  "owner": "worker-8",
+  "verified": true,
+  "method": "Standard Remove-NAVCompany on individually-owned verification container, matched company IDs before removal; SQL readback after removal",
+  "companiesRemoved": [
+    {
+      "name": "CRONUS International Ltd.",
+      "id": "14154dfa-98d4-f111-925b-7c1e523f9136"
+    },
+    {
+      "name": "CRONUS W8 S4 Native",
+      "id": "025e42a3-64d6-f111-b7a5-8802bb6eebf0"
+    }
+  ],
+  "remainingCompany": "My Company",
+  "residualLicenceProbes": 0,
+  "residualXSvcCompanies": 0,
+  "scope": "All self-created native and MCP fixtures, temporary Quotes and company-specific test configuration removed with owned verification companies. Container retained for UAT/closure; stop requested separately.",
+  "containerStateReadback": {
+    "at": "2026-11-02T03:06:57.875Z",
+    "statusCode": 200,
+    "id": "f0b5efcc1df3",
+    "displayName": "worker8-service4-lifecycle-20261102",
+    "state": "Stopped"
+  },
+  "containerStopAccepted": true,
+  "containerRetained": true
+}

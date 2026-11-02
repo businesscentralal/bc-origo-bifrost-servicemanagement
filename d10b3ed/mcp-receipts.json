@@ -1,0 +1,2620 @@
+[
+  {
+    "at": "2026-11-02T03:03:46.531Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "messageType": "Service.Order.Release",
+      "detail": "full",
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.Release",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Releases a service order for warehouse handling with the standard Business Central release. To change it again, use Service.Order.Reopen.",
+        "selectionDescription": "Releases a service order for warehouse handling with the standard Business Central release. To change it again, use Service.Order.Reopen.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "release service order",
+          "release to ship"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          }
+        ],
+        "response": {
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentType",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "systemId",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerName",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusBefore",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusAfter",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "description": "Recalculated amount excluding VAT."
+            },
+            {
+              "name": "amountIncludingVAT",
+              "type": "number",
+              "description": "Recalculated amount including VAT."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "The order is already in the target state or has nothing to release.",
+            "fix": "Use Service.Order.Reopen to change a released order; otherwise add a line with type and quantity."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central rejected the operation; its error text is returned.",
+            "fix": "Correct the BC error and retry."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Changes Service Header Release Status through standard BC release/reopen, recalculating VAT and warehouse requests.",
+          "idempotent": false,
+          "permissionSet": "BIFROST Svc ori",
+          "preconditions": "Existing service order in the opposite release state; standard BC service validation applies."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "Release an open order for warehouse handling."
+          },
+          {
+            "name": "Service.Order.Reopen",
+            "useInsteadWhen": "Reopen a released order to change it."
+          },
+          {
+            "name": "Data.Records.Get",
+            "useInsteadWhen": "Read Service Header and Service Line."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Edit ordinary service fields, excluding Release Status."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation and posting are delivered by subsequent service lifecycle stories; only release/reopen are provided by this group."
+        },
+        "examples": [
+          {
+            "description": "Send this data to Service.Order.Release or Service.Order.Reopen.",
+            "data": {
+              "no": "SO000001"
+            }
+          }
+        ],
+        "overview": "Returns the service order identity, release status before and after the standard BC operation, and recalculated amounts.",
+        "notes": "Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  {
+    "at": "2026-11-02T03:03:47.042Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "messageType": "Service.Order.Release",
+      "detail": "full",
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.Release",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.",
+        "selectionDescription": "Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "gefa út þjónustupöntun",
+          "gefa út til afhendingar"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          }
+        ],
+        "response": {
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentType",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "systemId",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerName",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusBefore",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusAfter",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "description": "Recalculated amount excluding VAT."
+            },
+            {
+              "name": "amountIncludingVAT",
+              "type": "number",
+              "description": "Recalculated amount including VAT."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "The order is already in the target state or has nothing to release.",
+            "fix": "Use Service.Order.Reopen to change a released order; otherwise add a line with type and quantity."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central rejected the operation; its error text is returned.",
+            "fix": "Correct the BC error and retry."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Changes Service Header Release Status through standard BC release/reopen, recalculating VAT and warehouse requests.",
+          "idempotent": false,
+          "permissionSet": "BIFROST Svc ori",
+          "preconditions": "Existing service order in the opposite release state; standard BC service validation applies."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "Release an open order for warehouse handling."
+          },
+          {
+            "name": "Service.Order.Reopen",
+            "useInsteadWhen": "Reopen a released order to change it."
+          },
+          {
+            "name": "Data.Records.Get",
+            "useInsteadWhen": "Read Service Header and Service Line."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Edit ordinary service fields, excluding Release Status."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation and posting are delivered by subsequent service lifecycle stories; only release/reopen are provided by this group."
+        },
+        "examples": [
+          {
+            "description": "Send this data to Service.Order.Release or Service.Order.Reopen.",
+            "data": {
+              "no": "SO000001"
+            }
+          }
+        ],
+        "overview": "Returns the service order identity, release status before and after the standard BC operation, and recalculated amounts.",
+        "notes": "Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nViðbætur (Foundation 28.0.8 eða nýrri) geta kallað á `Argument.SetErrorContext(Parameter, Expected, NextStep)` fyrir aðgerð sem gæti mistekist eftir gagnaskrif og síðan `Argument.ClearErrorContext()` eftir að hún tekst. Gefðu upp heiti færibreytu og þýddan texta, aldrei gildi úr beiðni, skráarinnihald, aðgangsupplýsingar eða kallstafla. Foundation skilar þessu samhengi með upprunalegu `BusinessCentralError` eftir afturköllun, einnig við ómeðhöndlaðar verkefnisvillur; `RespondWithLastError()` notar það líka. Viðmótið grípur ekki villur, staðfestir ekki gagnaskrif og breytir ekki færslumörkum. Haltu `Codeunit.Run` án skilagildis og láttu villur berast áfram þegar `OmitCommit` köll eru keðjuð; bættu aldrei við Boolean `Codeunit.Run` eða `TryFunction` sem skrifar gögn til að endurheimta samhengi. Samhengið er hreinsað milli skilaboða. Kallendur án samhengis halda óbreyttri uppbyggingu svars; þekktar læsingarvillur halda núverandi `Retryable` leiðbeiningum.\r\nSkilaboðagerð sem má aðeins keyra eftir einni leið (Foundation 28.0.9 eða nýrri) les `Argument.GetInvocationSource()`: `Queue` þegar verkraðari keyrir skilaboð sem biðraðarviðmótið setti í röð, `Task` fyrir verkviðmótið (`/tasks`), `Dispatcher` fyrir innra kall í gegnum `Dispatcher ori` (innbyggða MCP-verkfæraþjóninn, hreiðrað kall úr annarri skilaboðagerð) og `Direct` fyrir aðgerðina Keyra vinnslu á síðunni Skilaboð og allt sem ekki er skráð. Aðeins Foundation skráir gildið; gildi í beiðni, færibreytur, uppruni, efni og skrif í færibreytuna breyta því ekki. Hafnaðu öðrum leiðum með `PreconditionFailed` og `nextStep` sem nefnir leiðina sem á að nota.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  {
+    "at": "2026-11-02T03:03:46.748Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "messageType": "Service.Order.Reopen",
+      "detail": "full",
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.Reopen",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Reopens a released service order so it can be changed again.",
+        "selectionDescription": "Reopens a released service order so it can be changed again.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "reopen service order",
+          "change released order"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          }
+        ],
+        "response": {
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentType",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "systemId",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerName",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusBefore",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusAfter",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "description": "Recalculated amount excluding VAT."
+            },
+            {
+              "name": "amountIncludingVAT",
+              "type": "number",
+              "description": "Recalculated amount including VAT."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "The order is already in the target state or has nothing to release.",
+            "fix": "Use Service.Order.Reopen to change a released order; otherwise add a line with type and quantity."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central rejected the operation; its error text is returned.",
+            "fix": "Correct the BC error and retry."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Changes Service Header Release Status through standard BC release/reopen, recalculating VAT and warehouse requests.",
+          "idempotent": false,
+          "permissionSet": "BIFROST Svc ori",
+          "preconditions": "Existing service order in the opposite release state; standard BC service validation applies."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "Release an open order for warehouse handling."
+          },
+          {
+            "name": "Service.Order.Reopen",
+            "useInsteadWhen": "Reopen a released order to change it."
+          },
+          {
+            "name": "Data.Records.Get",
+            "useInsteadWhen": "Read Service Header and Service Line."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Edit ordinary service fields, excluding Release Status."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation and posting are delivered by subsequent service lifecycle stories; only release/reopen are provided by this group."
+        },
+        "examples": [
+          {
+            "description": "Send this data to Service.Order.Release or Service.Order.Reopen.",
+            "data": {
+              "no": "SO000001"
+            }
+          }
+        ],
+        "overview": "Returns the service order identity, release status before and after the standard BC operation, and recalculated amounts.",
+        "notes": "Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  {
+    "at": "2026-11-02T03:03:47.258Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "messageType": "Service.Order.Reopen",
+      "detail": "full",
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.Reopen",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Enduropnar útgefna þjónustupöntun svo hægt sé að breyta henni aftur.",
+        "selectionDescription": "Enduropnar útgefna þjónustupöntun svo hægt sé að breyta henni aftur.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "enduropna þjónustupöntun",
+          "breyta útgefinni pöntun"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          }
+        ],
+        "response": {
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentType",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "systemId",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerNo",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "customerName",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusBefore",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "releaseStatusAfter",
+              "type": "string",
+              "description": "Order identity or invariant state. Release states are Open and ReleasedToShip."
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "description": "Recalculated amount excluding VAT."
+            },
+            {
+              "name": "amountIncludingVAT",
+              "type": "number",
+              "description": "Recalculated amount including VAT."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "The order is already in the target state or has nothing to release.",
+            "fix": "Use Service.Order.Reopen to change a released order; otherwise add a line with type and quantity."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central rejected the operation; its error text is returned.",
+            "fix": "Correct the BC error and retry."
+          },
+          {
+            "code": "Retryable",
+            "when": "A transient lock or deadlock caught while writing or posting. The error preserves Business Central's original text. Uncaught errors are Retryable only for types with effect write.",
+            "fix": "Retry the same call after a few seconds; nothing was changed."
+          }
+        ],
+        "effect": {
+          "effect": "write",
+          "changes": "Changes Service Header Release Status through standard BC release/reopen, recalculating VAT and warehouse requests.",
+          "idempotent": false,
+          "permissionSet": "BIFROST Svc ori",
+          "preconditions": "Existing service order in the opposite release state; standard BC service validation applies."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "Release an open order for warehouse handling."
+          },
+          {
+            "name": "Service.Order.Reopen",
+            "useInsteadWhen": "Reopen a released order to change it."
+          },
+          {
+            "name": "Data.Records.Get",
+            "useInsteadWhen": "Read Service Header and Service Line."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Edit ordinary service fields, excluding Release Status."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation and posting are delivered by subsequent service lifecycle stories; only release/reopen are provided by this group."
+        },
+        "examples": [
+          {
+            "description": "Send this data to Service.Order.Release or Service.Order.Reopen.",
+            "data": {
+              "no": "SO000001"
+            }
+          }
+        ],
+        "overview": "Returns the service order identity, release status before and after the standard BC operation, and recalculated amounts.",
+        "notes": "Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nViðbætur (Foundation 28.0.8 eða nýrri) geta kallað á `Argument.SetErrorContext(Parameter, Expected, NextStep)` fyrir aðgerð sem gæti mistekist eftir gagnaskrif og síðan `Argument.ClearErrorContext()` eftir að hún tekst. Gefðu upp heiti færibreytu og þýddan texta, aldrei gildi úr beiðni, skráarinnihald, aðgangsupplýsingar eða kallstafla. Foundation skilar þessu samhengi með upprunalegu `BusinessCentralError` eftir afturköllun, einnig við ómeðhöndlaðar verkefnisvillur; `RespondWithLastError()` notar það líka. Viðmótið grípur ekki villur, staðfestir ekki gagnaskrif og breytir ekki færslumörkum. Haltu `Codeunit.Run` án skilagildis og láttu villur berast áfram þegar `OmitCommit` köll eru keðjuð; bættu aldrei við Boolean `Codeunit.Run` eða `TryFunction` sem skrifar gögn til að endurheimta samhengi. Samhengið er hreinsað milli skilaboða. Kallendur án samhengis halda óbreyttri uppbyggingu svars; þekktar læsingarvillur halda núverandi `Retryable` leiðbeiningum.\r\nSkilaboðagerð sem má aðeins keyra eftir einni leið (Foundation 28.0.9 eða nýrri) les `Argument.GetInvocationSource()`: `Queue` þegar verkraðari keyrir skilaboð sem biðraðarviðmótið setti í röð, `Task` fyrir verkviðmótið (`/tasks`), `Dispatcher` fyrir innra kall í gegnum `Dispatcher ori` (innbyggða MCP-verkfæraþjóninn, hreiðrað kall úr annarri skilaboðagerð) og `Direct` fyrir aðgerðina Keyra vinnslu á síðunni Skilaboð og allt sem ekki er skráð. Aðeins Foundation skráir gildið; gildi í beiðni, færibreytur, uppruni, efni og skrif í færibreytuna breyta því ekki. Hafnaðu öðrum leiðum með `PreconditionFailed` og `nextStep` sem nefnir leiðina sem á að nota.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:38.690Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableNumber": 5900,
+        "data": [
+          {
+            "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+            "fields": {
+              "ReleaseStatus": "Released to Ship"
+            }
+          }
+        ]
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "PermissionDenied",
+      "error": "Field Release Status (130) in table 5900 (Service Header) cannot be written via Data.Records.Set.",
+      "parameter": "data[0].fields.ReleaseStatus",
+      "received": "Released to Ship",
+      "expected": "a field the user may write (Bifrost Field Access)",
+      "nextStep": "Use Service.Order.Release / Service.Order.Reopen",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:38.909Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableNumber": 5900,
+        "data": [
+          {
+            "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+            "fields": {
+              "Description": "Worker8 Service4 verified EN"
+            }
+          }
+        ]
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Set",
+      "result": [
+        {
+          "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4EN"
+          },
+          "fields": {
+            "Description": "Worker8 Service4 verified EN"
+          }
+        }
+      ],
+      "status": "Success",
+      "insertedCount": 0,
+      "modifiedCount": 1
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:32.180Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Get",
+      "data": {
+        "tableNumber": 5900,
+        "tableView": "WHERE(No.=CONST(W8S4EN),Document Type=CONST(Order))"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 1,
+      "result": [
+        {
+          "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4EN"
+          },
+          "fields": {
+            "CustomerNo_": "W8S4CUST",
+            "BilltoCustomerNo_": "W8S4CUST",
+            "BilltoName": "Worker8 Service4 MCP fixture",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "",
+            "ShiptoCode": "",
+            "ShiptoName": "Worker8 Service4 MCP fixture",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-02",
+            "PostingDate": "2026-11-02",
+            "PostingDescription": "Order W8S4EN",
+            "PaymentTermsCode": "",
+            "DueDate": "2026-11-02",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "W8S4CUST",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "",
+            "PostingNo_": "",
+            "LastShippingNo_": "",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "CombineShipments": "false",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "Worker8 Service4 MCP fixture",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-02",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "",
+            "ShippingAgentCode": "",
+            "No_Series": "",
+            "PostingNo_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "Reserve": "Optional",
+            "AppliestoID": "",
+            "VATBaseDiscount_": "0",
+            "Status": "Pending",
+            "InvoiceDiscountCalculation": "None",
+            "InvoiceDiscountValue": "0",
+            "CompanyBankAccountCode": "",
+            "ReleaseStatus": "Open",
+            "VATReportingDate": "2026-11-02",
+            "IncomingDocumentEntryNo_": "0",
+            "TaxSystemType": "VAT",
+            "JournalTempl_Name": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DirectDebitMandateID": "",
+            "Doc_No_Occurrence": "1",
+            "ContactNo_": "CT000024",
+            "BilltoContactNo_": "CT000024",
+            "ResponsibilityCenter": "",
+            "ShippingAdvice": "Partial",
+            "ShippingTime": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Worker8 Service4 verified EN",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "02:39:08.557",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "2026-11-02",
+            "ResponseTime": "02:41:44.107",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "AssignedUserID": "",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-02T02:39:08.563Z",
+            "SystemCreatedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136",
+            "SystemModifiedAt": "2026-11-02T02:59:50.313Z",
+            "SystemModifiedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:31.083Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Get",
+      "data": {
+        "tableNumber": 5900,
+        "tableView": "WHERE(No.=CONST(W8S4EN),Document Type=CONST(Order))"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 1,
+      "result": [
+        {
+          "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4EN"
+          },
+          "fields": {
+            "CustomerNo_": "W8S4CUST",
+            "BilltoCustomerNo_": "W8S4CUST",
+            "BilltoName": "Worker8 Service4 MCP fixture",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "",
+            "ShiptoCode": "",
+            "ShiptoName": "Worker8 Service4 MCP fixture",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-02",
+            "PostingDate": "2026-11-02",
+            "PostingDescription": "Order W8S4EN",
+            "PaymentTermsCode": "",
+            "DueDate": "2026-11-02",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "W8S4CUST",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "",
+            "PostingNo_": "",
+            "LastShippingNo_": "",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "CombineShipments": "false",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "Worker8 Service4 MCP fixture",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-02",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "",
+            "ShippingAgentCode": "",
+            "No_Series": "",
+            "PostingNo_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "Reserve": "Optional",
+            "AppliestoID": "",
+            "VATBaseDiscount_": "0",
+            "Status": "Pending",
+            "InvoiceDiscountCalculation": "None",
+            "InvoiceDiscountValue": "0",
+            "CompanyBankAccountCode": "",
+            "ReleaseStatus": "Released to Ship",
+            "VATReportingDate": "2026-11-02",
+            "IncomingDocumentEntryNo_": "0",
+            "TaxSystemType": "VAT",
+            "JournalTempl_Name": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DirectDebitMandateID": "",
+            "Doc_No_Occurrence": "1",
+            "ContactNo_": "CT000024",
+            "BilltoContactNo_": "CT000024",
+            "ResponsibilityCenter": "",
+            "ShippingAdvice": "Partial",
+            "ShippingTime": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Worker8 Service4 verified EN",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "02:39:08.557",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "2026-11-02",
+            "ResponseTime": "02:41:44.107",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "AssignedUserID": "",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-02T02:39:08.563Z",
+            "SystemCreatedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136",
+            "SystemModifiedAt": "2026-11-02T02:59:49Z",
+            "SystemModifiedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:39.916Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4EN",
+        "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "ConflictingIdentifiers",
+      "error": "The identifiers do not identify the same service document.",
+      "parameter": "no/systemId/subject",
+      "nextStep": "Send identifiers belonging to the same service document.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:34.617Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "bad-guid"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "systemId must be a nonempty GUID.",
+      "parameter": "systemId",
+      "received": "bad-guid",
+      "expected": "GUID",
+      "nextStep": "Send the identifier in the format documented by describe_message_type.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:33.636Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {},
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "Send a service document no, systemId or plain subject.",
+      "parameter": "no/systemId",
+      "nextStep": "Send the identifier in the format documented by describe_message_type.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:35.036Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "",
+        "systemId": "bad-guid"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "MultipleErrors",
+      "error": "Nothing was changed.",
+      "errors": [
+        {
+          "code": "InvalidParameter",
+          "error": "no must be a nonempty JSON string of at most 20 characters.",
+          "parameter": "no",
+          "nextStep": "Send the identifier in the format documented by describe_message_type."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "error": "systemId must be a nonempty GUID.",
+          "parameter": "systemId",
+          "received": "bad-guid",
+          "expected": "GUID",
+          "nextStep": "Send the identifier in the format documented by describe_message_type."
+        }
+      ],
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:35.685Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4EN",
+        "extra": "x"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"extra\" is not declared by this message type. Nothing was executed.",
+      "parameter": "extra",
+      "expected": "declared request parameters",
+      "nextStep": "Remove this key or consult Help.Implementation.Get for the declared parameters.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:34.036Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4MISSING"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Service order W8S4MISSING was not found.",
+      "parameter": "no",
+      "received": "W8S4MISSING",
+      "nextStep": "Read the service orders with Data.Records.Get (table Service Header, Document Type = Order).",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:39.315Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "B08C3DF0-66D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "Service document W8S4EN is not an Order (actual type: Quote).",
+      "parameter": "systemId",
+      "received": "B08C3DF0-66D6-F111-B7A5-8F5831A3256F",
+      "expected": "Order",
+      "nextStep": "Send the No. or SystemId of a service order.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:30.801Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4EN"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4EN",
+      "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "Open",
+      "releaseStatusAfter": "ReleasedToShip",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:40.861Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4EN",
+        "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "ConflictingIdentifiers",
+      "error": "The identifiers do not identify the same service document.",
+      "parameter": "no/systemId/subject",
+      "nextStep": "Send identifiers belonging to the same service document.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:37.050Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "bad-guid"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "systemId must be a nonempty GUID.",
+      "parameter": "systemId",
+      "received": "bad-guid",
+      "expected": "GUID",
+      "nextStep": "Send the identifier in the format documented by describe_message_type.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:36.137Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {},
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "Send a service document no, systemId or plain subject.",
+      "parameter": "no/systemId",
+      "nextStep": "Send the identifier in the format documented by describe_message_type.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:37.716Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "",
+        "systemId": "bad-guid"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "MultipleErrors",
+      "error": "Nothing was changed.",
+      "errors": [
+        {
+          "code": "InvalidParameter",
+          "error": "no must be a nonempty JSON string of at most 20 characters.",
+          "parameter": "no",
+          "nextStep": "Send the identifier in the format documented by describe_message_type."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "error": "systemId must be a nonempty GUID.",
+          "parameter": "systemId",
+          "received": "bad-guid",
+          "expected": "GUID",
+          "nextStep": "Send the identifier in the format documented by describe_message_type."
+        }
+      ],
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:38.110Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4EN",
+        "extra": "x"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Parameter \"extra\" is not declared by this message type. Nothing was executed.",
+      "parameter": "extra",
+      "expected": "declared request parameters",
+      "nextStep": "Remove this key or consult Help.Implementation.Get for the declared parameters.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:36.652Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4MISSING"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Service order W8S4MISSING was not found.",
+      "parameter": "no",
+      "received": "W8S4MISSING",
+      "nextStep": "Read the service orders with Data.Records.Get (table Service Header, Document Type = Order).",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:40.321Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "B08C3DF0-66D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "Service document W8S4EN is not an Order (actual type: Quote).",
+      "parameter": "systemId",
+      "received": "B08C3DF0-66D6-F111-B7A5-8F5831A3256F",
+      "expected": "Order",
+      "nextStep": "Send the No. or SystemId of a service order.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:31.963Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4EN",
+      "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "ReleasedToShip",
+      "releaseStatusAfter": "Open",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:31.748Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "Service order W8S4EN is already released. Nothing was changed.",
+      "nextStep": "To change it, use Service.Order.Reopen.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Release\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:32.640Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4EN"
+      },
+      "lcid": 1033
+    },
+    "value": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "Service order W8S4EN is already open. Nothing to do.",
+      "nextStep": "Nothing to do. The service order can already be changed.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Reopen\". Always read the help before calling a message type."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:32.867Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {},
+      "lcid": 1033,
+      "subject": "W8S4EN"
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4EN",
+      "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "Open",
+      "releaseStatusAfter": "ReleasedToShip",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:33.083Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {},
+      "lcid": 1033,
+      "subject": "W8S4EN"
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4EN",
+      "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "ReleasedToShip",
+      "releaseStatusAfter": "Open",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:49.384Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableNumber": 5900,
+        "data": [
+          {
+            "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+            "fields": {
+              "ReleaseStatus": "Released to Ship"
+            }
+          }
+        ]
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "PermissionDenied",
+      "error": "Ekki er hægt að skrifa í reit Release Status (130) í töflu 5900 (Service Header) með Data.Records.Set.",
+      "parameter": "data[0].fields.ReleaseStatus",
+      "received": "Released to Ship",
+      "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+      "nextStep": "Notaðu Service.Order.Release / Service.Order.Reopen",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:49.710Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableNumber": 5900,
+        "data": [
+          {
+            "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+            "fields": {
+              "Description": "Worker8 Service4 verified IS"
+            }
+          }
+        ]
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Set",
+      "result": [
+        {
+          "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4IS"
+          },
+          "fields": {
+            "Description": "Worker8 Service4 verified IS"
+          }
+        }
+      ],
+      "status": "Success",
+      "insertedCount": 0,
+      "modifiedCount": 1
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:42.287Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Get",
+      "data": {
+        "tableNumber": 5900,
+        "tableView": "WHERE(No.=CONST(W8S4IS),Document Type=CONST(Order))"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 1,
+      "result": [
+        {
+          "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4IS"
+          },
+          "fields": {
+            "CustomerNo_": "W8S4CUST",
+            "BilltoCustomerNo_": "W8S4CUST",
+            "BilltoName": "Worker8 Service4 MCP fixture",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "",
+            "ShiptoCode": "",
+            "ShiptoName": "Worker8 Service4 MCP fixture",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-02",
+            "PostingDate": "2026-11-02",
+            "PostingDescription": "Order W8S4IS",
+            "PaymentTermsCode": "",
+            "DueDate": "2026-11-02",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "W8S4CUST",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "",
+            "PostingNo_": "",
+            "LastShippingNo_": "",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "CombineShipments": "false",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "Worker8 Service4 MCP fixture",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-02",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "",
+            "ShippingAgentCode": "",
+            "No_Series": "",
+            "PostingNo_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "Reserve": "Optional",
+            "AppliestoID": "",
+            "VATBaseDiscount_": "0",
+            "Status": "Pending",
+            "InvoiceDiscountCalculation": "None",
+            "InvoiceDiscountValue": "0",
+            "CompanyBankAccountCode": "",
+            "ReleaseStatus": "Open",
+            "VATReportingDate": "2026-11-02",
+            "IncomingDocumentEntryNo_": "0",
+            "TaxSystemType": "VAT",
+            "JournalTempl_Name": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DirectDebitMandateID": "",
+            "Doc_No_Occurrence": "1",
+            "ContactNo_": "CT000024",
+            "BilltoContactNo_": "CT000024",
+            "ResponsibilityCenter": "",
+            "ShippingAdvice": "Partial",
+            "ShippingTime": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Worker8 Service4 verified IS",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "02:44:52.563",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "2026-11-02",
+            "ResponseTime": "02:44:52.853",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "AssignedUserID": "",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-02T02:44:52.567Z",
+            "SystemCreatedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136",
+            "SystemModifiedAt": "2026-11-02T03:00:00.407Z",
+            "SystemModifiedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:41.311Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Data.Records.Get",
+      "data": {
+        "tableNumber": 5900,
+        "tableView": "WHERE(No.=CONST(W8S4IS),Document Type=CONST(Order))"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Get",
+      "status": "Success",
+      "noOfRecords": 1,
+      "result": [
+        {
+          "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "W8S4IS"
+          },
+          "fields": {
+            "CustomerNo_": "W8S4CUST",
+            "BilltoCustomerNo_": "W8S4CUST",
+            "BilltoName": "Worker8 Service4 MCP fixture",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "",
+            "ShiptoCode": "",
+            "ShiptoName": "Worker8 Service4 MCP fixture",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-02",
+            "PostingDate": "2026-11-02",
+            "PostingDescription": "Order W8S4IS",
+            "PaymentTermsCode": "",
+            "DueDate": "2026-11-02",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "W8S4CUST",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "",
+            "PostingNo_": "",
+            "LastShippingNo_": "",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "CombineShipments": "false",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "Worker8 Service4 MCP fixture",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-02",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "",
+            "ShippingAgentCode": "",
+            "No_Series": "",
+            "PostingNo_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "Reserve": "Optional",
+            "AppliestoID": "",
+            "VATBaseDiscount_": "0",
+            "Status": "Pending",
+            "InvoiceDiscountCalculation": "None",
+            "InvoiceDiscountValue": "0",
+            "CompanyBankAccountCode": "",
+            "ReleaseStatus": "Released to Ship",
+            "VATReportingDate": "2026-11-02",
+            "IncomingDocumentEntryNo_": "0",
+            "TaxSystemType": "VAT",
+            "JournalTempl_Name": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DirectDebitMandateID": "",
+            "Doc_No_Occurrence": "1",
+            "ContactNo_": "CT000024",
+            "BilltoContactNo_": "CT000024",
+            "ResponsibilityCenter": "",
+            "ShippingAdvice": "Partial",
+            "ShippingTime": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Worker8 Service4 verified IS",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "02:44:52.563",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "2026-11-02",
+            "ResponseTime": "02:44:52.853",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "AssignedUserID": "",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-02T02:44:52.567Z",
+            "SystemCreatedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136",
+            "SystemModifiedAt": "2026-11-02T02:59:59.433Z",
+            "SystemModifiedBy": "C04FBDDE-732A-4C29-9C8B-04BEFC02D136"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:50.638Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4IS",
+        "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "ConflictingIdentifiers",
+      "error": "Auðkennin vísa ekki á sama þjónustuskjalið.",
+      "parameter": "no/systemId/subject",
+      "nextStep": "Sendu auðkenni sem tilheyra sama þjónustuskjalinu.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:44.914Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "bad-guid"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "systemId verður að vera gilt GUID sem er ekki tómt.",
+      "parameter": "systemId",
+      "received": "bad-guid",
+      "expected": "GUID",
+      "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:43.943Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {},
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "Sendu no eða systemId þjónustuskjals eða númer þess í subject.",
+      "parameter": "no/systemId",
+      "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:45.676Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "",
+        "systemId": "bad-guid"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "MultipleErrors",
+      "error": "Engu var breytt.",
+      "errors": [
+        {
+          "code": "InvalidParameter",
+          "error": "no verður að vera JSON-strengur sem er ekki tómur og er að hámarki 20 stafir.",
+          "parameter": "no",
+          "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "error": "systemId verður að vera gilt GUID sem er ekki tómt.",
+          "parameter": "systemId",
+          "received": "bad-guid",
+          "expected": "GUID",
+          "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir."
+        }
+      ],
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:46.124Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4IS",
+        "extra": "x"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Viðfangið \"extra\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.",
+      "parameter": "extra",
+      "expected": "skilgreind beiðniviðföng",
+      "nextStep": "Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:44.469Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4MISSING"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Þjónustupöntun W8S4MISSING fannst ekki.",
+      "parameter": "no",
+      "received": "W8S4MISSING",
+      "nextStep": "Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:50.111Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "1E7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "Þjónustuskjal W8S4IS er ekki pöntun (raunveruleg gerð: Quote).",
+      "parameter": "systemId",
+      "received": "1E7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "expected": "Order",
+      "nextStep": "Sendu númer eða SystemId þjónustupöntunar.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:41.081Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "no": "W8S4IS"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4IS",
+      "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "Open",
+      "releaseStatusAfter": "ReleasedToShip",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:51.708Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4IS",
+        "systemId": "866C8193-66D6-F111-B7A5-ED6FD87D385A"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "ConflictingIdentifiers",
+      "error": "Auðkennin vísa ekki á sama þjónustuskjalið.",
+      "parameter": "no/systemId/subject",
+      "nextStep": "Sendu auðkenni sem tilheyra sama þjónustuskjalinu.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:47.721Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "bad-guid"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameterFormat",
+      "error": "systemId verður að vera gilt GUID sem er ekki tómt.",
+      "parameter": "systemId",
+      "received": "bad-guid",
+      "expected": "GUID",
+      "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:46.672Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {},
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "MissingParameter",
+      "error": "Sendu no eða systemId þjónustuskjals eða númer þess í subject.",
+      "parameter": "no/systemId",
+      "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:48.177Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "",
+        "systemId": "bad-guid"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "MultipleErrors",
+      "error": "Engu var breytt.",
+      "errors": [
+        {
+          "code": "InvalidParameter",
+          "error": "no verður að vera JSON-strengur sem er ekki tómur og er að hámarki 20 stafir.",
+          "parameter": "no",
+          "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "error": "systemId verður að vera gilt GUID sem er ekki tómt.",
+          "parameter": "systemId",
+          "received": "bad-guid",
+          "expected": "GUID",
+          "nextStep": "Sendu auðkennið á sniðinu sem describe_message_type lýsir."
+        }
+      ],
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:48.854Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4IS",
+        "extra": "x"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "UnknownParameter",
+      "error": "Viðfangið \"extra\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.",
+      "parameter": "extra",
+      "expected": "skilgreind beiðniviðföng",
+      "nextStep": "Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:47.105Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4MISSING"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "RecordNotFound",
+      "error": "Þjónustupöntun W8S4MISSING fannst ekki.",
+      "parameter": "no",
+      "received": "W8S4MISSING",
+      "nextStep": "Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:51.053Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "1E7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "Þjónustuskjal W8S4IS er ekki pöntun (raunveruleg gerð: Quote).",
+      "parameter": "systemId",
+      "received": "1E7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "expected": "Order",
+      "nextStep": "Sendu númer eða SystemId þjónustupöntunar.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:42.054Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4IS",
+      "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "ReleasedToShip",
+      "releaseStatusAfter": "Open",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:41.843Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {
+        "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "Þjónustupöntun W8S4IS hefur þegar verið gefin út. Engu var breytt.",
+      "nextStep": "Til að breyta henni, notaðu Service.Order.Reopen.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Release\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:42.948Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {
+        "no": "W8S4IS"
+      },
+      "lcid": 1039
+    },
+    "value": {
+      "status": "Error",
+      "code": "PreconditionFailed",
+      "error": "Þjónustupöntun W8S4IS er þegar opin. Ekkert að gera.",
+      "nextStep": "Ekkert að gera. Nú þegar er hægt að breyta þjónustupöntuninni.",
+      "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Reopen\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:43.192Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Release",
+      "data": {},
+      "lcid": 1039,
+      "subject": "W8S4IS"
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Release",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4IS",
+      "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "Open",
+      "releaseStatusAfter": "ReleasedToShip",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  },
+  {
+    "at": "2026-11-02T02:59:43.505Z",
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "args": {
+      "type": "Service.Order.Reopen",
+      "data": {},
+      "lcid": 1039,
+      "subject": "W8S4IS"
+    },
+    "value": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Reopen",
+      "status": "Success",
+      "documentType": "Order",
+      "documentNo": "W8S4IS",
+      "systemId": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "customerNo": "W8S4CUST",
+      "customerName": "Worker8 Service4 MCP fixture",
+      "releaseStatusBefore": "ReleasedToShip",
+      "releaseStatusAfter": "Open",
+      "amount": 50,
+      "amountIncludingVAT": 62.5
+    }
+  }
+]

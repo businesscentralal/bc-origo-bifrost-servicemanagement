@@ -1,0 +1,28 @@
+{
+  "at": "2026-11-02T02:45:16.161210+00:00",
+  "owner": "worker-8",
+  "repo": "businesscentralal/bc-origo-bifrost-servicemanagement",
+  "issue": 4,
+  "foundationSourceSha": "62fde654a424dce766656915e273592e2301c4c3",
+  "foundationVersion": "28.0.11.643",
+  "finding": "Data.Records.Set.SetPrimaryKeyFields validates in numeric field order. Service Item Line has Document No. field1 and Document Type field43; inserting an Order line validates DocumentNo with default Quote first and fails even when the Order exists.",
+  "repro": {
+    "tableNumber": 5901,
+    "data": [
+      {
+        "primaryKey": {
+          "DocumentType": "Order",
+          "DocumentNo_": "W8S4EN",
+          "LineNo_": 10000
+        },
+        "fields": {
+          "ServiceItemNo_": "W8S4SI"
+        }
+      }
+    ]
+  },
+  "evidence": "/workspace/evidence/servicemanagement4-resume-20261102/seed-en-service-item-line.json",
+  "workaround": "Created explicitly marked empty Quote with same No through MCP, then the actual Order service item line. Quotes remained isolated as wrong-document-type test fixtures and are removed with both owned verification companies. No Foundation edits or licence changes.",
+  "nextOwner": "Foundation retained source owner via Architect",
+  "nextAction": "Assign focused public primary-key dependency-order repair; do not take source from this task."
+}

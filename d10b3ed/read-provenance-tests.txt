@@ -1,0 +1,8 @@
+
+Welcome to the Server Admin Tool Shell!
+For a complete list of Server cmdlets type
+
+Get-Command -Module Microsoft.Dynamics.Nav.Management
+C:\Program Files\Microsoft Dynamics NAV\280\Service\Management
+[{"Name":"Bifrost Service Management","Version Major":28,"Version Minor":0,"Version Build":0,"Version Revision":0,"Source Commit ID":"d10b3edbf2d9041e9b9fb1bd5cb789304dc25688","Package Hash":"558F48094ADF06F290692B6E8F66811C6EA66E5AED3F12A11C75A372C7DA0B42"},{"Name":"Bifrost Service Management - Tests","Version Major":28,"Version Minor":0,"Version Build":0,"Version Revision":0,"Source Commit ID":"d10b3edbf2d9041e9b9fb1bd5cb789304dc25688","Package Hash":"770AE4FA97996C93A5351F74FB830908281BD6BBFA2345E4B799583AB834A3E7"},{"Name":"Bifrost Foundation","Version Major":28,"Version Minor":0,"Version Build":11,"Version Revision":643,"Source Commit ID":"62fde654a424dce766656915e273592e2301c4c3","Package Hash":"1F85AE848700A7CF1F2CF45E1D1E382F7156CD5636B194572247A116D9BFFFF2"}]
+[{"name":"CRONUS International Ltd_$AIT Test Method Line$2156302a-872f-4568-be0b-60968696f0d5"},{"name":"CRONUS International Ltd_$CAL Test Result$437dbf0e-84ff-417a-965d-ed2bb9650972"},{"name":"CRONUS International Ltd_$Test Method Line$23de40a6-dfe8-4f80-80db-d70f83ce8caf"},{"name":"CRONUS W8 S4 Native$AIT Test Method Line$2156302a-872f-4568-be0b-60968696f0d5"},{"name":"CRONUS W8 S4 Native$CAL Test Result$437dbf0e-84ff-417a-965d-ed2bb9650972"},{"name":"CRONUS W8 S4 Native$Test Method Line$23de40a6-dfe8-4f80-80db-d70f83ce8caf"},{"name":"My Company$AIT Test Method Line$2156302a-872f-4568-be0b-60968696f0d5"},{"name":"My Company$CAL Test Result$437dbf0e-84ff-417a-965d-ed2bb9650972"},{"name":"My Company$Test Method Line$23de40a6-dfe8-4f80-80db-d70f83ce8caf"}]

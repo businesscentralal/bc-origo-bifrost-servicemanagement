@@ -1,0 +1,264 @@
+{
+  "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+  "executed": 52,
+  "passed": 52,
+  "failed": 0,
+  "skipped": 0,
+  "languages": [
+    1033,
+    1039
+  ],
+  "createsOwnData": true,
+  "touchedMessageTypes": [
+    "Service.Order.Release",
+    "Service.Order.Reopen"
+  ],
+  "results": [
+    {
+      "at": "2026-11-02T02:59:51.713Z",
+      "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+      "containerId": "f0b5efcc1df3",
+      "languages": [
+        1033,
+        1039
+      ],
+      "touchedMessageTypes": [
+        "Service.Order.Release",
+        "Service.Order.Reopen"
+      ],
+      "createsOwnData": true,
+      "executed": 48,
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "complete": true,
+      "checks": [
+        {
+          "name": "tip-d10b3ed-en-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-read-released",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-repeat-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-read-open",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-repeat-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-subject-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-subject-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-missing",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-unknown",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-guid",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-multiple",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-undeclared",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-missing",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-unknown",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-guid",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-multiple",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-undeclared",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-guard",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-ordinary-edit",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-wrong-type",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Release-conflict",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-wrong-type",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-en-Service.Order.Reopen-conflict",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-read-released",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-repeat-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-read-open",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-repeat-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-subject-release",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-subject-reopen",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-missing",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-unknown",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-guid",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-multiple",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-undeclared",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-missing",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-unknown",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-guid",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-multiple",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-undeclared",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-guard",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-ordinary-edit",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-wrong-type",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Release-conflict",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-wrong-type",
+          "passed": true
+        },
+        {
+          "name": "tip-d10b3ed-is-Service.Order.Reopen-conflict",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+      "executed": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "label": "tip-d10b3ed-contract-release-1033",
+          "messageType": "Service.Order.Release",
+          "lcid": 1033,
+          "passed": true
+        },
+        {
+          "label": "tip-d10b3ed-contract-reopen-1033",
+          "messageType": "Service.Order.Reopen",
+          "lcid": 1033,
+          "passed": true
+        },
+        {
+          "label": "tip-d10b3ed-contract-release-1039",
+          "messageType": "Service.Order.Release",
+          "lcid": 1039,
+          "passed": true
+        },
+        {
+          "label": "tip-d10b3ed-contract-reopen-1039",
+          "messageType": "Service.Order.Reopen",
+          "lcid": 1039,
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

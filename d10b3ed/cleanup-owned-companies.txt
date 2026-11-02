@@ -1,0 +1,11 @@
+
+Welcome to the Server Admin Tool Shell!
+For a complete list of Server cmdlets type
+
+Get-Command -Module Microsoft.Dynamics.Nav.Management
+C:\Program Files\Microsoft Dynamics NAV\280\Service\Management
+REMOVED OWNED VERIFICATION COMPANY: CRONUS International Ltd.
+REMOVED OWNED VERIFICATION COMPANY: CRONUS W8 S4 Native
+{"Name":"My Company","Id":"83185a2c-9ad4-f111-925b-70a8a55288ee"}
+{"ResidualLicenceProbes":0}
+OWNED_FIXTURE_CLEANUP_VERIFIED

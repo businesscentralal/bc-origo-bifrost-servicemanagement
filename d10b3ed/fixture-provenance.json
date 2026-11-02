@@ -1,0 +1,309 @@
+{
+  "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+  "fixturesCreatedThrough": "Data.Records.Set",
+  "ledger": [
+    {
+      "tableNumber": 204,
+      "id": "4E34D674-66D6-F111-B7A5-ED6FD87D385A",
+      "primaryKey": {
+        "Code": "W8S4UNIT"
+      },
+      "fields": {
+        "Description": "Worker8 Service4 MCP unit"
+      }
+    },
+    {
+      "tableNumber": 27,
+      "id": "7CAADA83-66D6-F111-B7A5-ED6FD87D385A",
+      "primaryKey": {
+        "No_": "W8S4ITEM"
+      },
+      "fields": {
+        "Description": "Worker8 Service4 MCP item",
+        "BaseUnitofMeasure": "W8S4UNIT",
+        "Gen_Prod_PostingGroup": "RETAIL",
+        "VATProd_PostingGroup": "STANDARD",
+        "InventoryPostingGroup": "RESALE",
+        "UnitPrice": "10"
+      }
+    },
+    {
+      "tableNumber": 156,
+      "id": "8AAADA83-66D6-F111-B7A5-ED6FD87D385A",
+      "primaryKey": {
+        "No_": "W8S4RES"
+      },
+      "fields": {
+        "Name": "Worker8 Service4 MCP resource",
+        "Type": "Person",
+        "BaseUnitofMeasure": "W8S4UNIT",
+        "Gen_Prod_PostingGroup": "SERVICES",
+        "VATProd_PostingGroup": "STANDARD",
+        "UnitPrice": "10"
+      }
+    },
+    {
+      "tableNumber": 5940,
+      "id": "94AADA83-66D6-F111-B7A5-ED6FD87D385A",
+      "primaryKey": {
+        "No_": "W8S4SI"
+      },
+      "fields": {
+        "Description": "Worker8 Service4 MCP service item",
+        "CustomerNo_": "W8S4CUST"
+      }
+    },
+    {
+      "tableNumber": 5900,
+      "id": "866C8193-66D6-F111-B7A5-ED6FD87D385A",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "No_": "W8S4EN"
+      },
+      "fields": {
+        "CustomerNo_": "W8S4CUST",
+        "Description": "Worker8 Service4 MCP EN"
+      }
+    },
+    {
+      "tableNumber": 5900,
+      "id": "B08C3DF0-66D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Quote",
+        "No_": "W8S4EN"
+      },
+      "fields": {
+        "CustomerNo_": "W8S4CUST",
+        "Description": "Owned temporary generic-PK validation context"
+      }
+    },
+    {
+      "tableNumber": 5901,
+      "id": "E2C8ADF9-66D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentNo_": "W8S4EN",
+        "LineNo_": "10000",
+        "DocumentType": "Order"
+      },
+      "fields": {
+        "ServiceItemNo_": "W8S4SI"
+      }
+    },
+    {
+      "tableNumber": 5404,
+      "id": "FAE82051-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "ItemNo_": "W8S4ITEM",
+        "Code": "W8S4UNIT"
+      },
+      "fields": {
+        "Qty_perUnitofMeasure": "1"
+      }
+    },
+    {
+      "tableNumber": 205,
+      "id": "FCE82051-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "ResourceNo_": "W8S4RES",
+        "Code": "W8S4UNIT"
+      },
+      "fields": {
+        "Qty_perUnitofMeasure": "1"
+      }
+    },
+    {
+      "tableNumber": 5902,
+      "id": "BC792060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "DocumentNo_": "W8S4EN",
+        "LineNo_": "10000"
+      },
+      "fields": {
+        "Type": "Item",
+        "No_": "W8S4ITEM",
+        "ServiceItemLineNo_": "10000",
+        "Quantity": "2",
+        "UnitPrice": "10"
+      }
+    },
+    {
+      "tableNumber": 5902,
+      "id": "E5792060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "DocumentNo_": "W8S4EN",
+        "LineNo_": "20000"
+      },
+      "fields": {
+        "Type": "Resource",
+        "No_": "W8S4RES",
+        "ServiceItemLineNo_": "10000",
+        "Quantity": "3",
+        "UnitPrice": "10"
+      }
+    },
+    {
+      "tableNumber": 5900,
+      "id": "0C7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "No_": "W8S4IS"
+      },
+      "fields": {
+        "CustomerNo_": "W8S4CUST",
+        "Description": "Worker8 Service4 MCP IS"
+      }
+    },
+    {
+      "tableNumber": 5900,
+      "id": "1E7A2060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Quote",
+        "No_": "W8S4IS"
+      },
+      "fields": {
+        "CustomerNo_": "W8S4CUST",
+        "Description": "Owned temporary generic-PK validation context"
+      }
+    },
+    {
+      "tableNumber": 5901,
+      "id": "317A2060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentNo_": "W8S4IS",
+        "LineNo_": "10000",
+        "DocumentType": "Order"
+      },
+      "fields": {
+        "ServiceItemNo_": "W8S4SI"
+      }
+    },
+    {
+      "tableNumber": 5902,
+      "id": "387A2060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "DocumentNo_": "W8S4IS",
+        "LineNo_": "10000"
+      },
+      "fields": {
+        "Type": "Item",
+        "No_": "W8S4ITEM",
+        "ServiceItemLineNo_": "10000",
+        "Quantity": "2",
+        "UnitPrice": "10"
+      }
+    },
+    {
+      "tableNumber": 5902,
+      "id": "617A2060-67D6-F111-B7A5-8F5831A3256F",
+      "primaryKey": {
+        "DocumentType": "Order",
+        "DocumentNo_": "W8S4IS",
+        "LineNo_": "20000"
+      },
+      "fields": {
+        "Type": "Resource",
+        "No_": "W8S4RES",
+        "ServiceItemLineNo_": "10000",
+        "Quantity": "3",
+        "UnitPrice": "10"
+      }
+    }
+  ],
+  "customer": {
+    "company": "CRONUS International Ltd.",
+    "messageType": "Data.Records.Set",
+    "result": [
+      {
+        "id": "8E34CE4F-66D6-F111-B7A5-8802BB6EEBF0",
+        "primaryKey": {
+          "No_": "W8S4CUST"
+        },
+        "fields": {
+          "Name": "Worker8 Service4 MCP fixture",
+          "Gen_Bus_PostingGroup": "DOMESTIC",
+          "VATBus_PostingGroup": "DOMESTIC",
+          "CustomerPostingGroup": "DOMESTIC"
+        }
+      }
+    ],
+    "status": "Success",
+    "insertedCount": 1,
+    "modifiedCount": 0
+  },
+  "setup": {
+    "changeLogEntries": [
+      {
+        "at": "2026-11-02T02:35:13.969Z",
+        "table": 18,
+        "old": "0",
+        "requested": "All Fields"
+      },
+      {
+        "at": "2026-11-02T02:36:56.410Z",
+        "table": 27,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:27.488Z",
+        "table": 156,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:29.257Z",
+        "table": 204,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:30.902Z",
+        "table": 5900,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:32.602Z",
+        "table": 5901,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:34.269Z",
+        "table": 5902,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:35.937Z",
+        "table": 5911,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:37:37.610Z",
+        "table": 5940,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:43:30.577Z",
+        "table": 5404,
+        "old": "0",
+        "requested": "2"
+      },
+      {
+        "at": "2026-11-02T02:43:31.892Z",
+        "table": 205,
+        "old": "0",
+        "requested": "2"
+      }
+    ],
+    "changeLogActivatedWasAlreadyTrue": true
+  },
+  "temporaryQuotes": "Self-created same-number Quotes are required by Foundation643 PK field validation order; lifecycle assertions explicitly target Order, and both Quotes are included in owned-company cleanup.",
+  "cleanup": "See cleanup.json"
+}

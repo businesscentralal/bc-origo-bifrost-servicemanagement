@@ -1,0 +1,237 @@
+[
+  {
+    "ac": "AC01",
+    "criterion": "Release by `no` of an Open service order with an Item and a Resource line: `Release Status` is `Released to Ship`; response has `releaseStatusBefore = Open`, `releaseStatusAfter = ReleasedToShip`, `amount`, `amountIncludingVAT` equal to the header's recalculated amounts",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC02",
+    "criterion": "Release by `systemId` and by plain `subject` give the same result as by `no`",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC03",
+    "criterion": "Release of an order with no line that has a type and a quantity: BC's \"There is nothing to release\" text as `PreconditionFailed`, nothing changed",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC04",
+    "criterion": "Release with Location Mandatory on and an Item line without Location Code: BC's `TestField` text as `BusinessCentralError`, `Release Status` still Open (transaction rolled back)",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC05",
+    "criterion": "Release of an order that is already released: `PreconditionFailed`, nextStep names `Service.Order.Reopen`, nothing changed. Reopen of an Open order: `PreconditionFailed` \"nothing to do\"",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC06",
+    "criterion": "Reopen of a released order: `Release Status` is Open; response `releaseStatusBefore = ReleasedToShip`, `releaseStatusAfter = Open`",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC07",
+    "criterion": "A `systemId` of a service quote, invoice or credit memo: `InvalidParameter` (parameter `systemId`, expected `Order`); unknown `no`: `RecordNotFound`; `no` and `systemId` of two different orders: `ConflictingIdentifiers`",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC08",
+    "criterion": "Parameter validation: missing identifier answers `MissingParameter`; a `systemId` that is not a GUID answers `InvalidParameterFormat`; several problems with declared parameters in one call (for example an empty `no` together with a malformed `systemId`) answer `MultipleErrors` and change nothing. An undeclared key is refused by Foundation's strict dispatcher with `UnknownParameter` before the app runs; that is Foundation's contract, so test it on its own (`{\"no\":\"<order>\",\"extra\":\"x\"}` answers `UnknownParameter` for `extra`) and do not expect it inside `MultipleErrors`",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC09",
+    "criterion": "Omit Commit: a call under Omit Commit leaves no commit behind; the caller rolls back and the order has its old `Release Status` (both types)",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC10",
+    "criterion": "Write guard: `Data.Records.Set` on `Service Header` \"Release Status\" is refused with `PermissionDenied` and the hint naming `Service.Order.Release / Service.Order.Reopen`; other header fields (for example Description) stay writable; reads stay allowed",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate",
+    "amendmentSource": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/issues/4#issuecomment-6567708384"
+  },
+  {
+    "ac": "AC11",
+    "criterion": "Both types are listed by `describe_message_type` with the contract chapters envelope, target, parameters, response, errors, effect (`write`), related, workflow, examples, overview, notes; the errors chapter includes `Retryable`; the workflow names `Service.Quote.MakeOrder`, `Service.Allocation.Allocate`, `Service.Order.Release`, `Service.Order.Post`",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC12",
+    "criterion": "Both types are `Msg Interface ori` implementations with `AssertIsLicensed` and `AssertVersion1`: an unlicensed company (EULA not accepted) answers `EULA_REQUIRED` and changes nothing",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC13",
+    "criterion": "Catalogue texts in both languages. Release EN: \"Releases a service order for warehouse handling with the standard Business Central release. To change it again, use Service.Order.Reopen.\" IS: \"Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.\" Reopen EN: \"Reopens a released service order so it can be changed again.\" IS: \"Enduropnar útgefna þjónustupöntun svo hægt sé að breyta henni aftur.\" Keywords EN for Release include \"release service order, release to ship\"; IS include \"gefa út þjónustupöntun, gefa út til afhendingar\". The Icelandic keyword list has at least as many entries as the English list (`Test-IcelandicKeywordCounts.ps1`)",
+    "layer": "native + CI guard",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC14",
+    "criterion": "Refusal texts in English and Icelandic (table below) are labels with `is-IS=` comments; at lcid 1039 each refusal returns the Icelandic message and nextStep, at 1033 the English one; the xlf has a target for every label; `Test-IcelandicXlfInSync.ps1` and `Test-MixedLanguageLabels.ps1` pass",
+    "layer": "native + CI guard",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC15",
+    "criterion": "`BIFROST Svc ori` grants the new codeunits; a user with only `BIFROST SvcFull ori` runs both types; a user with only `BIFROST SvcRead ori` is refused by the platform (permission test, `SetExactPermissionSet`); the doc comment fix on the two permission objects is in",
+    "layer": "native",
+    "implementation": "implemented",
+    "verified": true,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "evidence": [
+      "native-full-suite.json",
+      "mcp-summary.json",
+      "guards.json"
+    ],
+    "verificationScope": "Owned BC28.5 native suite and MCP; independent bc29-w1 and UI remain separate"
+  },
+  {
+    "ac": "AC16",
+    "criterion": "Receipt on bc29-w1 (CRONUS): create a service order with `Data.Records.Set` (customer, service item line, one Item line, one Resource line), Release, read back, Reopen, read back, at 1033 and 1039; one refusal per language (release twice)",
+    "layer": "Claude Code receipt",
+    "implementation": "external receipt pending",
+    "verified": false,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688"
+  },
+  {
+    "ac": "AC17",
+    "criterion": "`tools/Test-MessageTypeNames.ps1` is copied from core and passes locally with `-SelfTest` and on `app/` (the run output goes in the PR body; CI wiring is #8, the Architect's); `Test-ObjectIdsUnique`, `Test-NoObsolete`, `Test-ContractParameterKeys` (run locally), `Test-PermissionCoverage` green; AL-Go Default and Test build green with CodeCop, UICop and AppSourceCop, 0 warnings; `.claude/CLAUDE.md` and README list every new id and both types; CHANGELOG entry under Unreleased",
+    "layer": "CI",
+    "implementation": "Implemented; local guards and analyzer compilation pass. AL-Go Default/Test pending.",
+    "verified": false,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688"
+  },
+  {
+    "ac": "AC18",
+    "criterion": "UAT: the Bifröst Tester releases and reopens a service order in English and Icelandic, tries a second release and an unknown order, and compares `Release Status` with the BC page",
+    "layer": "UAT",
+    "implementation": "external receipt pending",
+    "verified": false,
+    "sha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688"
+  }
+]

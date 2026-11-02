@@ -1,0 +1,108 @@
+- form "Company Information":
+  - main:
+    - button "Go to the previous document of the same type"
+    - button "Back"
+    - button "Make changes on the page"
+    - button "Share this page with other users or apps"
+    - button "Create a new entry." [disabled]
+    - button "Delete the information" [disabled]
+    - button "Not bookmarked": 
+    - button "This page will close in this window and it will open in a pop-up window.": 
+    - button "Toggle wide layout": 
+    - text: Company Information
+    - button "Dismiss"
+    - text: This page contains sensitive business data. You can set up a notification to alert you when data changes.
+    - button "Enable Field Monitoring"
+    - text: "|"
+    - button "Don't show this again."
+    - button "Expand notification message"
+    - menubar
+    - button "General" [expanded]:
+      - heading "General" [level=2]
+    - button "General, Show more": Show more
+    - button "Name"
+    - textbox "Name CRONUS International Ltd."
+    - button "Address"
+    - textbox "Address 5 The Ring"
+    - button "Address 2"
+    - textbox "Address 2 Westminster"
+    - button "City"
+    - textbox "City London"
+    - button "County"
+    - textbox "County (Blank)"
+    - button "Post Code"
+    - textbox "Post Code W2 8HG"
+    - button "Country/Region Code"
+    - button "Country/Region Code GB": GB
+    - button "Contact Name"
+    - textbox "Contact Name Adam Matteson"
+    - button "Phone No."
+    - button "Phone No. 0666-666-6666": 0666-666-6666
+    - button "VAT Registration No."
+    - button "VAT Registration No. 777777777": "777777777"
+    - button "GLN"
+    - textbox "GLN (Blank)"
+    - button "Use GLN in Electronic Documents"
+    - checkbox "Use GLN in Electronic Documents" [disabled]
+    - button "Use Registration No. in Electronic Document"
+    - checkbox "Use Registration No. in Electronic Document" [disabled]
+    - button "Picture"
+    - img "Picture Specifies the picture that has been set up for the company, such as a company logo."
+    - button "Communication" [expanded]:
+      - heading "Communication" [level=2]
+    - button "Communication, Show more": Show more
+    - button "Email"
+    - textbox "Email (Blank)"
+    - button "Home Page"
+    - textbox "Home Page (Blank)"
+    - button "Default Language Code"
+    - button "Default Language Code (Blank)"
+    - button "Contact No. SAF-T"
+    - button "Contact No. SAF-T (Blank)"
+    - button "Payments":
+      - heading "Payments" [level=2]
+    - button "Shipping":
+      - heading "Shipping" [level=2]
+    - button "Company Badge":
+      - heading "Company Badge" [level=2]
+    - button "User Experience" [expanded]:
+      - heading "User Experience" [level=2]
+    - button "Experience"
+    - button "Review or update the value for Experience"
+    - textbox "Experience Essential"
+    - button "Go to the next document of the same type"
+- dialog "Experience Tiers":
+  - main:
+    - heading "Experience Tiers" [level=1]
+    - menubar:
+      - menuitem "Search"
+    - menuitem "List layout selected"
+    - button ""
+    - button ""
+    - grid "Experience Tiers":
+      - rowgroup:
+        - row "Error Experience Tier Open menu for Experience Tier More Options":
+          - columnheader "Error"
+          - columnheader "Experience Tier Open menu for Experience Tier":
+            - button "Experience Tier"
+            - button "Open menu for Experience Tier"
+          - columnheader "More Options"
+      - row "Experience Tier Essential Show more options":
+        - rowheader
+        - gridcell "Experience Tier Essential":
+          - button "Experience Tier Essential": Essential
+        - gridcell "Show more options":
+          - button "Show more options"
+      - row "Experience Tier Premium" [selected]:
+        - rowheader
+        - gridcell "Experience Tier Premium":
+          - button "Experience Tier Premium": Premium
+        - gridcell:
+          - button "Show more options"
+    - button "OK"
+    - button "Cancel"
+- dialog "You cannot upgrade to the Premium experience because you do not have a Premium license assigned to you. Your administrator must assign the license to you in Office 365 and then synchronize the license information in Business Central from the Users page.":
+  - main:
+    - paragraph: You cannot upgrade to the Premium experience because you do not have a Premium license assigned to you. Your administrator must assign the license to you in Office 365 and then synchronize the license information in Business Central from the Users page.
+    - button "OK"
+- text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
