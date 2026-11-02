@@ -188,6 +188,7 @@ codeunit 97712 "Svc Lookup Tests ori"
         TempArgument: Record "Message Argument ori" temporary;
         ActualHeader: Record "Service Header";
     begin
+        TempArgument.Insert();
         TempArgument.Subject := CopyStr(Subject, 1, MaxStrLen(TempArgument.Subject));
         TempArgument.SetRequestJson(Request);
         Assert.IsTrue(Lookup.FindDocument(TempArgument, ExpectedHeader."Document Type", ActualHeader), 'Expected document lookup to succeed.');
@@ -201,6 +202,7 @@ codeunit 97712 "Svc Lookup Tests ori"
         Header: Record "Service Header";
         Response: JsonObject;
     begin
+        TempArgument.Insert();
         TempArgument.Subject := CopyStr(Subject, 1, MaxStrLen(TempArgument.Subject));
         TempArgument.SetRequestJson(Request);
         Assert.IsFalse(Lookup.FindDocument(TempArgument, Header."Document Type"::Order, Header), 'Expected document lookup refusal.');
