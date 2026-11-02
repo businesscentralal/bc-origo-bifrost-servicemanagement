@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-02T03:34:17.209468+00:00",
+  "results": [
+    {
+      "guard": "Test-BifrostPipeline",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-SharedAlpacaContainer",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-ContractParameterKeys",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-HelpLinks",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-IcelandicKeywordCounts",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-IcelandicXlfInSync",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-MessageTypeNames",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-MixedLanguageLabels",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-NoClientCallstack",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-NoObsolete",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-ObjectIdsUnique",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-PermissionCoverage",
+      "exitCode": 0
+    },
+    {
+      "guard": "Test-ValidatedTableView",
+      "exitCode": 0
+    }
+  ]
+}

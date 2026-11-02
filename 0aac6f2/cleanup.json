@@ -1,0 +1,24 @@
+{
+  "candidateSha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+  "at": "2026-11-02T03:38:03.215Z",
+  "retainedDevelopment": {
+    "containerId": "f0b5efcc1df3",
+    "name": "worker8-service4-lifecycle-20261102",
+    "use": "download compiler symbols for assigned PR repair",
+    "stopRequestStatus": 204,
+    "readbackState": "Stopped",
+    "newBcFixtureRecords": 0,
+    "deployedCandidate": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+    "retainedFor": "Original issue4 postdeploy Tester UAT/closure; no deletion authorized"
+  },
+  "originalCi": {
+    "containerId": "f0cd3fce6ee8",
+    "workflowCleanup": "success",
+    "independentReadbackStatus": 404
+  },
+  "newCi": {
+    "runId": 41383928777,
+    "cleanup": "pending"
+  },
+  "licenceConsentWrites": 0
+}

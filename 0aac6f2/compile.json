@@ -1,0 +1,34 @@
+{
+  "sha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+  "at": "2026-11-02T03:34:12.836639+00:00",
+  "sourceDiff": "",
+  "analyzers": [
+    "CodeCop",
+    "UICop",
+    "AppSourceCop"
+  ],
+  "default": {
+    "sha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/servicemanagement9-ci-worker7-20261102/default-compile.log",
+    "sha256": "107533b5103c4ed8b6771ad8daa4366a664f5fc0a3c8e900fb9b4cf08664e3db"
+  },
+  "app": {
+    "sha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/servicemanagement9-ci-worker7-20261102/app-compile.log",
+    "sha256": "365188ee9b81e95cf2809e864ee31b8b8f24c6470380ace9173b83984ddb25d6"
+  },
+  "test": {
+    "sha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/servicemanagement9-ci-worker7-20261102/test-compile.log",
+    "sha256": "9b5ff658ad48fff4223c23cc9e3495e571763f61395638137373ac81ac18c04c"
+  }
+}

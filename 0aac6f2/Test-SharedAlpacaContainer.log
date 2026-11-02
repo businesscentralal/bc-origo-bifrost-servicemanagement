@@ -1,0 +1,6 @@
+Bifrost shared container: phase=Test, id=shared-123, container mode=Default.
+Bifrost: republishing Test MainApp 28.0.0.0 on shared container shared-123, SHA256=9E7F223908880F4C626B5FDA4D82C18E7E992924C47D6ACB58905D3DF89BE8DA.
+Bifrost: Test MainApp republish completed; the test app may now be deployed.
+Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.
+Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.
+Shared Alpaca pipeline checks passed: plan validation, mode preservation, physical identity, compatibility guard, republish ordering, missing grant, Default passthrough, cross-company test runner selection, failure propagation and unrelated-app passthrough.

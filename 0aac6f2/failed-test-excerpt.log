@@ -1,0 +1,63 @@
+2026-11-02T03:15:51.7001346Z RunTestsInBcContainer override
+2026-11-02T03:18:14.4395856Z Running tests for App d39af77f-6b49-426f-a2ba-830ec3f35e21 in D:\a\bc-origo-bifrost-servicemanagement\bc-origo-bifrost-servicemanagement\test
+2026-11-02T03:20:28.8817687Z   Codeunit 97705 Svc Order Release Tests ori Success (48.405 seconds)
+2026-11-02T03:20:28.8829648Z     Testfunction Scenario_AC01_Release_ReturnsRecalculatedOrder Success (43.453 seconds)
+2026-11-02T03:20:28.8839918Z     Testfunction Scenario_AC02_Release_BysystemId Success (0.624 seconds)
+2026-11-02T03:20:28.8854730Z     Testfunction Scenario_AC02_Release_Bysubject Success (0.47 seconds)
+2026-11-02T03:20:28.8864310Z     Testfunction Scenario_AC03_NoQuantity_Refused Success (0.53 seconds)
+2026-11-02T03:20:28.8878586Z     Testfunction Scenario_AC04_LocationRequired_RollsBack Success (0.594 seconds)
+2026-11-02T03:20:28.8890792Z     Testfunction Scenario_AC07_RejectQuoteSystemId Success (0.357 seconds)
+2026-11-02T03:20:28.8902279Z     Testfunction Scenario_AC07_RejectInvoiceSystemId Success (0.307 seconds)
+2026-11-02T03:20:28.8914010Z     Testfunction Scenario_AC07_RejectCreditMemoSystemId Success (0.35 seconds)
+2026-11-02T03:20:28.8924018Z     Testfunction Scenario_AC07_ConflictingIdentifiers Success (1.137 seconds)
+2026-11-02T03:20:28.8935484Z     Testfunction Scenario_AC08_Validation_BothTypes Success (0.086 seconds)
+2026-11-02T03:20:28.8946054Z     Testfunction Scenario_AC09_Release_CallerRollback Success (0.497 seconds)
+2026-11-02T03:20:30.8767382Z   Codeunit 97706 Svc Order Reopen Tests ori Success (1.586 seconds)
+2026-11-02T03:20:30.8777316Z     Testfunction Scenario_AC06_Reopen_ReleasedOrder Success (0.56 seconds)
+2026-11-02T03:20:30.8788889Z     Testfunction Scenario_AC05_AC14_RepeatRefusals_Bilingual Success (0.516 seconds)
+2026-11-02T03:20:30.8800290Z     Testfunction Scenario_AC09_Reopen_CallerRollback Success (0.51 seconds)
+2026-11-02T03:20:33.5264574Z   Codeunit 97707 Svc Release Restrict Tests ori Success (2.266 seconds)
+2026-11-02T03:20:33.5274742Z     Testfunction Scenario_AC10_ReleaseStatus_BlockedWithHint Success (0.636 seconds)
+2026-11-02T03:20:33.5287117Z     Testfunction Scenario_AC10_OrdinaryFieldAndRead_RemainAllowed Success (1.63 seconds)
+2026-11-02T03:20:55.3473554Z   Codeunit 97708 Svc Release Contract Tests ori Failure (16.075 seconds)
+2026-11-02T03:20:55.3484490Z     Testfunction Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect Success (0.157 seconds)
+2026-11-02T03:20:55.3495392Z     Testfunction Scenario_AC13_Catalogue_BothLanguages Success (0.004 seconds)
+2026-11-02T03:20:55.3778840Z ##[error]Function Scenario_AC12_NewOrdinaryCompany_RequiresEula Sessions can only be started in tests that are run by a TestRunner that has TestIsolation set to Disabled.
+2026-11-02T03:20:55.3811590Z     Testfunction Scenario_AC12_NewOrdinaryCompany_RequiresEula Failure (15.914 seconds)
+2026-11-02T03:20:55.3812302Z       Error:
+2026-11-02T03:20:55.3812982Z         Sessions can only be started in tests that are run by a TestRunner that has TestIsolation set to Disabled.
+2026-11-02T03:20:55.3813772Z       Call Stack:
+2026-11-02T03:20:55.3814808Z         Svc Release Contract Tests ori(CodeUnit 97708).Scenario_AC12_NewOrdinaryCompany_RequiresEula line 23 - Bifrost Service Management - Tests by Origo version 28.0.2147483647.3
+2026-11-02T03:20:55.3816361Z         Test Runner - Mgt(CodeUnit 130454).RunTests line 26 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:55.3817552Z         Test Runner - Isol. Codeunit(CodeUnit 130450).OnRun(Trigger) line 4 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:55.3819379Z         Test Suite Mgt.(CodeUnit 130456).RunTests line 2 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:55.3820494Z         Test Suite Mgt.(CodeUnit 130456).RunSelectedTests line 35 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:55.3821593Z         Test Suite Mgt.(CodeUnit 130456).RunNextTest line 20 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:55.3822770Z         Command Line Test Tool(Page 130455).RunNextTest - OnAction(Trigger) line 7 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:20:58.3197906Z   Codeunit 97709 Svc Release Perm Tests ori Success (2.586 seconds)
+2026-11-02T03:20:58.3210416Z     Testfunction Scenario_AC15_FullRole_ReleaseAndReopen Success (2.06 seconds)
+2026-11-02T03:20:58.3222522Z     Testfunction Scenario_AC15_ReadRole_DeniedBothWrites Success (0.526 seconds)
+2026-11-02T03:21:13.7269320Z ##[error]Unexpected error when running action. Error Message: There are test failures!, StackTrace: at <ScriptBlock>, C:\ProgramData\BcContainerHelper\6.1.19\BcContainerHelper\AppHandling\Run-AlPipeline.ps1: line 3094 <- at <ScriptBlock>, C:\ProgramData\BcContainerHelper\6.1.19\BcContainerHelper\AppHandling\Run-AlPipeline.ps1: line 1496 <- at Run-AlPipeline, C:\ProgramData\BcContainerHelper\6.1.19\BcContainerHelper\AppHandling\Run-AlPipeline.ps1: line 1481 <- at <ScriptBlock>, D:\a\_actions\microsoft\AL-Go-Actions\v9.2\RunPipeline\RunPipeline.ps1: line 477 <- at <ScriptBlock>, D:\a\_temp\dcef6a7d-e5a7-4c72-aa81-a6b3912a0724.ps1: line 3 <- at <ScriptBlock>, D:\a\_actions\microsoft\AL-Go-Actions\v9.2\Invoke-AlGoAction.ps1: line 21 <- at <ScriptBlock>, D:\a\_temp\dcef6a7d-e5a7-4c72-aa81-a6b3912a0724.ps1: line 2 <- at <ScriptBlock>, <No file>: line 1
+2026-11-02T03:21:14.0571470Z ##[error]Process completed with exit code 1.
+2026-11-02T03:21:24.7661704Z 1 TestApps, 42 tests, 1 failed, 0 skipped, 78.504 seconds
+2026-11-02T03:21:24.7874380Z - Bifrost Service Management - Tests, 42 tests, 41 passed, 1 failed, 0 skipped, 78.504 seconds
+2026-11-02T03:21:24.8039150Z   - 97702 Svc Registration Tst ori, 2 tests, 0 failed, 0 skipped, 0.674 seconds
+2026-11-02T03:21:24.8067695Z   - 97705 Svc Order Release Tests ori, 11 tests, 0 failed, 0 skipped, 48.405 seconds
+2026-11-02T03:21:24.8076518Z   - 97706 Svc Order Reopen Tests ori, 3 tests, 0 failed, 0 skipped, 1.586 seconds
+2026-11-02T03:21:24.8085035Z   - 97707 Svc Release Restrict Tests ori, 2 tests, 0 failed, 0 skipped, 2.266 seconds
+2026-11-02T03:21:24.8093749Z   - 97708 Svc Release Contract Tests ori, 3 tests, 1 failed, 0 skipped, 16.075 seconds
+2026-11-02T03:21:24.8184745Z     - Scenario_AC12_NewOrdinaryCompany_RequiresEula, Failure, 15.914 seconds
+2026-11-02T03:21:24.8211458Z       - Error: Sessions can only be started in tests that are run by a TestRunner that has TestIsolation set to Disabled.
+2026-11-02T03:21:24.8218671Z         Stacktrace:
+2026-11-02T03:21:24.8264860Z         Svc Release Contract Tests ori(CodeUnit 97708).Scenario_AC12_NewOrdinaryCompany_RequiresEula line 23 - Bifrost Service Management - Tests by Origo version 28.0.2147483647.3
+2026-11-02T03:21:24.8267013Z         Test Runner - Mgt(CodeUnit 130454).RunTests line 26 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8268479Z         Test Runner - Isol. Codeunit(CodeUnit 130450).OnRun(Trigger) line 4 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8269976Z         Test Suite Mgt.(CodeUnit 130456).RunTests line 2 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8271781Z         Test Suite Mgt.(CodeUnit 130456).RunSelectedTests line 35 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8273201Z         Test Suite Mgt.(CodeUnit 130456).RunNextTest line 20 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8274717Z         Command Line Test Tool(Page 130455).RunNextTest - OnAction(Trigger) line 7 - Test Runner by Microsoft version 28.5.54151.55751
+2026-11-02T03:21:24.8304257Z   - 97709 Svc Release Perm Tests ori, 2 tests, 0 failed, 0 skipped, 2.586 seconds
+2026-11-02T03:21:24.8312212Z   - 97711 Svc Fixture Tests ori, 4 tests, 0 failed, 0 skipped, 1.49 seconds
+2026-11-02T03:21:24.8320548Z   - 97712 Svc Lookup Tests ori, 15 tests, 0 failed, 0 skipped, 5.422 seconds
+2026-11-02T03:21:24.9013426Z Bifrost Service Management - Tests,42,41,1,0,78.504
+2026-11-02T03:21:24.9103809Z |Bifrost Service Management - Tests|42|41 :heavy_check_mark:|1 :x:||78.504|
