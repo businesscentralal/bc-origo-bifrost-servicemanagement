@@ -8,7 +8,7 @@ using Origo.Bifrost;
 /// The extension includes "BIFROST Svc ori" instead of repeating its list, so the two always
 /// grant the same objects; add a new object to "BIFROST Svc ori" only.
 /// The message types still run under the caller's own permissions on the Service Management tables,
-/// so this does not widen access to production or routing data.
+/// so this does not widen access to service data.
 /// </summary>
 permissionsetextension 10076037 "BIFROST SvcFull ori" extends "BIFROST Full ori"
 {
