@@ -64,11 +64,13 @@ codeunit 97704 "Svc Test Data ori"
         Item.Rename(NewCode());
         Service.CreateServiceLineWithQuantity(ServiceLine, ServiceHeader, ServiceLine.Type::Item, Item."No.", 2);
         ServiceLine.Validate("Service Item Line No.", ServiceItemLine."Line No.");
+        ServiceLine.Validate("Unit Price", 10);
         ServiceLine.Modify(true);
         Resources.CreateResource(Resource, Customer."VAT Bus. Posting Group");
         Resource.Rename(NewCode());
         Service.CreateServiceLineWithQuantity(ServiceLine, ServiceHeader, ServiceLine.Type::Resource, Resource."No.", 3);
         ServiceLine.Validate("Service Item Line No.", ServiceItemLine."Line No.");
+        ServiceLine.Validate("Unit Price", 10);
         ServiceLine.Modify(true);
     end;
 
@@ -97,7 +99,8 @@ codeunit 97704 "Svc Test Data ori"
             Dispatcher.EnqueueAndProcess(MessageType, "Message Version ori"::"1.0", CopyStr(Subject, 1, 250), '', 'text/json', Input, TaskId, LanguageId, MessageId, Output, ContentType, ResponseTime);
         GlobalLanguage(PreviousLanguage);
         Output.GetSubText(ResponseText, 1);
-        Assert.IsTrue(Response.ReadFrom(ResponseText), 'Dispatcher must return JSON.');
+        if not Response.ReadFrom(ResponseText) then
+            Error('Dispatcher must return JSON.');
         exit(Response);
     end;
 

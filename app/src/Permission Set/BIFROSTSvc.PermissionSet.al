@@ -16,5 +16,9 @@ permissionset 10076036 "BIFROST Svc ori"
     Permissions =
         codeunit "Svc Registration ori" = X,
         codeunit "Svc Contract Parts ori" = X,
-        codeunit "Svc Document Lookup ori" = X;
+        codeunit "Svc Document Lookup ori" = X,
+        codeunit "Svc Order Release Impl ori" = X,
+        codeunit "Svc Order Reopen Impl ori" = X,
+        codeunit "Svc Release Proc ori" = X,
+        codeunit "Svc Release Restrict ori" = X;
 }

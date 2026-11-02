@@ -19,6 +19,10 @@ codeunit 10076041 "Svc Document Lookup ori"
         WrongTypeNextLbl: Label 'Send the No. or SystemId of a service document of type %1.', Comment = '%1 = document type, is-IS=Sendu númer eða SystemId þjónustuskjals af gerðinni %1.';
         ConflictLbl: Label 'The identifiers do not identify the same service document.', Comment = 'is-IS=Auðkennin vísa ekki á sama þjónustuskjalið.';
         ConflictNextLbl: Label 'Send identifiers belonging to the same service document.', Comment = 'is-IS=Sendu auðkenni sem tilheyra sama þjónustuskjalinu.';
+        OrderNotFoundLbl: Label 'Service order %1 was not found.', Comment = '%1 = identifier, is-IS=Þjónustupöntun %1 fannst ekki.';
+        OrderLookupLbl: Label 'Read the service orders with Data.Records.Get (table Service Header, Document Type = Order).', Comment = 'is-IS=Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).';
+        OrderTypeLbl: Label 'Service document %1 is not an Order (actual type: %2).', Comment = '%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).';
+        OrderTypeNextLbl: Label 'Send the No. or SystemId of a service order.', Comment = 'is-IS=Sendu númer eða SystemId þjónustupöntunar.';
         NothingLbl: Label 'Nothing was changed.', Comment = 'is-IS=Engu var breytt.';
 
     /// <summary>Validates all declared identifiers before reading the requested document. The caller chooses its document type.</summary>
@@ -31,8 +35,8 @@ codeunit 10076041 "Svc Document Lookup ori"
         Id: Guid;
     begin
         Request := Argument.GetRequestJson();
-        Number := ReadIdentifier(Argument, Request, 'no', MaxStrLen(ServiceHeader."No."));
-        IdText := ReadIdentifier(Argument, Request, 'systemId', 50);
+        Number := ReadIdentifier(Request, 'no', MaxStrLen(ServiceHeader."No."), Argument);
+        IdText := ReadIdentifier(Request, 'systemId', 50, Argument);
         SubjectNumber := Argument.Subject.Trim();
         if StrLen(SubjectNumber) > MaxStrLen(ServiceHeader."No.") then
             Argument.AddError("Bifrost Error Code ori"::InvalidParameter, StrSubstNo(InvalidLbl, 'subject', MaxStrLen(ServiceHeader."No.")), 'subject', '', '', CorrectLbl);
@@ -54,13 +58,18 @@ codeunit 10076041 "Svc Document Lookup ori"
         ServiceHeader.Reset();
         if IdText <> '' then begin
             if not ServiceHeader.GetBySystemId(Id) then begin
-                Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(NotFoundLbl, IdText), 'systemId', IdText, '', LookupLbl);
+                Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, NotFoundText(DocumentType, IdText), 'systemId', IdText, '', LookupText(DocumentType));
                 exit(false);
             end;
             if ServiceHeader."Document Type" <> DocumentType then begin
-                Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
-                    StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeName(ServiceHeader."Document Type")),
-                    'systemId', IdText, TypeName(DocumentType), StrSubstNo(WrongTypeNextLbl, TypeName(DocumentType)));
+                if DocumentType = DocumentType::Order then
+                    Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                        StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeName(ServiceHeader."Document Type")),
+                        'systemId', IdText, 'Order', OrderTypeNextLbl)
+                else
+                    Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                        StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeName(ServiceHeader."Document Type")),
+                        'systemId', IdText, TypeName(DocumentType), StrSubstNo(WrongTypeNextLbl, TypeName(DocumentType)));
                 exit(false);
             end;
             if (Number <> '') and (ServiceHeader."No." <> UpperCase(Number)) then
@@ -68,7 +77,7 @@ codeunit 10076041 "Svc Document Lookup ori"
             exit(true);
         end;
         if not ServiceHeader.Get(DocumentType, Number) then begin
-            Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, StrSubstNo(NotFoundLbl, Number), 'no', Number, '', LookupLbl);
+            Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, NotFoundText(DocumentType, Number), 'no', Number, '', LookupText(DocumentType));
             exit(false);
         end;
         exit(true);
@@ -90,7 +99,7 @@ codeunit 10076041 "Svc Document Lookup ori"
         exit('');
     end;
 
-    local procedure ReadIdentifier(var Argument: Record "Message Argument ori"; Request: JsonObject; KeyName: Text; Maximum: Integer): Text
+    local procedure ReadIdentifier(Request: JsonObject; KeyName: Text; Maximum: Integer; var Argument: Record "Message Argument ori"): Text
     var
         Token: JsonToken;
         Raw: Text;
@@ -113,5 +122,18 @@ codeunit 10076041 "Svc Document Lookup ori"
     begin
         Argument.RespondWithError("Bifrost Error Code ori"::ConflictingIdentifiers, ConflictLbl, 'no/systemId/subject', '', '', ConflictNextLbl);
         exit(false);
+    end;
+    local procedure NotFoundText(DocumentType: Enum "Service Document Type"; Identifier: Text): Text
+    begin
+        if DocumentType = DocumentType::Order then
+            exit(StrSubstNo(OrderNotFoundLbl, Identifier));
+        exit(StrSubstNo(NotFoundLbl, Identifier));
+    end;
+
+    local procedure LookupText(DocumentType: Enum "Service Document Type"): Text
+    begin
+        if DocumentType = DocumentType::Order then
+            exit(OrderLookupLbl);
+        exit(LookupLbl);
     end;
 }

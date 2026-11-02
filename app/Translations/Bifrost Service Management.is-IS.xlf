@@ -57,6 +57,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Engu var breytt.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType NothingLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3413569458" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the service orders with Data.Records.Get (table Service Header, Document Type = Order).</source>
+          <target>Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType OrderLookupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3481642633" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service order %1 was not found.</source>
+          <target>Þjónustupöntun %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Þjónustupöntun %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType OrderNotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3953873704" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 is not an Order (actual type: %2).</source>
+          <target>Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType OrderTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 571461949" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the No. or SystemId of a service order.</source>
+          <target>Sendu númer eða SystemId þjónustupöntunar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu númer eða SystemId þjónustupöntunar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType OrderTypeNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4166943217 - NamedType 69645355" size-unit="char" translate="yes" xml:space="preserve">
           <source>Service document %1 is not a %2 (actual type: %3).</source>
           <target>Þjónustuskjal %1 er ekki af gerðinni %2 (raunveruleg gerð: %3).</target>
@@ -68,6 +92,72 @@
           <target>Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</target>
           <note from="Developer" annotates="general" priority="2">%1 = document type, is-IS=Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType WrongTypeNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3821304223 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Releases a service order for warehouse handling with the standard Business Central release. To change it again, use Service.Order.Reopen.</source>
+          <target>Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Release Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3821304223 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>release service order, release to ship</source>
+          <target>gefa út þjónustupöntun, gefa út til afhendingar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=gefa út þjónustupöntun, gefa út til afhendingar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Release Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1476656233 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reopens a released service order so it can be changed again.</source>
+          <target>Enduropnar útgefna þjónustupöntun svo hægt sé að breyta henni aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Enduropnar útgefna þjónustupöntun svo hægt sé að breyta henni aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Reopen Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1476656233 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>reopen service order, change released order</source>
+          <target>enduropna þjónustupöntun, breyta útgefinni pöntun</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=enduropna þjónustupöntun, breyta útgefinni pöntun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Reopen Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 3851147959" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a line with a type and a quantity with Data.Records.Set.</source>
+          <target>Bættu við línu með tegund og magni með Data.Records.Set.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu við línu með tegund og magni með Data.Records.Set.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType AddLineLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry the service order operation.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aðgerðina á þjónustupöntuninni aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aðgerðina á þjónustupöntuninni aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 1000175713" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nothing to do. The service order can already be changed.</source>
+          <target>Ekkert að gera. Nú þegar er hægt að breyta þjónustupöntuninni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert að gera. Nú þegar er hægt að breyta þjónustupöntuninni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType NothingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 4013669850" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service order %1 is already open. Nothing to do.</source>
+          <target>Þjónustupöntun %1 er þegar opin. Ekkert að gera.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, is-IS=Þjónustupöntun %1 er þegar opin. Ekkert að gera.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType OpenLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 2127878785" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service order %1 is already released. Nothing was changed.</source>
+          <target>Þjónustupöntun %1 hefur þegar verið gefin út. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, is-IS=Þjónustupöntun %1 hefur þegar verið gefin út. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType ReleasedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 550942367 - NamedType 755373819" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To change it, use Service.Order.Reopen.</source>
+          <target>Til að breyta henni, notaðu Service.Order.Reopen.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Til að breyta henni, notaðu Service.Order.Reopen.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Proc ori - NamedType ReopenLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1664418921 - Method 1169258858 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Order.Release / Service.Order.Reopen</source>
+          <target>Notaðu Service.Order.Release / Service.Order.Reopen</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Release / Service.Order.Reopen</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Restrict ori - Method ReleaseStatusHint - NamedType HintLbl</note>
         </trans-unit>
         <trans-unit id="PermissionSet 222978927 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Service Management</source>

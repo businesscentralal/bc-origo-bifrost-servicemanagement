@@ -52,4 +52,73 @@ codeunit 10076040 "Svc Contract Parts ori"
         Errors.Add(Contract.ErrorEntry("Bifrost Error Code ori"::MultipleErrors, 'Several declared parameters are invalid; nothing changed.', 'Correct each returned parameter error.'));
         Errors.Add(Contract.ErrorEntry("Bifrost Error Code ori"::UnknownParameter, 'Foundation rejected an undeclared parameter before executing the message type.', 'Remove the undeclared parameter.'));
     end;
+
+    /// <summary>Describes the service release/reopen result.</summary>
+    internal procedure GetReleaseResponse(var Response: JsonObject)
+    var
+        Contract: Codeunit "Msg Contract Mgt ori";
+        Fields: JsonArray;
+        Name: Text;
+    begin
+        foreach Name in 'status,documentType,documentNo,systemId,customerNo,customerName,releaseStatusBefore,releaseStatusAfter'.Split(',') do
+            Fields.Add(Contract.ResponseField(Name, 'string', 'Order identity or invariant state. Release states are Open and ReleasedToShip.'));
+        Fields.Add(Contract.ResponseField('amount', 'number', 'Recalculated amount excluding VAT.'));
+        Fields.Add(Contract.ResponseField('amountIncludingVAT', 'number', 'Recalculated amount including VAT.'));
+        Response.Add('fields', Fields);
+    end;
+
+    /// <summary>Documents lifecycle refusals and standard BC errors.</summary>
+    internal procedure GetReleaseErrors(var Errors: JsonArray)
+    var
+        Contract: Codeunit "Msg Contract Mgt ori";
+    begin
+        GetIdentityErrors(Errors);
+        Errors.Add(Contract.ErrorEntry("Bifrost Error Code ori"::PreconditionFailed, 'The order is already in the target state or has nothing to release.', 'Use Service.Order.Reopen to change a released order; otherwise add a line with type and quantity.'));
+        Errors.Add(Contract.ErrorEntry("Bifrost Error Code ori"::BusinessCentralError, 'Business Central rejected the operation; its error text is returned.', 'Correct the BC error and retry.'));
+    end;
+
+    /// <summary>Declares a non-idempotent transactional write; Foundation adds Retryable.</summary>
+    internal procedure GetReleaseEffect(var Effect: JsonObject)
+    begin
+        Effect.Add('effect', 'write');
+        Effect.Add('changes', 'Changes Service Header Release Status through standard BC release/reopen, recalculating VAT and warehouse requests.');
+        Effect.Add('idempotent', false);
+        Effect.Add('permissionSet', 'BIFROST Svc ori');
+        Effect.Add('preconditions', 'Existing service order in the opposite release state; standard BC service validation applies.');
+    end;
+
+    /// <summary>Links the service lifecycle operations.</summary>
+    internal procedure GetReleaseRelated(var Related: JsonArray)
+    var
+        Contract: Codeunit "Msg Contract Mgt ori";
+    begin
+        Related.Add(Contract.RelatedEntry('Service.Order.Release', 'Release an open order for warehouse handling.'));
+        Related.Add(Contract.RelatedEntry('Service.Order.Reopen', 'Reopen a released order to change it.'));
+        Related.Add(Contract.RelatedEntry('Data.Records.Get', 'Read Service Header and Service Line.'));
+        Related.Add(Contract.RelatedEntry('Data.Records.Set', 'Edit ordinary service fields, excluding Release Status.'));
+    end;
+
+    /// <summary>Documents the quote, allocation, release and posting sequence.</summary>
+    internal procedure GetServiceWorkflow(var Workflow: JsonObject)
+    var
+        Steps: JsonArray;
+    begin
+        Steps.Add('Service.Quote.MakeOrder');
+        Steps.Add('Service.Allocation.Allocate');
+        Steps.Add('Service.Order.Release');
+        Steps.Add('Service.Order.Post');
+        Workflow.Add('steps', Steps);
+    end;
+
+    /// <summary>Shows the common order identifier payload.</summary>
+    internal procedure GetReleaseExamples(var Examples: JsonArray)
+    var
+        Example: JsonObject;
+        Data: JsonObject;
+    begin
+        Data.Add('no', 'SO000001');
+        Example.Add('description', 'Send this data to Service.Order.Release or Service.Order.Reopen.');
+        Example.Add('data', Data);
+        Examples.Add(Example);
+    end;
 }
