@@ -101,13 +101,13 @@ codeunit 10076040 "Svc Contract Parts ori"
     /// <summary>Documents the quote, allocation, release and posting sequence.</summary>
     internal procedure GetServiceWorkflow(var Workflow: JsonObject)
     var
+        Contract: Codeunit "Msg Contract Mgt ori";
         Steps: JsonArray;
     begin
-        Steps.Add('Service.Quote.MakeOrder');
-        Steps.Add('Service.Allocation.Allocate');
-        Steps.Add('Service.Order.Release');
-        Steps.Add('Service.Order.Post');
+        Steps.Add(Contract.WorkflowStep('Service.Order.Release', 'Release an open order for warehouse handling.'));
+        Steps.Add(Contract.WorkflowStep('Service.Order.Reopen', 'Reopen a released order when further edits are needed.'));
         Workflow.Add('steps', Steps);
+        Workflow.Add('description', 'The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation and posting are delivered by subsequent service lifecycle stories; only release/reopen are provided by this group.');
     end;
 
     /// <summary>Shows the common order identifier payload.</summary>

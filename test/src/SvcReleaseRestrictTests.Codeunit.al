@@ -2,6 +2,7 @@ namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Service.Document;
 using Origo.Bifrost;
+using System.Diagnostics;
 using System.TestLibraries.Utilities;
 
 /// <summary>Exercises the generic dispatcher write guard and proves unrelated edits and reads remain available.</summary>
@@ -25,7 +26,7 @@ codeunit 97707 "Svc Release Restrict Tests ori"
         Commit();
         Response := SetField(Header.SystemId, 'Release_Status', 'Released to Ship');
         Response.WriteTo(Serialized);
-        Assert.IsTrue(Serialized.Contains('BlockedByWriteGuard'), 'Dedicated lifecycle field is blocked.');
+        Assert.IsTrue(Serialized.Contains('BlockedByWriteGuard'), 'Dedicated lifecycle field is blocked: ' + Serialized);
         Assert.IsTrue(Serialized.Contains('Service.Order.Release / Service.Order.Reopen'), 'Hint names both operations.');
         Header.Get(Header."Document Type", Header."No.");
         Assert.AreEqual(Header."Release Status"::Open, Header."Release Status", 'Generic writer changed nothing.');
@@ -35,13 +36,50 @@ codeunit 97707 "Svc Release Restrict Tests ori"
     procedure Scenario_AC10_OrdinaryFieldAndRead_RemainAllowed()
     var
         Header: Record "Service Header";
+        ChangeLog: Record "Change Log Setup";
+        ChangeLogTable: Record "Change Log Setup (Table)";
+        PriorLog: Record "Change Log Setup";
+        PriorTable: Record "Change Log Setup (Table)";
+        HadLog: Boolean;
+        HadTable: Boolean;
         Request: JsonObject;
         Response: JsonObject;
         Serialized: Text;
     begin
         Data.CreateDocument(Header, Header."Document Type"::Order);
         Commit();
+        // Exercise the ordinary field under a legitimate Change Log write-guard configuration.
+        // No Foundation setup table is read or written, and dedicated restrictions remain active.
+        HadLog := ChangeLog.Get();
+        PriorLog := ChangeLog;
+        if not HadLog then begin
+            ChangeLog.Init();
+            ChangeLog.Insert();
+        end;
+        ChangeLog."Change Log Activated" := true;
+        ChangeLog.Modify();
+        HadTable := ChangeLogTable.Get(Database::"Service Header");
+        PriorTable := ChangeLogTable;
+        if not HadTable then begin
+            ChangeLogTable.Init();
+            ChangeLogTable."Table No." := Database::"Service Header";
+            ChangeLogTable.Insert();
+        end;
+        ChangeLogTable."Log Modification" := ChangeLogTable."Log Modification"::"All Fields";
+        ChangeLogTable.Modify();
+        Commit();
         Response := SetField(Header.SystemId, 'Description', 'X-service lifecycle test');
+        if HadTable then begin
+            ChangeLogTable := PriorTable;
+            ChangeLogTable.Modify();
+        end else
+            ChangeLogTable.Delete();
+        if HadLog then begin
+            ChangeLog := PriorLog;
+            ChangeLog.Modify();
+        end else
+            ChangeLog.Delete();
+        Commit();
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Ordinary edit allowed.');
         Header.Get(Header."Document Type", Header."No.");
         Assert.AreEqual('X-service lifecycle test', Header.Description, 'Description persisted.');

@@ -74,6 +74,19 @@ codeunit 97704 "Svc Test Data ori"
         ServiceLine.Modify(true);
     end;
 
+    /// <summary>Creates only the header needed for wrong-document-type rejection, without unsupported credit-memo service item lines.</summary>
+    procedure CreateHeader(var Header: Record "Service Header"; DocumentType: Enum "Service Document Type")
+    var
+        Customer: Record Customer;
+        Sales: Codeunit "Library - Sales";
+        Service: Codeunit "Library - Service";
+    begin
+        SetupNumbering();
+        Sales.CreateCustomer(Customer);
+        Customer.Rename(NewCode());
+        Service.CreateServiceHeader(Header, DocumentType, Customer."No.");
+    end;
+
     /// <summary>Invokes a message through the public dispatcher with explicit language, subject and transaction mode.</summary>
     procedure Invoke(MessageType: Enum "Message Type ori"; Request: JsonObject; Subject: Text; LanguageId: Integer; OmitCommit: Boolean): JsonObject
     var

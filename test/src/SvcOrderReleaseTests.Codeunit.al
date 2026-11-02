@@ -105,17 +105,23 @@ codeunit 97705 "Svc Order Release Tests ori"
     var
         Header: Record "Service Header";
         Setup: Record "Inventory Setup";
+        PreviousMandatory: Boolean;
         Request: JsonObject;
         Response: JsonObject;
     begin
         // Issue #4: independent fixture; exercise the public dispatcher and assert persisted state.
         Data.CreateDocument(Header, Header."Document Type"::Order);
         Setup.Get();
+        PreviousMandatory := Setup."Location Mandatory";
         Setup."Location Mandatory" := true;
         Setup.Modify();
         Request.Add('no', Header."No.");
         Commit();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', 1033, false);
+        Setup.Get();
+        Setup."Location Mandatory" := PreviousMandatory;
+        Setup.Modify();
+        Commit();
         Data.AssertRefusal(Response, 'BusinessCentralError');
         Assert.IsTrue(Data.TextValue(Response, 'error').Contains('Location Code'), 'BC TestField error retained.');
         Header.Get(Header."Document Type", Header."No.");
@@ -130,7 +136,7 @@ codeunit 97705 "Svc Order Release Tests ori"
         Response: JsonObject;
     begin
         // Issue #4: independent fixture; exercise the public dispatcher and assert persisted state.
-        Data.CreateDocument(Header, Header."Document Type"::"Quote");
+        Data.CreateHeader(Header, Header."Document Type"::"Quote");
         Request.Add('systemId', Format(Header.SystemId, 0, 4));
         Commit();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', 1033, false);
@@ -148,7 +154,7 @@ codeunit 97705 "Svc Order Release Tests ori"
         Response: JsonObject;
     begin
         // Issue #4: independent fixture; exercise the public dispatcher and assert persisted state.
-        Data.CreateDocument(Header, Header."Document Type"::"Invoice");
+        Data.CreateHeader(Header, Header."Document Type"::"Invoice");
         Request.Add('systemId', Format(Header.SystemId, 0, 4));
         Commit();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', 1033, false);
@@ -166,7 +172,7 @@ codeunit 97705 "Svc Order Release Tests ori"
         Response: JsonObject;
     begin
         // Issue #4: independent fixture; exercise the public dispatcher and assert persisted state.
-        Data.CreateDocument(Header, Header."Document Type"::"Credit Memo");
+        Data.CreateHeader(Header, Header."Document Type"::"Credit Memo");
         Request.Add('systemId', Format(Header.SystemId, 0, 4));
         Commit();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', 1033, false);
