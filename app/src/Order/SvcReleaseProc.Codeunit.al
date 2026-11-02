@@ -61,6 +61,8 @@ codeunit 10076044 "Svc Release Proc ori"
         Lookup: Codeunit "Svc Document Lookup ori";
         NoLines: Boolean;
         ErrorText: Text;
+        Response: JsonObject;
+        ErrorCode: JsonToken;
     begin
         if not Lookup.FindDocument(Argument, Enum::"Service Document Type"::Order, Header) then
             exit;
@@ -80,10 +82,20 @@ codeunit 10076044 "Svc Release Proc ori"
         else
             if not Codeunit.Run(Codeunit::"Svc Release Proc ori", Argument) then begin
                 ErrorText := GetLastErrorText();
+                Argument.RespondWithLastError();
+                Response := Argument.GetResponseJson();
+                if Response.Get('code', ErrorCode) then
+                    if ErrorCode.AsValue().AsText() = 'Retryable' then
+                        exit;
                 if NoLines then
                     Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, ErrorText, '', '', '', AddLineLbl)
-                else
-                    Argument.RespondWithError("Bifrost Error Code ori"::BusinessCentralError, ErrorText, '', '', '', CorrectLbl);
+                else begin
+                    if Response.Contains('nextStep') then
+                        Response.Replace('nextStep', CorrectLbl)
+                    else
+                        Response.Add('nextStep', CorrectLbl);
+                    Argument.SetResponseJson(Response);
+                end;
             end;
     end;
 

@@ -54,6 +54,7 @@ codeunit 97711 "Svc Fixture Tests ori"
     begin
         TestData.CreateHeader(Header, Header."Document Type"::Quote);
         Number := Header."No.";
+        Commit(); // The expected error rolls back its transaction; preserve the owned fixture for the positive cleanup check.
         asserterror TestData.DeleteMcpSetupQuote(Number);
         Assert.ExpectedError('Description');
         Header.Get(Header."Document Type"::Quote, Number);
