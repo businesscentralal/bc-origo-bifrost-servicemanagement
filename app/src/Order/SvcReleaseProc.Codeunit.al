@@ -81,21 +81,23 @@ codeunit 10076044 "Svc Release Proc ori"
             Codeunit.Run(Codeunit::"Svc Release Proc ori", Argument)
         else
             if not Codeunit.Run(Codeunit::"Svc Release Proc ori", Argument) then begin
-                ErrorText := GetLastErrorText();
                 Argument.RespondWithLastError();
                 Response := Argument.GetResponseJson();
                 if Response.Get('code', ErrorCode) then
                     if ErrorCode.AsValue().AsText() = 'Retryable' then
                         exit;
-                if NoLines then
-                    Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, ErrorText, '', '', '', AddLineLbl)
-                else begin
-                    if Response.Contains('nextStep') then
-                        Response.Replace('nextStep', CorrectLbl)
-                    else
-                        Response.Add('nextStep', CorrectLbl);
-                    Argument.SetResponseJson(Response);
-                end;
+                // RespondWithLastError has already collected the native error. Remap that response once;
+                // adding another collected error would turn this single precondition into MultipleErrors.
+                if NoLines then begin
+                    Response.Replace('code', 'PreconditionFailed');
+                    ErrorText := AddLineLbl;
+                end else
+                    ErrorText := CorrectLbl;
+                if Response.Contains('nextStep') then
+                    Response.Replace('nextStep', ErrorText)
+                else
+                    Response.Add('nextStep', ErrorText);
+                Argument.SetResponseJson(Response);
             end;
     end;
 
