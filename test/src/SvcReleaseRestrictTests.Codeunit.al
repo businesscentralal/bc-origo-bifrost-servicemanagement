@@ -45,7 +45,7 @@ codeunit 97707 "Svc Release Restrict Tests ori"
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Ordinary edit allowed.');
         Header.Get(Header."Document Type", Header."No.");
         Assert.AreEqual('X-service lifecycle test', Header.Description, 'Description persisted.');
-        Request.Add('table', 'Service Header');
+        Request.Add('tableName', 'Service Header');
         Request.Add('tableView', 'WHERE(No.=CONST(' + Header."No." + '))');
         Response := Data.Invoke("Message Type ori"::"Data.Records.Get", Request, '', 1033, false);
         Response.WriteTo(Serialized);
@@ -63,7 +63,7 @@ codeunit 97707 "Svc Release Restrict Tests ori"
         Entry.Add('id', Format(Id, 0, 4));
         Entry.Add('fields', Fields);
         Entries.Add(Entry);
-        Request.Add('table', 'Service Header');
+        Request.Add('tableName', 'Service Header');
         Request.Add('data', Entries);
         exit(Data.Invoke("Message Type ori"::"Data.Records.Set", Request, '', 1033, false));
     end;
