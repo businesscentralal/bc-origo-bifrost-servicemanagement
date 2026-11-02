@@ -26,8 +26,8 @@ codeunit 97704 "Svc Test Data ori"
         Utility: Codeunit "Library - Utility";
     begin
         Utility.CreateNoSeries(Series, true, true, false);
-        Series.Rename(CopyStr('X' + Series.Code, 1, MaxStrLen(Series.Code)));
-        Utility.CreateNoSeriesLine(SeriesLine, Series.Code, 'XSVC000001', 'XSVC999999');
+        Series.Rename(NewCode());
+        Utility.CreateNoSeriesLine(SeriesLine, Series.Code, CopyStr(Series.Code, 1, 12) + '000001', CopyStr(Series.Code, 1, 12) + '999999');
         if not Setup.Get() then begin
             Setup.Init();
             Setup.Insert(true);
@@ -56,17 +56,17 @@ codeunit 97704 "Svc Test Data ori"
     begin
         SetupNumbering();
         Sales.CreateCustomer(Customer);
-        Customer.Rename(CopyStr('X' + Customer."No.", 1, MaxStrLen(Customer."No.")));
+        Customer.Rename(NewCode());
         Service.CreateServiceHeader(ServiceHeader, DocumentType, Customer."No.");
         Service.CreateServiceItem(ServiceItem, Customer."No.");
         Service.CreateServiceItemLine(ServiceItemLine, ServiceHeader, ServiceItem."No.");
         Inventory.CreateItem(Item);
-        Item.Rename(CopyStr('X' + Item."No.", 1, MaxStrLen(Item."No.")));
+        Item.Rename(NewCode());
         Service.CreateServiceLineWithQuantity(ServiceLine, ServiceHeader, ServiceLine.Type::Item, Item."No.", 2);
         ServiceLine.Validate("Service Item Line No.", ServiceItemLine."Line No.");
         ServiceLine.Modify(true);
         Resources.CreateResource(Resource, Customer."VAT Bus. Posting Group");
-        Resource.Rename(CopyStr('X' + Resource."No.", 1, MaxStrLen(Resource."No.")));
+        Resource.Rename(NewCode());
         Service.CreateServiceLineWithQuantity(ServiceLine, ServiceHeader, ServiceLine.Type::Resource, Resource."No.", 3);
         ServiceLine.Validate("Service Item Line No.", ServiceItemLine."Line No.");
         ServiceLine.Modify(true);
@@ -119,4 +119,9 @@ codeunit 97704 "Svc Test Data ori"
         if Code <> 'MultipleErrors' then
             Assert.AreNotEqual('', TextValue(Response, 'nextStep'), 'Refusal must offer recovery guidance.');
     end;
+    local procedure NewCode(): Code[20]
+    begin
+        exit(CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '-{}'), 1, 20));
+    end;
+
 }
