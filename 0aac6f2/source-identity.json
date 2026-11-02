@@ -1,0 +1,19 @@
+{
+  "candidateSha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+  "priorSha": "d10b3edbf2d9041e9b9fb1bd5cb789304dc25688",
+  "at": "2026-11-02T03:41:30.726Z",
+  "trees": [
+    {
+      "path": "app",
+      "priorTree": "86a5a6ed830973bf236fbefc77e08fb5f9965e44",
+      "candidateTree": "86a5a6ed830973bf236fbefc77e08fb5f9965e44",
+      "identical": true
+    },
+    {
+      "path": "test",
+      "priorTree": "a26ccf81bafd3dceb433cba05dac7689157b75ad",
+      "candidateTree": "a26ccf81bafd3dceb433cba05dac7689157b75ad",
+      "identical": true
+    }
+  ]
+}

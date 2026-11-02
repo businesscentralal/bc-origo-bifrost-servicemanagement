@@ -1,6 +1,6 @@
 {
   "candidateSha": "0aac6f252987f0dd176c3989248a908a1e36d529",
-  "at": "2026-11-02T03:38:03.215Z",
+  "at": "2026-11-02T03:55:02.476Z",
   "retainedDevelopment": {
     "containerId": "f0b5efcc1df3",
     "name": "worker8-service4-lifecycle-20261102",
@@ -18,7 +18,9 @@
   },
   "newCi": {
     "runId": 41383928777,
-    "cleanup": "pending"
+    "containerId": "f02932f7a454",
+    "workflowCleanup": "success",
+    "independentReadbackStatus": 404
   },
   "licenceConsentWrites": 0
 }

@@ -1,0 +1,135 @@
+{
+  "sha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+  "branch": "feat/4-service-order-lifecycle-worker8",
+  "runId": 41383928777,
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777",
+  "runHeadSha": "0aac6f252987f0dd176c3989248a908a1e36d529",
+  "ciSourceCommit": "fb257dbcab91cb97c30bd72a5aa34746e8ad04e3",
+  "ciSourceExplanation": "GitHub pull_request merge ref. Its full tree equals current candidate; merge parents are base05306275 and candidate0aac6f2.",
+  "candidateTree": "c5570d73b6e80f801cfd75b4138519d52cc5dd70",
+  "ciTree": "c5570d73b6e80f801cfd75b4138519d52cc5dd70",
+  "appVersion": "28.0.2147483647.4",
+  "fullSuite": true,
+  "total": 42,
+  "passed": 42,
+  "failed": 0,
+  "skipped": 0,
+  "failedRegression": {
+    "name": "Scenario_AC12_NewOrdinaryCompany_RequiresEula",
+    "result": "Success",
+    "seconds": 34.884
+  },
+  "defaultJobId": 125080767038,
+  "testJobId": 125082309559,
+  "cleanupJobId": 125084803988,
+  "physicalContainerId": "f02932f7a454",
+  "defaultAndTestSameContainer": true,
+  "testProductRepublished": true,
+  "testProductSha256": "F6A321303230180BF9134083F26FDEF894C9680F3FCB66342FD6341B05CA44CF",
+  "runner": 130451,
+  "executedAt": "2026-11-02T03:49:40.3375622Z",
+  "finishedAt": "2026-11-02T03:52:15Z",
+  "verifiedAt": "2026-11-02T03:55:02.400Z",
+  "ciCleanup": {
+    "workflowConclusion": "success",
+    "independentGetStatus": 404
+  },
+  "retainedDev": {
+    "containerId": "f0b5efcc1df3",
+    "state": "Stopped",
+    "newFixtureWrites": 0
+  },
+  "signing": "PR build does not sign (unchanged main-only signing configuration); production signing requests preserved. No signed PR artifact is claimed.",
+  "nonTestSkippedJobs": [
+    "PregateCheck",
+    "Build . (Default then Test) / Default / Remove COSMO Alpaca Containers",
+    "Build . (Default then Test) / Test / Remove COSMO Alpaca Containers",
+    "Code Analysis Processing"
+  ],
+  "jobs": [
+    {
+      "id": 125080486853,
+      "name": "Initialize COSMO Alpaca / COSMO Alpaca Initialization",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080486853"
+    },
+    {
+      "id": 125080487059,
+      "name": "Initialization",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080487059"
+    },
+    {
+      "id": 125080487277,
+      "name": "Initialize COSMO Alpaca / COSMO Alpaca Settings Files Check / COSMO Alpaca Settings Files Check",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080487277"
+    },
+    {
+      "id": 125080488205,
+      "name": "PregateCheck",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080488205"
+    },
+    {
+      "id": 125080631248,
+      "name": "Create COSMO Alpaca Containers / Create COSMO Alpaca Containers",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080631248"
+    },
+    {
+      "id": 125080767038,
+      "name": "Build . (Default then Test) / Default / . (Default)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125080767038"
+    },
+    {
+      "id": 125082309559,
+      "name": "Build . (Default then Test) / Test / . (Test)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125082309559"
+    },
+    {
+      "id": 125082310432,
+      "name": "Build . (Default then Test) / Default / Remove COSMO Alpaca Containers",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125082310432"
+    },
+    {
+      "id": 125084803988,
+      "name": "Remove COSMO Alpaca Containers / Remove COSMO Alpaca Containers",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125084803988"
+    },
+    {
+      "id": 125084804859,
+      "name": "Build . (Default then Test) / Test / Remove COSMO Alpaca Containers",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125084804859"
+    },
+    {
+      "id": 125084805542,
+      "name": "Code Analysis Processing",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125084805542"
+    },
+    {
+      "id": 125084855108,
+      "name": "Pull Request Status Check",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41383928777/job/125084855108"
+    }
+  ]
+}

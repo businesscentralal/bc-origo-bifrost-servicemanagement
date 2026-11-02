@@ -1,0 +1,41 @@
+2026-11-02T03:42:21.0686327Z   signArtifacts: false
+2026-11-02T03:42:31.6372849Z Bifrost: Test MainApp republish completed; the test app may now be deployed.
+2026-11-02T03:42:31.6481135Z Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.
+2026-11-02T03:42:31.6552834Z Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.
+2026-11-02T03:42:35.1018218Z   doNotSignApps: True
+2026-11-02T03:42:35.1319755Z   doNotSignApps: True
+2026-11-02T03:42:36.7774112Z   doNotSignApps: True
+2026-11-02T03:42:36.8042628Z   doNotSignApps: True
+2026-11-02T03:42:50.1701076Z   doNotSignApps: True
+2026-11-02T03:42:50.1956928Z   doNotSignApps: True
+2026-11-02T03:43:04.8256802Z   doNotSignApps: True
+2026-11-02T03:43:16.2257108Z   doNotSignApps: True
+2026-11-02T03:43:16.2599958Z   doNotSignApps: True
+2026-11-02T03:43:17.9808440Z   doNotSignApps: True
+2026-11-02T03:43:30.3869523Z   doNotSignApps: True
+2026-11-02T03:43:30.8345793Z   doNotSignApps: True
+2026-11-02T03:43:30.8688102Z   doNotSignApps: True
+2026-11-02T03:43:41.6559438Z Bifrost shared container: phase=Test, id=f02932f7a454, container mode=Default.
+2026-11-02T03:44:04.3486956Z CodeSignCertPfxFile             Not specified
+2026-11-02T03:44:06.3536309Z         Write-Host "Bifrost: build mode '$($env:BuildMode)' - removed internalsVisibleTo and the AS0081 suppression from app/app.json."
+2026-11-02T03:45:46.0982027Z Bifrost: republishing Test MainApp 28.0.2147483647.4 on shared container f02932f7a454, SHA256=F6A321303230180BF9134083F26FDEF894C9680F3FCB66342FD6341B05CA44CF.
+2026-11-02T03:45:54.1605883Z Bifrost: Test MainApp republish completed; the test app may now be deployed.
+2026-11-02T03:46:02.7000581Z Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.
+2026-11-02T03:49:40.3375622Z     Testfunction Scenario_AC12_NewOrdinaryCompany_RequiresEula Success (34.884 seconds)
+2026-11-02T03:50:03.3293618Z   doNotSignApps: True
+2026-11-02T03:50:05.1383305Z   doNotSignApps: True
+2026-11-02T03:50:05.8321555Z   doNotSignApps: True
+2026-11-02T03:50:11.9111754Z   doNotSignApps: True
+2026-11-02T03:50:14.7061050Z   doNotSignApps: True
+2026-11-02T03:50:16.5466999Z   doNotSignApps: True
+2026-11-02T03:50:18.6156570Z   doNotSignApps: True
+2026-11-02T03:50:21.0890214Z   doNotSignApps: True
+2026-11-02T03:50:21.1295206Z   doNotSignApps: True
+2026-11-02T03:50:22.6231486Z 1 TestApps, 42 tests, 0 failed, 0 skipped, 114.745 seconds
+2026-11-02T03:50:22.6429288Z - Bifrost Service Management - Tests, 42 tests, 42 passed, 0 failed, 0 skipped, 114.745 seconds
+2026-11-02T03:50:26.9927209Z   doNotSignApps: True
+2026-11-02T03:50:27.0390494Z   doNotSignApps: True
+2026-11-02T03:50:29.0697666Z   doNotSignApps: True
+2026-11-02T03:50:29.1053115Z   doNotSignApps: True
+2026-11-02T03:50:30.9750836Z   doNotSignApps: True
+2026-11-02T03:50:31.0112747Z   doNotSignApps: True
