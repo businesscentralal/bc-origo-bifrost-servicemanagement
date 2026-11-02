@@ -6,8 +6,12 @@
 - Add `Service.Order.Release` and `Service.Order.Reopen` (10076039, 10076042–10076045) with standard BC execution, order-only lookup, rollback, bilingual catalogues/refusals and a field-level generic-write guard.
 - Add public-dispatcher lifecycle, write-guard, contract, permission and unlicensed-company regression coverage (97705–97710, 97713–97714), with isolated self-created fixtures and no consent writes.
 
+### Fixed
+- Name the actual service document type in a wrong-type refusal by the base application caption in the caller's language (10076041). `Service.Order.Release` and `Service.Order.Reopen` keep `code`, `parameter` and the English `expected` name unchanged (97715).
+
 ### Changed
 - Run the Service Management CI suite with standard runner 130451 so the new-company consent refusal test (97708) can start its real background session; retain every test and propagate Alpaca test failures.
+- Record runner 130451 on the SERVICEMGT suite (97700) so a command-line run uses that same runner.
 - Prepare issue #4 shared service document lookup and contract primitives (10076040–10076041), isolated lifecycle fixtures (97704), and fixture and lookup component regressions (97711–97712). The lifecycle implementations reuse these shared components.
 - Correct the SERVICEMGT test selection range to 97700..97799 and service permission documentation.
 - Add the core message-name guard for local verification; workflow wiring remains Architect-owned.
