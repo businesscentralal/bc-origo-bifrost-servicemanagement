@@ -25,7 +25,7 @@ codeunit 97711 "Svc Fixture Tests ori"
         TestLine.SetRange("Test Codeunit", Codeunit::"Svc Registration Tst ori");
         Assert.AreEqual(2, TestLine.Count(), 'Installed suite must select both registration tests.');
         TestLine.SetRange("Test Codeunit", Codeunit::"Svc Fixture Tests ori");
-        Assert.AreEqual(3, TestLine.Count(), 'Installed suite must include every fixture test, including this suite check.');
+        Assert.AreEqual(4, TestLine.Count(), 'Installed suite must include every fixture test, including this suite check.');
     end;
 
     [Test]
@@ -44,6 +44,23 @@ codeunit 97711 "Svc Fixture Tests ori"
     begin
         TestData.CreateDocument(ServiceHeader, ServiceHeader."Document Type"::Quote);
         AssertDocument(ServiceHeader);
+    end;
+
+    [Test]
+    procedure Fixture_SetupQuoteCleanup_RequiresMarker()
+    var
+        Header: Record "Service Header";
+        Number: Code[20];
+    begin
+        TestData.CreateHeader(Header, Header."Document Type"::Quote);
+        Number := Header."No.";
+        asserterror TestData.DeleteMcpSetupQuote(Number);
+        Assert.ExpectedError('Description');
+        Header.Get(Header."Document Type"::Quote, Number);
+        Header.Description := 'Owned temporary generic-PK validation context';
+        Header.Modify(true);
+        TestData.DeleteMcpSetupQuote(Number);
+        Assert.IsFalse(Header.Get(Header."Document Type"::Quote, Number), 'The marked empty setup quote must be removed.');
     end;
 
     local procedure AssertDocument(ServiceHeader: Record "Service Header")

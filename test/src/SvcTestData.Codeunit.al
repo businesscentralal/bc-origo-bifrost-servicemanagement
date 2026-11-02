@@ -87,6 +87,25 @@ codeunit 97704 "Svc Test Data ori"
         Service.CreateServiceHeader(Header, DocumentType, Customer."No.");
     end;
 
+    /// <summary>Deletes only a marked, empty temporary quote used to seed a service item line through generic primary-key validation.</summary>
+    procedure DeleteMcpSetupQuote(DocumentNo: Text)
+    var
+        Header: Record "Service Header";
+        Line: Record "Service Line";
+        ItemLine: Record "Service Item Line";
+    begin
+        Assert.IsTrue((DocumentNo <> '') and (StrLen(DocumentNo) <= MaxStrLen(Header."No.")), 'An exact fixture number is required.');
+        Header.Get(Header."Document Type"::Quote, DocumentNo);
+        Header.TestField(Description, 'Owned temporary generic-PK validation context');
+        Line.SetRange("Document Type", Header."Document Type");
+        Line.SetRange("Document No.", Header."No.");
+        Assert.IsTrue(Line.IsEmpty(), 'Cleanup only accepts an empty setup quote.');
+        ItemLine.SetRange("Document Type", Header."Document Type");
+        ItemLine.SetRange("Document No.", Header."No.");
+        Assert.IsTrue(ItemLine.IsEmpty(), 'Cleanup only accepts an empty setup quote.');
+        Header.Delete(true);
+    end;
+
     /// <summary>Invokes a message through the public dispatcher with explicit language, subject and transaction mode.</summary>
     procedure Invoke(MessageType: Enum "Message Type ori"; Request: JsonObject; Subject: Text; LanguageId: Integer; OmitCommit: Boolean): JsonObject
     var
