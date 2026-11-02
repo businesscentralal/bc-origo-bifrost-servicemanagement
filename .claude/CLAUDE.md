@@ -92,3 +92,21 @@ Key rules always in effect:
 
 ## Testing Through the MCP Server
 - Keep MCP calls serial - parallel bursts crash the server.
+
+## Issue #4 shared lifecycle preparation
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076040 | codeunit | Svc Contract Parts ori |
+| 10076041 | codeunit | Svc Document Lookup ori |
+| 97704 | codeunit | Svc Test Data ori |
+| 97711 | codeunit (test) | Svc Fixture Tests ori |
+
+The shared lookup validates `no`, `systemId` and plain `subject`, and accepts the document
+type from its caller. The fixture helper creates its own customer, service item, item and
+resource lines through BC test libraries. The `SERVICEMGT` suite selects 97700..97799.
+
+`Service.Order.Release` and `Service.Order.Reopen` are not registered by this preparation.
+Issue #4 still requires Gunnar’s A1/A2 decisions, the lifecycle implementations, dispatcher
+acceptance tests, localized contracts and current-tip native/UI/MCP verification.
+The naming guard is available locally; Architect owns its SourceGuards workflow wiring.

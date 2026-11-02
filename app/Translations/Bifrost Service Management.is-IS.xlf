@@ -3,6 +3,72 @@
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Service Management">
     <body>
       <group id="body">
+        <trans-unit id="Codeunit 4166943217 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers do not identify the same service document.</source>
+          <target>Auðkennin vísa ekki á sama þjónustuskjalið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa ekki á sama þjónustuskjalið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3299433917" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send identifiers belonging to the same service document.</source>
+          <target>Sendu auðkenni sem tilheyra sama þjónustuskjalinu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni sem tilheyra sama þjónustuskjalinu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType ConflictNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the identifier in the format documented by describe_message_type.</source>
+          <target>Sendu auðkennið á sniðinu sem describe_message_type lýsir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkennið á sniðinu sem describe_message_type lýsir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId must be a nonempty GUID.</source>
+          <target>systemId verður að vera gilt GUID sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=systemId verður að vera gilt GUID sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 1066607173" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a nonempty JSON string of at most %2 characters.</source>
+          <target>%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = maximum length, is-IS=%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType InvalidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 1392983852" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read service documents with Data.Records.Get (table Service Header) and send an existing identifier.</source>
+          <target>Lestu þjónustuskjöl með Data.Records.Get (tafla Service Header) og sendu auðkenni sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustuskjöl með Data.Records.Get (tafla Service Header) og sendu auðkenni sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType LookupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a service document no, systemId or plain subject.</source>
+          <target>Sendu no eða systemId þjónustuskjals eða númer þess í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu no eða systemId þjónustuskjals eða númer þess í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 was not found.</source>
+          <target>Þjónustuskjal %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Þjónustuskjal %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 1000175713" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nothing was changed.</source>
+          <target>Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType NothingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 69645355" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 is not a %2 (actual type: %3).</source>
+          <target>Þjónustuskjal %1 er ekki af gerðinni %2 (raunveruleg gerð: %3).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = expected type, %3 = actual type, is-IS=Þjónustuskjal %1 er ekki af gerðinni %2 (raunveruleg gerð: %3).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType WrongTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 946462362" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the No. or SystemId of a service document of type %1.</source>
+          <target>Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document type, is-IS=Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType WrongTypeNextLbl</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 222978927 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Service Management</source>
           <target>Bifröst - þjónustustjórnun</target>
