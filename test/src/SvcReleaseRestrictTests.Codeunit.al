@@ -24,9 +24,9 @@ codeunit 97707 "Svc Release Restrict Tests ori"
         // Issue #4 AC10: trigger the real Data.Records.Set event, not the subscriber directly.
         Data.CreateDocument(Header, Header."Document Type"::Order);
         Commit();
-        Response := SetField(Header.SystemId, 'Release_Status', 'Released to Ship');
+        Response := SetField(Header.SystemId, 'ReleaseStatus', 'Released to Ship');
         Response.WriteTo(Serialized);
-        Assert.IsTrue(Serialized.Contains('BlockedByWriteGuard'), 'Dedicated lifecycle field is blocked: ' + Serialized);
+        Data.AssertRefusal(Response, 'PermissionDenied');
         Assert.IsTrue(Serialized.Contains('Service.Order.Release / Service.Order.Reopen'), 'Hint names both operations.');
         Header.Get(Header."Document Type", Header."No.");
         Assert.AreEqual(Header."Release Status"::Open, Header."Release Status", 'Generic writer changed nothing.');

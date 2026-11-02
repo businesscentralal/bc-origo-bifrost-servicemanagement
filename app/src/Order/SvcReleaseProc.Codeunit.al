@@ -17,8 +17,12 @@ codeunit 10076044 "Svc Release Proc ori"
         BeforeStatus: Text;
         Response: JsonObject;
     begin
-        Header.ReadIsolation := IsolationLevel::UpdLock;
         if not Lookup.FindDocument(Rec, Enum::"Service Document Type"::Order, Header) then
+            exit;
+        // Lookup resets filters/isolation. Re-read under the write lock and recheck state at the mutation boundary.
+        Header.ReadIsolation := IsolationLevel::UpdLock;
+        Header.Get(Header."Document Type", Header."No.");
+        if AlreadyAtTarget(Rec, Header) then
             exit;
         BeforeStatus := StatusName(Header);
         if Rec.Type = Rec.Type::"Service.Order.Release" then
@@ -60,22 +64,16 @@ codeunit 10076044 "Svc Release Proc ori"
     begin
         if not Lookup.FindDocument(Argument, Enum::"Service Document Type"::Order, Header) then
             exit;
+        if AlreadyAtTarget(Argument, Header) then
+            exit;
         if Argument.Type = Argument.Type::"Service.Order.Release" then begin
-            if Header."Release Status" = Header."Release Status"::"Released to Ship" then begin
-                Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(ReleasedLbl, Header."No."), '', '', '', ReopenLbl);
-                exit;
-            end;
             Line.SetLoadFields("Document Type", "Document No.", Type, Quantity);
             Line.SetRange("Document Type", Header."Document Type");
             Line.SetRange("Document No.", Header."No.");
             Line.SetFilter(Type, '<>%1', Line.Type::" ");
             Line.SetFilter(Quantity, '<>0');
             NoLines := Line.IsEmpty();
-        end else
-            if Header."Release Status" = Header."Release Status"::Open then begin
-                Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(OpenLbl, Header."No."), '', '', '', NothingLbl);
-                exit;
-            end;
+        end;
 
         if Argument."Omit Commit" then
             Codeunit.Run(Codeunit::"Svc Release Proc ori", Argument)
@@ -87,6 +85,20 @@ codeunit 10076044 "Svc Release Proc ori"
                 else
                     Argument.RespondWithError("Bifrost Error Code ori"::BusinessCentralError, ErrorText, '', '', '', CorrectLbl);
             end;
+    end;
+
+    local procedure AlreadyAtTarget(var Argument: Record "Message Argument ori"; Header: Record "Service Header"): Boolean
+    begin
+        if Argument.Type = Argument.Type::"Service.Order.Release" then begin
+            if Header."Release Status" <> Header."Release Status"::"Released to Ship" then
+                exit(false);
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(ReleasedLbl, Header."No."), '', '', '', ReopenLbl);
+        end else begin
+            if Header."Release Status" <> Header."Release Status"::Open then
+                exit(false);
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(OpenLbl, Header."No."), '', '', '', NothingLbl);
+        end;
+        exit(true);
     end;
 
     local procedure StatusName(Header: Record "Service Header"): Text
