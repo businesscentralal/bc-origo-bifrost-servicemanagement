@@ -63,6 +63,7 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 | 10076041 | codeunit | Svc Document Lookup ori |
 | 97704 | codeunit | Svc Test Data ori |
 | 97711 | codeunit (test) | Svc Fixture Tests ori |
+| 97712 | codeunit (test) | Svc Lookup Tests ori |
 
 The shared lookup validates `no`, `systemId` and plain `subject`, and accepts the document
 type from its caller. The fixture helper creates its own customer, service item, item and
@@ -72,3 +73,7 @@ resource lines through BC test libraries. The `SERVICEMGT` suite selects 97700..
 Issue #4 still requires Gunnar’s A1/A2 decisions, the lifecycle implementations, dispatcher
 acceptance tests, localized contracts and current-tip native/UI/MCP verification.
 The naming guard is available locally; Architect owns its SourceGuards workflow wiring.
+
+Component tests (97712) verify only the shared lookup through the app’s internal helper and
+Foundation’s public argument API. They do not replace the required public-dispatcher tests
+for the eventual release/reopen message types.
