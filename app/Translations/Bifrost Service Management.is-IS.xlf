@@ -159,6 +159,30 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Release / Service.Order.Reopen</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Restrict ori - Method ReleaseStatusHint - NamedType HintLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 2792914765" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Credit Memo</source>
+          <target>Kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">Service Document Type Credit Memo, is-IS=Kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType CreditMemoCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 3730409591" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invoice</source>
+          <target>Reikningur</target>
+          <note from="Developer" annotates="general" priority="2">Service Document Type Invoice, is-IS=Reikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType InvoiceCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 2536333798" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Order</source>
+          <target>Pöntun</target>
+          <note from="Developer" annotates="general" priority="2">Service Document Type Order, is-IS=Pöntun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType OrderCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 4181329266" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Quote</source>
+          <target>Tilboð</target>
+          <note from="Developer" annotates="general" priority="2">Service Document Type Quote, is-IS=Tilboð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteCaptionLbl</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 222978927 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Service Management</source>
           <target>Bifröst - þjónustustjórnun</target>

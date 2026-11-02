@@ -24,6 +24,13 @@ codeunit 10076041 "Svc Document Lookup ori"
         OrderTypeLbl: Label 'Service document %1 is not an Order (actual type: %2).', Comment = '%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).';
         OrderTypeNextLbl: Label 'Send the No. or SystemId of a service order.', Comment = 'is-IS=Sendu númer eða SystemId þjónustupöntunar.';
         NothingLbl: Label 'Nothing was changed.', Comment = 'is-IS=Engu var breytt.';
+        // Base Application enum "Service Document Type" captions. Enum caption APIs follow the user
+        // language, not GlobalLanguage, so a 1039 call from an English user still receives Quote.
+        // These labels follow the call language and match the installed is-IS language pack.
+        QuoteCaptionLbl: Label 'Quote', Comment = 'Service Document Type Quote, is-IS=Tilboð';
+        OrderCaptionLbl: Label 'Order', Comment = 'Service Document Type Order, is-IS=Pöntun';
+        InvoiceCaptionLbl: Label 'Invoice', Comment = 'Service Document Type Invoice, is-IS=Reikningur';
+        CreditMemoCaptionLbl: Label 'Credit Memo', Comment = 'Service Document Type Credit Memo, is-IS=Kreditreikningur';
 
     /// <summary>Validates all declared identifiers before reading the requested document. The caller chooses its document type.</summary>
     internal procedure FindDocument(var Argument: Record "Message Argument ori"; DocumentType: Enum "Service Document Type"; var ServiceHeader: Record "Service Header"): Boolean
@@ -64,11 +71,11 @@ codeunit 10076041 "Svc Document Lookup ori"
             if ServiceHeader."Document Type" <> DocumentType then begin
                 if DocumentType = DocumentType::Order then
                     Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
-                        StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeName(ServiceHeader."Document Type")),
+                        StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeCaption(ServiceHeader."Document Type")),
                         'systemId', IdText, 'Order', OrderTypeNextLbl)
                 else
                     Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
-                        StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeName(ServiceHeader."Document Type")),
+                        StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeCaption(ServiceHeader."Document Type")),
                         'systemId', IdText, TypeName(DocumentType), StrSubstNo(WrongTypeNextLbl, TypeName(DocumentType)));
                 exit(false);
             end;
@@ -83,7 +90,7 @@ codeunit 10076041 "Svc Document Lookup ori"
         exit(true);
     end;
 
-    /// <summary>Returns invariant service document type names for machine-readable contracts and errors.</summary>
+    /// <summary>Returns invariant English service document type names for machine-readable fields such as expected.</summary>
     internal procedure TypeName(DocumentType: Enum "Service Document Type"): Text
     begin
         case DocumentType of
@@ -95,6 +102,27 @@ codeunit 10076041 "Svc Document Lookup ori"
                 exit('Invoice');
             DocumentType::"Credit Memo":
                 exit('CreditMemo');
+        end;
+        exit('');
+    end;
+
+    /// <summary>
+    /// The base application caption of a service document type in the language of the call, for a sentence a caller
+    /// reads. Quote is Tilboð at lcid 1039 and Quote at 1033. Structured fields keep the English name from TypeName.
+    /// </summary>
+    /// <param name="DocumentType">The document type named in the sentence.</param>
+    /// <returns>The caption in the current language.</returns>
+    local procedure TypeCaption(DocumentType: Enum "Service Document Type"): Text
+    begin
+        case DocumentType of
+            DocumentType::Quote:
+                exit(QuoteCaptionLbl);
+            DocumentType::Order:
+                exit(OrderCaptionLbl);
+            DocumentType::Invoice:
+                exit(InvoiceCaptionLbl);
+            DocumentType::"Credit Memo":
+                exit(CreditMemoCaptionLbl);
         end;
         exit('');
     end;

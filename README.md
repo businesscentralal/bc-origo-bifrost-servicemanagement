@@ -90,6 +90,7 @@ through `Help.Implementation.Get` / `describe_message_type`.
 | 97712 | codeunit | Svc Lookup Tests ori |
 | 97713 | table | Svc Licence Result Tst ori |
 | 97714 | codeunit | Svc Licence Probe Tst ori |
+| 97715 | codeunit | Svc Wrong Type Tests ori |
 | 10076035 | codeunit | Svc Registration ori |
 | 10076036 | permissionset | BIFROST Svc ori |
 | 10076037 | permissionsetextension | BIFROST SvcFull ori |

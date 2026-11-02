@@ -40,6 +40,13 @@ codeunit 97700 "Svc Test Install ori"
         if not TestMethodLine.IsEmpty() then
             TestMethodLine.DeleteAll(true);
 
+        // Runner 130451 allows StartSession. The command-line tool uses the suite's runner, and 130450
+        // rejects the new-company consent test even when that codeunit sets RequiredTestIsolation = Disabled.
+        if ALTestSuite."Test Runner Id" <> 130451 then begin
+            ALTestSuite.Validate("Test Runner Id", 130451);
+            ALTestSuite.Modify(true);
+        end;
+
         TestSuiteMgt.SelectTestMethodsByRange(ALTestSuite, ObjectRangeTok);
     end;
 }
