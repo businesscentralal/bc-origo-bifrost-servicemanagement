@@ -74,7 +74,27 @@ try {
     $env:_buildMode = 'Default'
     Invoke-BifrostSharedPublish -Parameters @{appFile=@($mainAppPath)} -Publisher $publisher
     Assert ($calls.Count -eq 1) 'Default publishing was changed.'
-    Write-Host 'Shared Alpaca pipeline checks passed: plan validation, mode preservation, physical identity, compatibility guard, republish ordering, missing grant, and Default passthrough.'
+    $env:_buildMode = 'Test'
+    $testParameters = @{extensionId='d39af77f-6b49-426f-a2ba-830ec3f35e21'; disabledTests=@(); returnTrueIfAllPassed=$true; GitHubActions='error'; JUnitResultFileName='results.xml'}
+    $runner = {
+        param($Parameters)
+        Assert ($Parameters.testRunnerCodeunitId -eq '130451') 'Cross-company tests need the standard non-isolated runner.'
+        Assert ($Parameters.disabledTests.Count -eq 0 -and $Parameters.returnTrueIfAllPassed -and $Parameters.GitHubActions -eq 'error') 'Test selection or failure gates changed.'
+        Assert ($Parameters.JUnitResultFileName -eq 'results.xml') 'Result output was changed.'
+        return $false
+    }
+    $result = Invoke-BifrostServiceTests -Parameters $testParameters -Runner $runner
+    Assert ($result -eq $false) 'A failing runner result was swallowed.'
+    Assert (!$testParameters.ContainsKey('testRunnerCodeunitId')) 'Caller parameters were mutated.'
+    MustThrow { Invoke-BifrostServiceTests -Parameters $testParameters -Runner { throw 'runner failure' } } 'Runner exceptions must propagate.'
+    $passthrough = { param($Parameters) Assert (!$Parameters.ContainsKey('testRunnerCodeunitId')) 'Unrelated runner was changed.'; return $true }
+    $foreignParameters = $testParameters.Clone(); $foreignParameters.extensionId = 'other-test-app'
+    Assert (Invoke-BifrostServiceTests -Parameters $foreignParameters -Runner $passthrough) 'Other test apps must pass through.'
+    $env:_buildMode = 'Default'
+    Assert (Invoke-BifrostServiceTests -Parameters $testParameters -Runner $passthrough) 'Default runner must pass through.'
+    $initialize = Get-Content -LiteralPath "$PSScriptRoot/../.AL-Go/PipelineInitialize.ps1" -Raw
+    Assert ($initialize.Contains("Get-Variable -Name 'RunTestsInBcContainer' -Scope 1 -ValueOnly") -and $initialize.Contains('Invoke-BifrostServiceTests -Parameters $Parameters -Runner $BifrostAlpacaRunTests')) 'PipelineInitialize must wrap the actual Alpaca test runner.'
+    Write-Host 'Shared Alpaca pipeline checks passed: plan validation, mode preservation, physical identity, compatibility guard, republish ordering, missing grant, Default passthrough, cross-company test runner selection, failure propagation and unrelated-app passthrough.'
 } finally {
     foreach ($name in $saved.Keys) { [Environment]::SetEnvironmentVariable($name,$saved[$name]) }
     $resolved = (Resolve-Path -LiteralPath $temp).Path

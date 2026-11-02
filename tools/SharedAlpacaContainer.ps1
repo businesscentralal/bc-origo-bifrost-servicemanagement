@@ -83,3 +83,16 @@ function Invoke-BifrostSharedPublish {
         Invoke-Command -ScriptBlock $Publisher -ArgumentList $remainingParameters
     }
 }
+
+# AC12 starts a real session in a newly created company and removes its own data.
+# Microsoft runner 130451 permits StartSession; 130450 forbids it regardless of
+# RequiredTestIsolation on the test codeunit. Keep Alpaca's runner/result checks.
+function Invoke-BifrostServiceTests {
+    param([hashtable] $Parameters, [scriptblock] $Runner)
+    $runParameters = $Parameters.Clone()
+    if ($env:_buildMode -eq 'Test' -and $Parameters.extensionId -eq 'd39af77f-6b49-426f-a2ba-830ec3f35e21') {
+        $runParameters.testRunnerCodeunitId = '130451'
+        Write-Host 'Bifrost: Service Management suite uses standard runner 130451 for the cross-company session test; all tests and failure gates remain enabled.'
+    }
+    Invoke-Command -ScriptBlock $Runner -ArgumentList $runParameters
+}

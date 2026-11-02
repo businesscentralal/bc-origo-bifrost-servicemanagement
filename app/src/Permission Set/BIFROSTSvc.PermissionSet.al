@@ -5,7 +5,7 @@ namespace Origo.Bifrost.ServiceManagement;
 /// Assign this alongside a Bifrost Core permission set to let a user or service invoke the
 /// Service Management message types. The message types themselves run under the caller's own
 /// permissions on the Business Central Service Management tables, so this set does not widen access
-/// to production or routing data. Add every new codeunit that a message type runs to this set.
+/// to service data. Add every new codeunit that a message type runs to this set.
 /// </summary>
 permissionset 10076036 "BIFROST Svc ori"
 {
@@ -14,5 +14,11 @@ permissionset 10076036 "BIFROST Svc ori"
     Access = Public;
 
     Permissions =
-        codeunit "Svc Registration ori" = X;
+        codeunit "Svc Registration ori" = X,
+        codeunit "Svc Contract Parts ori" = X,
+        codeunit "Svc Document Lookup ori" = X,
+        codeunit "Svc Order Release Impl ori" = X,
+        codeunit "Svc Order Reopen Impl ori" = X,
+        codeunit "Svc Release Proc ori" = X,
+        codeunit "Svc Release Restrict ori" = X;
 }

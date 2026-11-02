@@ -113,6 +113,14 @@ if ($env:BIFROST_SHARED_CONTAINER -eq 'true') {
         . ./tools/SharedAlpacaContainer.ps1
         Invoke-BifrostSharedPublish -Parameters $Parameters -Publisher $BifrostAlpacaPublish
     }
+    if ($env:_buildMode -eq 'Test') {
+        Set-Variable -Name 'BifrostAlpacaRunTests' -Value (Get-Variable -Name 'RunTestsInBcContainer' -Scope 1 -ValueOnly) -Scope 1
+        Set-Variable -Name 'RunTestsInBcContainer' -Scope 1 -Value {
+            param([hashtable] $Parameters)
+            . ./tools/SharedAlpacaContainer.ps1
+            Invoke-BifrostServiceTests -Parameters $Parameters -Runner $BifrostAlpacaRunTests
+        }
+    }
 }
 
 

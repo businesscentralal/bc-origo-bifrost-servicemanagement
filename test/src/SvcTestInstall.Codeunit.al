@@ -13,7 +13,7 @@ codeunit 97700 "Svc Test Install ori"
 
     var
         SuiteNameTok: Label 'SERVICEMGT', Locked = true;
-        ObjectRangeTok: Label '97700..97699', Locked = true;
+        ObjectRangeTok: Label '97700..97799', Locked = true;
 
     trigger OnInstallAppPerCompany()
     begin

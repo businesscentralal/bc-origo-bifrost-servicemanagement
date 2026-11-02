@@ -15,6 +15,12 @@ container identity, republish ordering, missing-grant rejection and Default publ
 The workflows run this check before building. Changes to the helper scripts trigger a full build.
 If the container was removed, rerun all jobs rather than the Test phase alone.
 
+The Service Management test app uses Microsoft's standard non-isolated runner 130451.
+Its AC12 consent-refusal test creates and deletes its own ordinary company and starts a
+background session there; the codeunit-isolated runner 130450 prohibits starting that session.
+The wrapper retains Alpaca's test execution and result validation, all test methods and failure
+gates. Other test apps and Default keep their existing runner.
+
 AL-Go system updates may overwrite the custom workflow and initialization hooks. Preserve
 the sequential wrapper, Default-only container creation plan, deferred cleanup, physical
 container check, compiled test grant check and the existing internals-stripping hooks.

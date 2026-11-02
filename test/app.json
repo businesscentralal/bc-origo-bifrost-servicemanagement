@@ -58,6 +58,12 @@
       "publisher": "Microsoft",
       "name": "Permissions Mock",
       "version": "1.0.0.0"
+    },
+    {
+      "id": "d852d5d2-a39d-4179-baeb-f99a19e32510",
+      "publisher": "Microsoft",
+      "name": "Application Test Library",
+      "version": "28.5.0.0"
     }
   ],
   "screenshots": [],
