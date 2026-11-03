@@ -24,6 +24,7 @@ codeunit 10076041 "Svc Document Lookup ori"
         OrderTypeLbl: Label 'Service document %1 is not an Order (actual type: %2).', Comment = '%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).';
         OrderTypeNextLbl: Label 'Send the No. or SystemId of a service order.', Comment = 'is-IS=Sendu númer eða SystemId þjónustupöntunar.';
         NothingLbl: Label 'Nothing was changed.', Comment = 'is-IS=Engu var breytt.';
+        MissingAllocLbl: Label 'Send documentNo, systemId, entryNo or a plain subject.', Comment = 'is-IS=Sendu documentNo, systemId, entryNo eða númer skjalsins í subject.';
         // Base Application enum "Service Document Type" captions. Enum caption APIs follow the user
         // language, not GlobalLanguage, so a 1039 call from an English user still receives Quote.
         // These labels follow the call language and match the installed is-IS language pack.
@@ -90,6 +91,59 @@ codeunit 10076041 "Svc Document Lookup ori"
         exit(true);
     end;
 
+    /// <summary>Resolves a service order from documentNo, systemId or the plain subject. Release keeps the no key.</summary>
+    internal procedure FindAllocationDocument(var Argument: Record "Message Argument ori"; var ServiceHeader: Record "Service Header"): Boolean
+    var
+        Request: JsonObject;
+        Number: Text;
+        IdText: Text;
+        SubjectNumber: Text;
+        Id: Guid;
+    begin
+        Request := Argument.GetRequestJson();
+        Number := ReadIdentifier(Request, 'documentNo', MaxStrLen(ServiceHeader."No."), Argument);
+        IdText := ReadIdentifier(Request, 'systemId', 50, Argument);
+        SubjectNumber := Argument.Subject.Trim();
+        if StrLen(SubjectNumber) > MaxStrLen(ServiceHeader."No.") then
+            Argument.AddError("Bifrost Error Code ori"::InvalidParameter, StrSubstNo(InvalidLbl, 'subject', MaxStrLen(ServiceHeader."No.")), 'subject', '', '', CorrectLbl);
+        if (Number = '') and (IdText = '') and (SubjectNumber = '') and not Argument.HasCollectedErrors() then
+            Argument.AddError("Bifrost Error Code ori"::MissingParameter, MissingAllocLbl, 'documentNo/systemId', '', '', CorrectLbl);
+        if IdText <> '' then
+            if not Evaluate(Id, IdText) or IsNullGuid(Id) then
+                Argument.AddError("Bifrost Error Code ori"::InvalidParameterFormat, GuidLbl, 'systemId', IdText, 'GUID', CorrectLbl);
+        if Argument.HasCollectedErrors() then begin
+            Argument.RespondWithCollectedErrors("Bifrost Error Code ori"::MultipleErrors, NothingLbl);
+            exit(false);
+        end;
+        if (Number <> '') and (SubjectNumber <> '') and (UpperCase(Number) <> UpperCase(SubjectNumber)) then
+            exit(Conflict(Argument));
+        if Number = '' then
+            Number := SubjectNumber;
+
+        ServiceHeader.Reset();
+        ServiceHeader.SetLoadFields();
+        if IdText <> '' then begin
+            if not ServiceHeader.GetBySystemId(Id) then begin
+                Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, NotFoundText("Service Document Type"::Order, IdText), 'systemId', IdText, '', LookupText("Service Document Type"::Order));
+                exit(false);
+            end;
+            if ServiceHeader."Document Type" <> "Service Document Type"::Order then begin
+                Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                    StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeCaption(ServiceHeader."Document Type")),
+                    'systemId', IdText, 'Order', OrderTypeNextLbl);
+                exit(false);
+            end;
+            if (Number <> '') and (ServiceHeader."No." <> UpperCase(Number)) then
+                exit(Conflict(Argument));
+            exit(true);
+        end;
+        if not ServiceHeader.Get("Service Document Type"::Order, Number) then begin
+            Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, NotFoundText("Service Document Type"::Order, Number), 'documentNo', Number, '', LookupText("Service Document Type"::Order));
+            exit(false);
+        end;
+        exit(true);
+    end;
+
     /// <summary>Returns invariant English service document type names for machine-readable fields such as expected.</summary>
     internal procedure TypeName(DocumentType: Enum "Service Document Type"): Text
     begin
@@ -112,7 +166,7 @@ codeunit 10076041 "Svc Document Lookup ori"
     /// </summary>
     /// <param name="DocumentType">The document type named in the sentence.</param>
     /// <returns>The caption in the current language.</returns>
-    local procedure TypeCaption(DocumentType: Enum "Service Document Type"): Text
+    internal procedure TypeCaption(DocumentType: Enum "Service Document Type"): Text
     begin
         case DocumentType of
             DocumentType::Quote:

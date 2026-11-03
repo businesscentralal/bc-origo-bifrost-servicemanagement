@@ -11,7 +11,7 @@ through Bifröst message types: service orders, service items, service quotes, r
 
 **Microsoft source:** <https://github.com/microsoft/BCApps/tree/main/src/Layers/W1/BaseApp/Service> (Service Management is part of the Base Application)
 
-**Status:** service order release/reopen implementation; verification is tracked in issue #4.
+**Status:** service allocation and service order release/reopen are implemented. Allocation verification is tracked in issue #6. Release/reopen verification is tracked in issue #4.
 
 ---
 
@@ -54,6 +54,31 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 | `test/` | Test app (`Bifrost Service Management - Tests`) |
 | `tools/` | Pipeline guard scripts |
 | `.AL-Go/`, `.github/`, `.alpaca/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
+
+## Issue #6 service allocation
+
+`Service.Allocation.Allocate` allocates a resource or resource group to a service item line of a service order for a date and a number of hours, or moves an active allocation to another resource. It uses standard Business Central allocation and does not commit on its own. Cancellation is not offered. Quotes, invoices and credit memos are outside this order-only scope.
+
+```json
+{"documentNo":"SO000001","resourceNo":"LINA","allocatedHours":2}
+```
+
+When Service Zones Option is Warning Displayed, a resource outside the order zone is refused unless `acceptOutsideServiceZone` is true. `Data.Records.Set` cannot change `Service Order Allocation` Status, Resource No. or Resource Group No.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076060 | enumextension | Svc Alloc MsgType ori |
+| 10076061 | codeunit | Svc Allocation Impl ori |
+| 10076062 | codeunit | Svc Allocation Proc ori |
+| 10076063 | codeunit | Svc Alloc Check ori |
+| 10076064 | codeunit | Svc Alloc Restrict ori |
+| 97725 | codeunit | Svc Allocation Tests ori |
+| 97726 | codeunit | Svc Reallocation Tests ori |
+| 97727 | codeunit | Svc Alloc Restrict Tests ori |
+| 97728 | codeunit | Svc Alloc Contract Tests ori |
+| 97729 | codeunit | Svc Alloc Perm Tests ori |
+
+Object ids 10076065–10076074 and test ids 97730–97739 are reserved for this story.
 
 ## Issue #4 service order lifecycle
 

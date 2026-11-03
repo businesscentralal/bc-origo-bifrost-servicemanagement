@@ -27,6 +27,16 @@ Allocated ids (record every new id here):
 | 97701 | codeunit (test) | Svc Test Upgrade ori |
 | 97702 | codeunit (test) | Svc Registration Tst ori |
 | 97703 | permissionset (test) | Svc Platform Tst ori |
+| 97725 | codeunit (test) | Svc Allocation Tests ori |
+| 97726 | codeunit (test) | Svc Reallocation Tests ori |
+| 97727 | codeunit (test) | Svc Alloc Restrict Tests ori |
+| 97728 | codeunit (test) | Svc Alloc Contract Tests ori |
+| 97729 | codeunit (test) | Svc Alloc Perm Tests ori |
+| 10076060 | enumextension | Svc Alloc MsgType ori |
+| 10076061 | codeunit | Svc Allocation Impl ori |
+| 10076062 | codeunit | Svc Allocation Proc ori |
+| 10076063 | codeunit | Svc Alloc Check ori |
+| 10076064 | codeunit | Svc Alloc Restrict ori |
 
 ## Microsoft source
 Business Central Service Management (service orders, service items, service contracts, service quotes) lives in the **Base Application**; BC 28 has no separate Microsoft service app to depend on. Source: https://github.com/microsoft/BCApps/tree/main/src/Layers/W1/BaseApp/Service
@@ -139,6 +149,22 @@ through `Help.Implementation.Get` / `describe_message_type`.
 | 10076043 | codeunit | Svc Order Reopen Impl ori |
 | 10076044 | codeunit | Svc Release Proc ori |
 | 10076045 | codeunit | Svc Release Restrict ori |
+| 10076060 | enumextension | Svc Alloc MsgType ori |
+| 10076061 | codeunit | Svc Allocation Impl ori |
+| 10076062 | codeunit | Svc Allocation Proc ori |
+| 10076063 | codeunit | Svc Alloc Check ori |
+| 10076064 | codeunit | Svc Alloc Restrict ori |
+| 97725 | codeunit | Svc Allocation Tests ori |
+| 97726 | codeunit | Svc Reallocation Tests ori |
+| 97727 | codeunit | Svc Alloc Restrict Tests ori |
+| 97728 | codeunit | Svc Alloc Contract Tests ori |
+| 97729 | codeunit | Svc Alloc Perm Tests ori |
+
+## Issue #6 service allocation
+
+`Service.Allocation.Allocate` allocates or reallocates a resource on a service order item line. It accepts `documentNo`, `systemId`, `entryNo` or a plain `subject`. `allocatedHours` is required. Send `resourceNo` or `resourceGroupNo`. An active entry is moved with `SetHideDialog` so no modal page runs. Cancellation is not supported. Orders only.
+
+Object ids 10076065–10076074 and test ids 97730–97739 are reserved. Pre-merge Web Client UI is not run here: Service Management UI needs a Premium licence and is UAT after deployment (issue comment 6576452597). That is `NOT_RUN`, not a pass.
 
 The shared lookup and contract parts support the subsequent service lifecycle stories.
 Native tests use self-created fixtures and the public Foundation dispatcher; the

@@ -20,5 +20,9 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Order Release Impl ori" = X,
         codeunit "Svc Order Reopen Impl ori" = X,
         codeunit "Svc Release Proc ori" = X,
-        codeunit "Svc Release Restrict ori" = X;
+        codeunit "Svc Release Restrict ori" = X,
+        codeunit "Svc Allocation Impl ori" = X,
+        codeunit "Svc Allocation Proc ori" = X,
+        codeunit "Svc Alloc Check ori" = X,
+        codeunit "Svc Alloc Restrict ori" = X;
 }

@@ -154,6 +154,48 @@ codeunit 97704 "Svc Test Data ori"
         if Code <> 'MultipleErrors' then
             Assert.AreNotEqual('', TextValue(Response, 'nextStep'), 'Refusal must offer recovery guidance.');
     end;
+
+    /// <summary>Remembers service zone and skill options, then turns both off so allocation tests do not depend on company defaults.</summary>
+    procedure SilenceServiceRules(var Zones: Option "Code Shown","Warning Displayed","Not Used"; var Skills: Option "Code Shown","Warning Displayed","Not Used")
+    var
+        Setup: Record "Service Mgt. Setup";
+    begin
+        Setup.Get();
+        Zones := Setup."Service Zones Option";
+        Skills := Setup."Resource Skills Option";
+        Setup."Service Zones Option" := Setup."Service Zones Option"::"Not Used";
+        Setup."Resource Skills Option" := Setup."Resource Skills Option"::"Not Used";
+        Setup.Modify();
+    end;
+
+    /// <summary>Restores service zone and skill options changed by SilenceServiceRules.</summary>
+    procedure RestoreServiceRules(Zones: Option "Code Shown","Warning Displayed","Not Used"; Skills: Option "Code Shown","Warning Displayed","Not Used")
+    var
+        Setup: Record "Service Mgt. Setup";
+    begin
+        Setup.Get();
+        Setup."Service Zones Option" := Zones;
+        Setup."Resource Skills Option" := Skills;
+        Setup.Modify();
+    end;
+
+    /// <summary>Creates another resource for the order customer.</summary>
+    procedure CreateResourceFor(CustomerNo: Code[20]; var Resource: Record Resource)
+    var
+        Customer: Record Customer;
+        Resources: Codeunit "Library - Resource";
+    begin
+        Customer.Get(CustomerNo);
+        Resources.CreateResource(Resource, Customer."VAT Bus. Posting Group");
+    end;
+
+    /// <summary>Returns the first allocation entry of a service document.</summary>
+    procedure FindAllocation(Header: Record "Service Header"; var Alloc: Record "Service Order Allocation")
+    begin
+        Alloc.SetRange("Document Type", Header."Document Type");
+        Alloc.SetRange("Document No.", Header."No.");
+        Alloc.FindFirst();
+    end;
     local procedure NewCode(): Code[20]
     begin
         exit(CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '-{}'), 1, 20));
