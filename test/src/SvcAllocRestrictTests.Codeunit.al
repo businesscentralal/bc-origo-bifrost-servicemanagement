@@ -27,7 +27,8 @@ codeunit 97727 "Svc Alloc Restrict Tests ori"
         Data.CreateDocument(Header, Header."Document Type"::Order);
         Data.FindAllocation(Header, Alloc);
         Commit();
-        Response := SetField(Alloc.SystemId, 'ResourceNo', 'X-BLOCKED');
+        // Foundation keeps the period in "Resource No." as an underscore, so the bare camelCase key is not that field.
+        Response := SetField(Alloc.SystemId, 'Resource No.', 'X-BLOCKED');
         Response.WriteTo(Serialized);
         Data.AssertRefusal(Response, 'PermissionDenied');
         Assert.IsTrue(Serialized.Contains('Service.Allocation.Allocate'), 'Hint names the allocation message type.');
@@ -35,7 +36,7 @@ codeunit 97727 "Svc Alloc Restrict Tests ori"
         Assert.AreEqual('', Alloc."Resource No.", 'Generic writer changed no resource.');
         Response := SetField(Alloc.SystemId, 'Status', 'Active');
         Data.AssertRefusal(Response, 'PermissionDenied');
-        Response := SetField(Alloc.SystemId, 'ResourceGroupNo', 'X-BLOCKED');
+        Response := SetField(Alloc.SystemId, 'Resource Group No.', 'X-BLOCKED');
         Data.AssertRefusal(Response, 'PermissionDenied');
     end;
 

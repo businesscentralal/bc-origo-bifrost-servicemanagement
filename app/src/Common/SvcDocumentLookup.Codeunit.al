@@ -121,6 +121,7 @@ codeunit 10076041 "Svc Document Lookup ori"
             Number := SubjectNumber;
 
         ServiceHeader.Reset();
+        ServiceHeader.SetLoadFields();
         if IdText <> '' then begin
             if not ServiceHeader.GetBySystemId(Id) then begin
                 Argument.RespondWithError("Bifrost Error Code ori"::RecordNotFound, NotFoundText("Service Document Type"::Order, IdText), 'systemId', IdText, '', LookupText("Service Document Type"::Order));

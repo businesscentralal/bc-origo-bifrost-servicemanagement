@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Projects.Resources.Resource;
+using Microsoft.Sales.Customer;
 using Microsoft.Service.Document;
 using Microsoft.Service.Item;
 using Microsoft.Service.Maintenance;
@@ -260,8 +261,7 @@ codeunit 97725 "Svc Allocation Tests ori"
         Alloc.Status := Alloc.Status::Nonactive;
         Alloc.Modify();
         Service.CreateServiceZone(Zone);
-        Header.Validate("Service Zone Code", Zone.Code);
-        Header.Modify(true);
+        AssignOrderZone(Header, Zone.Code);
         Setup.Get();
         Setup."Service Zones Option" := Setup."Service Zones Option"::"Warning Displayed";
         Setup.Modify();
@@ -319,8 +319,7 @@ codeunit 97725 "Svc Allocation Tests ori"
     begin
         PrepareOrder(Header, Resource, Zones, Skills);
         Service.CreateServiceZone(Zone);
-        Header.Validate("Service Zone Code", Zone.Code);
-        Header.Modify(true);
+        AssignOrderZone(Header, Zone.Code);
         Setup.Get();
         Setup."Service Zones Option" := Setup."Service Zones Option"::"Warning Displayed";
         Setup.Modify();
@@ -418,6 +417,24 @@ codeunit 97725 "Svc Allocation Tests ori"
         Alloc.Get(Alloc."Entry No.");
         Assert.AreEqual(Alloc.Status::Nonactive, Alloc.Status, 'Omit Commit kept the caller transaction.');
         Assert.AreEqual('', Alloc."Resource No.", 'Resource was not committed.');
+    end;
+
+    local procedure AssignOrderZone(var Header: Record "Service Header"; ZoneCode: Code[10])
+    var
+        Customer: Record Customer;
+        ShipTo: Record "Ship-to Address";
+    begin
+        // Service Header."Service Zone Code" is not editable. OnValidate copies the ship-to zone when a ship-to exists, otherwise the customer zone.
+        if (Header."Ship-to Code" <> '') and ShipTo.Get(Header."Customer No.", Header."Ship-to Code") then begin
+            ShipTo.Validate("Service Zone Code", ZoneCode);
+            ShipTo.Modify(true);
+        end;
+        Customer.Get(Header."Customer No.");
+        Customer.Validate("Service Zone Code", ZoneCode);
+        Customer.Modify(true);
+        Header.Get(Header."Document Type", Header."No.");
+        Header.Validate("Service Zone Code");
+        Header.Modify(true);
     end;
 
     local procedure PrepareOrder(var Header: Record "Service Header"; var Resource: Record Resource; var Zones: Option "Code Shown","Warning Displayed","Not Used"; var Skills: Option "Code Shown","Warning Displayed","Not Used")

@@ -185,6 +185,7 @@ codeunit 97726 "Svc Reallocation Tests ori"
         Extra.Status := Extra.Status::"Reallocation Needed";
         Extra.SetHideDialog(true);
         Extra.Insert(true);
+        SetNeutralRepairStatus(Header);
         Commit();
         Response := Move(Header."No.", Alloc."Entry No.", Third."No.", '', '', '');
         Restore(Zones, Skills);

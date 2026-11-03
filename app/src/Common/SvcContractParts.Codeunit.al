@@ -186,7 +186,6 @@ codeunit 10076040 "Svc Contract Parts ori"
         Contract: Codeunit "Msg Contract Mgt ori";
     begin
         Related.Add(Contract.RelatedEntry('Service.Allocation.Allocate', 'Allocate or reallocate a resource on a service order.'));
-        Related.Add(Contract.RelatedEntry('Service.Quote.MakeOrder', 'Convert a service quote. Active quote allocations arrive on the order as Reallocation Needed.'));
         Related.Add(Contract.RelatedEntry('Service.Order.Release', 'Release the order for warehouse handling after allocation.'));
         Related.Add(Contract.RelatedEntry('Data.Records.Get', 'Read Service Order Allocation, Service Header and Service Item Line.'));
         Related.Add(Contract.RelatedEntry('Data.Records.Set', 'Edit Allocated Hours and Allocation Date. Status, Resource No. and Resource Group No. stay on this message type.'));

@@ -273,6 +273,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=úthluta forða, úthluta tæknimanni, endurúthluta</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Allocation Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2706043136 - NamedType 807145736" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry.</source>
+          <target>Leiðréttu villuna frá Business Central og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna frá Business Central og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Allocation Proc ori - NamedType BcNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2706043136 - NamedType 3289019961" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the finished service order or service item line and try again.</source>
           <target>Leiðréttu þjónustupöntunina eða þjónustuvörulínuna sem er lokið og reyndu aftur.</target>

@@ -19,6 +19,7 @@ codeunit 10076062 "Svc Allocation Proc ori"
 
     var
         FinishedNextLbl: Label 'Correct the finished service order or service item line and try again.', Comment = 'is-IS=Leiðréttu þjónustupöntunina eða þjónustuvörulínuna sem er lokið og reyndu aftur.';
+        BcNextLbl: Label 'Correct the Business Central error and retry.', Comment = 'is-IS=Leiðréttu villuna frá Business Central og reyndu aftur.';
 
     /// <summary>Validates the request, then allocates without committing an Omit Commit transaction.</summary>
     internal procedure Execute(var Argument: Record "Message Argument ori")
@@ -47,16 +48,18 @@ codeunit 10076062 "Svc Allocation Proc ori"
             if ErrorCode.AsValue().AsText() = 'Retryable' then
                 exit;
         // Foundation reports a dedicated field write as PermissionDenied. A finished order or line is a precondition.
-        if not Check.IsFinishedPrecondition(Argument) then
-            exit;
-        if Response.Contains('code') then
-            Response.Replace('code', 'PreconditionFailed')
-        else
-            Response.Add('code', 'PreconditionFailed');
-        if Response.Contains('nextStep') then
-            Response.Replace('nextStep', FinishedNextLbl)
-        else
-            Response.Add('nextStep', FinishedNextLbl);
+        if Check.IsFinishedPrecondition(Argument) then begin
+            if Response.Contains('code') then
+                Response.Replace('code', 'PreconditionFailed')
+            else
+                Response.Add('code', 'PreconditionFailed');
+            if Response.Contains('nextStep') then
+                Response.Replace('nextStep', FinishedNextLbl)
+            else
+                Response.Add('nextStep', FinishedNextLbl);
+        end else
+            if not Response.Contains('nextStep') then
+                Response.Add('nextStep', BcNextLbl);
         Argument.SetResponseJson(Response);
     end;
 }

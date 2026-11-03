@@ -12,6 +12,8 @@ using Origo.Bifrost;
 codeunit 10076063 "Svc Alloc Check ori"
 {
     Access = Internal;
+    // Resource No. OnValidate confirms an outside zone in a client session. The message restores the option in the same transaction.
+    Permissions = tabledata "Service Mgt. Setup" = M;
 
     var
         Header: Record "Service Header";
@@ -23,6 +25,7 @@ codeunit 10076063 "Svc Alloc Check ori"
         StartTime: Time;
         FinishTime: Time;
         Hours: Decimal;
+        HeldZoneOption: Option "Code Shown","Warning Displayed","Not Used";
         RequestedEntryNo: Integer;
         RequestedLineNo: Integer;
         DocumentAttempted: Boolean;
@@ -35,6 +38,7 @@ codeunit 10076063 "Svc Alloc Check ori"
         HasStart: Boolean;
         HasFinish: Boolean;
         AcceptOutside: Boolean;
+        ZoneConfirmSuspended: Boolean;
         Reallocate: Boolean;
         NothingLbl: Label 'Nothing was changed.', Comment = 'is-IS=Engu var breytt.';
         CorrectLbl: Label 'Send the value in the format documented by describe_message_type.', Comment = 'is-IS=Sendu gildið á sniðinu sem describe_message_type lýsir.';
@@ -87,15 +91,23 @@ codeunit 10076063 "Svc Alloc Check ori"
         ClearState();
         Request := Argument.GetRequestJson();
         ReadParameters(Request, Argument);
+        // A format error is reported on its own. An out-of-range value is collected with a missing resource.
+        if Argument.HasCollectedErrors() then begin
+            if not HasFormatError(Argument) then
+                CollectReferenceErrors(Argument);
+            Argument.RespondWithCollectedErrors("Bifrost Error Code ori"::MultipleErrors, NothingLbl);
+            exit(false);
+        end;
+        // Document type and several service item lines are decided before resource existence.
+        if not ResolveDocument(Argument) then
+            exit(false);
+        if not ResolveLine(Argument) then
+            exit(false);
         CollectReferenceErrors(Argument);
         if Argument.HasCollectedErrors() then begin
             Argument.RespondWithCollectedErrors("Bifrost Error Code ori"::MultipleErrors, NothingLbl);
             exit(false);
         end;
-        if not ResolveDocument(Argument) then
-            exit(false);
-        if not ResolveLine(Argument) then
-            exit(false);
         if not ResolveAllocation(Argument) then
             exit(false);
         if not EnsureZone(Argument) then
@@ -167,7 +179,9 @@ codeunit 10076063 "Svc Alloc Check ori"
     begin
         if GroupSent then
             GroupToPass := ResourceGroupNo;
+        SuspendZoneConfirm();
         AllocMgt.AllocateDate(Header."Document Type".AsInteger(), Header."No.", Alloc."Entry No.", ResourceNo, GroupToPass, AllocationDate, Hours);
+        RestoreZoneConfirm();
         Alloc.Get(Alloc."Entry No.");
         ApplyOptionalFields();
     end;
@@ -178,6 +192,7 @@ codeunit 10076063 "Svc Alloc Check ori"
     begin
         AllocMgt.CheckServiceItemLineFinished(Header, Alloc."Service Item Line No.");
         AssertOneResource();
+        SuspendZoneConfirm();
         Alloc.SetHideDialog(true);
         Alloc."Allocation Date" := AllocationDate;
         if ResourceSent then
@@ -192,6 +207,7 @@ codeunit 10076063 "Svc Alloc Check ori"
         if HasFinish then
             Alloc.Validate("Finishing Time", FinishTime);
         Alloc.Modify(true);
+        RestoreZoneConfirm();
     end;
 
     local procedure ApplyOptionalFields()
@@ -280,6 +296,7 @@ codeunit 10076063 "Svc Alloc Check ori"
 
     local procedure ReadParameters(Request: JsonObject; var Argument: Record "Message Argument ori")
     var
+        Token: JsonToken;
         Subject: Text;
     begin
         ReadDocumentNo(Request, Argument);
@@ -297,10 +314,29 @@ codeunit 10076063 "Svc Alloc Check ori"
         Subject := Argument.Subject.Trim();
         if StrLen(Subject) > MaxStrLen(Header."No.") then
             Argument.AddError("Bifrost Error Code ori"::InvalidParameter, StrSubstNo(SubjectLbl, MaxStrLen(Header."No.")), 'subject', '', '', CorrectLbl);
+        // An empty request names one missing identifier. Resource and hours are required only once an order can be resolved.
         if not DocumentAttempted and not SystemAttempted and not EntrySent and (Subject = '') then
-            Argument.AddError("Bifrost Error Code ori"::MissingParameter, MissingIdentLbl, 'documentNo/systemId/entryNo', '', '', CorrectLbl);
-        if not ResourceSent and not GroupSent then
-            Argument.AddError("Bifrost Error Code ori"::MissingParameter, NoResourceLbl, 'resourceNo/resourceGroupNo', '', '', NoResourceLbl);
+            Argument.AddError("Bifrost Error Code ori"::MissingParameter, MissingIdentLbl, 'documentNo/systemId/entryNo', '', '', CorrectLbl)
+        else begin
+            if not Request.Get('allocatedHours', Token) then
+                Argument.AddError("Bifrost Error Code ori"::MissingParameter, HoursMissingLbl, 'allocatedHours', '', '', HoursNextLbl);
+            if not ResourceSent and not GroupSent then
+                Argument.AddError("Bifrost Error Code ori"::MissingParameter, NoResourceLbl, 'resourceNo/resourceGroupNo', '', '', NoResourceLbl);
+        end;
+    end;
+
+    local procedure HasFormatError(var Argument: Record "Message Argument ori"): Boolean
+    var
+        Errors: JsonArray;
+        Entry: JsonToken;
+        Code: JsonToken;
+    begin
+        Errors := Argument.GetCollectedErrorsJson();
+        foreach Entry in Errors do
+            if Entry.AsObject().Get('code', Code) then
+                if Code.AsValue().AsText() = 'InvalidParameterFormat' then
+                    exit(true);
+        exit(false);
     end;
 
     local procedure CollectReferenceErrors(var Argument: Record "Message Argument ori")
@@ -451,7 +487,9 @@ codeunit 10076063 "Svc Alloc Check ori"
         Setup.Get();
         if Setup."Service Zones Option" <> Setup."Service Zones Option"::"Warning Displayed" then
             exit(true);
-        Res.SetLoadFields("No.", "Service Zone Filter");
+        // Re-read the zone from the database. A partial header leaves the code blank and the refusal names no zone.
+        Header.SetLoadFields("Document Type", "No.", Status, "Service Zone Code");
+        Header.Get(Header."Document Type", Header."No.");
         Res.Get(ResourceNo);
         Res."Service Zone Filter" := Header."Service Zone Code";
         Res.CalcFields("In Customer Zone");
@@ -584,10 +622,9 @@ codeunit 10076063 "Svc Alloc Check ori"
         Raw: Text;
         Value: Decimal;
     begin
-        if not Request.Get('allocatedHours', Token) then begin
-            Argument.AddError("Bifrost Error Code ori"::MissingParameter, HoursMissingLbl, 'allocatedHours', '', '', HoursNextLbl);
+        // Absence is reported by ReadParameters only after an order identifier is present.
+        if not Request.Get('allocatedHours', Token) then
             exit(0);
-        end;
         Token.WriteTo(Raw);
         Raw := DelChr(Raw, '<>', ' ');
         if (CopyStr(Raw, 1, 1) = '"') or not Evaluate(Value, Raw, 9) then begin
@@ -703,5 +740,35 @@ codeunit 10076063 "Svc Alloc Check ori"
         HasFinish := false;
         AcceptOutside := false;
         Reallocate := false;
+        ZoneConfirmSuspended := false;
+        Clear(HeldZoneOption);
+    end;
+
+    local procedure SuspendZoneConfirm()
+    var
+        Setup: Record "Service Mgt. Setup";
+    begin
+        if ZoneConfirmSuspended or not AcceptOutside then
+            exit;
+        Setup.Get();
+        if Setup."Service Zones Option" <> Setup."Service Zones Option"::"Warning Displayed" then
+            exit;
+        // The client confirm does not honor HideDialog. Code Shown skips it and still runs the allocation validate.
+        HeldZoneOption := Setup."Service Zones Option";
+        Setup."Service Zones Option" := Setup."Service Zones Option"::"Code Shown";
+        Setup.Modify();
+        ZoneConfirmSuspended := true;
+    end;
+
+    local procedure RestoreZoneConfirm()
+    var
+        Setup: Record "Service Mgt. Setup";
+    begin
+        if not ZoneConfirmSuspended then
+            exit;
+        Setup.Get();
+        Setup."Service Zones Option" := HeldZoneOption;
+        Setup.Modify();
+        ZoneConfirmSuspended := false;
     end;
 }
