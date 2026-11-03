@@ -18,9 +18,11 @@ codeunit 10076061 "Svc Allocation Impl ori" implements "Msg Interface ori", "Msg
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         Processor: Codeunit "Svc Allocation Proc ori";
+        WriteCheck: Codeunit "Svc Write Check ori";
     begin
         Argument.AssertIsLicensed();
         Argument.AssertVersion1();
+        WriteCheck.AssertCanWrite(Format(Argument.Type));
         Processor.Execute(Argument);
     end;
 

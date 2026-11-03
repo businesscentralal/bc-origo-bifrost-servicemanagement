@@ -6,6 +6,8 @@ namespace Origo.Bifrost.ServiceManagement;
 /// Service Management message types. The message types themselves run under the caller's own
 /// permissions on the Business Central Service Management tables, so this set does not widen access
 /// to service data. Add every new codeunit that a message type runs to this set.
+/// Write access to "Svc Write Gate ori" is what lets a caller run the Service Management message
+/// types that write; "BIFROST SvcRead ori" grants only read on it.
 /// </summary>
 permissionset 10076036 "BIFROST Svc ori"
 {
@@ -24,5 +26,8 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Allocation Impl ori" = X,
         codeunit "Svc Allocation Proc ori" = X,
         codeunit "Svc Alloc Check ori" = X,
-        codeunit "Svc Alloc Restrict ori" = X;
+        codeunit "Svc Alloc Restrict ori" = X,
+        codeunit "Svc Write Check ori" = X,
+        table "Svc Write Gate ori" = X,
+        tabledata "Svc Write Gate ori" = RIMD;
 }

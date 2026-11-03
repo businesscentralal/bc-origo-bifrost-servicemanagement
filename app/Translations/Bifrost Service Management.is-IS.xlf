@@ -3,6 +3,18 @@
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Service Management">
     <body>
       <group id="body">
+        <trans-unit id="Table 30551372 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bifrost Service Management Write Gate</source>
+          <target>Skrifhlið Bifröst þjónustustjórnunar</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrifhlið Bifröst þjónustustjórnunar</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Svc Write Gate ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 30551372 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <target>Aðallykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Svc Write Gate ori - Field Primary Key - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 836155259 - NamedType 1564739506" size-unit="char" translate="yes" xml:space="preserve">
           <source>acceptOutsideServiceZone must be a JSON boolean.</source>
           <target>acceptOutsideServiceZone verður að vera JSON boolean.</target>
@@ -470,6 +482,12 @@
           <target>Notaðu Service.Order.Release / Service.Order.Reopen</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Release / Service.Order.Reopen</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Restrict ori - Method ReleaseStatusHint - NamedType HintLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3956670547 - NamedType 1624787246" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You do not have permission to run the Service Management message type %1. Ask your administrator for the BIFROST Svc ori or BIFROST Full ori permission set.</source>
+          <target>Þú hefur ekki heimild til að keyra þjónustustjórnunarskeytagerðina %1. Biddu kerfisstjóra um heimildasamstæðuna BIFROST Svc ori eða BIFROST Full ori.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = message type name, is-IS=Þú hefur ekki heimild til að keyra þjónustustjórnunarskeytagerðina %1. Biddu kerfisstjóra um heimildasamstæðuna BIFROST Svc ori eða BIFROST Full ori.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Write Check ori - NamedType NoWritePermissionErr</note>
         </trans-unit>
         <trans-unit id="PermissionSet 222978927 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Service Management</source>
