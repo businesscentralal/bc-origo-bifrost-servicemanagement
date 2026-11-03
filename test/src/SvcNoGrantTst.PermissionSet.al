@@ -8,6 +8,7 @@ permissionset 97710 "Svc NoGrant Tst ori"
     IncludedPermissionSets = "Svc Platform Tst ori";
     Permissions = codeunit "Svc Test Data ori" = X,
                   codeunit "Svc Release Perm Tests ori" = X,
+                  codeunit "Svc Alloc Perm Tests ori" = X,
                   table "Svc Licence Result Tst ori" = X,
                   tabledata "Svc Licence Result Tst ori" = RIMD;
 }

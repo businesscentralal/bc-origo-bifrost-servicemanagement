@@ -23,6 +23,12 @@ codeunit 97714 "Svc Licence Probe Tst ori"
         Request.Add('no', 'X-NOT-NEEDED');
         ResponseJson := Data.Invoke("Message Type ori"::"Service.Order.Reopen", Request, '', 1033, false);
         Responses.Add('reopen', ResponseJson);
+        Clear(Request);
+        Request.Add('documentNo', 'X-NOT-NEEDED');
+        Request.Add('resourceNo', 'X');
+        Request.Add('allocatedHours', 1);
+        ResponseJson := Data.Invoke("Message Type ori"::"Service.Allocation.Allocate", Request, '', 1033, false);
+        Responses.Add('allocate', ResponseJson);
         Responses.WriteTo(ResultText);
         Rec.Get(Rec.Id);
         Rec.Response.CreateOutStream(Output, TextEncoding::UTF8);

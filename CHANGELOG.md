@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Added
+- Add `Service.Allocation.Allocate` (10076060–10076064) to allocate or reallocate a resource or resource group on a service order item line through standard Business Central allocation, without a modal page or its own `Commit`. Orders only. An outside service zone is refused unless `acceptOutsideServiceZone` is true when Service Zones Option is Warning Displayed. Generic writes of Status, Resource No. and Resource Group No. stay on this message type.
+- Add allocation, reallocation, write-guard, contract, permission and unlicensed-company coverage (97725–97729). The licence probe (97714) also calls allocate. UI acceptance stays with Tester UAT because Service Management needs a Premium licence.
 - Add `Service.Order.Release` and `Service.Order.Reopen` (10076039, 10076042–10076045) with standard BC execution, order-only lookup, rollback, bilingual catalogues/refusals and a field-level generic-write guard.
 - Add public-dispatcher lifecycle, write-guard, contract, permission and unlicensed-company regression coverage (97705–97710, 97713–97714), with isolated self-created fixtures and no consent writes.
 
