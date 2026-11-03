@@ -2,6 +2,7 @@ namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Service.Document;
 using Origo.Bifrost;
+using Origo.Bifrost.ServiceManagement;
 using System.TestLibraries.Security.AccessControl;
 using System.TestLibraries.Utilities;
 
@@ -49,6 +50,29 @@ codeunit 97709 "Svc Release Perm Tests ori"
         Commit();
         AssertReadDenied("Message Type ori"::"Service.Order.Release", Request);
         AssertReadDenied("Message Type ori"::"Service.Order.Reopen", Request);
+    end;
+
+    [Test]
+    procedure Scenario_WriteGate_ReadDeniedFullGranted()
+    var
+        Gate: Record "Svc Write Gate ori";
+        ReadCanWrite: Boolean;
+        ReadCanRead: Boolean;
+        FullCanWrite: Boolean;
+    begin
+        // Standard D365 sets grant codeunit Execute broadly, so the write gate must hold even with them.
+        LowerPermissions.SetExactPermissionSet('BIFROST Read ori');
+        AddNativePermissions();
+        ReadCanWrite := Gate.WritePermission();
+        ReadCanRead := Gate.ReadPermission();
+        LowerPermissions.SetOutsideO365Scope();
+        LowerPermissions.SetExactPermissionSet('BIFROST Full ori');
+        AddNativePermissions();
+        FullCanWrite := Gate.WritePermission();
+        LowerPermissions.SetOutsideO365Scope();
+        Assert.IsFalse(ReadCanWrite, 'The read role must not hold the Service Management write gate.');
+        Assert.IsTrue(ReadCanRead, 'The read role keeps read on the write gate.');
+        Assert.IsTrue(FullCanWrite, 'The full role holds the Service Management write gate.');
     end;
 
     local procedure AssertReadDenied(MessageType: Enum "Message Type ori"; Request: JsonObject)
