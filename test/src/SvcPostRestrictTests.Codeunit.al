@@ -28,7 +28,7 @@ codeunit 97744 "Svc Post Restrict Tests ori"
         Line.SetRange("Document No.", Header."No.");
         Line.FindFirst();
         Commit();
-        Response := SetField(Header."No.", Line."Line No.", 'Quantity Shipped', '1');
+        Response := SetField(Header."No.", Line."Line No.", 'QuantityShipped', '1');
         Data.AssertRefusal(Response, 'PermissionDenied');
         Response.WriteTo(Serialized);
         Assert.IsTrue(Serialized.Contains('Service.Order.Post'), 'The refusal names the dedicated type.');
@@ -49,7 +49,7 @@ codeunit 97744 "Svc Post Restrict Tests ori"
         Line.SetRange("Document No.", Header."No.");
         Line.FindFirst();
         Commit();
-        Response := SetField(Header."No.", Line."Line No.", 'Qty. to Ship', '1');
+        Response := SetField(Header."No.", Line."Line No.", 'Qty_toShip', '1');
         Response.WriteTo(Serialized);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), Serialized);
         Line.Get(Line."Document Type", Line."Document No.", Line."Line No.");
