@@ -3,12 +3,15 @@
 ## Unreleased
 
 ### Added
+- Add quote-specific bilingual lookup refusals (10076041) and a 1039 regression (97719), keeping machine-readable expected `Quote` invariant.
+- Add `Service.Quote.MakeOrder` with native quote conversion, shared confirmation, irreversible commit semantics, allocation reallocation counts, the existing service write-role guard and bilingual contracts (10076050–10076052); require published Foundation 28.0.11.669 (#5). Add quote conversion, confirmation, contract/licence and permission coverage (97716–97720), including an actual caller-rollback/Omit Commit regression; extend the owned-company licence probe (97714) and add actual Change Log configuration for self-seeded MCP fixtures (97704), retaining the write guard. Test 97719 preserves the already allocated 97715.
 - Add `Service.Allocation.Allocate` (10076060–10076064) to allocate or reallocate a resource or resource group on a service order item line through standard Business Central allocation, without a modal page or its own `Commit`. Orders only. An outside service zone is refused unless `acceptOutsideServiceZone` is true when Service Zones Option is Warning Displayed. Generic writes of Status, Resource No. and Resource Group No. stay on this message type.
 - Add allocation, reallocation, write-guard, contract, permission and unlicensed-company coverage (97725–97729). The licence probe (97714) also calls allocate. UI acceptance stays with Tester UAT because Service Management needs a Premium licence.
 - Add `Service.Order.Release` and `Service.Order.Reopen` (10076039, 10076042–10076045) with standard BC execution, order-only lookup, rollback, bilingual catalogues/refusals and a field-level generic-write guard.
 - Add public-dispatcher lifecycle, write-guard, contract, permission and unlicensed-company regression coverage (97705–97710, 97713–97714), with isolated self-created fixtures and no consent writes.
 
 ### Fixed
+- Obtain quote precondition parameter names from BC field metadata (10076051), keeping the technical field identifiers invariant while the refusal and recovery text remain localized; assert those identifiers in the existing conversion regressions (97719) (#5).
 - Refuse `Service.Order.Release`, `Service.Order.Reopen` and `Service.Allocation.Allocate` for a caller without `BIFROST Svc ori` or `BIFROST Full ori`, through the new write gate table `Svc Write Gate ori` (10076065) and check `Svc Write Check ori` (10076066) (#14). Standard D365 permission sets grant codeunit Execute broadly. A read-only Bifrost user with D365 BASIC and service edit rights could therefore run these types once the Premium licence allowed the Service tables. `BIFROST SvcRead ori` grants only read on the gate. Add gate coverage to 97709; the read-role denial assertions in 97709 and 97729 are unchanged.
 - Name the actual service document type in a wrong-type refusal by the base application caption in the caller's language (10076041). `Service.Order.Release` and `Service.Order.Reopen` keep `code`, `parameter` and the English `expected` name unchanged (97715).
 

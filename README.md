@@ -41,7 +41,7 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 
 | App | ID | Publisher | Version |
 | --- | --- | --- | --- |
-| Bifrost Foundation | `7505e808-6e52-4b96-a328-82573391297a` | Origo | 28.0.5.590 |
+| Bifrost Foundation | `7505e808-6e52-4b96-a328-82573391297a` | Origo | 28.0.11.669 |
 | Base Application | | Microsoft | 28.5.0.0 (application floor) |
 
 ---
@@ -134,3 +134,39 @@ Native tests use self-created fixtures and the public Foundation dispatcher; the
 message acceptance. The naming guard runs locally; workflow wiring belongs to
 Architect's issue #8. Runtime, Claude receipt, CI and UAT results belong in exact-SHA
 verification evidence, not inferred from this source inventory.
+
+## Service.Quote.MakeOrder (#5)
+
+```json
+{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001","expectedCount":1}}
+```
+
+Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit, and cannot be undone. A retry after success returns `RecordNotFound`.
+
+Call without `expectedCount` to obtain `ConfirmationRequired` with count 1 and the quote summary, then confirm that count. An administrator may turn required confirmation off per company; any supplied count is still validated. A wrong count returns `ConfirmationMismatch` without converting the quote.
+
+Allocations moved by BC with `Reallocation Needed` are counted in `allocationsToReallocate`; `nextStep` names `Service.Allocation.Allocate` when needed, otherwise `Service.Order.Release` / `Service.Order.Post`. Missing customer, bill-to customer or Service Order Nos. is `PreconditionFailed`. BC conversion errors are returned unchanged as `BusinessCentralError` and roll back the conversion.
+
+The caller needs the Bifröst service write role and native service permissions. This type posts nothing and needs no posting token. Quote fields remain available through `Data.Records.Set`: conversion owns no field end to end. Contract quotes, archiving, loaners and chained operations are outside scope. Pre-merge Web Client acceptance remains `NOT_RUN (Premium)` per Gunnar's 02.11 decision; Tester checks English and Icelandic UI after deployment. Native and MCP evidence remain required before handoff.
+
+Foundation dependency: published 28.0.11 (`28.0.11.669`), the first containing `Confirm Gate ori` and `Msg Confirm ori` (core #1151).
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076050 | enumextension | Svc Quote MsgType ori |
+| 10076051 | codeunit | Svc Quote MakeOrder Impl ori |
+| 10076052 | codeunit | Svc Confirm ori |
+| 97716 | codeunit (test) | Svc Quote Confirm Tests ori |
+| 97717 | codeunit (test) | Svc Quote Contract Tests ori |
+| 97718 | codeunit (test) | Svc Quote Perm Tests ori |
+| 97719 | codeunit (test) | Svc Quote MakeOrder Tests ori |
+
+Story test id 97715 was already occupied on main by `Svc Wrong Type Tests ori` (#10). Quote conversion uses 97719 from #5's reserved range, preserving the existing object.
+
+`Service.Order.Post` is named as the planned next step in help. It is emitted in the structured `related` chapter only once issue #7 registers that type; Foundation rejects unknown related message names. This avoids the circular #5 → #7 → #5 source dependency.
+
+| 97720 | codeunit (test helper) | Svc Quote Caller Rollback ori |
+
+The caller-rollback regression verifies that Omit Commit conversion remains committed while a later unrelated caller write rolls back.
+
+Native conversion may calculate Item availability. The caller needs its standard base permissions for that calculation (the test fixture uses `D365 READ`; indirect-only `D365 ITEM AVAIL CALC` is insufficient for its FlowFields) as well as service editing. The Bifröst permission set grants no additional native table access. The read-role regression keeps these same native permissions and must still refuse conversion.
