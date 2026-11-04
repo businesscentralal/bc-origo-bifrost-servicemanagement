@@ -297,6 +297,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu þjónustupöntunina eða þjónustuvörulínuna sem er lokið og reyndu aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Allocation Proc ori - NamedType FinishedNextLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3137329348 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service quote %1 to a service order</source>
+          <target>þjónustutilboð %1 í þjónustupöntun</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=þjónustutilboð %1 í þjónustupöntun</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4166943217 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
           <source>The identifiers do not identify the same service document.</source>
           <target>Auðkennin vísa ekki á sama þjónustuskjalið.</target>
@@ -440,6 +446,60 @@
           <target>enduropna þjónustupöntun, breyta útgefinni pöntun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=enduropna þjónustupöntun, breyta útgefinni pöntun</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Reopen Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 3303280095 - NamedType 152929028" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The order has %1 allocations that need a resource again. Use Service.Allocation.Allocate.</source>
+          <target>Pöntunin er með %1 úthlutanir sem þurfa forða aftur. Notaðu Service.Allocation.Allocate.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = allocation count, is-IS=Pöntunin er með %1 úthlutanir sem þurfa forða aftur. Notaðu Service.Allocation.Allocate.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method BuildResponse - NamedType ReallocateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 3303280095 - NamedType 2029447175" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Order.Release, then Service.Order.Post.</source>
+          <target>Notaðu Service.Order.Release og síðan Service.Order.Post.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Release og síðan Service.Order.Post.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method BuildResponse - NamedType NextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 856371883 - NamedType 76061626" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service quote %1 has no customer. Nothing was changed.</source>
+          <target>Þjónustutilboð %1 hefur engan viðskiptamann. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=Þjónustutilboð %1 hefur engan viðskiptamann. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType CustomerLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 856371883 - NamedType 3153346606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service quote %1 has no bill-to customer. Nothing was changed.</source>
+          <target>Þjónustutilboð %1 hefur engan greiðanda. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=Þjónustutilboð %1 hefur engan greiðanda. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType BillToLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 856371883 - NamedType 3086193291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Customer No. with Data.Records.Set and send the request again.</source>
+          <target>Settu Customer No. með Data.Records.Set og sendu beiðnina aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Customer No. með Data.Records.Set og sendu beiðnina aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType CustomerNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 856371883 - NamedType 3435025527" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Bill-to Customer No. with Data.Records.Set and send the request again.</source>
+          <target>Settu Bill-to Customer No. með Data.Records.Set og sendu beiðnina aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Bill-to Customer No. með Data.Records.Set og sendu beiðnina aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType BillToNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 856371883 - NamedType 2743031330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Service Order Nos. in Service Mgt. Setup.</source>
+          <target>Settu Service Order Nos. í Service Mgt. Setup.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Service Order Nos. í Service Mgt. Setup.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType SeriesNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.</source>
+          <target>Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service quote to order, make service order, customer accepted the service quote</source>
+          <target>þjónustutilboð í pöntun, gera þjónustupöntun, viðskiptamaður samþykkti þjónustutilboðið</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustutilboð í pöntun, gera þjónustupöntun, viðskiptamaður samþykkti þjónustutilboðið</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 550942367 - NamedType 3851147959" size-unit="char" translate="yes" xml:space="preserve">
           <source>Add a line with a type and a quantity with Data.Records.Set.</source>

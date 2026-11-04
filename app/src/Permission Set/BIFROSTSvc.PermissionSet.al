@@ -27,6 +27,8 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Allocation Proc ori" = X,
         codeunit "Svc Alloc Check ori" = X,
         codeunit "Svc Alloc Restrict ori" = X,
+        codeunit "Svc Quote MakeOrder Impl ori" = X,
+        codeunit "Svc Confirm ori" = X,
         codeunit "Svc Write Check ori" = X,
         table "Svc Write Gate ori" = X,
         tabledata "Svc Write Gate ori" = RIMD;

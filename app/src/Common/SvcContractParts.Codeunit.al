@@ -104,11 +104,12 @@ codeunit 10076040 "Svc Contract Parts ori"
         Contract: Codeunit "Msg Contract Mgt ori";
         Steps: JsonArray;
     begin
+        Steps.Add(Contract.WorkflowStep('Service.Quote.MakeOrder', 'Convert an accepted quote; this call commits.'));
         Steps.Add(Contract.WorkflowStep('Service.Allocation.Allocate', 'Allocate or reallocate a resource on a service order.'));
         Steps.Add(Contract.WorkflowStep('Service.Order.Release', 'Release an open order for warehouse handling.'));
         Steps.Add(Contract.WorkflowStep('Service.Order.Reopen', 'Reopen a released order when further edits are needed.'));
         Workflow.Add('steps', Steps);
-        Workflow.Add('description', 'The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Allocation, release and reopen are provided. Quote conversion and posting are delivered by subsequent service lifecycle stories.');
+        Workflow.Add('description', 'The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation, release and reopen are provided. Posting is delivered by the subsequent lifecycle story.');
     end;
 
     /// <summary>Declares the allocation request parameters, including the order identity alternatives.</summary>
