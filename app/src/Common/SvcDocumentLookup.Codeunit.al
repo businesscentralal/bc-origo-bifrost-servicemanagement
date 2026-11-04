@@ -23,6 +23,10 @@ codeunit 10076041 "Svc Document Lookup ori"
         OrderLookupLbl: Label 'Read the service orders with Data.Records.Get (table Service Header, Document Type = Order).', Comment = 'is-IS=Lestu þjónustupantanirnar með Data.Records.Get (tafla Service Header, Document Type = Order).';
         OrderTypeLbl: Label 'Service document %1 is not an Order (actual type: %2).', Comment = '%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki pöntun (raunveruleg gerð: %2).';
         OrderTypeNextLbl: Label 'Send the No. or SystemId of a service order.', Comment = 'is-IS=Sendu númer eða SystemId þjónustupöntunar.';
+        QuoteNotFoundLbl: Label 'Service quote %1 was not found.', Comment = '%1 = quote number, is-IS=Þjónustutilboð %1 fannst ekki.';
+        QuoteLookupLbl: Label 'Read the service quotes with Data.Records.Get (table Service Header, Document Type = Quote).', Comment = 'is-IS=Lestu þjónustutilboðin með Data.Records.Get (tafla Service Header, Document Type = Quote).';
+        QuoteTypeLbl: Label 'Service document %1 is not a Quote (actual type: %2).', Comment = '%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki tilboð (raunveruleg gerð: %2).';
+        QuoteTypeNextLbl: Label 'Send the quote''s No. or SystemId.', Comment = 'is-IS=Sendu númer eða SystemId tilboðsins.';
         NothingLbl: Label 'Nothing was changed.', Comment = 'is-IS=Engu var breytt.';
         MissingAllocLbl: Label 'Send documentNo, systemId, entryNo or a plain subject.', Comment = 'is-IS=Sendu documentNo, systemId, entryNo eða númer skjalsins í subject.';
         // Base Application enum "Service Document Type" captions. Enum caption APIs follow the user
@@ -70,14 +74,20 @@ codeunit 10076041 "Svc Document Lookup ori"
                 exit(false);
             end;
             if ServiceHeader."Document Type" <> DocumentType then begin
-                if DocumentType = DocumentType::Order then
-                    Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
-                        StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeCaption(ServiceHeader."Document Type")),
-                        'systemId', IdText, 'Order', OrderTypeNextLbl)
-                else
-                    Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
-                        StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeCaption(ServiceHeader."Document Type")),
-                        'systemId', IdText, TypeName(DocumentType), StrSubstNo(WrongTypeNextLbl, TypeName(DocumentType)));
+                case DocumentType of
+                    DocumentType::Order:
+                        Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                            StrSubstNo(OrderTypeLbl, ServiceHeader."No.", TypeCaption(ServiceHeader."Document Type")),
+                            'systemId', IdText, 'Order', OrderTypeNextLbl);
+                    DocumentType::Quote:
+                        Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                            StrSubstNo(QuoteTypeLbl, ServiceHeader."No.", TypeCaption(ServiceHeader."Document Type")),
+                            'systemId', IdText, 'Quote', QuoteTypeNextLbl);
+                    else
+                        Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameter,
+                            StrSubstNo(WrongTypeLbl, ServiceHeader."No.", TypeName(DocumentType), TypeCaption(ServiceHeader."Document Type")),
+                            'systemId', IdText, TypeName(DocumentType), StrSubstNo(WrongTypeNextLbl, TypeName(DocumentType)));
+                end;
                 exit(false);
             end;
             if (Number <> '') and (ServiceHeader."No." <> UpperCase(Number)) then
@@ -209,6 +219,8 @@ codeunit 10076041 "Svc Document Lookup ori"
     begin
         if DocumentType = DocumentType::Order then
             exit(StrSubstNo(OrderNotFoundLbl, Identifier));
+        if DocumentType = DocumentType::Quote then
+            exit(StrSubstNo(QuoteNotFoundLbl, Identifier));
         exit(StrSubstNo(NotFoundLbl, Identifier));
     end;
 
@@ -216,6 +228,8 @@ codeunit 10076041 "Svc Document Lookup ori"
     begin
         if DocumentType = DocumentType::Order then
             exit(OrderLookupLbl);
+        if DocumentType = DocumentType::Quote then
+            exit(QuoteLookupLbl);
         exit(LookupLbl);
     end;
 }

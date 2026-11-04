@@ -305,6 +305,29 @@ codeunit 97719 "Svc Quote MakeOrder Tests ori"
         AssertUnchanged(Second);
     end;
 
+    [Test]
+    procedure Scenario_AC14_QuoteRefusals_Localized()
+    var
+        Header: Record "Service Header";
+        Request: JsonObject;
+        Response: JsonObject;
+    begin
+        Data.CreateHeader(Header, Header."Document Type"::Order);
+        Request.Add('systemId', Format(Header.SystemId, 0, 4));
+        Commit();
+        Response := Data.Invoke("Message Type ori"::"Service.Quote.MakeOrder", Request, '', 1039, false);
+        Data.AssertRefusal(Response, 'InvalidParameter');
+        Assert.IsTrue(Data.TextValue(Response, 'error').Contains('er ekki tilboð'), 'Quote scope is localized.');
+        Assert.IsTrue(Data.TextValue(Response, 'error').Contains('Pöntun'), 'Actual type is localized.');
+        Assert.AreEqual('Quote', Data.TextValue(Response, 'expected'), 'Structured scope remains invariant.');
+        Clear(Request);
+        Request.Add('no', 'X-NOT-FOUND');
+        Response := Data.Invoke("Message Type ori"::"Service.Quote.MakeOrder", Request, '', 1039, false);
+        Data.AssertRefusal(Response, 'RecordNotFound');
+        Assert.IsTrue(Data.TextValue(Response, 'error').Contains('Þjónustutilboð'), 'Quote-specific not-found text is localized.');
+        Assert.IsTrue(Data.TextValue(Response, 'nextStep').Contains('Lestu þjónustutilboðin'), 'Quote-specific lookup recovery.');
+    end;
+
     local procedure ConvertAndAssert(KeyName: Text; LanguageId: Integer; OmitCommit: Boolean)
     var
         Header: Record "Service Header";

@@ -38,7 +38,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
         Commit();
         if not ConfirmGate.Check(Argument, Argument.Type) then
             exit;
-        // Confirmation locks and re-resolves the quote after Commit. Do not convert a stale buffer.
+        // Re-resolve the quote after Commit and confirmation. BC owns the conversion transaction.
         if not Lookup.FindDocument(Argument, "Service Document Type"::Quote, Header) then
             exit;
         if not CheckPreconditions(Argument, Header) then

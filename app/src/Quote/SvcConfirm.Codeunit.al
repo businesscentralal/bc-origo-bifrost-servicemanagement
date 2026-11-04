@@ -3,7 +3,7 @@ namespace Origo.Bifrost.ServiceManagement;
 using Microsoft.Service.Document;
 using Origo.Bifrost;
 
-/// <summary>Counts and locks the quote selected for an irreversible service conversion.</summary>
+/// <summary>Counts the single quote selected before native BC conversion.</summary>
 codeunit 10076052 "Svc Confirm ori" implements "Msg Confirm ori"
 {
     Access = Internal;
@@ -23,11 +23,9 @@ codeunit 10076052 "Svc Confirm ori" implements "Msg Confirm ori"
         Summary := '';
         if not Lookup.FindDocument(Argument, "Service Document Type"::Quote, Header) then
             exit(false);
-        Header.LockTable();
-        if not Header.Get("Service Document Type"::Quote, Header."No.") then begin
-            Lookup.FindDocument(Argument, "Service Document Type"::Quote, Header);
-            exit(false);
-        end;
+        // The count is always one selected quote, not a variable-sized set. BC codeunit 5923
+        // owns the conversion transaction and locking. LockTable here starts a write transaction
+        // and prevents its Boolean Codeunit.Run from starting; no business writes belong here.
         Count := 1;
         Summary := StrSubstNo(SummaryLbl, Header."No.");
         exit(true);

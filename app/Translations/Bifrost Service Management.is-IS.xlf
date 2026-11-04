@@ -411,6 +411,30 @@
           <note from="Developer" annotates="general" priority="2">Service Document Type Quote, is-IS=Tilboð</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteCaptionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 435505318" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the service quotes with Data.Records.Get (table Service Header, Document Type = Quote).</source>
+          <target>Lestu þjónustutilboðin með Data.Records.Get (tafla Service Header, Document Type = Quote).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustutilboðin með Data.Records.Get (tafla Service Header, Document Type = Quote).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteLookupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 2234710973" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service quote %1 was not found.</source>
+          <target>Þjónustutilboð %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=Þjónustutilboð %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteNotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 457854204" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 is not a Quote (actual type: %2).</source>
+          <target>Þjónustuskjal %1 er ekki tilboð (raunveruleg gerð: %2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = number, %2 = actual type, is-IS=Þjónustuskjal %1 er ekki tilboð (raunveruleg gerð: %2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4166943217 - NamedType 2266394633" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the quote's No. or SystemId.</source>
+          <target>Sendu númer eða SystemId tilboðsins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu númer eða SystemId tilboðsins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType QuoteTypeNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4166943217 - NamedType 69645355" size-unit="char" translate="yes" xml:space="preserve">
           <source>Service document %1 is not a %2 (actual type: %3).</source>
           <target>Þjónustuskjal %1 er ekki af gerðinni %2 (raunveruleg gerð: %3).</target>

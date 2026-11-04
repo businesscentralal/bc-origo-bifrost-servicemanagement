@@ -9,8 +9,8 @@ using Microsoft.Service.Item;
 using Microsoft.Service.Setup;
 using Microsoft.Service.Test;
 using Origo.Bifrost;
-using System.TestLibraries.Utilities;
 using System.Diagnostics;
+using System.TestLibraries.Utilities;
 
 /// <summary>Creates isolated service lifecycle fixtures and invokes Foundation's public dispatcher.</summary>
 codeunit 97704 "Svc Test Data ori"
