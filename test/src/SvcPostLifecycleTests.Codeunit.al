@@ -2,6 +2,7 @@ namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Inventory.Setup;
 using Microsoft.Service.Document;
+using Microsoft.Service.Maintenance;
 using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
@@ -37,6 +38,7 @@ codeunit 97746 "Svc Post Lifecycle Tests ori"
         ItemLine: Record "Service Item Line";
         Line: Record "Service Line";
         InventorySetup: Record "Inventory Setup";
+        RepairStatus: Record "Repair Status";
         Request: JsonObject;
         Fields: JsonObject;
         PrimaryKey: JsonObject;
@@ -54,6 +56,11 @@ codeunit 97746 "Svc Post Lifecycle Tests ori"
         InventorySetup.Get();
         InventorySetup."Prevent Negative Inventory" := false;
         InventorySetup.Modify();
+        RepairStatus.Init();
+        RepairStatus.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, MaxStrLen(RepairStatus.Code));
+        RepairStatus.Validate("Service Order Status", RepairStatus."Service Order Status"::Finished);
+        RepairStatus."Posting Allowed" := true;
+        RepairStatus.Insert(true);
         QuoteNo := CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, MaxStrLen(QuoteNo));
         PrimaryKey.Add('DocumentType', 'Quote');
         PrimaryKey.Add('No_', QuoteNo);
@@ -108,6 +115,14 @@ codeunit 97746 "Svc Post Lifecycle Tests ori"
         Request.Add('no', OrderNo);
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', LanguageId, false);
         PostData.AssertSuccess(Response);
+        // Completing the repair is a real BC prerequisite, preserved rather than bypassed by posting.
+        Clear(PrimaryKey);
+        Clear(Fields);
+        PrimaryKey.Add('DocumentType', 'Order');
+        PrimaryKey.Add('DocumentNo_', OrderNo);
+        PrimaryKey.Add('LineNo_', 10000);
+        Fields.Add('RepairStatusCode', RepairStatus.Code);
+        SetRecord('Service Item Line', PrimaryKey, Fields, LanguageId);
         SetPostingQuantities(OrderNo, true, LanguageId);
         Response := PostData.Preview(OrderNo, 'true', 'true', '', LanguageId);
         PostData.AssertSuccess(Response);

@@ -106,24 +106,28 @@ codeunit 10076083 "Svc Post Options ori"
     /// <returns>True when the policy allows the combination.</returns>
     internal procedure CheckPolicy(var Argument: Record "Message Argument ori"; Ship: Boolean; Consume: Boolean; Invoice: Boolean): Boolean
     var
-        UserSetup: Record "User Setup";
+        UserSetupManagement: Codeunit "User Setup Management";
+        PolicyShip: Boolean;
+        PolicyConsume: Boolean;
+        PolicyInvoice: Boolean;
         Policy: Enum "Invoice Posting Policy";
         Violation: Boolean;
-        PolicyErr: Label 'Your service invoice posting policy does not allow this combination. Nothing was posted.', Comment = 'is-IS=Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.';
+        PolicyErr: Label 'Your service invoice posting policy (%1) does not allow this combination. Nothing was posted.', Comment = '%1 = policy name, is-IS=Bókunarregla þjónustureikninga þinna (%1) leyfir ekki þessa samsetningu. Ekkert var bókað.';
         PolicyNextLbl: Label 'Ask an administrator to check the policy in User Setup.', Comment = 'is-IS=Biddu stjórnanda um að skoða regluna í notandauppsetningu.';
     begin
-        // Mirrors Serv. Posting Selection Mgt.: Prohibited forbids invoicing, Mandatory forbids shipping or consuming without invoicing.
-        if UserSetup.Get(UserId()) then
-            Policy := UserSetup."Service Invoice Posting Policy";
-        case Policy of
-            Policy::Prohibited:
-                Violation := Invoice;
-            Policy::Mandatory:
-                Violation := (Ship or Consume) and not Invoice;
+        // Use the native policy reader; Mandatory exposes only Ship and Invoice in the standard menu.
+        UserSetupManagement.GetServiceInvoicePostingPolicy(PolicyShip, PolicyConsume, PolicyInvoice);
+        if PolicyShip and PolicyConsume and not PolicyInvoice then begin
+            Policy := Policy::Prohibited;
+            Violation := Invoice;
+        end;
+        if PolicyShip and not PolicyConsume and PolicyInvoice then begin
+            Policy := Policy::Mandatory;
+            Violation := not (Ship and Invoice) or Consume;
         end;
         if not Violation then
             exit(true);
-        Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, PolicyErr, 'invoice', Format(Invoice), '', PolicyNextLbl);
+        Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(PolicyErr, Policy.Names().Get(Policy.Ordinals().IndexOf(Policy.AsInteger()))), 'invoice', Format(Invoice, 0, 9), '', PolicyNextLbl);
         exit(false);
     end;
 
@@ -156,8 +160,12 @@ codeunit 10076083 "Svc Post Options ori"
         end;
         if Invoice and not Ship then begin
             Line.SetFilter("Qty. to Invoice", '<>0');
-            if not Line.IsEmpty() then
-                exit(true);
+            Line.SetLoadFields("Quantity Shipped", "Quantity Invoiced", "Quantity Consumed");
+            if Line.FindSet() then
+                repeat
+                    if Line."Quantity Shipped" - Line."Quantity Invoiced" - Line."Quantity Consumed" <> 0 then
+                        exit(true);
+                until Line.Next() = 0;
         end;
         Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(NothingErr, Header."No."), 'lines', '', '', NothingNextLbl);
         exit(false);
@@ -228,6 +236,7 @@ codeunit 10076083 "Svc Post Options ori"
         CustLedgerEntry: Record "Cust. Ledger Entry";
         Entry: JsonObject;
     begin
+        ShipmentHeader.SetLoadFields("No.", "Order No.", "Posting Date", SystemId);
         ShipmentHeader.SetRange("Order No.", OrderNo);
         if ShipmentHeader.FindSet() then
             repeat
@@ -240,6 +249,7 @@ codeunit 10076083 "Svc Post Options ori"
                     Posted.Add(Entry);
                 end;
             until ShipmentHeader.Next() = 0;
+        InvoiceHeader.SetLoadFields("No.", "Order No.", "Posting Date", "Bill-to Customer No.", SystemId);
         InvoiceHeader.SetRange("Order No.", OrderNo);
         if InvoiceHeader.FindSet() then
             repeat
@@ -254,6 +264,7 @@ codeunit 10076083 "Svc Post Options ori"
                     Entry.Add('amountIncludingVAT', InvoiceHeader."Amount Including VAT");
                     CustLedgerEntry.SetRange("Document Type", CustLedgerEntry."Document Type"::Invoice);
                     CustLedgerEntry.SetRange("Document No.", InvoiceHeader."No.");
+                    CustLedgerEntry.SetRange("Customer No.", InvoiceHeader."Bill-to Customer No.");
                     CustLedgerEntry.SetLoadFields("Entry No.");
                     if CustLedgerEntry.FindFirst() then
                         Entry.Add('custLedgerEntryNo', CustLedgerEntry."Entry No.");
@@ -280,11 +291,12 @@ codeunit 10076083 "Svc Post Options ori"
     begin
         Line.SetRange("Document Type", Header."Document Type");
         Line.SetRange("Document No.", Header."No.");
+        Line.SetLoadFields("Line No.", Type, "No.", Quantity, "Quantity Shipped", "Quantity Consumed", "Quantity Invoiced");
         if Line.FindSet() then
             repeat
                 Clear(Entry);
                 Entry.Add('lineNo', Line."Line No.");
-                Entry.Add('type', Format(Line.Type, 0, 9));
+                Entry.Add('type', Line.Type.Names().Get(Line.Type.Ordinals().IndexOf(Line.Type.AsInteger())));
                 Entry.Add('no', Line."No.");
                 Entry.Add('quantity', Line.Quantity);
                 Entry.Add('quantityShipped', Line."Quantity Shipped");

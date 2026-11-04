@@ -174,6 +174,20 @@ codeunit 97740 "Svc Order Post Tests ori"
     end;
 
     [Test]
+    procedure Scenario_AC06_InvoiceBeforeShipment_PreconditionFailed()
+    var
+        Header: Record "Service Header";
+        Response: JsonObject;
+    begin
+        // Story #7 AC06 | Time: WorkDate for posting | Risk: None.
+        PostData.CreateOrder(Header);
+        Commit();
+        Response := PostData.Post(Header."No.", '', '', 'true', 1, 1033);
+        Data.AssertRefusal(Response, 'PreconditionFailed');
+        Assert.AreEqual(0, PostData.PostedInvoices(Header."No."), 'There is no shipped quantity to invoice.');
+    end;
+
+    [Test]
     procedure Scenario_AC07_PolicyProhibitsInvoice_PreconditionFailed()
     var
         Header: Record "Service Header";
@@ -202,6 +216,44 @@ codeunit 97740 "Svc Order Post Tests ori"
         Commit();
         Data.AssertRefusal(Response, 'PreconditionFailed');
         Assert.AreEqual(0, PostData.PostedInvoices(Header."No."), 'Nothing is posted.');
+    end;
+
+    [Test]
+    procedure Scenario_AC07_Mandatory_InvoiceOnlyRefused()
+    var
+        Header: Record "Service Header";
+        UserSetup: Record "User Setup";
+        OldPolicy: Enum "Invoice Posting Policy";
+        Response: JsonObject;
+        Serialized: Text;
+        Existed: Boolean;
+    begin
+        // Story #7 AC07 | Time: WorkDate for service posting | Risk: own user policy is restored after the call.
+        PostData.CreateOrder(Header);
+        Commit();
+        Response := PostData.Post(Header."No.", 'true', '', '', 1, 1033);
+        PostData.AssertSuccess(Response);
+        Existed := UserSetup.Get(UserId());
+        if not Existed then begin
+            UserSetup.Init();
+            UserSetup."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserSetup."User ID"));
+            UserSetup.Insert();
+        end;
+        OldPolicy := UserSetup."Service Invoice Posting Policy";
+        UserSetup."Service Invoice Posting Policy" := UserSetup."Service Invoice Posting Policy"::Mandatory;
+        UserSetup.Modify();
+        Commit();
+        Response := PostData.Post(Header."No.", '', '', 'true', 1, 1033);
+        if Existed then begin
+            UserSetup."Service Invoice Posting Policy" := OldPolicy;
+            UserSetup.Modify();
+        end else
+            UserSetup.Delete();
+        Commit();
+        Data.AssertRefusal(Response, 'PreconditionFailed');
+        Response.WriteTo(Serialized);
+        Assert.IsTrue(Serialized.Contains('Mandatory'), 'The refusal names the actual posting policy.');
+        Assert.AreEqual(0, PostData.PostedInvoices(Header."No."), 'Mandatory requires Ship and Invoice, as in the native menu.');
     end;
 
     [Test]

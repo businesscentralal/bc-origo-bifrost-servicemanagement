@@ -568,9 +568,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - NamedType CorrectLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 4273898622 - Method 1615552954 - NamedType 529108071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Your service invoice posting policy does not allow this combination. Nothing was posted.</source>
-          <target>Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.</note>
+          <source>Your service invoice posting policy (%1) does not allow this combination. Nothing was posted.</source>
+          <target>Bókunarregla þjónustureikninga þinna (%1) leyfir ekki þessa samsetningu. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = policy name, is-IS=Bókunarregla þjónustureikninga þinna (%1) leyfir ekki þessa samsetningu. Ekkert var bókað.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckPolicy - NamedType PolicyErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4273898622 - Method 1615552954 - NamedType 4119627103" size-unit="char" translate="yes" xml:space="preserve">
