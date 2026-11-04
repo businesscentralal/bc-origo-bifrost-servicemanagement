@@ -58,21 +58,19 @@ codeunit 97744 "Svc Post Restrict Tests ori"
 
     local procedure SetField(OrderNo: Code[20]; LineNo: Integer; FieldName: Text; Value: Text): JsonObject
     var
+        Line: Record "Service Line";
         Request: JsonObject;
-        Records: JsonArray;
         Entry: JsonObject;
-        PrimaryKey: JsonObject;
         Fields: JsonObject;
+        Entries: JsonArray;
     begin
-        PrimaryKey.Add('Document Type', 'Order');
-        PrimaryKey.Add('Document No.', OrderNo);
-        PrimaryKey.Add('Line No.', LineNo);
+        Line.Get(Line."Document Type"::Order, OrderNo, LineNo);
         Fields.Add(FieldName, Value);
-        Entry.Add('primaryKey', PrimaryKey);
+        Entry.Add('id', Format(Line.SystemId, 0, 4));
         Entry.Add('fields', Fields);
-        Records.Add(Entry);
-        Request.Add('table', 'Service Line');
-        Request.Add('records', Records);
+        Entries.Add(Entry);
+        Request.Add('tableName', 'Service Line');
+        Request.Add('data', Entries);
         exit(Data.Invoke("Message Type ori"::"Data.Records.Set", Request, '', 1033, false));
     end;
 }

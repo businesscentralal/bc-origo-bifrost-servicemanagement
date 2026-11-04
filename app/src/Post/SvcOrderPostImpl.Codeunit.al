@@ -44,6 +44,8 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
         Options.ReadFlags(Argument, Ship, Consume, Invoice, AnySent);
         if not Lookup.FindDocument(Argument, "Service Document Type"::Order, Header) then
             exit;
+        if Options.RespondBadFlags(Argument) then
+            exit;
         if not Options.Resolve(Argument, Ship, Consume, Invoice, AnySent) then
             exit;
         if not Options.CheckSomethingToPost(Argument, Header, Ship, Consume, Invoice) then

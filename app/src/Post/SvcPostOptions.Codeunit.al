@@ -14,6 +14,7 @@ codeunit 10076083 "Svc Post Options ori"
     Access = Internal;
 
     var
+        BadFlags: List of [Text];
         CorrectLbl: Label 'Send true or false, or leave the key out.', Comment = 'is-IS=Sendu true eða false, eða slepptu lyklinum.';
         BooleanLbl: Label '%1 must be a JSON boolean.', Comment = '%1 = parameter, is-IS=%1 verður að vera JSON boolean.';
 
@@ -29,12 +30,36 @@ codeunit 10076083 "Svc Post Options ori"
         Sent: Boolean;
     begin
         Request := Argument.GetRequestJson();
-        Ship := ReadFlag(Request, 'ship', Argument, Sent);
+        Ship := ReadFlag(Request, 'ship', Sent);
         AnySent := Sent;
-        Consume := ReadFlag(Request, 'consume', Argument, Sent);
+        Consume := ReadFlag(Request, 'consume', Sent);
         AnySent := AnySent or Sent;
-        Invoice := ReadFlag(Request, 'invoice', Argument, Sent);
+        Invoice := ReadFlag(Request, 'invoice', Sent);
         AnySent := AnySent or Sent;
+    end;
+
+    /// <summary>Answers flags that are not JSON booleans: one problem as InvalidParameterFormat, several as MultipleErrors.</summary>
+    /// <param name="Argument">Receives the answer.</param>
+    /// <returns>True when an answer was given and the call must stop.</returns>
+    internal procedure RespondBadFlags(var Argument: Record "Message Argument ori"): Boolean
+    var
+        NothingPostedLbl: Label 'Nothing was posted.', Comment = 'is-IS=Ekkert var bókað.';
+        Entry: Text;
+        Parts: List of [Text];
+    begin
+        if BadFlags.Count() = 0 then
+            exit(false);
+        if BadFlags.Count() = 1 then begin
+            Parts := BadFlags.Get(1).Split('|');
+            Argument.RespondWithError("Bifrost Error Code ori"::InvalidParameterFormat, StrSubstNo(BooleanLbl, Parts.Get(1)), Parts.Get(1), Parts.Get(2), 'boolean', CorrectLbl);
+            exit(true);
+        end;
+        foreach Entry in BadFlags do begin
+            Parts := Entry.Split('|');
+            Argument.AddError("Bifrost Error Code ori"::InvalidParameterFormat, StrSubstNo(BooleanLbl, Parts.Get(1)), Parts.Get(1), Parts.Get(2), 'boolean', CorrectLbl);
+        end;
+        Argument.RespondWithCollectedErrors("Bifrost Error Code ori"::MultipleErrors, NothingPostedLbl);
+        exit(true);
     end;
 
     /// <summary>Applies the default and refuses combinations Business Central does not offer or the user policy forbids.</summary>
@@ -81,18 +106,22 @@ codeunit 10076083 "Svc Post Options ori"
     /// <returns>True when the policy allows the combination.</returns>
     internal procedure CheckPolicy(var Argument: Record "Message Argument ori"; Ship: Boolean; Consume: Boolean; Invoice: Boolean): Boolean
     var
-        UserSetupMgt: Codeunit "User Setup Management";
-        AllowedShip: Boolean;
-        AllowedConsume: Boolean;
-        AllowedInvoice: Boolean;
+        UserSetup: Record "User Setup";
+        Policy: Enum "Invoice Posting Policy";
+        Violation: Boolean;
         PolicyErr: Label 'Your service invoice posting policy does not allow this combination. Nothing was posted.', Comment = 'is-IS=Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.';
         PolicyNextLbl: Label 'Ask an administrator to check the policy in User Setup.', Comment = 'is-IS=Biddu stjórnanda um að skoða regluna í notandauppsetningu.';
     begin
-        AllowedShip := Ship;
-        AllowedConsume := Consume;
-        AllowedInvoice := Invoice;
-        UserSetupMgt.GetServiceInvoicePostingPolicy(AllowedShip, AllowedConsume, AllowedInvoice);
-        if (AllowedShip = Ship) and (AllowedConsume = Consume) and (AllowedInvoice = Invoice) then
+        // Mirrors Serv. Posting Selection Mgt.: Prohibited forbids invoicing, Mandatory forbids shipping or consuming without invoicing.
+        if UserSetup.Get(UserId()) then
+            Policy := UserSetup."Service Invoice Posting Policy";
+        case Policy of
+            Policy::Prohibited:
+                Violation := Invoice;
+            Policy::Mandatory:
+                Violation := (Ship or Consume) and not Invoice;
+        end;
+        if not Violation then
             exit(true);
         Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, PolicyErr, 'invoice', Format(Invoice), '', PolicyNextLbl);
         exit(false);
@@ -265,7 +294,7 @@ codeunit 10076083 "Svc Post Options ori"
             until Line.Next() = 0;
     end;
 
-    local procedure ReadFlag(Request: JsonObject; KeyName: Text; var Argument: Record "Message Argument ori"; var Sent: Boolean): Boolean
+    local procedure ReadFlag(Request: JsonObject; KeyName: Text; var Sent: Boolean): Boolean
     var
         Token: JsonToken;
         Raw: Text;
@@ -280,7 +309,7 @@ codeunit 10076083 "Svc Post Options ori"
             exit(true);
         if Raw = 'false' then
             exit(false);
-        Argument.AddError("Bifrost Error Code ori"::InvalidParameterFormat, StrSubstNo(BooleanLbl, KeyName), KeyName, Raw, 'boolean', CorrectLbl);
+        BadFlags.Add(KeyName + '|' + Raw);
         exit(false);
     end;
 }

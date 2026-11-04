@@ -645,6 +645,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Settu ship, invoice eða ship og consume á true, eða slepptu þeim öllum.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType NoneNextLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 669718459 - NamedType 361021498" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nothing was posted.</source>
+          <target>Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method RespondBadFlags - NamedType NothingPostedLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1303592562 - Method 4006469891 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
           <source>Use Service.Order.Post</source>
           <target>Notaðu Service.Order.Post</target>
