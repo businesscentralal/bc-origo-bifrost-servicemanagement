@@ -17,11 +17,12 @@ codeunit 97718 "Svc Quote Perm Tests ori"
         LowerPermissions: Codeunit "Library - Lower Permissions";
 
     [Test]
-    procedure Scenario_AC15_FullRole_ReleaseAndReopen()
+    procedure Scenario_AC15_FullRole_ConvertsQuote()
     var
         Header: Record "Service Header";
         Request: JsonObject;
         Response: JsonObject;
+        ResponseText: Text;
     begin
         // BIFROST SvcFull is a permission-set extension, so assign the actual BIFROST Full base role.
         Data.CreateDocument(Header, Header."Document Type"::Quote);
@@ -32,11 +33,12 @@ codeunit 97718 "Svc Quote Perm Tests ori"
         AddNativePermissions();
         Response := Data.Invoke("Message Type ori"::"Service.Quote.MakeOrder", Request, '', 1033, false);
         LowerPermissions.SetOutsideO365Scope();
-        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role releases.');
+        Response.WriteTo(ResponseText);
+        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role converts: ' + ResponseText);
     end;
 
     [Test]
-    procedure Scenario_AC15_ReadRole_DeniedBothWrites()
+    procedure Scenario_AC15_ReadRole_DeniedConversion()
     var
         Header: Record "Service Header";
         Request: JsonObject;

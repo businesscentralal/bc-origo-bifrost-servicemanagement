@@ -26,6 +26,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
         WriteCheck: Codeunit "Svc Write Check ori";
         Response: JsonObject;
         QuoteNo: Code[20];
+        ConversionNextLbl: Label 'Correct the field or setup named by Business Central and send the quote conversion again. Nothing was changed.', Comment = 'is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og sendu umbreytingu tilboðsins aftur. Engu var breytt.';
     begin
         Argument.AssertIsLicensed();
         Argument.AssertVersion1();
@@ -43,11 +44,13 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
             exit;
         if not CheckPreconditions(Argument, Header) then
             exit;
+        Argument.SetErrorContext('no', '', ConversionNextLbl);
         ClearLastError();
         if not ConvertQuote.Run(Header) then begin
             Argument.RespondWithLastError();
             exit;
         end;
+        Argument.ClearErrorContext();
         OrderHeader.Get("Service Document Type"::Order, ConvertQuote.ReturnOrderNo());
         BuildResponse(QuoteNo, OrderHeader, Response);
         Argument.SetResponseJson(Response);

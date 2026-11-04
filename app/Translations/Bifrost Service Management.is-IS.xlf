@@ -513,6 +513,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Settu Service Order Nos. í Service Mgt. Setup.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method CheckPreconditions - NamedType SeriesNextLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3257175344 - Method 3571782927 - NamedType 1822164879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and send the quote conversion again. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og sendu umbreytingu tilboðsins aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og sendu umbreytingu tilboðsins aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method ExecuteBifrostTask - NamedType ConversionNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.</source>
           <target>Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
