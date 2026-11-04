@@ -95,6 +95,8 @@ codeunit 97718 "Svc Quote Perm Tests ori"
     begin
         LowerPermissions.AddPermissionSet('D365 BASIC');
         LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
+        // Native quote conversion checks Item availability across transfers and project planning.
+        LowerPermissions.AddPermissionSet('D365 ITEM AVAIL CALC');
         LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
     end;
 }

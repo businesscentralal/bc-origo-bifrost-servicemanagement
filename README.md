@@ -168,3 +168,5 @@ Story test id 97715 was already occupied on main by `Svc Wrong Type Tests ori` (
 | 97720 | codeunit (test helper) | Svc Quote Caller Rollback ori |
 
 The caller-rollback regression verifies that Omit Commit conversion remains committed while a later unrelated caller write rolls back.
+
+Native conversion may calculate Item availability. The caller needs its standard base permissions for that calculation (`D365 ITEM AVAIL CALC`) as well as service editing. The Bifröst permission set grants no additional native table access. The read-role regression keeps these same native permissions and must still refuse conversion.
