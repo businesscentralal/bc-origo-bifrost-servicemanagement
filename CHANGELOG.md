@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Fixed
-- Hide the service posting token from all generic readers/writers, including force (10076084/97744); prove preview entry counts and untouched numbering (97741), and retained BC commits under Omit Commit/caller rollback (97740).
+- Hide the service posting token from all generic readers/writers, including force (10076084/97744); prove preview entry counts and untouched numbering (97741), and retained BC commits under Omit Commit/caller rollback (97740/97750).
 - Service.Order.Post retains customer identity when standard posting deletes the order (10076079); regression in 97740 and ordinary-company consent coverage in 97747/97748.
 - Service posting keeps confirmation and native posting under order/line locks (10076080), reads the native service invoice policy including Mandatory, and serializes line types by invariant enum names (10076083). Tests 97740/97742/97746 cover policy, confirmation preferences and bilingual end-to-end processing.
 

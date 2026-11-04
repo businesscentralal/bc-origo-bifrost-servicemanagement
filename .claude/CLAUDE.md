@@ -220,7 +220,7 @@ Post a service order (ship, consume, invoice) and preview the entries first.
 - Set `Qty. to Ship`, `Qty. to Consume` and `Qty. to Invoice` on the lines with `Data.Records.Set`. The posted-quantity fields are refused there.
 - Post commits (Business Central's own commit in `Service-Post` is kept) and needs the permission set `BIFROST SvcPost ori`, which is not part of `BIFROST SvcFull ori` or `BIFROST SvcRead ori`. PreviewPost is listed only for holders of that set.
 
-Object ids: app 10076075–10076086, tests 97740–97749.
+Object ids: app 10076075–10076086, tests 97740–97750.
 
 | Id | Object | Name |
 | --- | --- | --- |
@@ -241,3 +241,4 @@ Object ids: app 10076075–10076086, tests 97740–97749.
 | 97747 | codeunit (test) | Svc Post Licence Tests ori |
 | 97748 | codeunit | Svc Post Licence Probe ori |
 | 97749 | codeunit (test) | Svc Post Data ori |
+| 97750 | codeunit | Svc Post Caller Rollback ori |
