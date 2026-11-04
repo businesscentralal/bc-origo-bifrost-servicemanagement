@@ -1,0 +1,30 @@
+{
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "at": "2026-11-04T15:24:36.128609+00:00",
+  "artifacts": [
+    {
+      "role": "default",
+      "file": "/workspace/evidence/service5-worker7-20261104/compile/default.app",
+      "bytes": 64130,
+      "sha256": "647b62b2d0a03111a8a8ccc16d15417c3f13844a9bbd127f692557f189f6aeda",
+      "deployed": false,
+      "deploymentReceipt": null
+    },
+    {
+      "role": "app",
+      "file": "/workspace/evidence/service5-worker7-20261104/compile/app.app",
+      "bytes": 64242,
+      "sha256": "584a6e0d85d38c370f0bdd4da5aa5d9a9aa41af1f095eefd29001860c5a5ebb3",
+      "deployed": true,
+      "deploymentReceipt": "/workspace/evidence/service5-worker7-20261104/product-deploy.json"
+    },
+    {
+      "role": "test",
+      "file": "/workspace/evidence/service5-worker7-20261104/compile/test.app",
+      "bytes": 55240,
+      "sha256": "05473ec7da1aa16d67c2ba756b804b0afadad9e34615d72c07dc09dec79c1df0",
+      "deployed": true,
+      "deploymentReceipt": "/workspace/evidence/service5-worker7-20261104/test-deploy.json"
+    }
+  ]
+}

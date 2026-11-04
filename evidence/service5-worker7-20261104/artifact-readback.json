@@ -1,0 +1,54 @@
+{
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "containerId": "f0ba81c6d797",
+  "owner": "worker-7",
+  "at": "2026-11-04T15:30:45.651Z",
+  "artifacts": [
+    {
+      "role": "app",
+      "file": "/workspace/evidence/service5-worker7-20261104/compile/app.app",
+      "bytes": 64242,
+      "sha256": "584a6e0d85d38c370f0bdd4da5aa5d9a9aa41af1f095eefd29001860c5a5ebb3",
+      "deployed": true,
+      "deploymentReceipt": "/workspace/evidence/service5-worker7-20261104/product-deploy.json",
+      "packageId": "1ff9d0a4-e294-481a-8124-9ac41b5c06ce",
+      "installed": {
+        "@odata.etag": "W/\"JzE4OzY2MzcwMzU1MzY1NjY2MjM3MDE7MDA7Jw==\"",
+        "packageId": "1ff9d0a4-e294-481a-8124-9ac41b5c06ce",
+        "id": "f74e6852-7965-4c14-afb7-1102e080cda7",
+        "displayName": "Bifrost Service Management",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      },
+      "packageIdentityMatches": true
+    },
+    {
+      "role": "test",
+      "file": "/workspace/evidence/service5-worker7-20261104/compile/test.app",
+      "bytes": 55240,
+      "sha256": "05473ec7da1aa16d67c2ba756b804b0afadad9e34615d72c07dc09dec79c1df0",
+      "deployed": true,
+      "deploymentReceipt": "/workspace/evidence/service5-worker7-20261104/test-deploy.json",
+      "packageId": "85ce8228-82c7-4230-8e98-8744e6c448e0",
+      "installed": {
+        "@odata.etag": "W/\"JzIwOzE2NDQ4ODY4NDkxNDMwODkyODI1MTswMDsn\"",
+        "packageId": "85ce8228-82c7-4230-8e98-8744e6c448e0",
+        "id": "d39af77f-6b49-426f-a2ba-830ec3f35e21",
+        "displayName": "Bifrost Service Management - Tests",
+        "publisher": "Origo",
+        "versionMajor": 28,
+        "versionMinor": 0,
+        "versionBuild": 0,
+        "versionRevision": 0,
+        "isInstalled": true,
+        "publishedAs": " Dev"
+      },
+      "packageIdentityMatches": true
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "containerId": "f0ba81c6d797",
+  "owner": "worker-7",
+  "touchedMessageTypes": [
+    "Service.Quote.MakeOrder",
+    "Service.Order.Release",
+    "Service.Order.Reopen",
+    "Service.Allocation.Allocate"
+  ],
+  "createsOwnData": true,
+  "verified": true,
+  "total": 48,
+  "passed": 48,
+  "failed": 0,
+  "skipped": 0,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "dataSetup": "Separate native test-helper extension seeds 6 uniquely marked quotes with newly created customer/item/resource/service item/number series and item+resource lines; no shared/customer fixture is reused. MCP modifies only these own quotes; whole owned container deletion verifies cleanup.",
+  "scenarios": {
+    "1033": [
+      {
+        "name": "full contract Service.Quote.MakeOrder",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Order.Release",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Order.Reopen",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Allocation.Allocate",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Order.Release",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Order.Reopen",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Allocation.Allocate",
+        "status": "passed"
+      },
+      {
+        "name": "missing identifier",
+        "status": "passed"
+      },
+      {
+        "name": "malformed systemId",
+        "status": "passed"
+      },
+      {
+        "name": "undeclared key",
+        "status": "passed"
+      },
+      {
+        "name": "unknown quote",
+        "status": "passed"
+      },
+      {
+        "name": "localized precondition Customer No.",
+        "status": "passed"
+      },
+      {
+        "name": "localized precondition Bill-to Customer No.",
+        "status": "passed"
+      },
+      {
+        "name": "confirmation required and quote preserved",
+        "status": "passed"
+      },
+      {
+        "name": "confirmation mismatch and quote preserved",
+        "status": "passed"
+      },
+      {
+        "name": "generic quote edit remains allowed",
+        "status": "passed"
+      },
+      {
+        "name": "convert by no",
+        "status": "passed"
+      },
+      {
+        "name": "read back native order and row counts",
+        "status": "passed"
+      },
+      {
+        "name": "converted quote removed",
+        "status": "passed"
+      },
+      {
+        "name": "retry refused",
+        "status": "passed"
+      },
+      {
+        "name": "plain subject lookup reaches same missing quote",
+        "status": "passed"
+      },
+      {
+        "name": "order systemId is not a quote",
+        "status": "passed"
+      },
+      {
+        "name": "shared lookup releases converted order",
+        "status": "passed"
+      },
+      {
+        "name": "shared lookup reopens converted order",
+        "status": "passed"
+      }
+    ],
+    "1039": [
+      {
+        "name": "full contract Service.Quote.MakeOrder",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Order.Release",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Order.Reopen",
+        "status": "passed"
+      },
+      {
+        "name": "full contract Service.Allocation.Allocate",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Order.Release",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Order.Reopen",
+        "status": "passed"
+      },
+      {
+        "name": "quote refused by order-only Service.Allocation.Allocate",
+        "status": "passed"
+      },
+      {
+        "name": "missing identifier",
+        "status": "passed"
+      },
+      {
+        "name": "malformed systemId",
+        "status": "passed"
+      },
+      {
+        "name": "undeclared key",
+        "status": "passed"
+      },
+      {
+        "name": "unknown quote",
+        "status": "passed"
+      },
+      {
+        "name": "localized precondition Customer No.",
+        "status": "passed"
+      },
+      {
+        "name": "localized precondition Bill-to Customer No.",
+        "status": "passed"
+      },
+      {
+        "name": "confirmation required and quote preserved",
+        "status": "passed"
+      },
+      {
+        "name": "confirmation mismatch and quote preserved",
+        "status": "passed"
+      },
+      {
+        "name": "generic quote edit remains allowed",
+        "status": "passed"
+      },
+      {
+        "name": "convert by systemId",
+        "status": "passed"
+      },
+      {
+        "name": "read back native order and row counts",
+        "status": "passed"
+      },
+      {
+        "name": "converted quote removed",
+        "status": "passed"
+      },
+      {
+        "name": "retry refused",
+        "status": "passed"
+      },
+      {
+        "name": "plain subject lookup reaches same missing quote",
+        "status": "passed"
+      },
+      {
+        "name": "order systemId is not a quote",
+        "status": "passed"
+      },
+      {
+        "name": "shared lookup releases converted order",
+        "status": "passed"
+      },
+      {
+        "name": "shared lookup reopens converted order",
+        "status": "passed"
+      }
+    ]
+  },
+  "cleanup": "Whole owned environment deletion being verified; original foreign worker4 environment preserved"
+}

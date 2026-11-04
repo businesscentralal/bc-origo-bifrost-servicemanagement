@@ -1,0 +1,32 @@
+{
+  "at": "2026-11-04T15:43:38.959782+00:00",
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "productChanged": false,
+  "attempts": [
+    {
+      "phase": "seed via unregistered SVC5SEED suite",
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "outcome": "empty setup; not a pass; no quote fixtures"
+    },
+    {
+      "phase": "native admin Invoke-NAVCodeunit",
+      "outcome": "401 existing Windows management identity; no credential changes; no fixture writes"
+    },
+    {
+      "phase": "private installer compile",
+      "outcome": "var Code[10] signature fixed; failed compile retained in tool transcript/excerpt; successful final compiler log retained; subsequent private commands were not compile-guarded and republished prior compiled normal harness. Corrected command now stops on any compile error. Product publication was always compile-guarded and unchanged."
+    },
+    {
+      "phase": "registered SVC5SEED suite on130451",
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "outcome": "6new own marked fixtures seeded and explicitly committed. Setup count is separate from104full native acceptance methods."
+    }
+  ],
+  "prevention": "Register a separate fixture suite in private Install codeunit and assert nonzero seed count; compile-guard setup publication; inspect successful receipts/markers before retrying writes."
+}

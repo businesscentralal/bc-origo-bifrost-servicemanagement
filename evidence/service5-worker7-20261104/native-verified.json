@@ -1,0 +1,14 @@
+{
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "containerId": "f0ba81c6d797",
+  "fullSuite": true,
+  "total": 104,
+  "passed": 104,
+  "failed": 0,
+  "skipped": 0,
+  "sourceTotal": 104,
+  "missingSourceMethods": [],
+  "unexpectedMethods": [],
+  "exactMethodSet": true,
+  "evidence": "full-suite.junit.xml"
+}

@@ -1,0 +1,137 @@
+{
+  "checks": {
+    "format_guid": {
+      "pass": true,
+      "findings": []
+    },
+    "commit_in_loop": {
+      "pass": true,
+      "findings": []
+    },
+    "try_prefix_convention": {
+      "pass": true,
+      "findings": []
+    },
+    "xml_doc_comments": {
+      "pass": true,
+      "findings": []
+    },
+    "confirm_in_page": {
+      "pass": true,
+      "findings": []
+    },
+    "changelog": {
+      "pass": true,
+      "findings": []
+    },
+    "hardcoded_values": {
+      "pass": true,
+      "findings": []
+    },
+    "app_json": {
+      "pass": true,
+      "findings": []
+    },
+    "modernization": {
+      "pass": true,
+      "findings": []
+    },
+    "data_classification": {
+      "pass": true,
+      "findings": []
+    },
+    "namespace": {
+      "pass": true,
+      "findings": []
+    },
+    "object_naming": {
+      "pass": true,
+      "findings": []
+    },
+    "read_isolation": {
+      "pass": true,
+      "findings": []
+    },
+    "set_load_fields": {
+      "findings": [],
+      "pass": true,
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure"
+    },
+    "global_variables": {
+      "pass": true,
+      "findings": []
+    },
+    "format_evaluate_enum": {
+      "pass": true,
+      "findings": []
+    },
+    "with_statements": {
+      "pass": true,
+      "findings": []
+    },
+    "today_vs_workdate": {
+      "pass": true,
+      "findings": []
+    },
+    "page_code_minimal": {
+      "pass": true,
+      "findings": []
+    },
+    "one_statement_per_line": {
+      "pass": false,
+      "findings": [
+        {
+          "line": 41,
+          "text": "internal procedure FindDocument(var Argument: Record \"Message Argument ori\"; DocumentType: Enum \"Service Document Type\"; var ServiceHeader: Record \"Service Header\"): Boolean",
+          "file": "SvcDocumentLookup.Codeunit.al"
+        },
+        {
+          "line": 194,
+          "text": "local procedure ReadIdentifier(Request: JsonObject; KeyName: Text; Maximum: Integer; var Argument: Record \"Message Argument ori\"): Text",
+          "file": "SvcDocumentLookup.Codeunit.al"
+        },
+        {
+          "line": 16,
+          "text": "procedure GetConfirmCount(var Argument: Record \"Message Argument ori\"; var Count: Integer; var Summary: Text): Boolean",
+          "file": "SvcConfirm.Codeunit.al"
+        },
+        {
+          "line": 254,
+          "text": "local procedure BuildResponse(QuoteNo: Code[20]; Header: Record \"Service Header\"; var Response: JsonObject)",
+          "file": "SvcQuoteMakeOrderImpl.Codeunit.al"
+        }
+      ]
+    },
+    "reserved_var_names": {
+      "pass": true,
+      "findings": []
+    },
+    "event_subscriber_placement": {
+      "pass": true,
+      "findings": []
+    },
+    "caption_translation": {
+      "findings": [
+        {
+          "line": 10,
+          "text": "Caption = 'Service.Quote.MakeOrder', Locked = true;",
+          "file": "SvcQuoteMsgType.EnumExt.al"
+        }
+      ],
+      "pass": false,
+      "skipped": null
+    }
+  },
+  "version": "28.0.0.0",
+  "publisher": "Origo",
+  "project": "Bifrost Service Management",
+  "mode": "diff (vs 13ff030)",
+  "summary": {
+    "failed": 2,
+    "total": 23,
+    "ready": false,
+    "passed": 21
+  },
+  "files_scanned": 6,
+  "total_al_files": 21
+}

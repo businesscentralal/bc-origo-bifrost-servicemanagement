@@ -1,0 +1,240 @@
+{
+  "issueUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/issues/5",
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "matrix": [
+    {
+      "id": "AC01",
+      "criterion": "MakeOrder by `no` with `expectedCount = 1` on a quote with one service item line, an Item line and a Resource line: a service order exists with the quote's customer, service item line and lines; the quote is gone; `Quote No.` on the order is the quote number; response has `quoteNo`, `orderNo`, `orderSystemId`, counts equal to the rows on the order",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC01_Release_ReturnsRecalculatedOrder",
+        "Scenario_AC01_No_ConvertsAllLines",
+        "Scenario_AC01_AC03_ReleaseQuote_NamesTypeInCallerLanguage",
+        "Scenario_AC01_AC03_ReopenQuote_NamesTypeInCallerLanguage"
+      ]
+    },
+    {
+      "id": "AC02",
+      "criterion": "MakeOrder by `systemId` and by plain `subject` give the same result",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC02_Release_BysystemId",
+        "Scenario_AC02_Release_Bysubject",
+        "Scenario_AC02_SystemId_ConvertsQuote",
+        "Scenario_AC02_Subject_ConvertsQuote",
+        "Scenario_AC02_StructuredFields_StayEnglish"
+      ]
+    },
+    {
+      "id": "AC03",
+      "criterion": "MakeOrder without `expectedCount` answers `ConfirmationRequired` (`expected` = 1, summary names the quote), nothing changed. Wrong count answers `ConfirmationMismatch`. With the company setting off, omission runs the type; a supplied wrong count still refuses",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC03_NoQuantity_Refused",
+        "Scenario_AC03_Required_MissingCount",
+        "Scenario_AC03_Required_WrongCount",
+        "Scenario_AC03_Optional_OmissionRuns",
+        "Scenario_AC03_Optional_WrongCountStillRefuses",
+        "Scenario_AC01_AC03_ReleaseQuote_NamesTypeInCallerLanguage",
+        "Scenario_AC01_AC03_ReopenQuote_NamesTypeInCallerLanguage"
+      ]
+    },
+    {
+      "id": "AC04",
+      "criterion": "A quote with an Active allocation: the new order's allocation has status `Reallocation Needed`, `allocationsToReallocate` = 1 and `nextStep` names `Service.Allocation.Allocate`",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC04_LocationRequired_RollsBack",
+        "Scenario_AC04_ActiveAllocation_NeedsReallocation"
+      ]
+    },
+    {
+      "id": "AC05",
+      "criterion": "Quote without Customer No. (or without Bill-to Customer No.): `PreconditionFailed`, quote unchanged, no order",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC05_AC14_RepeatRefusals_Bilingual",
+        "Scenario_AC05_MissingCustomer_Refused",
+        "Scenario_AC05_MissingBillTo_Refused"
+      ]
+    },
+    {
+      "id": "AC06",
+      "criterion": "Blocked customer (Blocked = All), blocked service item or item blocked for service: BC's text as `BusinessCentralError`, quote unchanged, no order (rolled back)",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC06_Reopen_ReleasedOrder",
+        "Scenario_AC06_BlockedCustomer_RollsBack",
+        "Scenario_AC06_BlockedServiceItem_RollsBack",
+        "Scenario_AC06_ServiceBlockedItem_RollsBack"
+      ]
+    },
+    {
+      "id": "AC07",
+      "criterion": "Service Order Nos. empty in Service Mgt. Setup: BC's `TestField` text returned as `PreconditionFailed` with nextStep naming the setup field, nothing changed",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC07_RejectQuoteSystemId",
+        "Scenario_AC07_RejectInvoiceSystemId",
+        "Scenario_AC07_RejectCreditMemoSystemId",
+        "Scenario_AC07_ConflictingIdentifiers",
+        "Scenario_AC07_NoOrderSeries_Refused"
+      ]
+    },
+    {
+      "id": "AC08",
+      "criterion": "A `systemId` of a service order: `InvalidParameter` (expected `Quote`); unknown `no`: `RecordNotFound`; second call with the same quote after success: `RecordNotFound` (not retry-safe, documented in notes)",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC08_Validation_BothTypes",
+        "Scenario_AC08_OrderSystemId_Refused",
+        "Scenario_AC08_UnknownNumber_Refused"
+      ]
+    },
+    {
+      "id": "AC09",
+      "criterion": "Parameter validation: missing identifier `MissingParameter`; `systemId` not a GUID `InvalidParameterFormat`; several problems with declared parameters in one call (for example an empty `no` and a malformed `systemId`) answer `MultipleErrors` and change nothing. An undeclared key is refused by Foundation's strict dispatcher with `UnknownParameter` before the app runs; that is Foundation's contract, so test it on its own (`{\"no\":\"<quote>\",\"extra\":\"x\"}` answers `UnknownParameter` for `extra`) and do not expect it inside `MultipleErrors`",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC09_Release_CallerRollback",
+        "Scenario_AC09_Reopen_CallerRollback",
+        "Scenario_AC09_MissingIdentifier_Refused",
+        "Scenario_AC09_MalformedGuid_Refused",
+        "Scenario_AC09_MultipleErrors_Collected",
+        "Scenario_AC09_UnknownParameter_DispatcherRefuses"
+      ]
+    },
+    {
+      "id": "AC10",
+      "criterion": "Commit: the call commits (as Foundation's `Sales.Quote.MakeOrder`); under Omit Commit the documented behaviour holds (test asserts it), and a call that BC refuses leaves no order and the quote intact",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC10_OmitCommit_StillCommits",
+        "Scenario_AC10_CallerRollback_OrderPersists",
+        "Scenario_AC10_ReleaseStatus_BlockedWithHint",
+        "Scenario_AC10_OrdinaryFieldAndRead_RemainAllowed"
+      ]
+    },
+    {
+      "id": "AC11",
+      "criterion": "Contract: envelope, target, parameters, response, errors, effect (`irreversible`), related (`Sales.Quote.MakeOrder`, `Service.Allocation.Allocate`, `Service.Order.Release`, `Service.Order.Post`), workflow, examples, overview, notes; the effect text says the call commits; Foundation's `expectedCount` parameter and confirmation effect appear in the described contract; the errors list has `ConfirmationRequired`, `ConfirmationMismatch`, `PreconditionFailed`, `BusinessCentralError`, `Retryable`",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect",
+        "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect"
+      ]
+    },
+    {
+      "id": "AC12",
+      "criterion": "Generic writes: `Data.Records.Set` on `Service Header` of a quote is not restricted by this group (no subscriber); a test records that, and the help notes say why",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC12_NewOrdinaryCompany_RequiresEula",
+        "Scenario_AC12_QuoteGenericWrite_RemainsAllowed",
+        "Scenario_AC12_NewOrdinaryCompany_RequiresEula",
+        "Scenario_AC12_SuiteUsesSessionRunner"
+      ]
+    },
+    {
+      "id": "AC13",
+      "criterion": "Licence: an unlicensed company answers `EULA_REQUIRED` and changes nothing",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC13_Catalogue_BothLanguages",
+        "Scenario_AC13_Catalogue_BothLanguages"
+      ]
+    },
+    {
+      "id": "AC14",
+      "criterion": "Texts in English and Icelandic (table below) are labels with `is-IS=` comments and xlf targets; at lcid 1039 each answers in Icelandic. Catalogue: EN \"Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.\" IS \"Breytir \u00fej\u00f3nustutilbo\u00f0i \u00ed \u00fej\u00f3nustup\u00f6ntun, eins og a\u00f0ger\u00f0in Gera p\u00f6ntun \u00e1 tilbo\u00f0inu. Tilbo\u00f0inu er eytt. Framkv\u00e6mir Commit og ekki er h\u00e6gt a\u00f0 afturkalla.\" Keywords EN include \"service quote to order, make service order, customer accepted the service quote\"; IS include \"\u00fej\u00f3nustutilbo\u00f0 \u00ed p\u00f6ntun, gera \u00fej\u00f3nustup\u00f6ntun, vi\u00f0skiptama\u00f0ur sam\u00feykkti \u00fej\u00f3nustutilbo\u00f0i\u00f0\". Icelandic keyword list is not shorter than English",
+      "layer": "native + CI guard",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC05_AC14_RepeatRefusals_Bilingual",
+        "Scenario_AC14_Icelandic_ConfirmationSummary",
+        "Scenario_AC14_Icelandic_ConvertsQuote",
+        "Scenario_AC14_QuoteRefusals_Localized"
+      ]
+    },
+    {
+      "id": "AC15",
+      "criterion": "`BIFROST Svc ori` grants the new codeunits; a user with only `BIFROST SvcRead ori` is refused by the platform; a user with `BIFROST SvcFull ori` and the base service permissions runs the type",
+      "layer": "native",
+      "implementation": "present in candidate",
+      "verification": "Verified by full configured104native suite at b92361b, relevant repository guards and/or48bilingual MCP scenarios; inspect linked specific raw receipts. Premium UI acceptance remains NOT_RUN and UAT separate.",
+      "nativeMethods": [
+        "Scenario_AC15_FullRole_ConvertsQuote",
+        "Scenario_AC15_ReadRole_DeniedConversion",
+        "Scenario_AC15_FullRole_ReleaseAndReopen",
+        "Scenario_AC15_ReadRole_DeniedBothWrites"
+      ]
+    },
+    {
+      "id": "AC16",
+      "criterion": "The Foundation dependency in both `app.json` files is the release that contains `Confirm Gate ori`; app and test app compile against it with 0 warnings; `Test-PermissionCoverage`, `Test-ObjectIdsUnique`, `Test-MessageTypeNames`, `Test-IcelandicXlfInSync`, `Test-ContractParameterKeys` green; CHANGELOG, README and `.claude/CLAUDE.md` updated",
+      "layer": "CI",
+      "implementation": "present in candidate",
+      "verification": "Local exact-candidate product/test/no-IVT compile0errors0warnings; all named repository guards and docs locally verified. Current-tip PR paired CI pending; no CI pass claimed yet.",
+      "nativeMethods": []
+    },
+    {
+      "id": "AC17",
+      "criterion": "Receipt on bc29-w1 (CRONUS): set a Service Quote Nos. series (empty in the demo data; disclose it), create a service item and a quote with `Data.Records.Set` for a demo customer with an Item and a Resource line, MakeOrder without count (refusal), with count; read back the order and that the quote is gone; at 1033 and 1039",
+      "layer": "Claude Code receipt",
+      "implementation": "independent downstream acceptance",
+      "verification": "pending Claude receipt",
+      "nativeMethods": []
+    },
+    {
+      "id": "AC18",
+      "criterion": "UAT: the Bifr\u00f6st Tester converts a quote in English and Icelandic, retries it (`RecordNotFound`), and compares the order with the BC page",
+      "layer": "UAT",
+      "implementation": "independent downstream acceptance",
+      "verification": "pending Tester after Architect same-SHA deployment",
+      "nativeMethods": []
+    }
+  ],
+  "uiDisposition": {
+    "status": "NOT_RUN",
+    "reason": "Premium UI acceptance delegated to Tester UAT by Gunnar02Nov issue comment6576451899; fresh developer UI separately attempted without claiming UAT"
+  },
+  "evidence": [
+    "native-verified.json",
+    "full-suite.junit.xml",
+    "source-test-roster.json",
+    "mcp-summary-final.json",
+    "mcp-receipts-1033.json",
+    "mcp-receipts-1039.json",
+    "compile.json",
+    "artifact-readback.json",
+    "guards-final.json",
+    "ui-summary.json"
+  ]
+}

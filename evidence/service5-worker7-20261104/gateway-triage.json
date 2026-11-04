@@ -1,0 +1,21 @@
+{
+  "raw": {
+    "failed": 2,
+    "total": 23,
+    "ready": false,
+    "passed": 21
+  },
+  "findings": [
+    {
+      "check": "one_statement_per_line",
+      "classification": "false-positive",
+      "reason": "All four findings are mandatory AL procedure parameter separators; no multiple executable statements."
+    },
+    {
+      "check": "caption_translation",
+      "classification": "false-positive",
+      "reason": "Service.Quote.MakeOrder is invariant public protocol key; localized catalogue is covered separately."
+    }
+  ],
+  "unresolved": 0
+}

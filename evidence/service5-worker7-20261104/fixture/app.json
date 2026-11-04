@@ -1,0 +1,36 @@
+{
+  "id": "e1ec596b-c390-48d6-9b39-5871bf0996ca",
+  "name": "Worker7 Service5 Verification Fixtures",
+  "publisher": "Origo",
+  "version": "1.0.0.2",
+  "application": "28.5.0.0",
+  "platform": "28.0.0.0",
+  "runtime": "17.0",
+  "target": "Cloud",
+  "idRanges": [
+    {
+      "from": 97790,
+      "to": 97799
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "d39af77f-6b49-426f-a2ba-830ec3f35e21",
+      "name": "Bifrost Service Management - Tests",
+      "publisher": "Origo",
+      "version": "28.0.0.0"
+    },
+    {
+      "id": "7505e808-6e52-4b96-a328-82573391297a",
+      "name": "Bifrost Foundation",
+      "publisher": "Origo",
+      "version": "28.0.11.669"
+    },
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "name": "Test Runner",
+      "publisher": "Microsoft",
+      "version": "1.0.0.0"
+    }
+  ]
+}

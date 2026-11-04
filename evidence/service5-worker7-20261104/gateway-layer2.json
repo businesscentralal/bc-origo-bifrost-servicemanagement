@@ -1,0 +1,13 @@
+{
+  "sha": "b92361bb8efd26d4da1bd16563fdb9b6e6b196c5",
+  "scope": "Service Management issue5 candidate, original owner history preserved",
+  "compiler": "CodeCop/UICop/AppSourceCop on product, test and no-IVT Default:0errors0warnings; installed compiled package IDs verified by Automation API.",
+  "objectIds": "Original issue5 reserved ids retained;97719preserves already-used97715. No ids added in this continuation. Guards pass.",
+  "logic": "Conversion is delegated to native5923. Validate->Commit->public Foundation ConfirmGate->relookup/preconditions->Boolean native Run; no duplicate conversion implementation. No page/YesNo conversion call. Metadata field-name fix retains protocol identifiers while refusal/nextStep labels remain translated.",
+  "permissions": "Write gate10076066retained; both lower-permission role tests use identical native permission grants; no permission widening in continuation.",
+  "translations": "Exact compiler g.xlf compared with committed is-IS.xlf; sync guard passes. No label wording changes in continuation.",
+  "compatibility": "No public procedure/field removals, renames or type changes. Foundation28.0.11.669dependency matches published release. Service Management remains unreleased; no AppSource publish authorized.",
+  "mechanicalTriage": "Layer1raw21/23; AL signature semicolons and invariant Service.Quote.MakeOrder caption are false positives, recorded separately. All13repository guards pass after generated XLF supplied.",
+  "tests": "Full104source methods executed/passed with0failed0skipped; raw JUnit method set equals source roster.48MCP checks passed across1033/1039; seed1/1 counted separately.",
+  "limits": "UI acceptance NOT_RUN(Premium) under scoped Gunnar decision; independent Claude AC17 and Tester AC18 remain downstream. Original worker4 foreign stopped container and private evidence remain preserved/requested."
+}
