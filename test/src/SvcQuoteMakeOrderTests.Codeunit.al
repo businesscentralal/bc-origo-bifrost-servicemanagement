@@ -45,6 +45,26 @@ codeunit 97719 "Svc Quote MakeOrder Tests ori"
     end;
 
     [Test]
+    procedure Scenario_AC10_CallerRollback_OrderPersists()
+    var
+        Quote: Record "Service Header";
+        OrderHeader: Record "Service Header";
+        Caller: Codeunit "Svc Quote Caller Rollback ori";
+        QuoteNo: Code[20];
+    begin
+        Data.CreateDocument(Quote, Quote."Document Type"::Quote);
+        QuoteNo := Quote."No.";
+        Commit();
+        asserterror Caller.Run(Quote);
+        Assert.ExpectedError('X-EXPECTED-CALLER-ROLLBACK');
+        Assert.IsFalse(Quote.Get(Quote."Document Type"::Quote, QuoteNo), 'Committed conversion removed the quote.');
+        OrderHeader.SetRange("Document Type", OrderHeader."Document Type"::Order);
+        OrderHeader.SetRange("Quote No.", QuoteNo);
+        Assert.IsTrue(OrderHeader.FindFirst(), 'The converted order survives the later caller rollback.');
+        Assert.AreNotEqual('X-CALLER-ROLLBACK', OrderHeader.Description, 'The unrelated caller write rolls back.');
+    end;
+
+    [Test]
     procedure Scenario_AC14_Icelandic_ConvertsQuote()
     begin
         ConvertAndAssert('no', 1039, false);
