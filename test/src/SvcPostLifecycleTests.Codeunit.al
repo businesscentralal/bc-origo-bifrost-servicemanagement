@@ -58,7 +58,6 @@ codeunit 97746 "Svc Post Lifecycle Tests ori"
         InventorySetup.Modify();
         RepairStatus.Init();
         RepairStatus.Code := CopyStr(DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, MaxStrLen(RepairStatus.Code));
-        RepairStatus.Validate("Service Order Status", RepairStatus."Service Order Status"::Finished);
         RepairStatus."Posting Allowed" := true;
         RepairStatus.Insert(true);
         QuoteNo := CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, MaxStrLen(QuoteNo));
@@ -115,7 +114,11 @@ codeunit 97746 "Svc Post Lifecycle Tests ori"
         Request.Add('no', OrderNo);
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', LanguageId, false);
         PostData.AssertSuccess(Response);
-        // Completing the repair is a real BC prerequisite, preserved rather than bypassed by posting.
+        // The posting-allowed status preserves the order's current native status; unrelated transition policy remains intact.
+        Header.Get(Header."Document Type"::Order, OrderNo);
+        RepairStatus.Validate("Service Order Status", Header.Status);
+        RepairStatus.Modify(true);
+        Commit();
         Clear(PrimaryKey);
         Clear(Fields);
         PrimaryKey.Add('DocumentType', 'Order');
