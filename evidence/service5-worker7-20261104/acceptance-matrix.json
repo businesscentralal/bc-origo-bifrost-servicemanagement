@@ -144,7 +144,8 @@
       "nativeMethods": [
         "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect",
         "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect"
-      ]
+      ],
+      "registrationCondition": "Service.Order.Post is named in notes/nextStep now; its structured related entry is emitted only after dependent issue7 registers that type. Foundation rejects unknown related types. No registered posting type or issue7 completion is claimed by this PR."
     },
     {
       "id": "AC12",
@@ -236,5 +237,8 @@
     "artifact-readback.json",
     "guards-final.json",
     "ui-summary.json"
+  ],
+  "knownCrossStoryConditions": [
+    "Service.Order.Post is named in notes/nextStep now; its structured related entry is emitted only after dependent issue7 registers that type. Foundation rejects unknown related types. No registered posting type or issue7 completion is claimed by this PR."
   ]
 }

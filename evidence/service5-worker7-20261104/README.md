@@ -11,3 +11,5 @@ Owned container deletion returned204 and readback404, removing all own native/MC
 Repository guards pass, including mixed-language and exact generated XLF synchronization. Layer1raw21/23findings are AL procedure signature separators and the invariant public message key; see gateway triage. Harness repairs (empty seed suite, rejected admin management auth and private installer compile correction) remain disclosed; successful business writes were not repeated. No product assertions, guards or exclusions were weakened.
 
 This evidence branch stores receipts for the named source candidate. Its documentation commit is not a new product verification claim. PR paired CI and independent review/clearance/approval, Architect merge/deployment and Tester UAT remain separate.
+
+Known cross-story contract condition: Service.Order.Post is named in notes/nextStep, while its structured related entry is conditional until issue7 registers the type. Foundation refuses unknown related message names. This PR does not implement or claim registration of posting; the full AC11 text remains retained in the matrix and downstream issue tracking.
