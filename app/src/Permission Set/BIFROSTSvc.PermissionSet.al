@@ -35,6 +35,7 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Post Restrict ori" = X,
         codeunit "Svc Posting Gate ori" = X,
         codeunit "Svc Order Post Impl ori" = X,
+        codeunit "Svc Order Post Proc ori" = X,
         codeunit "Svc Order Preview Impl ori" = X,
         codeunit "Svc Order Preview Proc ori" = X,
         codeunit "Svc Write Check ori" = X,

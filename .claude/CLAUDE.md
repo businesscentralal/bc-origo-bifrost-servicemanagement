@@ -220,7 +220,7 @@ Post a service order (ship, consume, invoice) and preview the entries first.
 - Set `Qty. to Ship`, `Qty. to Consume` and `Qty. to Invoice` on the lines with `Data.Records.Set`. The posted-quantity fields are refused there.
 - Post commits (Business Central's own commit in `Service-Post` is kept) and needs the permission set `BIFROST SvcPost ori`, which is not part of `BIFROST SvcFull ori` or `BIFROST SvcRead ori`. PreviewPost is listed only for holders of that set.
 
-Object ids: app 10076075–10076086, tests 97740–97745 and 97749.
+Object ids: app 10076075–10076086, tests 97740–97749.
 
 | Id | Object | Name |
 | --- | --- | --- |
@@ -229,6 +229,7 @@ Object ids: app 10076075–10076086, tests 97740–97745 and 97749.
 | 10076077 | enumextension | Svc Post MsgType ori |
 | 10076078 | codeunit | Svc Posting Gate ori |
 | 10076079 | codeunit | Svc Order Post Impl ori |
+| 10076080 | codeunit | Svc Order Post Proc ori |
 | 10076081 | codeunit | Svc Order Preview Impl ori |
 | 10076082 | codeunit | Svc Order Preview Proc ori |
 | 10076083 | codeunit | Svc Post Options ori |
@@ -236,4 +237,7 @@ Object ids: app 10076075–10076086, tests 97740–97745 and 97749.
 | 10076085 | codeunit | Svc Post Confirm ori |
 | 10076086 | codeunit | Svc Post Contract ori |
 | 97740–97745 | codeunit (test) | Svc Order Post / Preview / Post Confirm / Posting Gate / Post Restrict / Post Contract Tests ori |
+| 97746 | codeunit (test) | Svc Post Lifecycle Tests ori |
+| 97747 | codeunit (test) | Svc Post Licence Tests ori |
+| 97748 | codeunit | Svc Post Licence Probe ori |
 | 97749 | codeunit (test) | Svc Post Data ori |

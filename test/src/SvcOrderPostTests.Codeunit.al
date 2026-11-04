@@ -34,6 +34,8 @@ codeunit 97740 "Svc Order Post Tests ori"
             LastEntry := LedgerEntry."Entry No.";
         Response := PostData.Post(OrderNo, 'true', '', 'true', 1, 1033);
         PostData.AssertSuccess(Response);
+        Assert.AreEqual(Header."Customer No.", Data.TextValue(Response, 'customerNo'), 'The deleted order retains customer identity in the response.');
+        Assert.AreEqual(Header.Name, Data.TextValue(Response, 'customerName'), 'The deleted order retains customer name in the response.');
         Assert.AreEqual(2, PostData.ArrayCount(Response, 'postedDocuments'), 'A shipment and an invoice are listed.');
         Assert.AreEqual(1, PostData.PostedShipments(OrderNo), 'One service shipment exists.');
         Assert.AreEqual(1, PostData.PostedInvoices(OrderNo), 'One service invoice exists.');

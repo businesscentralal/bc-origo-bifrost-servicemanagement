@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Fixed
+- Service.Order.Post retains customer identity when standard posting deletes the order (10076079); regression in 97740 and ordinary-company consent coverage in 97747/97748.
+
 ### Added
 - Add `Service.Order.Post` (irreversible, commits, `expectedCount` 1) and `Service.Order.PreviewPost` (read) through standard Business Central service posting (`Service-Post`, `Gen. Jnl.-Post Preview`): ship, invoice, ship and invoice (default), ship and consume, the user's service invoice posting policy, a posting token table `Svc Posting ori` (10076075) with the assignable set `BIFROST SvcPost ori` (10076076, not in Full or Read), a write guard for the six posted-quantity fields of `Service Line`, and bilingual contracts (10076075–10076086) (#7). Add posting, preview, confirmation, gate, write-guard and contract coverage (97740–97745, helper 97749). Builds on the `Svc Confirm ori` pattern of #5.
 - Add quote-specific bilingual lookup refusals (10076041) and a 1039 regression (97719), keeping machine-readable expected `Quote` invariant.

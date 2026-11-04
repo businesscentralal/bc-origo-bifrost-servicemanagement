@@ -1,7 +1,6 @@
 namespace Origo.Bifrost.ServiceManagement;
 
 using Microsoft.Service.Document;
-using Microsoft.Service.Posting;
 using Origo.Bifrost;
 
 /// <summary>Implements Service.Order.Post through the standard Business Central service posting.</summary>
@@ -15,25 +14,11 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
         ExecuteBifrostTask(Rec);
     end;
 
-    /// <summary>Validates the request, confirms the count, then posts the order. This call commits.</summary>
+    /// <summary>Validates access and catches native posting errors outside the locked posting transaction.</summary>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
-        Header: Record "Service Header";
-        Lookup: Codeunit "Svc Document Lookup ori";
-        Options: Codeunit "Svc Post Options ori";
         Gate: Codeunit "Svc Posting Gate ori";
         WriteCheck: Codeunit "Svc Write Check ori";
-        ConfirmGate: Codeunit "Confirm Gate ori";
-        ServicePost: Codeunit "Service-Post";
-        Shipments: List of [Code[20]];
-        Invoices: List of [Code[20]];
-        Response: JsonObject;
-        Ship: Boolean;
-        Consume: Boolean;
-        Invoice: Boolean;
-        AnySent: Boolean;
-        OrderNo: Code[20];
-        LastLedgerEntryNo: Integer;
         PostNextLbl: Label 'Correct the setup or document named by Business Central and send the posting again. Nothing was posted.', Comment = 'is-IS=Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.';
     begin
         Argument.AssertIsLicensed();
@@ -41,61 +26,13 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
         WriteCheck.AssertCanWrite('Service.Order.Post');
         if not Gate.AssertCanPost(Argument) then
             exit;
-        Options.ReadFlags(Argument, Ship, Consume, Invoice, AnySent);
-        if not Lookup.FindDocument(Argument, "Service Document Type"::Order, Header) then
-            exit;
-        if Options.RespondBadFlags(Argument) then
-            exit;
-        if not Options.Resolve(Argument, Ship, Consume, Invoice, AnySent) then
-            exit;
-        if not Options.CheckSomethingToPost(Argument, Header, Ship, Consume, Invoice) then
-            exit;
-        OrderNo := Header."No.";
-        Options.CapturePosted(OrderNo, Shipments, Invoices, LastLedgerEntryNo);
-        // Service-Post ends in Commit() and Codeunit.Run needs a clean transaction, as in Sales.Document.Post.
-        Commit();
-        if not ConfirmGate.Check(Argument, Argument.Type) then
-            exit;
-        if not Header.Get("Service Document Type"::Order, OrderNo) then
-            exit;
         Argument.SetErrorContext('no', '', PostNextLbl);
         ClearLastError();
-        ServicePost.SetPostingOptions(Ship, Consume, Invoice);
-        ServicePost.SetHideValidationDialog(true);
-        if not ServicePost.Run(Header) then begin
+        if not Codeunit.Run(Codeunit::"Svc Order Post Proc ori", Argument) then begin
             Argument.RespondWithLastError();
             exit;
         end;
         Argument.ClearErrorContext();
-        BuildResponse(Options, OrderNo, Shipments, Invoices, LastLedgerEntryNo, Ship, Consume, Invoice, Response);
-        Argument.SetResponseJson(Response);
-        Argument."Content Type" := Argument.GetContentTypeJson();
-    end;
-
-    local procedure BuildResponse(Options: Codeunit "Svc Post Options ori"; OrderNo: Code[20]; Shipments: List of [Code[20]]; Invoices: List of [Code[20]]; LastLedgerEntryNo: Integer; Ship: Boolean; Consume: Boolean; Invoice: Boolean; var Response: JsonObject)
-    var
-        Header: Record "Service Header";
-        Posted: JsonArray;
-        Lines: JsonArray;
-        Deleted: Boolean;
-    begin
-        Deleted := not Header.Get("Service Document Type"::Order, OrderNo);
-        Response.Add('status', 'Success');
-        Response.Add('documentNo', OrderNo);
-        if not Deleted then begin
-            Response.Add('customerNo', Header."Customer No.");
-            Response.Add('customerName', Header.Name);
-        end;
-        Response.Add('ship', Ship);
-        Response.Add('consume', Consume);
-        Response.Add('invoice', Invoice);
-        Options.CollectPosted(OrderNo, Shipments, Invoices, Posted);
-        Response.Add('postedDocuments', Posted);
-        Response.Add('serviceLedgerEntries', Options.CountLedgerEntries(OrderNo, LastLedgerEntryNo));
-        Response.Add('orderDeleted', Deleted);
-        if not Deleted then
-            Options.BuildLines(Header, Lines);
-        Response.Add('lines', Lines);
     end;
 
     /// <summary>Lists the type only for callers holding the posting token and write permission on service headers.</summary>

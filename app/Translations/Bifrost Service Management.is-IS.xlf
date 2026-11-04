@@ -477,6 +477,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=bóka þjónustupöntun, afhenda og reikningsfæra, nota, reikningsfæra þjónustuverkið, afhenda þjónustuvörur</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Post Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2388906030 - Method 607911521 - NamedType 3498257463" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the setup or document named by Business Central and send the posting again. Nothing was posted.</source>
+          <target>Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Post Proc ori - Method ExecutePosting - NamedType PostNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 3553618805" size-unit="char" translate="yes" xml:space="preserve">
           <source>Preview needs its own transaction and cannot run under Omit Commit.</source>
           <target>Forskoðun þarf eigin færslu og getur ekki keyrt undir Omit Commit.</target>
