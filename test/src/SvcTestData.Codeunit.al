@@ -10,6 +10,7 @@ using Microsoft.Service.Setup;
 using Microsoft.Service.Test;
 using Origo.Bifrost;
 using System.TestLibraries.Utilities;
+using System.Diagnostics;
 
 /// <summary>Creates isolated service lifecycle fixtures and invokes Foundation's public dispatcher.</summary>
 codeunit 97704 "Svc Test Data ori"
@@ -196,6 +197,43 @@ codeunit 97704 "Svc Test Data ori"
         Alloc.SetRange("Document No.", Header."No.");
         Alloc.FindFirst();
     end;
+    /// <summary>Enables actual Change Log coverage for owned MCP fixture writes without disabling Foundation's write guard.</summary>
+    procedure ConfigureMcpWriteLogging()
+    var
+        ChangeLog: Record "Change Log Setup";
+        ChangeLogTable: Record "Change Log Setup (Table)";
+        TableId: Integer;
+        TableIds: List of [Integer];
+    begin
+        if not ChangeLog.Get() then begin
+            ChangeLog.Init();
+            ChangeLog.Insert();
+        end;
+        ChangeLog."Change Log Activated" := true;
+        ChangeLog.Modify();
+        // Only service fixtures and their numbering/unit setup in this disposable development company.
+        TableIds.Add(156);
+        TableIds.Add(204);
+        TableIds.Add(308);
+        TableIds.Add(309);
+        TableIds.Add(5900);
+        TableIds.Add(5901);
+        TableIds.Add(5902);
+        TableIds.Add(5911);
+        TableIds.Add(5940);
+        foreach TableId in TableIds do begin
+            if not ChangeLogTable.Get(TableId) then begin
+                ChangeLogTable.Init();
+                ChangeLogTable."Table No." := TableId;
+                ChangeLogTable.Insert();
+            end;
+            ChangeLogTable."Log Insertion" := ChangeLogTable."Log Insertion"::"All Fields";
+            ChangeLogTable."Log Modification" := ChangeLogTable."Log Modification"::"All Fields";
+            ChangeLogTable."Log Deletion" := ChangeLogTable."Log Deletion"::"All Fields";
+            ChangeLogTable.Modify();
+        end;
+    end;
+
     local procedure NewCode(): Code[20]
     begin
         exit(CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '-{}'), 1, 20));
