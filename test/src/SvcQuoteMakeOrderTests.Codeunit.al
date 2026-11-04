@@ -205,6 +205,7 @@ codeunit 97719 "Svc Quote MakeOrder Tests ori"
         Setup.Modify();
         Commit();
         Data.AssertRefusal(Response, 'PreconditionFailed');
+        Assert.AreEqual('Service Order Nos.', Data.TextValue(Response, 'parameter'), 'Setup refusal retains the technical field name.');
         Assert.IsTrue(Data.TextValue(Response, 'nextStep').Contains('Service Order Nos.'), 'Setup recovery names the field.');
         AssertUnchanged(Header);
     end;
@@ -391,6 +392,10 @@ codeunit 97719 "Svc Quote MakeOrder Tests ori"
         Commit();
         Response := Convert(Header, 1);
         Data.AssertRefusal(Response, 'PreconditionFailed');
+        if BillTo then
+            Assert.AreEqual('Bill-to Customer No.', Data.TextValue(Response, 'parameter'), 'Bill-to refusal retains the technical field name.')
+        else
+            Assert.AreEqual('Customer No.', Data.TextValue(Response, 'parameter'), 'Customer refusal retains the technical field name.');
         AssertUnchanged(Header);
     end;
 
