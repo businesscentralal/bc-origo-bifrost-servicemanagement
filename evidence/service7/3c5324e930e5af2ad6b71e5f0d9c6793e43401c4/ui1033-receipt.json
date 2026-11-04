@@ -1,0 +1,38 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "lcid": 1033,
+  "invoiceNo": "PSVI000010",
+  "id": "85399EC3-70D8-F111-B7A5-95A7BD7560EF",
+  "customerNo": "XFB2F9C56CE9244A5B04",
+  "orderNo": "XC772780A466000001",
+  "netAmount": 30,
+  "itemQuantity": 1,
+  "resourceQuantity": 2,
+  "verified": true,
+  "scenarios": 1,
+  "scenario": "Native Posted Service Invoice identity/source order/customer, item1/resource2 quantities and net lines10+20 match canonical MCP.",
+  "languageVerified": "My Settings: Language English (United States)",
+  "rows": [
+    [
+      "Item",
+      "",
+      "GL00000218",
+      "1",
+      "10.00",
+      "",
+      "10.00"
+    ],
+    [
+      "Resource",
+      "",
+      "GU00000259",
+      "2",
+      "10.00",
+      "",
+      "20.00"
+    ]
+  ],
+  "screenshot": "ui-invoice1033.png",
+  "checkedAt": "2026-11-04T17:02:30.377563+00:00",
+  "method": "Playwright MCP browser_run_code_unsafe; native BC page5978"
+}

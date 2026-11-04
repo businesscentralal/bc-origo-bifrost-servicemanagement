@@ -1,0 +1,72 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "owner": "worker-7",
+  "createsOwnData": true,
+  "touchedMessageTypes": [
+    "Service.Order.Post",
+    "Service.Order.PreviewPost"
+  ],
+  "startedAt": "2026-11-04T16:57:59.248Z",
+  "scenarios": [
+    {
+      "name": "help Service.Order.Post 1039",
+      "status": "passed"
+    },
+    {
+      "name": "help Service.Order.PreviewPost 1039",
+      "status": "passed"
+    },
+    {
+      "name": "fixture 1039",
+      "orderNo": "X9BE392B2CA2000001",
+      "systemId": "1B6DE09E-70D8-F111-B7A5-95A7BD7560EF",
+      "customerNo": "XC1EE780B7C084613A36",
+      "owned": true
+    },
+    {
+      "name": "missing expectedCount refuses 1039",
+      "status": "passed"
+    },
+    {
+      "name": "stale expectedCount refuses 1039",
+      "status": "passed"
+    },
+    {
+      "name": "invalid consume/invoice refuses 1039",
+      "status": "passed"
+    },
+    {
+      "name": "preview invoice rollback 1039",
+      "status": "passed"
+    },
+    {
+      "name": "own quantities for consumption 1039",
+      "status": "passed"
+    },
+    {
+      "name": "preview consumption rollback 1039",
+      "status": "passed"
+    },
+    {
+      "name": "post consumption 1039",
+      "status": "passed"
+    },
+    {
+      "name": "own remaining quantities for invoice 1039",
+      "status": "passed"
+    },
+    {
+      "name": "post remaining shipment and invoice 1039",
+      "status": "passed"
+    },
+    {
+      "name": "read posted documents and service ledger 1039",
+      "status": "passed"
+    }
+  ],
+  "passed": 12,
+  "failed": 0,
+  "skipped": 0,
+  "finishedAt": "2026-11-04T16:58:15.745Z"
+}

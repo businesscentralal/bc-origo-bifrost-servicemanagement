@@ -1,0 +1,32 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "owner": "worker-7",
+  "runtime": "BC28.5 W1 (Microsoft apps28.5.54151.57488)",
+  "Foundation": "28.0.11.669 released package; same recorded release used for symbols/deployment",
+  "productVersion": "28.0.0.0",
+  "testVersion": "28.0.0.0",
+  "publication": {
+    "repo": "businesscentralal/bc-origo-bifrost-servicemanagement",
+    "branch": "feat/7-service-order-post-worker29",
+    "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+    "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/tree/feat/7-service-order-post-worker29",
+    "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/commit/3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+    "remoteVerifiedAt": "2026-11-04T16:46:06.210Z"
+  },
+  "artifacts": {
+    "app": {
+      "file": "/workspace/evidence/service7-worker7-20261104-r2/compile/app.app",
+      "sha256": "defb30a3f92f7ea862a651f2cb2281f66d431b0a3008e55e177d2a716761a244",
+      "bytes": 91284,
+      "devPublishStatus": 200
+    },
+    "test": {
+      "file": "/workspace/evidence/service7-worker7-20261104-r2/compile/test.app",
+      "sha256": "5064d437aa16b439a192952d679a4034ee618bdcd5e694a861e6f6018014a56f",
+      "bytes": 73544,
+      "devPublishStatus": 200
+    }
+  },
+  "proof": "Fresh worker-created environment; publish requests used these exact locally hashed files after GitHub publication;200 responses and COSMO app/version readback retained. Server app/version readback alone is not claimed as a remote file checksum."
+}

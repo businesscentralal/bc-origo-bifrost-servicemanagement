@@ -1,0 +1,13 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "run": 41870735529,
+  "job": 126721071308,
+  "runUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/actions/runs/41870735529",
+  "fullSuite": true,
+  "total": 145,
+  "executed": 145,
+  "passed": 145,
+  "failed": 0,
+  "skipped": 0,
+  "method": "145 actual Testfunction Success log entries, no Failure/Failed/Skipped method entries; full configured suite; no exclusions"
+}

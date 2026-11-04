@@ -1,0 +1,12 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "fullSuite": true,
+  "sourceMethods": 145,
+  "total": 145,
+  "passed": 145,
+  "failed": 0,
+  "skipped": 0,
+  "ok": true,
+  "durationMs": 403490
+}

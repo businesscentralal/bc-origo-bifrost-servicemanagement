@@ -1,0 +1,20 @@
+Test-PermissionCoverage
+Every page, query, report and xmlport is granted by an assignable permission set.
+Test-ObjectIdsUnique
+Object ID uniqueness check passed: no duplicate object type and ID within any app.
+Test-MessageTypeNames
+Every message type name in the app has exactly three parts (6 checked; test apps are exempt).
+Test-IcelandicXlfInSync
+The committed is-IS.xlf is what tools/Update-IcelandicXlf.ps1 generates from the build.
+Test-MixedLanguageLabels
+No procedure answers a Locked English sentence.
+Test-ContractParameterKeys
+Every contract parameter is a key the code reads, and every key the code reads is declared (0 allow-listed).
+Test-NoClientCallstack
+No call stack is returned or documented to callers.
+Test-ValidatedTableView
+Every applied tableView is validated first.
+Test-NoObsolete
+No obsolete declaration and no AL0432/AL0667 pragma in the app, apart from the allow-listed VAT Amount Line pragmas.
+Test-IcelandicKeywordCounts
+Every Icelandic keyword list has at least as many entries as the English one (6 in the source, 6 in the xlf).

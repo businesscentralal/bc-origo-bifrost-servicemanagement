@@ -1,0 +1,137 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "owner": "worker-7",
+  "touchedMessageTypes": [
+    "Service.Order.Post",
+    "Service.Order.PreviewPost"
+  ],
+  "createsOwnData": true,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "executed": 40,
+  "passed": 40,
+  "failed": 0,
+  "skipped": 0,
+  "fixtureSetup": "One separately reported native seed method created two uniquely marked service orders and all related own master data; setup is not included in145native or40MCP acceptance counts.",
+  "scenarios": [
+    [
+      {
+        "name": "help Service.Order.Post 1033",
+        "status": "passed"
+      },
+      {
+        "name": "help Service.Order.PreviewPost 1033",
+        "status": "passed"
+      },
+      {
+        "name": "fixture 1033",
+        "orderNo": "XC772780A466000001",
+        "systemId": "216CE09E-70D8-F111-B7A5-95A7BD7560EF",
+        "customerNo": "XFB2F9C56CE9244A5B04",
+        "owned": true
+      },
+      {
+        "name": "missing expectedCount refuses 1033",
+        "status": "passed"
+      },
+      {
+        "name": "stale expectedCount refuses 1033",
+        "status": "passed"
+      },
+      {
+        "name": "invalid consume/invoice refuses 1033",
+        "status": "passed"
+      },
+      {
+        "name": "preview invoice rollback 1033",
+        "status": "passed"
+      },
+      {
+        "name": "own quantities for consumption 1033",
+        "status": "passed"
+      },
+      {
+        "name": "preview consumption rollback 1033",
+        "status": "passed"
+      },
+      {
+        "name": "post consumption 1033",
+        "status": "passed"
+      },
+      {
+        "name": "own remaining quantities for invoice 1033",
+        "status": "passed"
+      },
+      {
+        "name": "post remaining shipment and invoice 1033",
+        "status": "passed"
+      },
+      {
+        "name": "read posted documents and service ledger 1033",
+        "status": "passed"
+      }
+    ],
+    [
+      {
+        "name": "help Service.Order.Post 1039",
+        "status": "passed"
+      },
+      {
+        "name": "help Service.Order.PreviewPost 1039",
+        "status": "passed"
+      },
+      {
+        "name": "fixture 1039",
+        "orderNo": "X9BE392B2CA2000001",
+        "systemId": "1B6DE09E-70D8-F111-B7A5-95A7BD7560EF",
+        "customerNo": "XC1EE780B7C084613A36",
+        "owned": true
+      },
+      {
+        "name": "missing expectedCount refuses 1039",
+        "status": "passed"
+      },
+      {
+        "name": "stale expectedCount refuses 1039",
+        "status": "passed"
+      },
+      {
+        "name": "invalid consume/invoice refuses 1039",
+        "status": "passed"
+      },
+      {
+        "name": "preview invoice rollback 1039",
+        "status": "passed"
+      },
+      {
+        "name": "own quantities for consumption 1039",
+        "status": "passed"
+      },
+      {
+        "name": "preview consumption rollback 1039",
+        "status": "passed"
+      },
+      {
+        "name": "post consumption 1039",
+        "status": "passed"
+      },
+      {
+        "name": "own remaining quantities for invoice 1039",
+        "status": "passed"
+      },
+      {
+        "name": "post remaining shipment and invoice 1039",
+        "status": "passed"
+      },
+      {
+        "name": "read posted documents and service ledger 1039",
+        "status": "passed"
+      }
+    ]
+  ],
+  "genericGuards": "All six posted-quantity fields and posting token read/write restrictions in both languages;16passed.",
+  "cleanup": "Verified whole owned container deletion204 and readback404; cleanup.json"
+}

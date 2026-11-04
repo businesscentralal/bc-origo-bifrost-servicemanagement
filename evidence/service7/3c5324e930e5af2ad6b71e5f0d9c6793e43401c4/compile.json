@@ -1,0 +1,34 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "at": "2026-11-04T16:44:25.066395+00:00",
+  "sourceDiff": "",
+  "analyzers": [
+    "CodeCop",
+    "UICop",
+    "AppSourceCop"
+  ],
+  "default": {
+    "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/service7-worker7-20261104-r2/default-compile.log",
+    "sha256": "48cbcee2b6252b71200fe5977570f01f4151fa6fdf98096baa815f12c2047101"
+  },
+  "app": {
+    "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/service7-worker7-20261104-r2/app-compile.log",
+    "sha256": "defb30a3f92f7ea862a651f2cb2281f66d431b0a3008e55e177d2a716761a244"
+  },
+  "test": {
+    "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "/workspace/evidence/service7-worker7-20261104-r2/test-compile.log",
+    "sha256": "5064d437aa16b439a192952d679a4034ee618bdcd5e694a861e6f6018014a56f"
+  }
+}

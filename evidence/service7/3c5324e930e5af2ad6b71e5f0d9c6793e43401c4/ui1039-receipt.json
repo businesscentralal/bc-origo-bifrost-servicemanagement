@@ -1,0 +1,34 @@
+{
+  "verified": true,
+  "lcid": 1039,
+  "invoice": "PSVI000011",
+  "order": "X9BE392B2CA2000001",
+  "customer": "XC1EE780B7C084613A36",
+  "rows": [
+    [
+      "Item",
+      "",
+      "GL00000220",
+      "1",
+      "10.00",
+      "",
+      "10.00"
+    ],
+    [
+      "Resource",
+      "",
+      "GU00000261",
+      "2",
+      "10.00",
+      "",
+      "20.00"
+    ]
+  ],
+  "screenshot": "ui-invoice1039.png",
+  "languageEvidence": "My Settings Icelandic (Iceland); Stillingar/Leita shell and Icelandic system text",
+  "limitation": "W1 Service captions remain English",
+  "url": "https://cosmo-alpaca-enterprise.westeurope.cloudapp.azure.com/f0da6cf8479a/?company=CRONUS%20International%20Ltd.&tenant=default&page=5978&dc=0&bookmark=1F_aBcAAAJ7_1AAUwBWAEkAMAAwADAAMAAxADE",
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "method": "Playwright MCP browser_run_code_unsafe; native BC page5978"
+}

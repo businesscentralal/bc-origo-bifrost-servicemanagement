@@ -1,0 +1,33 @@
+{
+  "scope": "issue7 candidate; latest dependency change is isolated metadata field-name repair from published issue5",
+  "standardsSnapshot": "52ba4754cfd614e4a7c50af87b30149b18b313e3; no fresh-sync claim",
+  "layer1Triage": {
+    "procedureSemicolons": {
+      "count": 17,
+      "disposition": "False positives: every match is a parameter separator inside a declaration, not multiple statements."
+    },
+    "captionTranslation": {
+      "count": 2,
+      "disposition": "Locked technical message identifiers must remain invariant; localized descriptions and keywords have en-US/is-IS targets."
+    },
+    "readIsolation": {
+      "count": 9,
+      "disposition": "Fixed: quantity validation uses Default to retain native transaction locking; read-only posted snapshots and response loops use ReadCommitted."
+    }
+  },
+  "layer2": {
+    "compiler": "Product, production Default and test app each0errors0warnings at exactSHA; compile.json",
+    "idsNamingPermissionWiring": "10076075..10076085 app;97740..97749 tests; separate posting token and base write gate retained",
+    "breakingChanges": "No public procedure/field removed or renamed; dependency merge only replaces literal field identifiers with native metadata names",
+    "logic": "Read native posting/preview processors, explicit flags/policy/refusals, confirmation under Header/Line lock, BC-owned commit path and OmitCommit distinction, committed response data and posted-document comparison; assertions unchanged",
+    "testCoverage": "145/145native,40/40self-seeded canonicalMCP,2/2native invoice readbacks in1033/1039; cleanup204/404; CI145/145",
+    "docs": "CHANGELOG adds10076083 isolation behavior; existing Post/PreviewPost help states commits, token and scope; README and CLAUDE object maps retained",
+    "limits": "EarlierCI lost client session; fresh normal pairedCI41870735529green at this candidate. Independent ClaudeAC20/Grok/TesterAC21 remain pending. W1Service captions stayEnglish inIcelandic session; no fullPremiumUAT claimed."
+  },
+  "appliedLessons": [
+    "servicemanagement7-worker7-lifecycle-repair-status-20261104",
+    "servicemanagement9-worker7-ci-runner-isolation-20261102",
+    "servicemanagement9-worker7-status-heading-recurrence-20261102"
+  ],
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4"
+}

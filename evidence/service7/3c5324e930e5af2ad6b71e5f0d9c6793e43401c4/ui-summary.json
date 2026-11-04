@@ -1,0 +1,25 @@
+{
+  "sha": "3c5324e930e5af2ad6b71e5f0d9c6793e43401c4",
+  "containerId": "f0da6cf8479a",
+  "owner": "worker-7",
+  "verified": true,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "total": 2,
+  "executed": 2,
+  "passed": 2,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": "Each language: native Posted Service Invoice matches canonical MCP invoice/customer/source order, item1 and resource2 quantities, net lines10+20.",
+  "languageEvidence": "My Settings English(United States) then Icelandic(Iceland); Stillingar/Leita shell and Icelandic system text observed.",
+  "limitation": "W1 Service captions remain English. Full service-job Premium UI and AC21 remain Tester UAT after actual same-SHA deployment; these two developer readback comparisons are not UAT.",
+  "evidenceFiles": [
+    "ui1033-receipt.json",
+    "ui1039-receipt.json",
+    "ui-invoice1033.png",
+    "ui-invoice1039.png"
+  ],
+  "harnessHistory": "Initial inputValue call did not support a BC read-only span; corrected to innerText. One browser_click used outdated ref schema, corrected to target. Neither invocation supplied an acceptance result."
+}
