@@ -3,6 +3,18 @@
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Service Management">
     <body>
       <group id="body">
+        <trans-unit id="Table 3229195182 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BIFROST SvcPost ori</source>
+          <target>Bifröst bókun þjónustu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bifröst bókun þjónustu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Svc Posting ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3229195182 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <target>Aðallykill</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðallykill</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Svc Posting ori - Field Primary Key - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 30551372 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Bifrost Service Management Write Gate</source>
           <target>Skrifhlið Bifröst þjónustustjórnunar</target>
@@ -447,6 +459,66 @@
           <note from="Developer" annotates="general" priority="2">%1 = document type, is-IS=Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType WrongTypeNextLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2591205528 - Method 3571782927 - NamedType 3498257463" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the setup or document named by Business Central and send the posting again. Nothing was posted.</source>
+          <target>Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Post Impl ori - Method ExecuteBifrostTask - NamedType PostNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2591205528 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posts a service order: ships, consumes or invoices the quantities on its lines with the standard Business Central service posting. Commits and cannot be undone.</source>
+          <target>Bókar þjónustupöntun: afhendir, notar eða reikningsfærir magnið á línum hennar með venjulegri þjónustubókun Business Central. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bókar þjónustupöntun: afhendir, notar eða reikningsfærir magnið á línum hennar með venjulegri þjónustubókun Business Central. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Post Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2591205528 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>post service order, ship and invoice, consume, invoice the service job, ship service items</source>
+          <target>bóka þjónustupöntun, afhenda og reikningsfæra, nota, reikningsfæra þjónustuverkið, afhenda þjónustuvörur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=bóka þjónustupöntun, afhenda og reikningsfæra, nota, reikningsfæra þjónustuverkið, afhenda þjónustuvörur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Post Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 3553618805" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Preview needs its own transaction and cannot run under Omit Commit.</source>
+          <target>Forskoðun þarf eigin færslu og getur ekki keyrt undir Omit Commit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Forskoðun þarf eigin færslu og getur ekki keyrt undir Omit Commit.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method ExecuteBifrostTask - NamedType OmitCommitErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 563883597" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run the preview without Omit Commit.</source>
+          <target>Keyrðu forskoðunina án Omit Commit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Keyrðu forskoðunina án Omit Commit.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method ExecuteBifrostTask - NamedType OmitCommitNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 450631880" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting preview failed and no entries were captured. The order cannot be posted in its current state.</source>
+          <target>Bókunarforskoðun mistókst og engar færslur voru teknar. Ekki er hægt að bóka pöntunina í núverandi stöðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bókunarforskoðun mistókst og engar færslur voru teknar. Ekki er hægt að bóka pöntunina í núverandi stöðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method ExecuteBifrostTask - NamedType PreviewFailedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 1608957885" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set.</source>
+          <target>Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method ExecuteBifrostTask - NamedType NothingToPostNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 3571782927 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Preview-posting service order %1 (%2) would create %3 ledger entries across %4 tables. %5</source>
+          <target>Forskoðun bókunar þjónustupöntunar %1 (%2) myndi búa til %3 færslur í %4 töflum. %5</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, %2 = options, %3 = entries, %4 = tables, %5 = G/L status, is-IS=Forskoðun bókunar þjónustupöntunar %1 (%2) myndi búa til %3 færslur í %4 töflum. %5</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method ExecuteBifrostTask - NamedType SummaryLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shows the entries that posting a service order would create. Changes nothing.</source>
+          <target>Sýnir færslurnar sem bókun þjónustupöntunar myndi búa til. Breytir engu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sýnir færslurnar sem bókun þjónustupöntunar myndi búa til. Breytir engu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2572135298 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>preview service order posting, simulate posting, what would post, check before invoicing a service order</source>
+          <target>forskoða bókun þjónustupöntunar, herma bókun, hvað myndi bókast, athuga áður en þjónustupöntun er reikningsfærð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=forskoða bókun þjónustupöntunar, herma bókun, hvað myndi bókast, athuga áður en þjónustupöntun er reikningsfærð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Preview Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3821304223 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Releases a service order for warehouse handling with the standard Business Central release. To change it again, use Service.Order.Reopen.</source>
           <target>Gefur út þjónustupöntun fyrir vöruhúsameðhöndlun með venjulegri útgáfu Business Central. Til að breyta henni aftur, notaðu Service.Order.Reopen.</target>
@@ -470,6 +542,126 @@
           <target>enduropna þjónustupöntun, breyta útgefinni pöntun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=enduropna þjónustupöntun, breyta útgefinni pöntun</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Order Reopen Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4206746284 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service order %1 (%2)</source>
+          <target>þjónustupöntun %1 (%2)</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, %2 = posting options, is-IS=þjónustupöntun %1 (%2)</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - NamedType 1564739506" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a JSON boolean.</source>
+          <target>%1 verður að vera JSON boolean.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 verður að vera JSON boolean.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - NamedType BooleanLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send true or false, or leave the key out.</source>
+          <target>Sendu true eða false, eða slepptu lyklinum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu true eða false, eða slepptu lyklinum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1615552954 - NamedType 529108071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Your service invoice posting policy does not allow this combination. Nothing was posted.</source>
+          <target>Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bókunarregla þjónustureikninga þinna leyfir ekki þessa samsetningu. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckPolicy - NamedType PolicyErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1615552954 - NamedType 4119627103" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator to check the policy in User Setup.</source>
+          <target>Biddu stjórnanda um að skoða regluna í notandauppsetningu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu stjórnanda um að skoða regluna í notandauppsetningu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckPolicy - NamedType PolicyNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2147372879 - NamedType 3917977900" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There is nothing to post on service order %1 for these options.</source>
+          <target>Ekkert er til að bóka á þjónustupöntun %1 fyrir þessa valkosti.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, is-IS=Ekkert er til að bóka á þjónustupöntun %1 fyrir þessa valkosti.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckSomethingToPost - NamedType NothingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2147372879 - NamedType 635097044" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set.</source>
+          <target>Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckSomethingToPost - NamedType NothingNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1793542552 - NamedType 3455265340" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ship</source>
+          <target>afhenda</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=afhenda</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method OptionName - NamedType ShipLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1793542552 - NamedType 2813721509" size-unit="char" translate="yes" xml:space="preserve">
+          <source>invoice</source>
+          <target>reikningsfæra</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=reikningsfæra</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method OptionName - NamedType InvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1793542552 - NamedType 4129641491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ship and invoice</source>
+          <target>afhenda og reikningsfæra</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=afhenda og reikningsfæra</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method OptionName - NamedType ShipInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 1793542552 - NamedType 2232220016" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ship and consume</source>
+          <target>afhenda og nota</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=afhenda og nota</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method OptionName - NamedType ShipConsumeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 1407741108" size-unit="char" translate="yes" xml:space="preserve">
+          <source>consume and invoice cannot be posted together. Send ship and consume, or invoice.</source>
+          <target>Ekki er hægt að bóka consume og invoice saman. Sendu ship og consume, eða invoice.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekki er hægt að bóka consume og invoice saman. Sendu ship og consume, eða invoice.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType ConsumeInvoiceErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 1993421372" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send ship and consume, or invoice.</source>
+          <target>Sendu ship og consume, eða invoice.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu ship og consume, eða invoice.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType ConsumeInvoiceNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 3242057981" size-unit="char" translate="yes" xml:space="preserve">
+          <source>consume needs ship = true.</source>
+          <target>consume krefst ship = true.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=consume krefst ship = true.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType ConsumeShipErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 1148052405" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send ship = true together with consume.</source>
+          <target>Sendu ship = true ásamt consume.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu ship = true ásamt consume.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType ConsumeShipNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 69696777" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ship, consume and invoice are all false: nothing would be posted.</source>
+          <target>ship, consume og invoice eru öll false: ekkert yrði bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=ship, consume og invoice eru öll false: ekkert yrði bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType NoneErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4273898622 - Method 2721639112 - NamedType 533720321" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set ship, invoice or ship and consume to true, or leave all three out.</source>
+          <target>Settu ship, invoice eða ship og consume á true, eða slepptu þeim öllum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu ship, invoice eða ship og consume á true, eða slepptu þeim öllum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method Resolve - NamedType NoneNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1303592562 - Method 4006469891 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Order.Post</source>
+          <target>Notaðu Service.Order.Post</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Post</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Restrict ori - Method PostedQuantityHint - NamedType HintLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1472574303 - Method 3527532202 - NamedType 842664886" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting denied: missing '%1' permission set.</source>
+          <target>Bókun hafnað: vantar heimildasettið '%1'.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = permission set name, is-IS=Bókun hafnað: vantar heimildasettið '%1'.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Posting Gate ori - Method AssertCanPost - NamedType PostingDeniedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1472574303 - Method 3527532202 - NamedType 427177100" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator to assign the %1 permission set.</source>
+          <target>Biddu stjórnanda um að úthluta heimildasettinu %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = permission set name, is-IS=Biddu stjórnanda um að úthluta heimildasettinu %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Posting Gate ori - Method AssertCanPost - NamedType PostingDeniedNextStepLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 3303280095 - NamedType 152929028" size-unit="char" translate="yes" xml:space="preserve">
           <source>The order has %1 allocations that need a resource again. Use Service.Allocation.Allocate.</source>
@@ -584,6 +776,12 @@
           <target>Bifröst - þjónustustjórnun</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Bifröst - þjónustustjórnun</note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST Svc ori - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 1734547007 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service Posting Gate</source>
+          <target>Bókunarhlið þjónustu</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bókunarhlið þjónustu</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BIFROST SvcPost ori - Property Caption</note>
         </trans-unit>
       </group>
     </body>
