@@ -229,16 +229,16 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
         SeriesNextLbl: Label 'Set Service Order Nos. in Service Mgt. Setup.', Comment = 'is-IS=Settu Service Order Nos. í Service Mgt. Setup.';
     begin
         if Header."Customer No." = '' then begin
-            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(CustomerLbl, Header."No."), 'Customer No.', '', '', CustomerNextLbl);
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(CustomerLbl, Header."No."), Header.FieldName("Customer No."), '', '', CustomerNextLbl);
             exit(false);
         end;
         if Header."Bill-to Customer No." = '' then begin
-            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(BillToLbl, Header."No."), 'Bill-to Customer No.', '', '', BillToNextLbl);
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(BillToLbl, Header."No."), Header.FieldName("Bill-to Customer No."), '', '', BillToNextLbl);
             exit(false);
         end;
         ClearLastError();
         if not CheckOrderSeries(Setup) then begin
-            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, GetLastErrorText(), 'Service Order Nos.', '', '', SeriesNextLbl);
+            Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, GetLastErrorText(), Setup.FieldName("Service Order Nos."), '', '', SeriesNextLbl);
             exit(false);
         end;
         exit(true);
