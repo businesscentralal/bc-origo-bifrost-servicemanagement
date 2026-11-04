@@ -168,11 +168,14 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     procedure GetRelated(var Related: JsonArray): Boolean
     var
         Contract: Codeunit "Msg Contract Mgt ori";
+        MessageType: Enum "Message Type ori";
     begin
         Related.Add(Contract.RelatedEntry('Sales.Quote.MakeOrder', 'Use for a sales quote.'));
         Related.Add(Contract.RelatedEntry('Service.Allocation.Allocate', 'Reallocate moved allocations marked Reallocation Needed.'));
         Related.Add(Contract.RelatedEntry('Service.Order.Release', 'Release the new order.'));
-        Related.Add(Contract.RelatedEntry('Service.Order.Post', 'Post the new order.'));
+        // Issue #7 follows this issue. Foundation refuses a related name until its enum value exists.
+        if MessageType.Names().Contains('Service.Order.Post') then
+            Related.Add(Contract.RelatedEntry('Service.Order.Post', 'Post the new order.'));
         exit(true);
     end;
 
@@ -200,10 +203,10 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
         exit(false);
     end;
 
-    /// <summary>Explains the order-only scope and transaction semantics.</summary>
+    /// <summary>Explains quote scope and transaction semantics.</summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'This call commits, including when Omit Commit is requested. Not retry-safe: the deleted quote answers RecordNotFound after success. Quote fields remain editable through Data.Records.Set because conversion owns no field end to end. Contract quotes, archiving, loaners and optional chaining are outside scope.';
+        Notes := 'This call commits, including when Omit Commit is requested. Not retry-safe: the deleted quote answers RecordNotFound after success. Quote fields remain editable through Data.Records.Set because conversion owns no field end to end. Service.Order.Post appears in related when issue #7 registers that type; Foundation refuses unregistered related names. Contract quotes, archiving, loaners and optional chaining are outside scope.';
         exit(true);
     end;
 

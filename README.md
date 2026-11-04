@@ -162,3 +162,5 @@ Foundation dependency: published 28.0.11 (`28.0.11.669`), the first containing `
 | 97719 | codeunit (test) | Svc Quote MakeOrder Tests ori |
 
 Story test id 97715 was already occupied on main by `Svc Wrong Type Tests ori` (#10). Quote conversion uses 97719 from #5's reserved range, preserving the existing object.
+
+`Service.Order.Post` is named as the planned next step in help. It is emitted in the structured `related` chapter only once issue #7 registers that type; Foundation rejects unknown related message names. This avoids the circular #5 → #7 → #5 source dependency.
