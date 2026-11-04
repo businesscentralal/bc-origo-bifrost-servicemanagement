@@ -49,6 +49,8 @@ codeunit 97744 "Svc Post Restrict Tests ori"
         Line.SetRange("Document No.", Header."No.");
         Line.FindFirst();
         Commit();
+        Data.ConfigureMcpWriteLogging();
+        Commit();
         Response := SetField(Header."No.", Line."Line No.", 'Qty_toShip', '1');
         Response.WriteTo(Serialized);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), Serialized);
