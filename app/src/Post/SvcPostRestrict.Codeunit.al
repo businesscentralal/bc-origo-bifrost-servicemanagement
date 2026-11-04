@@ -24,6 +24,20 @@ codeunit 10076084 "Svc Post Restrict ori"
             Hint := HintLbl;
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", OnAfterIsTableReadRestrictedForDataRecords, '', false, false)]
+    local procedure HidePostingToken(TableNo: Integer; var IsRestricted: Boolean)
+    begin
+        if TableNo = Database::"Svc Posting ori" then
+            IsRestricted := true;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Message Argument ori", OnAfterIsTableWriteRestrictedForDataRecords, '', false, false)]
+    local procedure RestrictPostingToken(TableNo: Integer; Force: Boolean; var IsRestricted: Boolean)
+    begin
+        if TableNo = Database::"Svc Posting ori" then
+            IsRestricted := true;
+    end;
+
     local procedure IsGuardedField(FieldNo: Integer): Boolean
     var
         ServiceLine: Record "Service Line";

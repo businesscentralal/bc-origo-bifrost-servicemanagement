@@ -579,12 +579,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Biddu stjórnanda um að skoða regluna í notandauppsetningu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckPolicy - NamedType PolicyNextLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 4273898622 - Method 2147372879 - NamedType 3917977900" size-unit="char" translate="yes" xml:space="preserve">
-          <source>There is nothing to post on service order %1 for these options.</source>
-          <target>Ekkert er til að bóka á þjónustupöntun %1 fyrir þessa valkosti.</target>
-          <note from="Developer" annotates="general" priority="2">%1 = order number, is-IS=Ekkert er til að bóka á þjónustupöntun %1 fyrir þessa valkosti.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Post Options ori - Method CheckSomethingToPost - NamedType NothingErr</note>
-        </trans-unit>
         <trans-unit id="Codeunit 4273898622 - Method 2147372879 - NamedType 635097044" size-unit="char" translate="yes" xml:space="preserve">
           <source>Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set.</source>
           <target>Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.</target>

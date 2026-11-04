@@ -5,6 +5,7 @@ using Microsoft.Sales.Receivables;
 using Microsoft.Service.Document;
 using Microsoft.Service.History;
 using Microsoft.Service.Ledger;
+using Microsoft.Utilities;
 using Origo.Bifrost;
 using System.Security.User;
 
@@ -141,7 +142,7 @@ codeunit 10076083 "Svc Post Options ori"
     internal procedure CheckSomethingToPost(var Argument: Record "Message Argument ori"; Header: Record "Service Header"; Ship: Boolean; Consume: Boolean; Invoice: Boolean): Boolean
     var
         Line: Record "Service Line";
-        NothingErr: Label 'There is nothing to post on service order %1 for these options.', Comment = '%1 = order number, is-IS=Ekkert er til að bóka á þjónustupöntun %1 fyrir þessa valkosti.';
+        DocumentErrors: Codeunit "Document Errors Mgt.";
         NothingNextLbl: Label 'Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set.', Comment = 'is-IS=Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.';
     begin
         Line.SetRange("Document Type", Header."Document Type");
@@ -167,7 +168,7 @@ codeunit 10076083 "Svc Post Options ori"
                         exit(true);
                 until Line.Next() = 0;
         end;
-        Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(NothingErr, Header."No."), 'lines', '', '', NothingNextLbl);
+        Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, DocumentErrors.GetNothingToPostErrorMsg(), 'lines', '', '', NothingNextLbl);
         exit(false);
     end;
 

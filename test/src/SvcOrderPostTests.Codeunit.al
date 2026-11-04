@@ -357,6 +357,34 @@ codeunit 97740 "Svc Order Post Tests ori"
         Assert.AreEqual(0, PostData.PostedShipments(Header."No.") + PostData.PostedInvoices(Header."No."), 'A failing call leaves nothing posted.');
     end;
 
+    [Test]
+    procedure Scenario_AC13_OmitCommit_PostSurvivesCallerRollback()
+    var
+        Header: Record "Service Header";
+        OrderNo: Code[20];
+    begin
+        // Story #7 AC13 | Time: WorkDate for posting | Risk: standard Service-Post commits are intentionally retained.
+        PostData.CreateOrder(Header);
+        OrderNo := Header."No.";
+        Commit();
+        asserterror PostThenAbort(OrderNo);
+        Assert.ExpectedError('X-SVC7-EXPECTED-CALLER-ROLLBACK');
+        Assert.AreEqual(1, PostData.PostedShipments(OrderNo), 'The native committed shipment survives the later caller error.');
+        Assert.AreEqual(1, PostData.PostedInvoices(OrderNo), 'The native committed invoice survives Omit Commit and the caller error.');
+        Assert.IsFalse(Header.Get(Header."Document Type"::Order, OrderNo), 'The fully posted order stays deleted.');
+    end;
+
+    local procedure PostThenAbort(OrderNo: Code[20])
+    var
+        Request: JsonObject;
+        Response: JsonObject;
+    begin
+        Request := PostData.Build(OrderNo, 'true', '', 'true', 1);
+        Response := Data.Invoke("Message Type ori"::"Service.Order.Post", Request, '', 1033, true);
+        PostData.AssertSuccess(Response);
+        Error('X-SVC7-EXPECTED-CALLER-ROLLBACK');
+    end;
+
     local procedure SetAllowedRange(FromDate: Date; ToDate: Date)
     var
         GeneralLedgerSetup: Record "General Ledger Setup";
