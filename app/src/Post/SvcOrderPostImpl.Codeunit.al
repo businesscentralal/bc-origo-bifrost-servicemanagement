@@ -209,7 +209,7 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
     /// <summary>Explains commit behavior and not retry-safe semantics.</summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'This call commits, including when Omit Commit is requested; Business Central''s own commit in Service-Post is kept. Not retry-safe: after success the posted quantities are gone and a fully posted order is deleted. Stand-alone service invoices and credit memos, batch posting, post and print or send, and undo are out of scope. Set the posting date and quantities on the order with Data.Records.Set before posting; the posted-quantity fields themselves are refused there.';
+        Notes := 'This call commits, including when Omit Commit is requested; Business Central''s own commit in Service-Post is kept. In an AL rollback chain (Omit Commit), a native posting error is raised to the caller unchanged so its transaction can roll back; normal calls return BusinessCentralError JSON. Not retry-safe: after success the posted quantities are gone and a fully posted order is deleted. Stand-alone service invoices and credit memos, batch posting, post and print or send, and undo are out of scope. Set the posting date and quantities on the order with Data.Records.Set before posting; the posted-quantity fields themselves are refused there.';
         exit(true);
     end;
 

@@ -182,6 +182,7 @@ Post a service order (ship, consume, invoice) and preview the entries first.
 
 - Options: Ship, Invoice, Ship and Invoice (default when no flag is sent) and Ship and Consume. `consume` only with `ship`, never with `invoice`. The user's service invoice posting policy applies.
 - Set `Qty. to Ship`, `Qty. to Consume` and `Qty. to Invoice` on the lines with `Data.Records.Set`. The posted-quantity fields are refused there.
+- In an AL Omit Commit chain, native posting errors propagate unchanged so the caller can roll back. Normal calls return `BusinessCentralError` JSON. A successful post retains BC commits in both modes.
 - Post commits (Business Central's own commit in `Service-Post` is kept) and needs the permission set `BIFROST SvcPost ori`, which is not part of `BIFROST SvcFull ori` or `BIFROST SvcRead ori`. PreviewPost is listed only for holders of that set.
 
 Object ids: app 10076075–10076086, tests 97740–97750.

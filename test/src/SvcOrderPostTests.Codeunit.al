@@ -358,6 +358,39 @@ codeunit 97740 "Svc Order Post Tests ori"
     end;
 
     [Test]
+    procedure Scenario_AC13_OmitCommit_NativeErrorRollsBack()
+    var
+        Header: Record "Service Header";
+        Line: Record "Service Line";
+        Request: JsonObject;
+        Response: JsonObject;
+        ErrorText: Text;
+    begin
+        // Story #7 AC13 | Time: closed posting range in2026 | Risk: native Omit Commit errors propagate, as in Warehouse.
+        PostData.CreateOrder(Header);
+        Header.Validate("Posting Date", 20000101D);
+        Header.Modify(true);
+        Line.SetRange("Document Type", Header."Document Type");
+        Line.SetRange("Document No.", Header."No.");
+        Line.FindSet(true);
+        repeat
+            Line.Validate("Posting Date", 20000101D);
+            Line.Modify(true);
+        until Line.Next() = 0;
+        SetAllowedRange(20260101D, 20261231D);
+        Request := PostData.Build(Header."No.", 'true', '', 'true', 1);
+        Commit();
+        asserterror Response := Data.Invoke("Message Type ori"::"Service.Order.Post", Request, '', 1033, true);
+        ErrorText := GetLastErrorText();
+        SetAllowedRange(0D, 0D);
+        Commit();
+        Assert.IsTrue(ErrorText.Contains('Posting Date'), 'The original native posting-date refusal must propagate.');
+        Assert.IsFalse(ErrorText.Contains('transaction'), 'The native refusal must not become a Codeunit.Run transaction failure.');
+        Assert.AreEqual(0, PostData.PostedShipments(Header."No.") + PostData.PostedInvoices(Header."No."), 'A failed chained post leaves no posted documents.');
+        Assert.IsTrue(Header.Get(Header."Document Type", Header."No."), 'The refused order remains.');
+    end;
+
+    [Test]
     procedure Scenario_AC13_OmitCommit_PostSurvivesCallerRollback()
     var
         Header: Record "Service Header";
