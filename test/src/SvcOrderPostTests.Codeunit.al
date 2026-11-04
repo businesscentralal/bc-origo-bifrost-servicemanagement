@@ -72,6 +72,30 @@ codeunit 97740 "Svc Order Post Tests ori"
     end;
 
     [Test]
+    procedure Scenario_AC02_Shipped_DefaultInvoice()
+    begin
+        InvoiceShippedOrder(false, false, 1033);
+    end;
+
+    [Test]
+    procedure Scenario_AC02_Shipped_ExplicitInvoice()
+    begin
+        InvoiceShippedOrder(true, false, 1039);
+    end;
+
+    [Test]
+    procedure Scenario_AC02_Shipped_MandatoryDefaultInvoice()
+    begin
+        InvoiceShippedOrder(false, true, 1039);
+    end;
+
+    [Test]
+    procedure Scenario_AC02_Shipped_MandatoryExplicitInvoice()
+    begin
+        InvoiceShippedOrder(true, true, 1033);
+    end;
+
+    [Test]
     procedure Scenario_AC03_ShipAndConsume_NoInvoice()
     var
         Header: Record "Service Header";
@@ -417,4 +441,63 @@ codeunit 97740 "Svc Order Post Tests ori"
         GeneralLedgerSetup."Allow Posting To" := ToDate;
         GeneralLedgerSetup.Modify();
     end;
+    local procedure InvoiceShippedOrder(ExplicitFlags: Boolean; MandatoryPolicy: Boolean; Lcid: Integer)
+    var
+        Header: Record "Service Header";
+        Line: Record "Service Line";
+        UserSetup: Record "User Setup";
+        OldPolicy: Enum "Invoice Posting Policy";
+        Response: JsonObject;
+        Preview: JsonObject;
+        OrderNo: Code[20];
+        ShipFlag: Text;
+        InvoiceFlag: Text;
+        Existed: Boolean;
+    begin
+        // Story #7 AC02/AC07/AC11 | Time: WorkDate | Risk: restore the owned user's posting policy.
+        PostData.CreateOrder(Header);
+        OrderNo := Header."No.";
+        Commit();
+        Response := PostData.Post(OrderNo, 'true', '', '', 1, Lcid);
+        PostData.AssertSuccess(Response);
+        Line.SetRange("Document Type", Line."Document Type"::Order);
+        Line.SetRange("Document No.", OrderNo);
+        Line.SetFilter("Qty. to Ship", '<>0');
+        Assert.IsTrue(Line.IsEmpty(), 'All quantities have already been shipped.');
+        Existed := UserSetup.Get(UserId());
+        if not Existed then begin
+            UserSetup.Init();
+            UserSetup."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserSetup."User ID"));
+            UserSetup.Insert();
+        end;
+        OldPolicy := UserSetup."Service Invoice Posting Policy";
+        if MandatoryPolicy then
+            UserSetup."Service Invoice Posting Policy" := UserSetup."Service Invoice Posting Policy"::Mandatory
+        else
+            UserSetup."Service Invoice Posting Policy" := UserSetup."Service Invoice Posting Policy"::Allowed;
+        UserSetup.Modify();
+        Commit();
+        if ExplicitFlags then begin
+            ShipFlag := 'true';
+            InvoiceFlag := 'true';
+        end;
+        Preview := PostData.Preview(OrderNo, ShipFlag, '', InvoiceFlag, Lcid);
+        Assert.AreEqual(0, PostData.PostedInvoices(OrderNo), 'Preview leaves no invoice.');
+        Assert.AreEqual(1, PostData.PostedShipments(OrderNo), 'Preview creates no additional shipment.');
+        Response := PostData.Post(OrderNo, ShipFlag, '', InvoiceFlag, 1, Lcid);
+        if Existed then begin
+            UserSetup."Service Invoice Posting Policy" := OldPolicy;
+            UserSetup.Modify();
+        end else
+            UserSetup.Delete();
+        Commit();
+        PostData.AssertSuccess(Preview);
+        Assert.IsTrue(PostData.BooleanValue(Preview, 'rollback'), 'Preview of already-shipped quantities rolls back.');
+        Assert.IsTrue(PostData.IntegerValue(Preview, 'entryCount') > 0, 'Preview captures the remaining invoice entries.');
+        PostData.AssertSuccess(Response);
+        Assert.AreEqual(1, PostData.ArrayCount(Response, 'postedDocuments'), 'Only the remaining invoice is posted.');
+        Assert.AreEqual(1, PostData.PostedShipments(OrderNo), 'The existing shipment is not duplicated.');
+        Assert.AreEqual(1, PostData.PostedInvoices(OrderNo), 'The shipped quantities are invoiced.');
+    end;
+
 }

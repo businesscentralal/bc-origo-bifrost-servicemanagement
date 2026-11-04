@@ -3,6 +3,10 @@
 ## Unreleased
 
 ### Fixed
+- Service.Order.Post and PreviewPost can invoice already-shipped quantities with default or explicit Ship and Invoice, including Mandatory posting policy (10076083; regression tests 97740).
+
+
+### Fixed
 - Declare read isolation for service posting quantity validation and posted-document response reads (10076083); validation keeps the posting transaction’s native locking, and response reads exclude uncommitted rows (#7).
 - Hide the service posting token from all generic readers/writers, including force (10076084/97744); prove preview entry counts and untouched numbering (97741), and retained BC commits under Omit Commit/caller rollback (97740/97750).
 - Service.Order.Post retains customer identity when standard posting deletes the order (10076079); regression in 97740 and ordinary-company consent coverage in 97747/97748.

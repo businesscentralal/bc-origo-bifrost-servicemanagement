@@ -160,9 +160,9 @@ codeunit 10076083 "Svc Post Options ori"
                 exit(true);
             Line.SetRange("Qty. to Consume");
         end;
-        if Invoice and not Ship then begin
+        if Invoice then begin
             Line.SetFilter("Qty. to Invoice", '<>0');
-            Line.SetLoadFields("Quantity Shipped", "Quantity Invoiced", "Quantity Consumed");
+            Line.SetLoadFields("Document Type", "Document No.", "Qty. to Invoice", "Quantity Shipped", "Quantity Invoiced", "Quantity Consumed");
             if Line.FindSet() then
                 repeat
                     if Line."Quantity Shipped" - Line."Quantity Invoiced" - Line."Quantity Consumed" <> 0 then
