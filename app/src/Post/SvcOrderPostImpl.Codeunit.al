@@ -17,6 +17,7 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
     /// <summary>Validates access and catches native posting errors outside the locked posting transaction.</summary>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
+        Processor: Codeunit "Svc Order Post Proc ori";
         Gate: Codeunit "Svc Posting Gate ori";
         WriteCheck: Codeunit "Svc Write Check ori";
         PostNextLbl: Label 'Correct the setup or document named by Business Central and send the posting again. Nothing was posted.', Comment = 'is-IS=Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.';
@@ -28,6 +29,13 @@ codeunit 10076079 "Svc Order Post Impl ori" implements "Msg Interface ori", "Msg
             exit;
         Argument.SetErrorContext('no', '', PostNextLbl);
         ClearLastError();
+        if Argument."Omit Commit" then begin
+            // A chained dispatcher call already has queue writes. A Boolean Codeunit.Run is illegal
+            // in that transaction; the direct native path retains BC commits and propagates errors.
+            Processor.Run(Argument);
+            Argument.ClearErrorContext();
+            exit;
+        end;
         if not Codeunit.Run(Codeunit::"Svc Order Post Proc ori", Argument) then begin
             Argument.RespondWithLastError();
             exit;
