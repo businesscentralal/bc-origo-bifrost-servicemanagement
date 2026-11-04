@@ -145,6 +145,7 @@ codeunit 10076083 "Svc Post Options ori"
         DocumentErrors: Codeunit "Document Errors Mgt.";
         NothingNextLbl: Label 'Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set.', Comment = 'is-IS=Settu Qty. to Ship, Qty. to Consume eða Qty. to Invoice á línurnar með Data.Records.Set.';
     begin
+        Line.ReadIsolation := IsolationLevel::Default;
         Line.SetRange("Document Type", Header."Document Type");
         Line.SetRange("Document No.", Header."No.");
         if Ship then begin
@@ -210,6 +211,9 @@ codeunit 10076083 "Svc Post Options ori"
     begin
         Clear(Shipments);
         Clear(Invoices);
+        ShipmentHeader.ReadIsolation := IsolationLevel::ReadCommitted;
+        InvoiceHeader.ReadIsolation := IsolationLevel::ReadCommitted;
+        LedgerEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         ShipmentHeader.SetRange("Order No.", OrderNo);
         ShipmentHeader.SetLoadFields("No.", "Order No.");
         if ShipmentHeader.FindSet() then
@@ -237,6 +241,9 @@ codeunit 10076083 "Svc Post Options ori"
         CustLedgerEntry: Record "Cust. Ledger Entry";
         Entry: JsonObject;
     begin
+        ShipmentHeader.ReadIsolation := IsolationLevel::ReadCommitted;
+        InvoiceHeader.ReadIsolation := IsolationLevel::ReadCommitted;
+        CustLedgerEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         ShipmentHeader.SetLoadFields("No.", "Order No.", "Posting Date", SystemId);
         ShipmentHeader.SetRange("Order No.", OrderNo);
         if ShipmentHeader.FindSet() then
@@ -279,6 +286,7 @@ codeunit 10076083 "Svc Post Options ori"
     var
         LedgerEntry: Record "Service Ledger Entry";
     begin
+        LedgerEntry.ReadIsolation := IsolationLevel::ReadCommitted;
         LedgerEntry.SetFilter("Entry No.", '>%1', LastEntryNo);
         LedgerEntry.SetRange("Service Order No.", OrderNo);
         exit(LedgerEntry.Count());
@@ -290,6 +298,7 @@ codeunit 10076083 "Svc Post Options ori"
         Line: Record "Service Line";
         Entry: JsonObject;
     begin
+        Line.ReadIsolation := IsolationLevel::ReadCommitted;
         Line.SetRange("Document Type", Header."Document Type");
         Line.SetRange("Document No.", Header."No.");
         Line.SetLoadFields("Line No.", Type, "No.", Quantity, "Quantity Shipped", "Quantity Consumed", "Quantity Invoiced");
