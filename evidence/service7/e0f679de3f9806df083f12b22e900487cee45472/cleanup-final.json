@@ -1,0 +1,11 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "owner": "worker-7",
+  "containerId": "f015bb440386",
+  "deleted": true,
+  "deleteStatus": 204,
+  "readbackStatus": 404,
+  "verified": true,
+  "verifiedAt": "2026-11-04T14:46:29.575370+00:00",
+  "scope": "Entire individually owned disposable verification container; all native/MCP own fixture data and temporary fixture app resources removed. No foreign resource deleted."
+}

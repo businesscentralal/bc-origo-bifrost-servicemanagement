@@ -1,0 +1,32 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "containerId": "f015bb440386",
+  "lcid": 1039,
+  "verified": true,
+  "scenarios": [
+    {
+      "name": "Own service order/customer before posting",
+      "order": "XDF7AC985BD7000001",
+      "customer": "XB89989A4E5694720A36",
+      "marker": "Dainn worker7 issue7 MCP1039",
+      "screenshot": "ui-order1039.png"
+    },
+    {
+      "name": "MCP result matches native Posted Service Invoice",
+      "invoice": "PSVI000035",
+      "order": "XDF7AC985BD7000001",
+      "customer": "XB89989A4E5694720A36",
+      "itemQuantity": 1,
+      "resourceQuantity": 2,
+      "lineAmounts": [
+        10,
+        20
+      ],
+      "netAmount": 30,
+      "screenshot": "ui-invoice1039.png"
+    }
+  ],
+  "method": "Playwright MCP; language selected in My Settings and Icelandic system captions Uppl\u00fdsingar observed",
+  "checkedAt": "2026-11-04T14:44:51.258101+00:00",
+  "limits": "BC W1 service application captions remain English; user/client LCID1039 and Icelandic system/Foundation text were observed. This is developer evidence, not independent Tester UAT."
+}

@@ -1,0 +1,10 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "sourceMethods": 145,
+  "executedCases": 145,
+  "uniqueExecutedMethods": 145,
+  "failures": 0,
+  "skipped": 0,
+  "missing": [],
+  "unexpected": []
+}

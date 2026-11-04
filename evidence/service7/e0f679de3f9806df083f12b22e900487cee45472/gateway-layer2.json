@@ -1,0 +1,21 @@
+{
+  "owner": "D\u00e1inn (worker-7)",
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "standardsSnapshot": "52ba4754cfd614e4a7c50af87b30149b18b313e3",
+  "target": "main; issue7-only implementation compared separately with stacked issue5 base90e76dc9857c6fcfd61f21b75da52ed49108d60f",
+  "tier": "Standard",
+  "compiler": "Product Default(no IVT), product Test and test app all compiled0errors0warnings; compile-a762b78.json records package hashes and clean source state.",
+  "namingAndIds": "App10076075..10076086; tests/helpers97740..97750, all within allocated ranges. README/CLAUDE updated; public APIs preserved.",
+  "permissionWiring": "BIFROST Svc ori grants new processor execute; Full inherits write gate but not posting token; Read excludes posting token. Hard generic read/write restriction now protects posting token even with force. Actual native/MCP regressions required.",
+  "dataAndTransactions": "Normal calls use a Boolean processor error boundary. Omit Commit/chained calls already own a queue-write transaction, so call the processor directly and propagate original BC errors as Warehouse Omit Commit tests require. Both paths take order/line locks, check confirmation and retain native Service-Post commits. 97750 isolates the caller rollback test. No EULA/trial/licence/HTTP writes.",
+  "layer1FalsePositives": [
+    "Locked message-type captions are immutable protocol identifiers; translating them would violate the API naming rule.",
+    "one_statement_per_line reports semicolons in formal parameter lists, rather than multiple executable statements.",
+    "read_isolation reports captures that already call SetLoadFields; pure IsEmpty checks do not fetch field payload. Posting Header is subsequently modified by native BC and intentionally loads a full record."
+  ],
+  "runtime": "Current-tip full145executed/145passed/0failed/0skipped, all145method identities matched; focused27/27; canonical MCP40/40; native Web Client4scenarios in1033/1039; owned container deleted204/readback404.",
+  "documentation": "CHANGELOG, README and CLAUDE.md include processor10076080 and tests97746/97747/97748; generated is-IS XLF in sync; full protocol contracts retain four posting combinations and explicit commits.",
+  "dependencyFinding": "Issue5 source at90e76dc has one real mixed-language guard failure at Quote/SvcQuoteMakeOrderImpl.Codeunit.al222. Preserved unchanged and reported to root/retained dependency owner; no waiver claimed. Issue5 remains unmerged and has no PR at14:10 readback.",
+  "pendingIndependentLayers": "Claude exact-tip AC20 onbc29-w1; Grok clearance; eligible approval; Architect merge/deploy; Tester AC21 and Premium UI acceptance on UAT.",
+  "verdict": "Developer verification complete. PR remains draft/on hold for issue5 integration and its existing mixed-language guard finding, plus paired CI. Claude/Grok/approval follow handoff; no independent receipt/clearance/UAT pass claimed."
+}

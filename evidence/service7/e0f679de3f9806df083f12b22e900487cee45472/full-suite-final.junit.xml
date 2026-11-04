@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="97702 Svc Registration Tst ori" timestamp="2026-11-04T14:30:42" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="0.03" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="97702 Svc Registration Tst ori" name="GetApps_ListsServiceManagement" time="0.01" />
+    <testcase classname="97702 Svc Registration Tst ori" name="GetApps_UnderLicenseAdminRole_ListsServiceManagement" time="0.02" />
+  </testsuite>
+  <testsuite name="97705 Svc Order Release Tests ori" timestamp="2026-11-04T14:30:54" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="9.656" tests="0" failures="0" errors="0" skipped="0" total="11">
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC01_Release_ReturnsRecalculatedOrder" time="1.063" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC02_Release_BysystemId" time="0.877" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC02_Release_Bysubject" time="0.91" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC03_NoQuantity_Refused" time="1.06" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC04_LocationRequired_RollsBack" time="1.023" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC07_RejectQuoteSystemId" time="0.48" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC07_RejectInvoiceSystemId" time="0.503" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC07_RejectCreditMemoSystemId" time="0.53" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC07_ConflictingIdentifiers" time="1.887" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC08_Validation_BothTypes" time="0.15" />
+    <testcase classname="97705 Svc Order Release Tests ori" name="Scenario_AC09_Release_CallerRollback" time="1.173" />
+  </testsuite>
+  <testsuite name="97706 Svc Order Reopen Tests ori" timestamp="2026-11-04T14:30:58" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="2.749" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97706 Svc Order Reopen Tests ori" name="Scenario_AC06_Reopen_ReleasedOrder" time="0.916" />
+    <testcase classname="97706 Svc Order Reopen Tests ori" name="Scenario_AC05_AC14_RepeatRefusals_Bilingual" time="0.846" />
+    <testcase classname="97706 Svc Order Reopen Tests ori" name="Scenario_AC09_Reopen_CallerRollback" time="0.987" />
+  </testsuite>
+  <testsuite name="97707 Svc Release Restrict Tests ori" timestamp="2026-11-04T14:31:02" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.666" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="97707 Svc Release Restrict Tests ori" name="Scenario_AC10_ReleaseStatus_BlockedWithHint" time="0.863" />
+    <testcase classname="97707 Svc Release Restrict Tests ori" name="Scenario_AC10_OrdinaryFieldAndRead_RemainAllowed" time="0.803" />
+  </testsuite>
+  <testsuite name="97708 Svc Release Contract Tests ori" timestamp="2026-11-04T14:31:40" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="36.891" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97708 Svc Release Contract Tests ori" name="Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect" time="0.033" />
+    <testcase classname="97708 Svc Release Contract Tests ori" name="Scenario_AC13_Catalogue_BothLanguages" time="0.004" />
+    <testcase classname="97708 Svc Release Contract Tests ori" name="Scenario_AC12_NewOrdinaryCompany_RequiresEula" time="36.854" />
+  </testsuite>
+  <testsuite name="97709 Svc Release Perm Tests ori" timestamp="2026-11-04T14:31:44" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.884" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97709 Svc Release Perm Tests ori" name="Scenario_AC15_FullRole_ReleaseAndReopen" time="1.044" />
+    <testcase classname="97709 Svc Release Perm Tests ori" name="Scenario_AC15_ReadRole_DeniedBothWrites" time="0.837" />
+    <testcase classname="97709 Svc Release Perm Tests ori" name="Scenario_WriteGate_ReadDeniedFullGranted" time="0.003" />
+  </testsuite>
+  <testsuite name="97711 Svc Fixture Tests ori" timestamp="2026-11-04T14:31:48" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="2.372" tests="0" failures="0" errors="0" skipped="0" total="4">
+    <testcase classname="97711 Svc Fixture Tests ori" name="Suite_SelectsRegistrationAndFixtureTests" time="0.006" />
+    <testcase classname="97711 Svc Fixture Tests ori" name="Fixture_OrderHasOwnItemAndResourceLines" time="0.88" />
+    <testcase classname="97711 Svc Fixture Tests ori" name="Fixture_QuoteHasOwnItemAndResourceLines" time="0.91" />
+    <testcase classname="97711 Svc Fixture Tests ori" name="Fixture_SetupQuoteCleanup_RequiresMarker" time="0.576" />
+  </testsuite>
+  <testsuite name="97712 Svc Lookup Tests ori" timestamp="2026-11-04T14:31:58" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="7.551" tests="0" failures="0" errors="0" skipped="0" total="15">
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_NumberResolvesOrder" time="0.946" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_SystemIdResolvesOrder" time="0.85" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_SubjectResolvesOrder" time="0.75" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_AllIdentifiersMustAgree" time="0.88" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_CallerCanResolveQuote" time="0.994" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_DifferentNumbersConflict" time="1.56" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_ConflictingSubjectIsNotIgnored" time="0.74" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_WrongDocumentTypeIsRefused" time="0.794" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_MissingIdentifierIsRefused" time="0.003" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_UnknownNumberIsNotFound" time="0.006" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_MalformedGuidIsRefused" time="0.007" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_NumericNumberIsNotCoerced" time="0.004" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_LongNumberIsNotTruncated" time="0.006" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_DeclaredErrorsAreCollected" time="0.007" />
+    <testcase classname="97712 Svc Lookup Tests ori" name="Component_MissingIdentifierLocalizes" time="0.004" />
+  </testsuite>
+  <testsuite name="97715 Svc Wrong Type Tests ori" timestamp="2026-11-04T14:32:01" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.321" tests="0" failures="0" errors="0" skipped="0" total="4">
+    <testcase classname="97715 Svc Wrong Type Tests ori" name="Scenario_AC01_AC03_ReleaseQuote_NamesTypeInCallerLanguage" time="0.433" />
+    <testcase classname="97715 Svc Wrong Type Tests ori" name="Scenario_AC01_AC03_ReopenQuote_NamesTypeInCallerLanguage" time="0.43" />
+    <testcase classname="97715 Svc Wrong Type Tests ori" name="Scenario_AC02_StructuredFields_StayEnglish" time="0.454" />
+    <testcase classname="97715 Svc Wrong Type Tests ori" name="Scenario_AC12_SuiteUsesSessionRunner" time="0.004" />
+  </testsuite>
+  <testsuite name="97716 Svc Quote Confirm Tests ori" timestamp="2026-11-04T14:32:09" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="6.205" tests="0" failures="0" errors="0" skipped="0" total="5">
+    <testcase classname="97716 Svc Quote Confirm Tests ori" name="Scenario_AC03_Required_MissingCount" time="1.24" />
+    <testcase classname="97716 Svc Quote Confirm Tests ori" name="Scenario_AC03_Required_WrongCount" time="1.034" />
+    <testcase classname="97716 Svc Quote Confirm Tests ori" name="Scenario_AC03_Optional_OmissionRuns" time="1.444" />
+    <testcase classname="97716 Svc Quote Confirm Tests ori" name="Scenario_AC03_Optional_WrongCountStillRefuses" time="1.2" />
+    <testcase classname="97716 Svc Quote Confirm Tests ori" name="Scenario_AC14_Icelandic_ConfirmationSummary" time="1.287" />
+  </testsuite>
+  <testsuite name="97717 Svc Quote Contract Tests ori" timestamp="2026-11-04T14:32:46" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="33.758" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97717 Svc Quote Contract Tests ori" name="Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect" time="0.02" />
+    <testcase classname="97717 Svc Quote Contract Tests ori" name="Scenario_AC13_Catalogue_BothLanguages" time="0.004" />
+    <testcase classname="97717 Svc Quote Contract Tests ori" name="Scenario_AC12_NewOrdinaryCompany_RequiresEula" time="33.734" />
+  </testsuite>
+  <testsuite name="97718 Svc Quote Perm Tests ori" timestamp="2026-11-04T14:32:50" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="2.328" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97718 Svc Quote Perm Tests ori" name="Scenario_AC15_FullRole_ConvertsQuote" time="1.387" />
+    <testcase classname="97718 Svc Quote Perm Tests ori" name="Scenario_AC15_ReadRole_DeniedConversion" time="0.937" />
+    <testcase classname="97718 Svc Quote Perm Tests ori" name="Scenario_WriteGate_ReadDeniedFullGranted" time="0.004" />
+  </testsuite>
+  <testsuite name="97719 Svc Quote MakeOrder Tests ori" timestamp="2026-11-04T14:33:12" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="19.095" tests="0" failures="0" errors="0" skipped="0" total="22">
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC01_No_ConvertsAllLines" time="1.136" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC02_SystemId_ConvertsQuote" time="1.753" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC02_Subject_ConvertsQuote" time="1.237" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC10_OmitCommit_StillCommits" time="1.086" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC10_CallerRollback_OrderPersists" time="1.24" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC14_Icelandic_ConvertsQuote" time="1.28" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC04_ActiveAllocation_NeedsReallocation" time="1.234" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC05_MissingCustomer_Refused" time="1.143" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC05_MissingBillTo_Refused" time="0.8" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC06_BlockedCustomer_RollsBack" time="0.86" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC06_BlockedServiceItem_RollsBack" time="0.836" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC06_ServiceBlockedItem_RollsBack" time="0.797" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC07_NoOrderSeries_Refused" time="0.827" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC08_OrderSystemId_Refused" time="0.44" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC08_UnknownNumber_Refused" time="0.017" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC09_MissingIdentifier_Refused" time="0.016" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC09_MalformedGuid_Refused" time="0.02" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC09_MultipleErrors_Collected" time="0.02" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC09_UnknownParameter_DispatcherRefuses" time="0.937" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_ConflictingIdentifiers_Refused" time="1.863" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC14_QuoteRefusals_Localized" time="0.5" />
+    <testcase classname="97719 Svc Quote MakeOrder Tests ori" name="Scenario_AC12_QuoteGenericWrite_RemainsAllowed" time="1.053" />
+  </testsuite>
+  <testsuite name="97725 Svc Allocation Tests ori" timestamp="2026-11-04T14:33:25" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="11.024" tests="0" failures="0" errors="0" skipped="0" total="11">
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_Allocate_ByDocumentNo_ActivatesEntry" time="0.986" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_Allocate_BySystemIdSubjectAndEntryNo" time="0.886" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_Allocate_GroupOnly_AndTimes" time="0.887" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_Allocate_DefaultAndPastDate" time="0.857" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_Validation_MissingInvalidAndUnknown" time="1.03" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_OrdersOnly_AndSeveralLines" time="1.827" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_NoOpenEntry_AndOutsideZone" time="1.09" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_ZoneText_Icelandic" time="0.91" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_FinishedOrderAndLine_Precondition" time="0.89" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_SkillWarning_IsBusinessCentralError" time="0.927" />
+    <testcase classname="97725 Svc Allocation Tests ori" name="Scenario_OmitCommit_CallerRollback" time="0.734" />
+  </testsuite>
+  <testsuite name="97726 Svc Reallocation Tests ori" timestamp="2026-11-04T14:33:35" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="6.367" tests="0" failures="0" errors="0" skipped="0" total="6">
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_Reallocate_KeepsEntryAndReason" time="1.163" />
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_ReallocationNeeded_AndServiceStarted" time="1.22" />
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_InitialRepairStatus_BecomesReferred" time="1.167" />
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_OneResource_UsesBusinessCentralText" time="0.944" />
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_EntryNo_SelectsAmongSeveralOpenEntries" time="0.887" />
+    <testcase classname="97726 Svc Reallocation Tests ori" name="Scenario_InvalidTime_RollsBackInsertedHistory" time="0.986" />
+  </testsuite>
+  <testsuite name="97727 Svc Alloc Restrict Tests ori" timestamp="2026-11-04T14:33:39" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.777" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="97727 Svc Alloc Restrict Tests ori" name="Scenario_GuardedFields_PermissionDeniedWithHint" time="0.81" />
+    <testcase classname="97727 Svc Alloc Restrict Tests ori" name="Scenario_HoursAndRead_RemainAllowed" time="0.967" />
+  </testsuite>
+  <testsuite name="97728 Svc Alloc Contract Tests ori" timestamp="2026-11-04T14:34:16" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="34.337" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97728 Svc Alloc Contract Tests ori" name="Scenario_Contract_HasChaptersWriteEffectAndRetryable" time="0.03" />
+    <testcase classname="97728 Svc Alloc Contract Tests ori" name="Scenario_Catalogue_BothLanguages" time="0.007" />
+    <testcase classname="97728 Svc Alloc Contract Tests ori" name="Scenario_NewOrdinaryCompany_RequiresEula" time="34.3" />
+  </testsuite>
+  <testsuite name="97729 Svc Alloc Perm Tests ori" timestamp="2026-11-04T14:34:21" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.85" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="97729 Svc Alloc Perm Tests ori" name="Scenario_FullRole_CanAllocate" time="0.94" />
+    <testcase classname="97729 Svc Alloc Perm Tests ori" name="Scenario_ReadRole_CannotAllocate" time="0.91" />
+  </testsuite>
+  <testsuite name="97740 Svc Order Post Tests ori" timestamp="2026-11-04T14:34:43" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="18.723" tests="0" failures="0" errors="0" skipped="0" total="19">
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC01_ShipAndInvoice_PostsBothDocuments" time="1.29" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC02_ShipOnly_ThenInvoiceOnly" time="1.577" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC03_ShipAndConsume_NoInvoice" time="1.017" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC04_PartialQuantity_OrderStays" time="1.123" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC05_NoFlags_DefaultsToShipAndInvoice" time="1.36" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC05_ConsumeWithInvoice_Refused" time="0.93" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC05_ConsumeWithoutShip_Refused" time="1.043" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC06_NothingToPost_PreconditionFailed" time="0.89" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC06_InvoiceBeforeShipment_PreconditionFailed" time="0.787" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC07_PolicyProhibitsInvoice_PreconditionFailed" time="0.97" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC07_Mandatory_InvoiceOnlyRefused" time="1.244" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC08_BcRefusal_AtomicBusinessCentralError" time="0.844" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC12_NonBooleanFlag_InvalidParameterFormat" time="0.767" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC12_TwoBadFlags_MultipleErrors" time="0.794" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC12_MissingIdentifier_MissingParameter" time="0.024" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC12_UnknownKey_FoundationRefuses" time="0.863" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC13_FailedCall_LeavesNothingPosted" time="0.993" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC13_OmitCommit_NativeErrorRollsBack" time="0.99" />
+    <testcase classname="97740 Svc Order Post Tests ori" name="Scenario_AC13_OmitCommit_PostSurvivesCallerRollback" time="1.217" />
+  </testsuite>
+  <testsuite name="97741 Svc Order Preview Tests ori" timestamp="2026-11-04T14:34:50" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="3.773" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97741 Svc Order Preview Tests ori" name="Scenario_AC11_Preview_MatchesPost_AndChangesNothing" time="1.566" />
+    <testcase classname="97741 Svc Order Preview Tests ori" name="Scenario_AC11_OmitCommit_PreconditionFailed" time="0.917" />
+    <testcase classname="97741 Svc Order Preview Tests ori" name="Scenario_AC18_Icelandic_PreviewSummary" time="1.29" />
+  </testsuite>
+  <testsuite name="97742 Svc Post Confirm Tests ori" timestamp="2026-11-04T14:34:59" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="6.049" tests="0" failures="0" errors="0" skipped="0" total="5">
+    <testcase classname="97742 Svc Post Confirm Tests ori" name="Scenario_AC09_MissingCount_ConfirmationRequired" time="1.11" />
+    <testcase classname="97742 Svc Post Confirm Tests ori" name="Scenario_AC09_WrongCount_ConfirmationMismatch" time="1.153" />
+    <testcase classname="97742 Svc Post Confirm Tests ori" name="Scenario_AC18_Icelandic_ConfirmationSummary" time="1.406" />
+    <testcase classname="97742 Svc Post Confirm Tests ori" name="Scenario_AC09_Optional_MissingCount_Posts" time="1.34" />
+    <testcase classname="97742 Svc Post Confirm Tests ori" name="Scenario_AC09_Optional_WrongCount_Refuses" time="1.04" />
+  </testsuite>
+  <testsuite name="97743 Svc Posting Gate Tests ori" timestamp="2026-11-04T14:35:04" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="2.257" tests="0" failures="0" errors="0" skipped="0" total="5">
+    <testcase classname="97743 Svc Posting Gate Tests ori" name="Scenario_AC10_FullRole_DoesNotHoldPostingToken" time="0.01" />
+    <testcase classname="97743 Svc Posting Gate Tests ori" name="Scenario_AC10_PostingSet_GrantsToken" time="0.007" />
+    <testcase classname="97743 Svc Posting Gate Tests ori" name="Scenario_AC10_Name_Is19Characters" time="0.01" />
+    <testcase classname="97743 Svc Posting Gate Tests ori" name="Scenario_AC10_WithoutToken_DirectPost_PermissionDenied" time="0.883" />
+    <testcase classname="97743 Svc Posting Gate Tests ori" name="Scenario_AC10_WithToken_PostRuns" time="1.347" />
+  </testsuite>
+  <testsuite name="97744 Svc Post Restrict Tests ori" timestamp="2026-11-04T14:35:09" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="1.873" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97744 Svc Post Restrict Tests ori" name="Scenario_AC14_PostedQuantity_IsRefused_WithHint" time="0.88" />
+    <testcase classname="97744 Svc Post Restrict Tests ori" name="Scenario_AC14_QtyToShip_StaysWritable" time="0.986" />
+    <testcase classname="97744 Svc Post Restrict Tests ori" name="Scenario_AC14_TokenTable_HiddenEvenWithForce" time="0.007" />
+  </testsuite>
+  <testsuite name="97745 Svc Post Contract Tests ori" timestamp="2026-11-04T14:35:13" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="0.072" tests="0" failures="0" errors="0" skipped="0" total="3">
+    <testcase classname="97745 Svc Post Contract Tests ori" name="Scenario_AC16_PostContract_HasAllChapters_AndCommits" time="0.04" />
+    <testcase classname="97745 Svc Post Contract Tests ori" name="Scenario_AC16_PreviewContract_HasAllChapters_AndIsRead" time="0.026" />
+    <testcase classname="97745 Svc Post Contract Tests ori" name="Scenario_AC18_Catalogue_BothLanguages" time="0.006" />
+  </testsuite>
+  <testsuite name="97746 Svc Post Lifecycle Tests ori" timestamp="2026-11-04T14:35:21" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="5.303" tests="0" failures="0" errors="0" skipped="0" total="2">
+    <testcase classname="97746 Svc Post Lifecycle Tests ori" name="Scenario_AC15_QuoteToConsumedAndInvoiced_English" time="2.71" />
+    <testcase classname="97746 Svc Post Lifecycle Tests ori" name="Scenario_AC15_QuoteToConsumedAndInvoiced_Icelandic" time="2.593" />
+  </testsuite>
+  <testsuite name="97747 Svc Post Licence Tests ori" timestamp="2026-11-04T14:35:59" hostname="f015bb440386-business-central-66d87fddf4-ks4bl" time="34.093" tests="0" failures="0" errors="0" skipped="0" total="1">
+    <testcase classname="97747 Svc Post Licence Tests ori" name="Scenario_AC17_OrdinaryCompany_RequiresEula" time="34.093" />
+  </testsuite>
+</testsuites>

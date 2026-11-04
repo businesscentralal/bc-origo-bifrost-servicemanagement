@@ -1,0 +1,799 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "containerId": "f015bb440386",
+  "createsOwnData": true,
+  "passed": 16,
+  "failed": 0,
+  "skipped": 0,
+  "receipts": [
+    {
+      "tool": "get_records",
+      "args": {
+        "table": "Service Line",
+        "filter": "WHERE(Document Type=CONST(Order),Document No.=CONST(XDF7AC985BD7000001))",
+        "take": 10
+      },
+      "result": {
+        "company": "CRONUS International Ltd.",
+        "table": "Service Line",
+        "skip": 0,
+        "take": 10,
+        "count": 2,
+        "records": [
+          {
+            "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+            "primaryKey": {
+              "DocumentType": "Order",
+              "DocumentNo_": "XDF7AC985BD7000001",
+              "LineNo_": "10000"
+            },
+            "fields": {
+              "CustomerNo_": "XB89989A4E5694720A36",
+              "Type": "Item",
+              "No_": "XB1C1D005897C4153AF3",
+              "LocationCode": "",
+              "PostingGroup": "FINISHED",
+              "Description": "GL00000212",
+              "Description2": "",
+              "UnitofMeasure": "Bag",
+              "Quantity": "2",
+              "OutstandingQuantity": "2",
+              "Qty_toInvoice": "2",
+              "Qty_toShip": "2",
+              "UnitPrice": "10",
+              "UnitCostLCY": "0",
+              "VAT_": "10",
+              "LineDiscount_": "0",
+              "LineDiscountAmount": "0",
+              "Amount": "20",
+              "AmountIncludingVAT": "22",
+              "AllowInvoiceDisc_": "true",
+              "GrossWeight": "0",
+              "NetWeight": "0",
+              "UnitsperParcel": "0",
+              "UnitVolume": "0",
+              "Appl_toItemEntry": "0",
+              "ShortcutDimension1Code": "",
+              "ShortcutDimension2Code": "",
+              "CustomerPriceGroup": "",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "JobLineType": " ",
+              "WorkTypeCode": "",
+              "OutstandingAmount": "22",
+              "Qty_ShippedNotInvoiced": "0",
+              "ShippedNotInvoiced": "0",
+              "QuantityShipped": "0",
+              "QuantityInvoiced": "0",
+              "ShipmentNo_": "",
+              "ShipmentLineNo_": "0",
+              "OrderNo_": "",
+              "BilltoCustomerNo_": "XB89989A4E5694720A36",
+              "Inv_DiscountAmount": "0",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "VATCalculationType": "Normal VAT",
+              "TransactionType": "",
+              "TransportMethod": "",
+              "AttachedtoLineNo_": "0",
+              "ExitPoint": "",
+              "Area": "",
+              "TransactionSpecification": "",
+              "TaxAreaCode": "",
+              "TaxLiable": "false",
+              "TaxGroupCode": "",
+              "VATClauseCode": "REDUCED",
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "REDUCED",
+              "CurrencyCode": "GBP",
+              "OutstandingAmountLCY": "22",
+              "ShippedNotInvoicedLCY": "0",
+              "Reserve": "Optional",
+              "VATBaseAmount": "20",
+              "UnitCost": "0",
+              "SystemCreatedEntry": "false",
+              "LineAmount": "20",
+              "VATDifference": "0",
+              "Inv_Disc_AmounttoInvoice": "0",
+              "VATIdentifier": "REDUCED",
+              "Pmt_DiscountAmount": "0",
+              "DimensionSetID": [],
+              "TimeSheetNo_": "",
+              "TimeSheetLineNo_": "0",
+              "TimeSheetDate": "",
+              "JobPlanningLineNo_": "0",
+              "JobRemainingQty_": "0",
+              "JobRemainingQty_Base": "0",
+              "JobRemainingTotalCost": "0",
+              "JobRemainingTotalCostLCY": "0",
+              "JobRemainingLineAmount": "0",
+              "VariantCode": "",
+              "BinCode": "",
+              "Qty_perUnitofMeasure": "1",
+              "Planned": "false",
+              "UnitofMeasureCode": "BAG",
+              "Qty_RoundingPrecision": "0",
+              "Qty_RoundingPrecisionBase": "0",
+              "QuantityBase": "2",
+              "OutstandingQty_Base": "2",
+              "Qty_toInvoiceBase": "2",
+              "Qty_toShipBase": "2",
+              "Qty_ShippedNotInvd_Base": "0",
+              "Qty_ShippedBase": "0",
+              "Qty_InvoicedBase": "0",
+              "ResponsibilityCenter": "",
+              "ItemCategoryCode": "",
+              "Nonstock": "false",
+              "ItemReferenceNo_": "",
+              "ItemReferenceUnitofMeasure": "",
+              "ItemReferenceType": " ",
+              "ItemReferenceTypeNo_": "",
+              "CompletelyShipped": "false",
+              "RequestedDeliveryDate": "",
+              "PromisedDeliveryDate": "",
+              "ShippingTime": "",
+              "PlannedDeliveryDate": "2026-11-01",
+              "ShippingAgentCode": "",
+              "ShippingAgentServiceCode": "",
+              "Appl_fromItemEntry": "0",
+              "ServiceItemNo_": "XDF7AC985BD7000002",
+              "Appl_toServiceEntry": "0",
+              "ServiceItemLineNo_": "10000",
+              "ServiceItemSerialNo_": "",
+              "Serv_PriceAdjmt_Gr_Code": "",
+              "PostingDate": "2026-11-01",
+              "OrderDate": "2026-11-01",
+              "NeededbyDate": "2026-11-01",
+              "ShiptoCode": "",
+              "Qty_toConsume": "0",
+              "QuantityConsumed": "0",
+              "Qty_toConsumeBase": "0",
+              "Qty_ConsumedBase": "0",
+              "ServicePriceGroupCode": "",
+              "FaultAreaCode": "",
+              "SymptomCode": "",
+              "FaultCode": "",
+              "ResolutionCode": "",
+              "ExcludeWarranty": "false",
+              "Warranty": "false",
+              "ContractNo_": "",
+              "ContractDisc__": "0",
+              "WarrantyDisc__": "0",
+              "ComponentLineNo_": "0",
+              "SparePartAction": " ",
+              "FaultReasonCode": "",
+              "ReplacedItemNo_": "",
+              "ExcludeContractDiscount": "false",
+              "ReplacedItemType": " ",
+              "PriceAdjmt_Status": " ",
+              "LineDiscountType": "",
+              "CopyComponentsFrom": "None",
+              "Sust_AccountNo_": "",
+              "Sust_AccountName": "",
+              "Sust_AccountCategory": "",
+              "Sust_AccountSubcategory": "",
+              "CO2eperUnit": "0",
+              "TotalCO2e": "0",
+              "PostedTotalCO2e": "0",
+              "ReturnReasonCode": "",
+              "PriceCalculationMethod": "Lowest Price",
+              "AllowLineDisc_": "true",
+              "CustomerDisc_Group": "",
+              "Qty_Picked": "0",
+              "Qty_PickedBase": "0",
+              "CompletelyPicked": "false",
+              "PickQty_Base": "0",
+              "SystemCreatedAt": "2026-11-04T14:04:59.967Z",
+              "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+              "SystemModifiedAt": "2026-11-04T14:05:00.037Z",
+              "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+            }
+          },
+          {
+            "id": "C460EAB5-58D8-F111-B7A5-A68D8B011E50",
+            "primaryKey": {
+              "DocumentType": "Order",
+              "DocumentNo_": "XDF7AC985BD7000001",
+              "LineNo_": "20000"
+            },
+            "fields": {
+              "CustomerNo_": "XB89989A4E5694720A36",
+              "Type": "Resource",
+              "No_": "X9801296E0DC64F7DB6C",
+              "LocationCode": "",
+              "PostingGroup": "",
+              "Description": "GU00000253",
+              "Description2": "",
+              "UnitofMeasure": "Bag",
+              "Quantity": "3",
+              "OutstandingQuantity": "3",
+              "Qty_toInvoice": "3",
+              "Qty_toShip": "3",
+              "UnitPrice": "10",
+              "UnitCostLCY": "47",
+              "VAT_": "0",
+              "LineDiscount_": "0",
+              "LineDiscountAmount": "0",
+              "Amount": "30",
+              "AmountIncludingVAT": "30",
+              "AllowInvoiceDisc_": "true",
+              "GrossWeight": "0",
+              "NetWeight": "0",
+              "UnitsperParcel": "0",
+              "UnitVolume": "0",
+              "Appl_toItemEntry": "0",
+              "ShortcutDimension1Code": "",
+              "ShortcutDimension2Code": "",
+              "CustomerPriceGroup": "",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "JobLineType": " ",
+              "WorkTypeCode": "",
+              "OutstandingAmount": "30",
+              "Qty_ShippedNotInvoiced": "0",
+              "ShippedNotInvoiced": "0",
+              "QuantityShipped": "0",
+              "QuantityInvoiced": "0",
+              "ShipmentNo_": "",
+              "ShipmentLineNo_": "0",
+              "OrderNo_": "",
+              "BilltoCustomerNo_": "XB89989A4E5694720A36",
+              "Inv_DiscountAmount": "0",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "VATCalculationType": "Normal VAT",
+              "TransactionType": "",
+              "TransportMethod": "",
+              "AttachedtoLineNo_": "0",
+              "ExitPoint": "",
+              "Area": "",
+              "TransactionSpecification": "",
+              "TaxAreaCode": "",
+              "TaxLiable": "false",
+              "TaxGroupCode": "",
+              "VATClauseCode": "NO TAX",
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "NO TAX",
+              "CurrencyCode": "GBP",
+              "OutstandingAmountLCY": "30",
+              "ShippedNotInvoicedLCY": "0",
+              "Reserve": "Never",
+              "VATBaseAmount": "30",
+              "UnitCost": "47",
+              "SystemCreatedEntry": "false",
+              "LineAmount": "30",
+              "VATDifference": "0",
+              "Inv_Disc_AmounttoInvoice": "0",
+              "VATIdentifier": "NO TAX",
+              "Pmt_DiscountAmount": "0",
+              "DimensionSetID": [],
+              "TimeSheetNo_": "",
+              "TimeSheetLineNo_": "0",
+              "TimeSheetDate": "",
+              "JobPlanningLineNo_": "0",
+              "JobRemainingQty_": "0",
+              "JobRemainingQty_Base": "0",
+              "JobRemainingTotalCost": "0",
+              "JobRemainingTotalCostLCY": "0",
+              "JobRemainingLineAmount": "0",
+              "VariantCode": "",
+              "BinCode": "",
+              "Qty_perUnitofMeasure": "1",
+              "Planned": "false",
+              "UnitofMeasureCode": "BAG",
+              "Qty_RoundingPrecision": "0",
+              "Qty_RoundingPrecisionBase": "0",
+              "QuantityBase": "3",
+              "OutstandingQty_Base": "3",
+              "Qty_toInvoiceBase": "3",
+              "Qty_toShipBase": "3",
+              "Qty_ShippedNotInvd_Base": "0",
+              "Qty_ShippedBase": "0",
+              "Qty_InvoicedBase": "0",
+              "ResponsibilityCenter": "",
+              "ItemCategoryCode": "",
+              "Nonstock": "false",
+              "ItemReferenceNo_": "",
+              "ItemReferenceUnitofMeasure": "",
+              "ItemReferenceType": " ",
+              "ItemReferenceTypeNo_": "",
+              "CompletelyShipped": "false",
+              "RequestedDeliveryDate": "",
+              "PromisedDeliveryDate": "",
+              "ShippingTime": "",
+              "PlannedDeliveryDate": "2026-11-01",
+              "ShippingAgentCode": "",
+              "ShippingAgentServiceCode": "",
+              "Appl_fromItemEntry": "0",
+              "ServiceItemNo_": "XDF7AC985BD7000002",
+              "Appl_toServiceEntry": "0",
+              "ServiceItemLineNo_": "10000",
+              "ServiceItemSerialNo_": "",
+              "Serv_PriceAdjmt_Gr_Code": "",
+              "PostingDate": "2026-11-01",
+              "OrderDate": "2026-11-01",
+              "NeededbyDate": "2026-11-01",
+              "ShiptoCode": "",
+              "Qty_toConsume": "0",
+              "QuantityConsumed": "0",
+              "Qty_toConsumeBase": "0",
+              "Qty_ConsumedBase": "0",
+              "ServicePriceGroupCode": "",
+              "FaultAreaCode": "",
+              "SymptomCode": "",
+              "FaultCode": "",
+              "ResolutionCode": "",
+              "ExcludeWarranty": "false",
+              "Warranty": "false",
+              "ContractNo_": "",
+              "ContractDisc__": "0",
+              "WarrantyDisc__": "0",
+              "ComponentLineNo_": "0",
+              "SparePartAction": " ",
+              "FaultReasonCode": "",
+              "ReplacedItemNo_": "",
+              "ExcludeContractDiscount": "false",
+              "ReplacedItemType": " ",
+              "PriceAdjmt_Status": " ",
+              "LineDiscountType": "",
+              "CopyComponentsFrom": "None",
+              "Sust_AccountNo_": "",
+              "Sust_AccountName": "",
+              "Sust_AccountCategory": "",
+              "Sust_AccountSubcategory": "",
+              "CO2eperUnit": "0",
+              "TotalCO2e": "0",
+              "PostedTotalCO2e": "0",
+              "ReturnReasonCode": "",
+              "PriceCalculationMethod": "Lowest Price",
+              "AllowLineDisc_": "true",
+              "CustomerDisc_Group": "",
+              "Qty_Picked": "0",
+              "Qty_PickedBase": "0",
+              "CompletelyPicked": "false",
+              "PickQty_Base": "0",
+              "SystemCreatedAt": "2026-11-04T14:05:00.11Z",
+              "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+              "SystemModifiedAt": "2026-11-04T14:05:00.163Z",
+              "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+            }
+          }
+        ],
+        "noOfRecords": 2
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityShipped": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Quantity Shipped (60) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityShipped",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityInvoiced": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Quantity Invoiced (61) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityInvoiced",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityConsumed": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Quantity Consumed (5918) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityConsumed",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_ShippedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Qty. Shipped (Base) (5460) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_ShippedBase",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_InvoicedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Qty. Invoiced (Base) (5461) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_InvoicedBase",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_ConsumedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Field Qty. Consumed (Base) (5920) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_ConsumedBase",
+        "received": "1",
+        "expected": "a field the user may write (Bifrost Field Access)",
+        "nextStep": "Use Service.Order.Post",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Get",
+        "data": {
+          "tableName": "Svc Posting ori"
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Table 10076075 (Svc Posting ori) cannot be read via Data.Records.Get. This is an internal table.",
+        "parameter": "tableName",
+        "received": "Svc Posting ori",
+        "expected": "a table the user may read through the generic data types",
+        "nextStep": "Choose a table the user may access through the generic data types. This restriction cannot be bypassed by the request.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Get\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Svc Posting ori",
+          "data": [
+            {
+              "primaryKey": {
+                "PrimaryKey": "X-SVC7"
+              },
+              "fields": {}
+            }
+          ]
+        },
+        "lcid": 1033
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Table 10076075 (Svc Posting ori) cannot be written via Data.Records.Set. This is an internal table.",
+        "parameter": "tableName",
+        "received": "Svc Posting ori",
+        "expected": "a table the user may write through the generic data types",
+        "nextStep": "Choose a table the user may access through the generic data types. This restriction cannot be bypassed by the request.",
+        "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityShipped": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Quantity Shipped (60) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityShipped",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityInvoiced": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Quantity Invoiced (61) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityInvoiced",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "QuantityConsumed": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Quantity Consumed (5918) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.QuantityConsumed",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_ShippedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Qty. Shipped (Base) (5460) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_ShippedBase",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_InvoicedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Qty. Invoiced (Base) (5461) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_InvoicedBase",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Service Line",
+          "data": [
+            {
+              "id": "7860EAB5-58D8-F111-B7A5-A68D8B011E50",
+              "fields": {
+                "Qty_ConsumedBase": 1
+              }
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í reit Qty. Consumed (Base) (5920) í töflu 5902 (Service Line) með Data.Records.Set.",
+        "parameter": "data[0].fields.Qty_ConsumedBase",
+        "received": "1",
+        "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+        "nextStep": "Notaðu Service.Order.Post",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Get",
+        "data": {
+          "tableName": "Svc Posting ori"
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að lesa töflu 10076075 (Svc Posting ori) með Data.Records.Get. Þetta er innri tafla.",
+        "parameter": "tableName",
+        "received": "Svc Posting ori",
+        "expected": "tafla sem notandinn má lesa með almennu Data-gerðunum",
+        "nextStep": "Veldu töflu sem notandinn má nálgast með almennu Data-gerðunum. Beiðnin getur ekki sniðgengið þessa takmörkun.",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Get\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    },
+    {
+      "tool": "invoke_message_type",
+      "args": {
+        "type": "Data.Records.Set",
+        "data": {
+          "tableName": "Svc Posting ori",
+          "data": [
+            {
+              "primaryKey": {
+                "PrimaryKey": "X-SVC7"
+              },
+              "fields": {}
+            }
+          ]
+        },
+        "lcid": 1039
+      },
+      "result": {
+        "status": "Error",
+        "code": "PermissionDenied",
+        "error": "Ekki er hægt að skrifa í töflu 10076075 (Svc Posting ori) með Data.Records.Set. Þetta er innri tafla.",
+        "parameter": "tableName",
+        "received": "Svc Posting ori",
+        "expected": "tafla sem notandinn má skrifa í með almennu Data-gerðunum",
+        "nextStep": "Veldu töflu sem notandinn má nálgast með almennu Data-gerðunum. Beiðnin getur ekki sniðgengið þessa takmörkun.",
+        "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+      }
+    }
+  ],
+  "finishedAt": "2026-11-04T14:40:48.236Z"
+}

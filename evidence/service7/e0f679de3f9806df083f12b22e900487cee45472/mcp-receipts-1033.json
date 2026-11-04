@@ -1,0 +1,4026 @@
+[
+  {
+    "at": "2026-11-04T14:37:04.994Z",
+    "tool": "get_message_type_help",
+    "args": {
+      "messageType": "Service.Order.Post",
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Post",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.Post",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Posts a service order: ships, consumes or invoices the quantities on its lines with the standard Business Central service posting. Commits and cannot be undone.",
+        "selectionDescription": "Posts a service order: ships, consumes or invoices the quantities on its lines with the standard Business Central service posting. Commits and cannot be undone.",
+        "messageDirection": "Inbound",
+        "keywords": [
+          "post service order",
+          "ship and invoice",
+          "consume",
+          "invoice the service job",
+          "ship service items"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          },
+          {
+            "name": "ship",
+            "type": "boolean",
+            "required": false,
+            "description": "Post the shipment (Qty. to Ship on the lines). When none of ship, consume and invoice is sent, ship and invoice are both true. A flag that is not sent is false once another flag is sent."
+          },
+          {
+            "name": "consume",
+            "type": "boolean",
+            "required": false,
+            "description": "Post consumption (Qty. to Consume). Only together with ship = true, never with invoice. Default false."
+          },
+          {
+            "name": "invoice",
+            "type": "boolean",
+            "required": false,
+            "description": "Post the invoice (Qty. to Invoice). Send invoice alone to invoice what was shipped."
+          },
+          {
+            "name": "expectedCount",
+            "type": "integer",
+            "required": false,
+            "description": "Always checked when sent. Required only when Require Confirmation for Irreversible Messages is enabled in Bifrost Setup (on by default; an administrator can turn it off per company). When enabled, call without expectedCount to preview the count."
+          }
+        ],
+        "response": {
+          "contentType": "text/json",
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Success."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "The service order that was posted."
+            },
+            {
+              "name": "customerNo",
+              "type": "string",
+              "description": "The service order that was posted."
+            },
+            {
+              "name": "customerName",
+              "type": "string",
+              "description": "The service order that was posted."
+            },
+            {
+              "name": "ship",
+              "type": "boolean",
+              "description": "The options posted, and whether Business Central removed the fully posted order."
+            },
+            {
+              "name": "consume",
+              "type": "boolean",
+              "description": "The options posted, and whether Business Central removed the fully posted order."
+            },
+            {
+              "name": "invoice",
+              "type": "boolean",
+              "description": "The options posted, and whether Business Central removed the fully posted order."
+            },
+            {
+              "name": "orderDeleted",
+              "type": "boolean",
+              "description": "The options posted, and whether Business Central removed the fully posted order."
+            },
+            {
+              "name": "serviceLedgerEntries",
+              "type": "integer",
+              "description": "Service ledger entries created by this call."
+            },
+            {
+              "name": "postedDocuments",
+              "type": "array",
+              "description": "The posted documents this call created.",
+              "children": [
+                {
+                  "name": "type",
+                  "type": "string",
+                  "description": "Service Shipment or Service Invoice created by this call."
+                },
+                {
+                  "name": "no",
+                  "type": "string",
+                  "description": "Service Shipment or Service Invoice created by this call."
+                },
+                {
+                  "name": "recordSystemId",
+                  "type": "string",
+                  "description": "Service Shipment or Service Invoice created by this call."
+                },
+                {
+                  "name": "postingDate",
+                  "type": "string",
+                  "description": "Service Shipment or Service Invoice created by this call."
+                },
+                {
+                  "name": "amount",
+                  "type": "number",
+                  "description": "Invoices only."
+                },
+                {
+                  "name": "amountIncludingVAT",
+                  "type": "number",
+                  "description": "Invoices only."
+                },
+                {
+                  "name": "custLedgerEntryNo",
+                  "type": "integer",
+                  "description": "Invoices only."
+                }
+              ]
+            },
+            {
+              "name": "lines",
+              "type": "array",
+              "description": "Remaining order lines; empty when the order was deleted.",
+              "children": [
+                {
+                  "name": "lineNo",
+                  "type": "number",
+                  "description": "Quantities on the remaining order line."
+                },
+                {
+                  "name": "quantity",
+                  "type": "number",
+                  "description": "Quantities on the remaining order line."
+                },
+                {
+                  "name": "quantityShipped",
+                  "type": "number",
+                  "description": "Quantities on the remaining order line."
+                },
+                {
+                  "name": "quantityConsumed",
+                  "type": "number",
+                  "description": "Quantities on the remaining order line."
+                },
+                {
+                  "name": "quantityInvoiced",
+                  "type": "number",
+                  "description": "Quantities on the remaining order line."
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "description": "Line type."
+                },
+                {
+                  "name": "no",
+                  "type": "string",
+                  "description": "Line number of the item, resource or cost."
+                }
+              ]
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "consume with invoice, consume without ship, or all three flags false.",
+            "fix": "The four combinations of the Business Central posting menu are Ship, Invoice, Ship and Invoice, and Ship and Consume."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "ship, consume or invoice is not a JSON boolean (null, a string or a number).",
+            "fix": "Send true or false, or leave the key out."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "There is nothing to post, or the service invoice posting policy of the user does not allow the combination.",
+            "fix": "Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set; ask an administrator to check User Setup."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central refused the posting (missing posting setup, closed period, blocked customer, item tracking); its text is returned and nothing was posted.",
+            "fix": "Correct the Business Central error and retry."
+          },
+          {
+            "code": "PermissionDenied",
+            "when": "Posting denied: the caller lacks the BIFROST SvcPost ori permission set.",
+            "fix": "Ask an administrator to assign BIFROST SvcPost ori."
+          },
+          {
+            "code": "ConfirmationRequired",
+            "when": "expectedCount (1) was not sent.",
+            "fix": "Send expectedCount 1."
+          },
+          {
+            "code": "ConfirmationMismatch",
+            "when": "expectedCount differs from the one order selected.",
+            "fix": "Send expectedCount 1."
+          }
+        ],
+        "effect": {
+          "effect": "irreversible",
+          "idempotent": false,
+          "permissionSet": "BIFROST SvcPost ori",
+          "preconditions": "Quantities on the lines (Qty. to Ship, Qty. to Consume, Qty. to Invoice); posting setup; a service invoice posting policy that allows the combination.",
+          "changes": "Posts the service order through Service-Post: shipments, consumption and invoices are created, ledger entries are written and a fully posted order is deleted. This call commits and cannot be undone. Needs expectedCount only when enabled in Bifrost Setup (on by default; an administrator can turn it off per company); always checked when sent. When enabled, call without it to see the preview."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.PreviewPost",
+            "useInsteadWhen": "You want to see the entries first."
+          },
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "The order must be released for warehouse handling."
+          },
+          {
+            "name": "Service.Allocation.Allocate",
+            "useInsteadWhen": "Allocate a resource before service starts."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Set Qty. to Ship, Qty. to Consume and Qty. to Invoice on the service lines."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Quote.MakeOrder",
+              "purpose": "Convert an accepted quote; this call commits."
+            },
+            {
+              "messageType": "Service.Allocation.Allocate",
+              "purpose": "Allocate or reallocate a resource on a service order."
+            },
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation, release and reopen are provided. Posting is delivered by the subsequent lifecycle story."
+        },
+        "examples": [
+          {
+            "title": "Ship and invoice (default)",
+            "request": {
+              "type": "Service.Order.Post",
+              "data": {
+                "no": "SVC-ORDER1",
+                "expectedCount": 1
+              }
+            },
+            "response": {
+              "status": "Success",
+              "documentNo": "SVC-ORDER1",
+              "customerNo": "10000",
+              "customerName": "Adatum",
+              "ship": true,
+              "consume": false,
+              "invoice": true,
+              "postedDocuments": [
+                {
+                  "type": "Service Shipment",
+                  "no": "SVC-SHIP1"
+                },
+                {
+                  "type": "Service Invoice",
+                  "no": "SVC-INV1"
+                }
+              ],
+              "serviceLedgerEntries": 2,
+              "orderDeleted": true,
+              "lines": []
+            }
+          },
+          {
+            "title": "Ship only",
+            "request": {
+              "type": "Service.Order.Post",
+              "data": {
+                "no": "SVC-ORDER1",
+                "ship": true,
+                "expectedCount": 1
+              }
+            },
+            "response": {
+              "status": "Success",
+              "documentNo": "SVC-ORDER1",
+              "ship": true,
+              "consume": false,
+              "invoice": false
+            }
+          },
+          {
+            "title": "Invoice what was shipped",
+            "request": {
+              "type": "Service.Order.Post",
+              "data": {
+                "no": "SVC-ORDER1",
+                "invoice": true,
+                "expectedCount": 1
+              }
+            },
+            "response": {
+              "status": "Success",
+              "documentNo": "SVC-ORDER1",
+              "ship": false,
+              "consume": false,
+              "invoice": true
+            }
+          },
+          {
+            "title": "Ship and consume",
+            "request": {
+              "type": "Service.Order.Post",
+              "data": {
+                "no": "SVC-ORDER1",
+                "ship": true,
+                "consume": true,
+                "expectedCount": 1
+              }
+            },
+            "response": {
+              "status": "Success",
+              "documentNo": "SVC-ORDER1",
+              "ship": true,
+              "consume": true,
+              "invoice": false
+            }
+          }
+        ],
+        "overview": "Posts a service order with the standard Business Central service posting: ship, ship and consume, ship and invoice, or invoice what was shipped. Send expectedCount 1. This call commits.",
+        "notes": "This call commits, including when Omit Commit is requested; Business Central's own commit in Service-Post is kept. In an AL rollback chain (Omit Commit), a native posting error is raised to the caller unchanged so its transaction can roll back; normal calls return BusinessCentralError JSON. Not retry-safe: after success the posted quantities are gone and a fully posted order is deleted. Stand-alone service invoices and credit memos, batch posting, post and print or send, and undo are out of scope. Set the posting date and quantities on the order with Data.Records.Set before posting; the posted-quantity fields themselves are refused there."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:05.337Z",
+    "tool": "get_message_type_help",
+    "args": {
+      "messageType": "Service.Order.PreviewPost",
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.PreviewPost",
+      "status": "Success",
+      "contract": "json",
+      "format": "chapters",
+      "catalogue": {
+        "name": "Service.Order.PreviewPost",
+        "isEnabled": true,
+        "filterTableNo": 5900,
+        "description": "Shows the entries that posting a service order would create. Changes nothing.",
+        "selectionDescription": "Shows the entries that posting a service order would create. Changes nothing.",
+        "messageDirection": "Both",
+        "keywords": [
+          "preview service order posting",
+          "simulate posting",
+          "what would post",
+          "check before invoicing a service order"
+        ],
+        "chargeable": true
+      },
+      "chapters": {
+        "envelope": {
+          "subject": {
+            "use": "documentNo",
+            "description": "Optional plain service document number. Every supplied identifier must agree."
+          },
+          "dataRequired": false,
+          "version": "1.0",
+          "contentType": "text/json"
+        },
+        "target": [
+          {
+            "source": "data.no",
+            "form": "document no.",
+            "description": "Service document number in the message type's document scope."
+          },
+          {
+            "source": "data.systemId",
+            "form": "guid",
+            "description": "Service Header SystemId. The document type must match the message type."
+          },
+          {
+            "source": "subject",
+            "form": "document no.",
+            "description": "Plain service document number, as an alternative to data.no."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "type": "string",
+            "required": false,
+            "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+          },
+          {
+            "name": "systemId",
+            "type": "string",
+            "required": false,
+            "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+          },
+          {
+            "name": "ship",
+            "type": "boolean",
+            "required": false,
+            "description": "Post the shipment (Qty. to Ship on the lines). When none of ship, consume and invoice is sent, ship and invoice are both true. A flag that is not sent is false once another flag is sent."
+          },
+          {
+            "name": "consume",
+            "type": "boolean",
+            "required": false,
+            "description": "Post consumption (Qty. to Consume). Only together with ship = true, never with invoice. Default false."
+          },
+          {
+            "name": "invoice",
+            "type": "boolean",
+            "required": false,
+            "description": "Post the invoice (Qty. to Invoice). Send invoice alone to invoice what was shipped."
+          }
+        ],
+        "response": {
+          "contentType": "text/json",
+          "fields": [
+            {
+              "name": "status",
+              "type": "string",
+              "description": "Success."
+            },
+            {
+              "name": "entryCount",
+              "type": "integer",
+              "description": "Captured entries across every preview table, and the G/L entries among them."
+            },
+            {
+              "name": "glEntryCount",
+              "type": "integer",
+              "description": "Captured entries across every preview table, and the G/L entries among them."
+            },
+            {
+              "name": "rollback",
+              "type": "boolean",
+              "description": "Always true: nothing was posted."
+            },
+            {
+              "name": "summary",
+              "type": "string",
+              "description": "One-sentence summary and the previewed order."
+            },
+            {
+              "name": "documentNo",
+              "type": "string",
+              "description": "One-sentence summary and the previewed order."
+            },
+            {
+              "name": "ship",
+              "type": "boolean",
+              "description": "The options previewed."
+            },
+            {
+              "name": "consume",
+              "type": "boolean",
+              "description": "The options previewed."
+            },
+            {
+              "name": "invoice",
+              "type": "boolean",
+              "description": "The options previewed."
+            },
+            {
+              "name": "totals",
+              "type": "object",
+              "description": "G/L totals over the captured entries."
+            },
+            {
+              "name": "preview",
+              "type": "array",
+              "description": "One element per ledger table the preview filled, in the Data.Records.Get entry shape."
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "MissingParameter",
+            "when": "No document identifier was supplied.",
+            "fix": "Send no, systemId or a plain subject."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "An identifier is empty, too long or identifies the wrong document type.",
+            "fix": "Use an identifier in the documented document scope."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "An identifier is not a JSON string or systemId is not a GUID.",
+            "fix": "Correct the identifier type and format."
+          },
+          {
+            "code": "RecordNotFound",
+            "when": "The service document was not found.",
+            "fix": "Read Service Header with Data.Records.Get."
+          },
+          {
+            "code": "ConflictingIdentifiers",
+            "when": "Identifiers name different service documents.",
+            "fix": "Send identifiers belonging to the same document."
+          },
+          {
+            "code": "MultipleErrors",
+            "when": "Several declared parameters are invalid; nothing changed.",
+            "fix": "Correct each returned parameter error."
+          },
+          {
+            "code": "UnknownParameter",
+            "when": "Foundation rejected an undeclared parameter before executing the message type.",
+            "fix": "Remove the undeclared parameter."
+          },
+          {
+            "code": "InvalidParameter",
+            "when": "consume with invoice, consume without ship, or all three flags false.",
+            "fix": "The four combinations of the Business Central posting menu are Ship, Invoice, Ship and Invoice, and Ship and Consume."
+          },
+          {
+            "code": "InvalidParameterFormat",
+            "when": "ship, consume or invoice is not a JSON boolean (null, a string or a number).",
+            "fix": "Send true or false, or leave the key out."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "There is nothing to post, or the service invoice posting policy of the user does not allow the combination.",
+            "fix": "Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set; ask an administrator to check User Setup."
+          },
+          {
+            "code": "BusinessCentralError",
+            "when": "Business Central refused the posting (missing posting setup, closed period, blocked customer, item tracking); its text is returned and nothing was posted.",
+            "fix": "Correct the Business Central error and retry."
+          },
+          {
+            "code": "PreconditionFailed",
+            "when": "Preview needs its own transaction and cannot run under Omit Commit.",
+            "fix": "Run the preview without Omit Commit."
+          }
+        ],
+        "effect": {
+          "effect": "read",
+          "changes": "Nothing: the preview runs through Business Central's posting preview and the transaction is rolled back. No entry, posted document or number-series use remains.",
+          "idempotent": true,
+          "permissionSet": "BIFROST SvcPost ori",
+          "preconditions": "Quantities on the lines for the chosen options."
+        },
+        "metering": {
+          "chargeable": true,
+          "chargedAs": "message"
+        },
+        "related": [
+          {
+            "name": "Service.Order.Post",
+            "useInsteadWhen": "You want to post for real."
+          },
+          {
+            "name": "Service.Order.Release",
+            "useInsteadWhen": "The order must be released for warehouse handling."
+          },
+          {
+            "name": "Service.Allocation.Allocate",
+            "useInsteadWhen": "Allocate a resource before service starts."
+          },
+          {
+            "name": "Data.Records.Set",
+            "useInsteadWhen": "Set Qty. to Ship, Qty. to Consume and Qty. to Invoice on the service lines."
+          }
+        ],
+        "workflow": {
+          "steps": [
+            {
+              "messageType": "Service.Quote.MakeOrder",
+              "purpose": "Convert an accepted quote; this call commits."
+            },
+            {
+              "messageType": "Service.Allocation.Allocate",
+              "purpose": "Allocate or reallocate a resource on a service order."
+            },
+            {
+              "messageType": "Service.Order.Release",
+              "purpose": "Release an open order for warehouse handling."
+            },
+            {
+              "messageType": "Service.Order.Reopen",
+              "purpose": "Reopen a released order when further edits are needed."
+            }
+          ],
+          "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation, release and reopen are provided. Posting is delivered by the subsequent lifecycle story."
+        },
+        "examples": [
+          {
+            "title": "Preview ship and invoice",
+            "request": {
+              "type": "Service.Order.PreviewPost",
+              "data": {
+                "no": "SVC-ORDER1"
+              }
+            },
+            "response": {
+              "status": "Success",
+              "entryCount": 6,
+              "glEntryCount": 3,
+              "rollback": true,
+              "documentNo": "SVC-ORDER1",
+              "ship": true,
+              "consume": false,
+              "invoice": true
+            }
+          }
+        ],
+        "overview": "Simulates posting a service order and returns every ledger entry the posting would create, then rolls back. Use it before Service.Order.Post; nothing is changed.",
+        "notes": "The type is listed only for callers holding BIFROST SvcPost ori but runs no posting gate itself. In a preview Business Central writes the placeholder *** as every Document No. Under Omit Commit the preview is refused because it needs its own transaction."
+      },
+      "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:05.708Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Header",
+      "filter": "WHERE(Description=CONST(Dainn worker7 issue7 MCP 1033))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Header",
+      "skip": 0,
+      "take": 100,
+      "count": 1,
+      "records": [
+        {
+          "id": "2A5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "No_": "XA946F4B36E2000001"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoName": "GL00000209",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ShiptoName": "GL00000209",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-01",
+            "PostingDate": "2026-11-01",
+            "PostingDescription": "Order XA946F4B36E2000001",
+            "PaymentTermsCode": "COD",
+            "DueDate": "2026-11-01",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "2026-11-01",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "X07A7E3B91CB44C66BCB",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "",
+            "PostingNo_": "",
+            "LastShippingNo_": "",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "CombineShipments": "false",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "GL00000209",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-01",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "ACCOUNT",
+            "ShippingAgentCode": "",
+            "No_Series": "XA946F4B36E2F4307A31",
+            "PostingNo_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "Reserve": "Optional",
+            "AppliestoID": "",
+            "VATBaseDiscount_": "0",
+            "Status": "Pending",
+            "InvoiceDiscountCalculation": "None",
+            "InvoiceDiscountValue": "0",
+            "CompanyBankAccountCode": "",
+            "ReleaseStatus": "Open",
+            "VATReportingDate": "2026-11-01",
+            "IncomingDocumentEntryNo_": "0",
+            "TaxSystemType": "VAT",
+            "JournalTempl_Name": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DirectDebitMandateID": "",
+            "Doc_No_Occurrence": "1",
+            "ContactNo_": "CT000133",
+            "BilltoContactNo_": "CT000133",
+            "ResponsibilityCenter": "",
+            "ShippingAdvice": "Partial",
+            "ShippingTime": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Dainn worker7 issue7 MCP 1033",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "14:04:58.263",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "",
+            "ResponseTime": "",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "AssignedUserID": "",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-04T14:04:58.287Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:04:58.977Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 1
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:06.266Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.Post",
+      "data": {
+        "no": "XA946F4B36E2000001",
+        "ship": true,
+        "invoice": true
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "status": "Error",
+      "code": "ConfirmationRequired",
+      "error": "This call cannot be undone and was not run. It would affect 1 (service order XA946F4B36E2000001 (ship and invoice)). Nothing was changed.",
+      "parameter": "expectedCount",
+      "expected": "1",
+      "nextStep": "Send the same request again with expectedCount set to 1.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Post\". Always read the help before calling a message type."
+    },
+    "isError": true
+  },
+  {
+    "at": "2026-11-04T14:37:06.751Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.Post",
+      "data": {
+        "no": "XA946F4B36E2000001",
+        "ship": true,
+        "invoice": true,
+        "expectedCount": 2
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "status": "Error",
+      "code": "ConfirmationMismatch",
+      "error": "You sent expectedCount 2, but the call would now affect 1 (service order XA946F4B36E2000001 (ship and invoice)). Nothing was changed.",
+      "parameter": "expectedCount",
+      "received": "2",
+      "expected": "1",
+      "nextStep": "Check the preview and send expectedCount 1 if that is what you want.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Post\". Always read the help before calling a message type."
+    },
+    "isError": true
+  },
+  {
+    "at": "2026-11-04T14:37:07.257Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.Post",
+      "data": {
+        "no": "XA946F4B36E2000001",
+        "ship": true,
+        "consume": true,
+        "invoice": true,
+        "expectedCount": 1
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "status": "Error",
+      "code": "InvalidParameter",
+      "error": "consume and invoice cannot be posted together. Send ship and consume, or invoice.",
+      "parameter": "consume",
+      "received": "true",
+      "expected": "true",
+      "nextStep": "Send ship and consume, or invoice.",
+      "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Service.Order.Post\". Always read the help before calling a message type."
+    },
+    "isError": true
+  },
+  {
+    "at": "2026-11-04T14:37:08.122Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.PreviewPost",
+      "data": {
+        "no": "XA946F4B36E2000001",
+        "ship": true,
+        "invoice": true
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.PreviewPost",
+      "status": "Success",
+      "entryCount": 16,
+      "glEntryCount": 4,
+      "rollback": true,
+      "summary": "Preview-posting service order XA946F4B36E2000001 (ship and invoice) would create 16 ledger entries across 8 tables. Transaction is balanced.",
+      "documentNo": "XA946F4B36E2000001",
+      "ship": true,
+      "consume": false,
+      "invoice": true,
+      "totals": {
+        "balanced": true,
+        "totalDebitLCY": 52,
+        "totalCreditLCY": 52
+      },
+      "preview": [
+        {
+          "tableId": 17,
+          "tableName": "G/L Entry",
+          "tableCaption": "G/L Entry",
+          "entryCount": 4,
+          "entries": [
+            {
+              "id": "6FAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "4311"
+              },
+              "fields": {
+                "G_LAccountNo_": "6110",
+                "Description": "Order XA946F4B36E2000001",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_PostingType": "Sale",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "-30",
+                "DebitAmount": "0",
+                "CreditAmount": "30",
+                "VATAmount": "0",
+                "Bal_AccountType": "G/L Account",
+                "Bal_AccountNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "VATBus_PostingGroup": "DOMESTIC",
+                "VATProd_PostingGroup": "NO TAX",
+                "Quantity": "0",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0",
+                "JobNo_": ""
+              }
+            },
+            {
+              "id": "72AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "4312"
+              },
+              "fields": {
+                "G_LAccountNo_": "6110",
+                "Description": "Order XA946F4B36E2000001",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_PostingType": "Sale",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "-20",
+                "DebitAmount": "0",
+                "CreditAmount": "20",
+                "VATAmount": "-2",
+                "Bal_AccountType": "G/L Account",
+                "Bal_AccountNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "VATBus_PostingGroup": "DOMESTIC",
+                "VATProd_PostingGroup": "REDUCED",
+                "Quantity": "0",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0",
+                "JobNo_": ""
+              }
+            },
+            {
+              "id": "73AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "4313"
+              },
+              "fields": {
+                "G_LAccountNo_": "5611",
+                "Description": "Order XA946F4B36E2000001",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_PostingType": " ",
+                "Gen_Bus_PostingGroup": "",
+                "Gen_Prod_PostingGroup": "",
+                "Amount": "-2",
+                "DebitAmount": "0",
+                "CreditAmount": "2",
+                "VATAmount": "0",
+                "Bal_AccountType": "G/L Account",
+                "Bal_AccountNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "VATBus_PostingGroup": "",
+                "VATProd_PostingGroup": "",
+                "Quantity": "0",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0",
+                "JobNo_": ""
+              }
+            },
+            {
+              "id": "77AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "4314"
+              },
+              "fields": {
+                "G_LAccountNo_": "2310",
+                "Description": "Order XA946F4B36E2000001",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_PostingType": " ",
+                "Gen_Bus_PostingGroup": "",
+                "Gen_Prod_PostingGroup": "",
+                "Amount": "52",
+                "DebitAmount": "52",
+                "CreditAmount": "0",
+                "VATAmount": "0",
+                "Bal_AccountType": "G/L Account",
+                "Bal_AccountNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "VATBus_PostingGroup": "",
+                "VATProd_PostingGroup": "",
+                "Quantity": "0",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0",
+                "JobNo_": ""
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 21,
+          "tableName": "Cust. Ledger Entry",
+          "tableCaption": "Cust. Ledger Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "75AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "4314"
+              },
+              "fields": {
+                "Description": "Order XA946F4B36E2000001",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Amount": "52",
+                "DebitAmount": "0",
+                "CreditAmount": "0",
+                "Bal_AccountType": "G/L Account",
+                "Bal_AccountNo_": "",
+                "DimensionSetID": [],
+                "ClosedbyEntryNo_": "0",
+                "Open": "true",
+                "MessagetoRecipient": "",
+                "CurrencyCode": "GBP",
+                "DueDate": "2026-11-01",
+                "Pmt_DiscountDate": "2026-11-01",
+                "OriginalPmt_Disc_Possible": "0",
+                "RemainingPmt_Disc_Possible": "0",
+                "PaymentMethodCode": "ACCOUNT",
+                "OnHold": "",
+                "AmountLCY": "52",
+                "RemainingAmount": "52",
+                "RemainingAmt_LCY": "52",
+                "OriginalAmount": "52",
+                "OriginalAmt_LCY": "52",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SalespersonCode": "",
+                "Pmt_Disc_ToleranceDate": "2026-11-01",
+                "Max_PaymentTolerance": "0",
+                "ExportedtoPaymentFile": "false",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 32,
+          "tableName": "Item Ledger Entry",
+          "tableCaption": "Item Ledger Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "65AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "869"
+              },
+              "fields": {
+                "Description": "",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Service Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "Country_RegionCode": "",
+                "ItemNo_": "XF88175DB738541CABDF",
+                "EntryType": "Sale",
+                "SerialNo_": "",
+                "LotNo_": "",
+                "PackageNo_": "",
+                "LocationCode": "",
+                "Quantity": "-2",
+                "InvoicedQuantity": "-2",
+                "RemainingQuantity": "-2",
+                "Open": "true",
+                "OrderType": "Service",
+                "SalesAmountExpected": "0",
+                "SalesAmountActual": "20",
+                "CostAmountExpected": "0",
+                "CostAmountActual": "0",
+                "CostAmountNonInvtbl_": "0",
+                "CostAmountExpectedACY": "0",
+                "CostAmountActualACY": "0",
+                "CostAmountNonInvtbl_ACY": "0",
+                "ItemLedgerEntryQuantity": "0",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": ""
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 203,
+          "tableName": "Res. Ledger Entry",
+          "tableCaption": "Res. Ledger Entry",
+          "entryCount": 2,
+          "entries": [
+            {
+              "id": "6BAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "108"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "EntryType": "Usage",
+                "Quantity": "3",
+                "OrderType": "Service",
+                "JobNo_": "",
+                "UnitCost": "25",
+                "TotalCost": "75",
+                "UnitPrice": "10",
+                "TotalPrice": "30",
+                "ResourceNo_": "X7D80082BCAE244DBAF8",
+                "Chargeable": "true"
+              }
+            },
+            {
+              "id": "6CAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "109"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "EntryType": "Sale",
+                "Quantity": "-3",
+                "OrderType": "Service",
+                "JobNo_": "",
+                "UnitCost": "25",
+                "TotalCost": "-75",
+                "UnitPrice": "10",
+                "TotalPrice": "-30",
+                "ResourceNo_": "X7D80082BCAE244DBAF8",
+                "Chargeable": "true"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 254,
+          "tableName": "VAT Entry",
+          "tableCaption": "VAT Entry",
+          "entryCount": 2,
+          "entries": [
+            {
+              "id": "6EAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "609"
+              },
+              "fields": {
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "0",
+                "VATBus_PostingGroup": "DOMESTIC",
+                "VATProd_PostingGroup": "NO TAX",
+                "Type": "Sale",
+                "Base": "-30",
+                "VATCalculationType": "Normal VAT",
+                "Billto_PaytoNo_": "X07A7E3B91CB44C66BCB",
+                "Country_RegionCode": "",
+                "EU3PartyTrade": "false",
+                "Closed": "false",
+                "ClosedbyEntryNo_": "0",
+                "InternalRef_No_": "",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0"
+              }
+            },
+            {
+              "id": "71AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "610"
+              },
+              "fields": {
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "-2",
+                "VATBus_PostingGroup": "DOMESTIC",
+                "VATProd_PostingGroup": "REDUCED",
+                "Type": "Sale",
+                "Base": "-20",
+                "VATCalculationType": "Normal VAT",
+                "Billto_PaytoNo_": "X07A7E3B91CB44C66BCB",
+                "Country_RegionCode": "",
+                "EU3PartyTrade": "false",
+                "Closed": "false",
+                "ClosedbyEntryNo_": "0",
+                "InternalRef_No_": "",
+                "Reversed": "false",
+                "ReversedbyEntryNo_": "0",
+                "ReversedEntryNo_": "0"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 379,
+          "tableName": "Detailed Cust. Ledg. Entry",
+          "tableCaption": "Detailed Cust. Ledg. Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "76AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "1179"
+              },
+              "fields": {
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "Gen_Bus_PostingGroup": "",
+                "Gen_Prod_PostingGroup": "",
+                "Amount": "52",
+                "DebitAmount": "52",
+                "CreditAmount": "0",
+                "VATBus_PostingGroup": "",
+                "VATProd_PostingGroup": "",
+                "EntryType": "Initial Entry",
+                "CurrencyCode": "GBP",
+                "RemainingPmt_Disc_Possible": "0",
+                "AmountLCY": "52",
+                "InitialEntryDueDate": "2026-11-01",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "Max_PaymentTolerance": "0",
+                "Cust_LedgerEntryNo_": "4314",
+                "Unapplied": "false"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 5802,
+          "tableName": "Value Entry",
+          "tableCaption": "Value Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "67AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "905"
+              },
+              "fields": {
+                "Description": "",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Service Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "Type": " ",
+                "ItemNo_": "XF88175DB738541CABDF",
+                "EntryType": "Direct Cost",
+                "LocationCode": "",
+                "InvoicedQuantity": "-2",
+                "OrderType": "Service",
+                "SalesAmountExpected": "0",
+                "SalesAmountActual": "20",
+                "CostAmountExpected": "0",
+                "CostAmountActual": "0",
+                "CostAmountNonInvtbl_": "0",
+                "CostAmountExpectedACY": "0",
+                "CostAmountActualACY": "0",
+                "CostAmountNonInvtbl_ACY": "0",
+                "ItemLedgerEntryType": "Sale",
+                "Adjustment": "false",
+                "ItemChargeNo_": "",
+                "CostPostedtoG_L": "0",
+                "ItemLedgerEntryQuantity": "-2",
+                "ValuedQuantity": "-2",
+                "CostperUnit": "0",
+                "ValuedByAverageCost": "false",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "No_": "",
+                "DiscountAmount": "0"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 5907,
+          "tableName": "Service Ledger Entry",
+          "tableCaption": "Service Ledger Entry",
+          "entryCount": 4,
+          "entries": [
+            {
+              "id": "62AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "193"
+              },
+              "fields": {
+                "Description": "GL00000210",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "20",
+                "DimensionSetID": [],
+                "Type": "Item",
+                "EntryType": "Usage",
+                "LocationCode": "",
+                "Quantity": "2",
+                "Open": "false",
+                "AmountLCY": "20",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "0",
+                "UnitPrice": "10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "XF88175DB738541CABDF",
+                "CostAmount": "0",
+                "DiscountAmount": "0",
+                "ChargedQty_": "2",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "63AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "194"
+              },
+              "fields": {
+                "Description": "GL00000210",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "-20",
+                "DimensionSetID": [],
+                "Type": "Item",
+                "EntryType": "Sale",
+                "LocationCode": "",
+                "Quantity": "-2",
+                "Open": "false",
+                "AmountLCY": "-20",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "0",
+                "UnitPrice": "-10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "XF88175DB738541CABDF",
+                "CostAmount": "0",
+                "DiscountAmount": "0",
+                "ChargedQty_": "-2",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "68AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "195"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "30",
+                "DimensionSetID": [],
+                "Type": "Resource",
+                "EntryType": "Usage",
+                "LocationCode": "",
+                "Quantity": "3",
+                "Open": "false",
+                "AmountLCY": "30",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "25",
+                "UnitPrice": "10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "X7D80082BCAE244DBAF8",
+                "CostAmount": "75",
+                "DiscountAmount": "0",
+                "ChargedQty_": "3",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "69AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "196"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Invoice",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "-30",
+                "DimensionSetID": [],
+                "Type": "Resource",
+                "EntryType": "Sale",
+                "LocationCode": "",
+                "Quantity": "-3",
+                "Open": "false",
+                "AmountLCY": "-30",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "-25",
+                "UnitPrice": "-10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "X7D80082BCAE244DBAF8",
+                "CostAmount": "-75",
+                "DiscountAmount": "0",
+                "ChargedQty_": "-3",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:08.382Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Shipment Header",
+      "filter": "WHERE(Order No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Shipment Header",
+      "skip": 0,
+      "take": 100,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:09.626Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Line",
+      "filter": "WHERE(Document Type=CONST(Order),Document No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Line",
+      "skip": 0,
+      "take": 100,
+      "count": 2,
+      "records": [
+        {
+          "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "10000"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "LocationCode": "",
+            "PostingGroup": "FINISHED",
+            "Description": "GL00000210",
+            "Description2": "",
+            "UnitofMeasure": "Bag",
+            "Quantity": "2",
+            "OutstandingQuantity": "2",
+            "Qty_toInvoice": "2",
+            "Qty_toShip": "2",
+            "UnitPrice": "10",
+            "UnitCostLCY": "0",
+            "VAT_": "10",
+            "LineDiscount_": "0",
+            "LineDiscountAmount": "0",
+            "Amount": "20",
+            "AmountIncludingVAT": "22",
+            "AllowInvoiceDisc_": "true",
+            "GrossWeight": "0",
+            "NetWeight": "0",
+            "UnitsperParcel": "0",
+            "UnitVolume": "0",
+            "Appl_toItemEntry": "0",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPriceGroup": "",
+            "JobNo_": "",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "WorkTypeCode": "",
+            "OutstandingAmount": "22",
+            "Qty_ShippedNotInvoiced": "0",
+            "ShippedNotInvoiced": "0",
+            "QuantityShipped": "0",
+            "QuantityInvoiced": "0",
+            "ShipmentNo_": "",
+            "ShipmentLineNo_": "0",
+            "OrderNo_": "",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Inv_DiscountAmount": "0",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "VATCalculationType": "Normal VAT",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "AttachedtoLineNo_": "0",
+            "ExitPoint": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "TaxGroupCode": "",
+            "VATClauseCode": "REDUCED",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATProd_PostingGroup": "REDUCED",
+            "CurrencyCode": "GBP",
+            "OutstandingAmountLCY": "22",
+            "ShippedNotInvoicedLCY": "0",
+            "Reserve": "Optional",
+            "VATBaseAmount": "20",
+            "UnitCost": "0",
+            "SystemCreatedEntry": "false",
+            "LineAmount": "20",
+            "VATDifference": "0",
+            "Inv_Disc_AmounttoInvoice": "0",
+            "VATIdentifier": "REDUCED",
+            "Pmt_DiscountAmount": "0",
+            "DimensionSetID": [],
+            "TimeSheetNo_": "",
+            "TimeSheetLineNo_": "0",
+            "TimeSheetDate": "",
+            "JobPlanningLineNo_": "0",
+            "JobRemainingQty_": "0",
+            "JobRemainingQty_Base": "0",
+            "JobRemainingTotalCost": "0",
+            "JobRemainingTotalCostLCY": "0",
+            "JobRemainingLineAmount": "0",
+            "VariantCode": "",
+            "BinCode": "",
+            "Qty_perUnitofMeasure": "1",
+            "Planned": "false",
+            "UnitofMeasureCode": "BAG",
+            "Qty_RoundingPrecision": "0",
+            "Qty_RoundingPrecisionBase": "0",
+            "QuantityBase": "2",
+            "OutstandingQty_Base": "2",
+            "Qty_toInvoiceBase": "2",
+            "Qty_toShipBase": "2",
+            "Qty_ShippedNotInvd_Base": "0",
+            "Qty_ShippedBase": "0",
+            "Qty_InvoicedBase": "0",
+            "ResponsibilityCenter": "",
+            "ItemCategoryCode": "",
+            "Nonstock": "false",
+            "ItemReferenceNo_": "",
+            "ItemReferenceUnitofMeasure": "",
+            "ItemReferenceType": " ",
+            "ItemReferenceTypeNo_": "",
+            "CompletelyShipped": "false",
+            "RequestedDeliveryDate": "",
+            "PromisedDeliveryDate": "",
+            "ShippingTime": "",
+            "PlannedDeliveryDate": "2026-11-01",
+            "ShippingAgentCode": "",
+            "ShippingAgentServiceCode": "",
+            "Appl_fromItemEntry": "0",
+            "ServiceItemNo_": "XA946F4B36E2000002",
+            "Appl_toServiceEntry": "0",
+            "ServiceItemLineNo_": "10000",
+            "ServiceItemSerialNo_": "",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "PostingDate": "2026-11-01",
+            "OrderDate": "2026-11-01",
+            "NeededbyDate": "2026-11-01",
+            "ShiptoCode": "",
+            "Qty_toConsume": "0",
+            "QuantityConsumed": "0",
+            "Qty_toConsumeBase": "0",
+            "Qty_ConsumedBase": "0",
+            "ServicePriceGroupCode": "",
+            "FaultAreaCode": "",
+            "SymptomCode": "",
+            "FaultCode": "",
+            "ResolutionCode": "",
+            "ExcludeWarranty": "false",
+            "Warranty": "false",
+            "ContractNo_": "",
+            "ContractDisc__": "0",
+            "WarrantyDisc__": "0",
+            "ComponentLineNo_": "0",
+            "SparePartAction": " ",
+            "FaultReasonCode": "",
+            "ReplacedItemNo_": "",
+            "ExcludeContractDiscount": "false",
+            "ReplacedItemType": " ",
+            "PriceAdjmt_Status": " ",
+            "LineDiscountType": "",
+            "CopyComponentsFrom": "None",
+            "Sust_AccountNo_": "",
+            "Sust_AccountName": "",
+            "Sust_AccountCategory": "",
+            "Sust_AccountSubcategory": "",
+            "CO2eperUnit": "0",
+            "TotalCO2e": "0",
+            "PostedTotalCO2e": "0",
+            "ReturnReasonCode": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "CustomerDisc_Group": "",
+            "Qty_Picked": "0",
+            "Qty_PickedBase": "0",
+            "CompletelyPicked": "false",
+            "PickQty_Base": "0",
+            "SystemCreatedAt": "2026-11-04T14:04:58.72Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:04:58.793Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "20000"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "LocationCode": "",
+            "PostingGroup": "",
+            "Description": "GU00000251",
+            "Description2": "",
+            "UnitofMeasure": "Bag",
+            "Quantity": "3",
+            "OutstandingQuantity": "3",
+            "Qty_toInvoice": "3",
+            "Qty_toShip": "3",
+            "UnitPrice": "10",
+            "UnitCostLCY": "25",
+            "VAT_": "0",
+            "LineDiscount_": "0",
+            "LineDiscountAmount": "0",
+            "Amount": "30",
+            "AmountIncludingVAT": "30",
+            "AllowInvoiceDisc_": "true",
+            "GrossWeight": "0",
+            "NetWeight": "0",
+            "UnitsperParcel": "0",
+            "UnitVolume": "0",
+            "Appl_toItemEntry": "0",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPriceGroup": "",
+            "JobNo_": "",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "WorkTypeCode": "",
+            "OutstandingAmount": "30",
+            "Qty_ShippedNotInvoiced": "0",
+            "ShippedNotInvoiced": "0",
+            "QuantityShipped": "0",
+            "QuantityInvoiced": "0",
+            "ShipmentNo_": "",
+            "ShipmentLineNo_": "0",
+            "OrderNo_": "",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Inv_DiscountAmount": "0",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "VATCalculationType": "Normal VAT",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "AttachedtoLineNo_": "0",
+            "ExitPoint": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "TaxGroupCode": "",
+            "VATClauseCode": "NO TAX",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATProd_PostingGroup": "NO TAX",
+            "CurrencyCode": "GBP",
+            "OutstandingAmountLCY": "30",
+            "ShippedNotInvoicedLCY": "0",
+            "Reserve": "Never",
+            "VATBaseAmount": "30",
+            "UnitCost": "25",
+            "SystemCreatedEntry": "false",
+            "LineAmount": "30",
+            "VATDifference": "0",
+            "Inv_Disc_AmounttoInvoice": "0",
+            "VATIdentifier": "NO TAX",
+            "Pmt_DiscountAmount": "0",
+            "DimensionSetID": [],
+            "TimeSheetNo_": "",
+            "TimeSheetLineNo_": "0",
+            "TimeSheetDate": "",
+            "JobPlanningLineNo_": "0",
+            "JobRemainingQty_": "0",
+            "JobRemainingQty_Base": "0",
+            "JobRemainingTotalCost": "0",
+            "JobRemainingTotalCostLCY": "0",
+            "JobRemainingLineAmount": "0",
+            "VariantCode": "",
+            "BinCode": "",
+            "Qty_perUnitofMeasure": "1",
+            "Planned": "false",
+            "UnitofMeasureCode": "BAG",
+            "Qty_RoundingPrecision": "0",
+            "Qty_RoundingPrecisionBase": "0",
+            "QuantityBase": "3",
+            "OutstandingQty_Base": "3",
+            "Qty_toInvoiceBase": "3",
+            "Qty_toShipBase": "3",
+            "Qty_ShippedNotInvd_Base": "0",
+            "Qty_ShippedBase": "0",
+            "Qty_InvoicedBase": "0",
+            "ResponsibilityCenter": "",
+            "ItemCategoryCode": "",
+            "Nonstock": "false",
+            "ItemReferenceNo_": "",
+            "ItemReferenceUnitofMeasure": "",
+            "ItemReferenceType": " ",
+            "ItemReferenceTypeNo_": "",
+            "CompletelyShipped": "false",
+            "RequestedDeliveryDate": "",
+            "PromisedDeliveryDate": "",
+            "ShippingTime": "",
+            "PlannedDeliveryDate": "2026-11-01",
+            "ShippingAgentCode": "",
+            "ShippingAgentServiceCode": "",
+            "Appl_fromItemEntry": "0",
+            "ServiceItemNo_": "XA946F4B36E2000002",
+            "Appl_toServiceEntry": "0",
+            "ServiceItemLineNo_": "10000",
+            "ServiceItemSerialNo_": "",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "PostingDate": "2026-11-01",
+            "OrderDate": "2026-11-01",
+            "NeededbyDate": "2026-11-01",
+            "ShiptoCode": "",
+            "Qty_toConsume": "0",
+            "QuantityConsumed": "0",
+            "Qty_toConsumeBase": "0",
+            "Qty_ConsumedBase": "0",
+            "ServicePriceGroupCode": "",
+            "FaultAreaCode": "",
+            "SymptomCode": "",
+            "FaultCode": "",
+            "ResolutionCode": "",
+            "ExcludeWarranty": "false",
+            "Warranty": "false",
+            "ContractNo_": "",
+            "ContractDisc__": "0",
+            "WarrantyDisc__": "0",
+            "ComponentLineNo_": "0",
+            "SparePartAction": " ",
+            "FaultReasonCode": "",
+            "ReplacedItemNo_": "",
+            "ExcludeContractDiscount": "false",
+            "ReplacedItemType": " ",
+            "PriceAdjmt_Status": " ",
+            "LineDiscountType": "",
+            "CopyComponentsFrom": "None",
+            "Sust_AccountNo_": "",
+            "Sust_AccountName": "",
+            "Sust_AccountCategory": "",
+            "Sust_AccountSubcategory": "",
+            "CO2eperUnit": "0",
+            "TotalCO2e": "0",
+            "PostedTotalCO2e": "0",
+            "ReturnReasonCode": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "CustomerDisc_Group": "",
+            "Qty_Picked": "0",
+            "Qty_PickedBase": "0",
+            "CompletelyPicked": "false",
+            "PickQty_Base": "0",
+            "SystemCreatedAt": "2026-11-04T14:04:58.893Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:04:58.967Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 2
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:09.998Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Service Line",
+        "data": [
+          {
+            "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+            "fields": {
+              "Qty_toShip": 1,
+              "Qty_toConsume": 1
+            }
+          },
+          {
+            "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+            "fields": {
+              "Qty_toShip": 1,
+              "Qty_toConsume": 1
+            }
+          }
+        ]
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Set",
+      "result": [
+        {
+          "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "10000"
+          },
+          "fields": {
+            "Qty_toShip": "1",
+            "Qty_toConsume": "1"
+          }
+        },
+        {
+          "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "20000"
+          },
+          "fields": {
+            "Qty_toShip": "1",
+            "Qty_toConsume": "1"
+          }
+        }
+      ],
+      "status": "Success",
+      "insertedCount": 0,
+      "modifiedCount": 2
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:10.413Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.PreviewPost",
+      "data": {
+        "systemId": "2A5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+        "ship": true,
+        "consume": true
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.PreviewPost",
+      "status": "Success",
+      "entryCount": 7,
+      "glEntryCount": 0,
+      "rollback": true,
+      "summary": "Preview-posting service order XA946F4B36E2000001 (ship and consume) would create 7 ledger entries across 4 tables. No G/L entries would be posted.",
+      "documentNo": "XA946F4B36E2000001",
+      "ship": true,
+      "consume": true,
+      "invoice": false,
+      "totals": {
+        "totalDebitLCY": 0,
+        "totalCreditLCY": 0
+      },
+      "preview": [
+        {
+          "tableId": 32,
+          "tableName": "Item Ledger Entry",
+          "tableCaption": "Item Ledger Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "9FAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "870"
+              },
+              "fields": {
+                "Description": "",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Service Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "Country_RegionCode": "",
+                "ItemNo_": "XF88175DB738541CABDF",
+                "EntryType": "Negative Adjmt.",
+                "SerialNo_": "",
+                "LotNo_": "",
+                "PackageNo_": "",
+                "LocationCode": "",
+                "Quantity": "-1",
+                "InvoicedQuantity": "-1",
+                "RemainingQuantity": "-1",
+                "Open": "true",
+                "OrderType": "Service",
+                "SalesAmountExpected": "0",
+                "SalesAmountActual": "0",
+                "CostAmountExpected": "0",
+                "CostAmountActual": "0",
+                "CostAmountNonInvtbl_": "0",
+                "CostAmountExpectedACY": "0",
+                "CostAmountActualACY": "0",
+                "CostAmountNonInvtbl_ACY": "0",
+                "ItemLedgerEntryQuantity": "0",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": ""
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 203,
+          "tableName": "Res. Ledger Entry",
+          "tableCaption": "Res. Ledger Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "A5AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "110"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "EntryType": "Usage",
+                "Quantity": "1",
+                "OrderType": "Service",
+                "JobNo_": "",
+                "UnitCost": "25",
+                "TotalCost": "25",
+                "UnitPrice": "0",
+                "TotalPrice": "0",
+                "ResourceNo_": "X7D80082BCAE244DBAF8",
+                "Chargeable": "true"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 5802,
+          "tableName": "Value Entry",
+          "tableCaption": "Value Entry",
+          "entryCount": 1,
+          "entries": [
+            {
+              "id": "A1AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "906"
+              },
+              "fields": {
+                "Description": "",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Service Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "SourceType": "Customer",
+                "SourceNo_": "X07A7E3B91CB44C66BCB",
+                "DimensionSetID": [],
+                "Type": " ",
+                "ItemNo_": "XF88175DB738541CABDF",
+                "EntryType": "Direct Cost",
+                "LocationCode": "",
+                "InvoicedQuantity": "-1",
+                "OrderType": "Service",
+                "SalesAmountExpected": "0",
+                "SalesAmountActual": "0",
+                "CostAmountExpected": "0",
+                "CostAmountActual": "0",
+                "CostAmountNonInvtbl_": "0",
+                "CostAmountExpectedACY": "0",
+                "CostAmountActualACY": "0",
+                "CostAmountNonInvtbl_ACY": "0",
+                "ItemLedgerEntryType": "Negative Adjmt.",
+                "Adjustment": "false",
+                "ItemChargeNo_": "",
+                "CostPostedtoG_L": "0",
+                "ItemLedgerEntryQuantity": "-1",
+                "ValuedQuantity": "-1",
+                "CostperUnit": "0",
+                "ValuedByAverageCost": "false",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "No_": "",
+                "DiscountAmount": "0"
+              }
+            }
+          ]
+        },
+        {
+          "tableId": 5907,
+          "tableName": "Service Ledger Entry",
+          "tableCaption": "Service Ledger Entry",
+          "entryCount": 4,
+          "entries": [
+            {
+              "id": "9CAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "193"
+              },
+              "fields": {
+                "Description": "GL00000210",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "0",
+                "DimensionSetID": [],
+                "Type": "Item",
+                "EntryType": "Usage",
+                "LocationCode": "",
+                "Quantity": "1",
+                "Open": "false",
+                "AmountLCY": "0",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "0",
+                "UnitPrice": "10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "XF88175DB738541CABDF",
+                "CostAmount": "0",
+                "DiscountAmount": "0",
+                "ChargedQty_": "0",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "9DAAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "194"
+              },
+              "fields": {
+                "Description": "GL00000210",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MISC",
+                "Amount": "0",
+                "DimensionSetID": [],
+                "Type": "Item",
+                "EntryType": "Consume",
+                "LocationCode": "",
+                "Quantity": "-1",
+                "Open": "false",
+                "AmountLCY": "0",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "0",
+                "UnitPrice": "-10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "XF88175DB738541CABDF",
+                "CostAmount": "0",
+                "DiscountAmount": "0",
+                "ChargedQty_": "0",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "A2AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "195"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "0",
+                "DimensionSetID": [],
+                "Type": "Resource",
+                "EntryType": "Usage",
+                "LocationCode": "",
+                "Quantity": "1",
+                "Open": "false",
+                "AmountLCY": "0",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "25",
+                "UnitPrice": "10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "X7D80082BCAE244DBAF8",
+                "CostAmount": "25",
+                "DiscountAmount": "0",
+                "ChargedQty_": "0",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            },
+            {
+              "id": "A3AAB533-5DD8-F111-B7A5-83ACBC861B81",
+              "primaryKey": {
+                "EntryNo_": "196"
+              },
+              "fields": {
+                "Description": "GU00000251",
+                "PostingDate": "2026-11-01",
+                "DocumentType": "Shipment",
+                "DocumentNo_": "***",
+                "ExternalDocumentNo_": "",
+                "Gen_Bus_PostingGroup": "DOMESTIC",
+                "Gen_Prod_PostingGroup": "MANUFACT",
+                "Amount": "0",
+                "DimensionSetID": [],
+                "Type": "Resource",
+                "EntryType": "Consume",
+                "LocationCode": "",
+                "Quantity": "-1",
+                "Open": "false",
+                "AmountLCY": "0",
+                "CustomerNo_": "X07A7E3B91CB44C66BCB",
+                "JobNo_": "",
+                "JobTaskNo_": "",
+                "VariantCode": "",
+                "UnitCost": "-25",
+                "UnitPrice": "-10",
+                "ServiceContractNo_": "",
+                "ServiceOrderNo_": "XA946F4B36E2000001",
+                "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+                "ItemNo_Serviced": "",
+                "No_": "X7D80082BCAE244DBAF8",
+                "CostAmount": "-25",
+                "DiscountAmount": "0",
+                "ChargedQty_": "0",
+                "Discount_": "0",
+                "MovedfromPrepaidAcc_": "true",
+                "Serv_ContractAcc_Gr_Code": "",
+                "FaultReasonCode": "",
+                "ShiptoCode": "",
+                "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+                "SerialNo_Serviced": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:10.629Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Shipment Header",
+      "filter": "WHERE(Order No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Shipment Header",
+      "skip": 0,
+      "take": 100,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:11.000Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.Post",
+      "data": {
+        "systemId": "2A5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+        "ship": true,
+        "consume": true,
+        "expectedCount": 1
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Post",
+      "status": "Success",
+      "documentNo": "XA946F4B36E2000001",
+      "customerNo": "X07A7E3B91CB44C66BCB",
+      "customerName": "GL00000209",
+      "ship": true,
+      "consume": true,
+      "invoice": false,
+      "postedDocuments": [
+        {
+          "type": "Service Shipment",
+          "no": "PSVS000056",
+          "recordSystemId": "BBAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "postingDate": "2026-11-01"
+        }
+      ],
+      "serviceLedgerEntries": 4,
+      "orderDeleted": false,
+      "lines": [
+        {
+          "lineNo": 10000,
+          "type": "Item",
+          "no": "XF88175DB738541CABDF",
+          "quantity": 2,
+          "quantityShipped": 1,
+          "quantityConsumed": 1,
+          "quantityInvoiced": 0
+        },
+        {
+          "lineNo": 20000,
+          "type": "Resource",
+          "no": "X7D80082BCAE244DBAF8",
+          "quantity": 3,
+          "quantityShipped": 1,
+          "quantityConsumed": 1,
+          "quantityInvoiced": 0
+        }
+      ]
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:11.239Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Line",
+      "filter": "WHERE(Document Type=CONST(Order),Document No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Line",
+      "skip": 0,
+      "take": 100,
+      "count": 2,
+      "records": [
+        {
+          "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "10000"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "LocationCode": "",
+            "PostingGroup": "FINISHED",
+            "Description": "GL00000210",
+            "Description2": "",
+            "UnitofMeasure": "Bag",
+            "Quantity": "2",
+            "OutstandingQuantity": "1",
+            "Qty_toInvoice": "1",
+            "Qty_toShip": "1",
+            "UnitPrice": "10",
+            "UnitCostLCY": "0",
+            "VAT_": "10",
+            "LineDiscount_": "0",
+            "LineDiscountAmount": "0",
+            "Amount": "10",
+            "AmountIncludingVAT": "11",
+            "AllowInvoiceDisc_": "true",
+            "GrossWeight": "0",
+            "NetWeight": "0",
+            "UnitsperParcel": "0",
+            "UnitVolume": "0",
+            "Appl_toItemEntry": "0",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPriceGroup": "",
+            "JobNo_": "",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "WorkTypeCode": "",
+            "OutstandingAmount": "5.5",
+            "Qty_ShippedNotInvoiced": "0",
+            "ShippedNotInvoiced": "0",
+            "QuantityShipped": "1",
+            "QuantityInvoiced": "0",
+            "ShipmentNo_": "",
+            "ShipmentLineNo_": "0",
+            "OrderNo_": "",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Inv_DiscountAmount": "0",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "VATCalculationType": "Normal VAT",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "AttachedtoLineNo_": "0",
+            "ExitPoint": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "TaxGroupCode": "",
+            "VATClauseCode": "REDUCED",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATProd_PostingGroup": "REDUCED",
+            "CurrencyCode": "GBP",
+            "OutstandingAmountLCY": "5.5",
+            "ShippedNotInvoicedLCY": "0",
+            "Reserve": "Optional",
+            "VATBaseAmount": "10",
+            "UnitCost": "0",
+            "SystemCreatedEntry": "false",
+            "LineAmount": "10",
+            "VATDifference": "0",
+            "Inv_Disc_AmounttoInvoice": "0",
+            "VATIdentifier": "REDUCED",
+            "Pmt_DiscountAmount": "0",
+            "DimensionSetID": [],
+            "TimeSheetNo_": "",
+            "TimeSheetLineNo_": "0",
+            "TimeSheetDate": "",
+            "JobPlanningLineNo_": "0",
+            "JobRemainingQty_": "0",
+            "JobRemainingQty_Base": "0",
+            "JobRemainingTotalCost": "0",
+            "JobRemainingTotalCostLCY": "0",
+            "JobRemainingLineAmount": "0",
+            "VariantCode": "",
+            "BinCode": "",
+            "Qty_perUnitofMeasure": "1",
+            "Planned": "false",
+            "UnitofMeasureCode": "BAG",
+            "Qty_RoundingPrecision": "0",
+            "Qty_RoundingPrecisionBase": "0",
+            "QuantityBase": "2",
+            "OutstandingQty_Base": "1",
+            "Qty_toInvoiceBase": "1",
+            "Qty_toShipBase": "1",
+            "Qty_ShippedNotInvd_Base": "0",
+            "Qty_ShippedBase": "1",
+            "Qty_InvoicedBase": "0",
+            "ResponsibilityCenter": "",
+            "ItemCategoryCode": "",
+            "Nonstock": "false",
+            "ItemReferenceNo_": "",
+            "ItemReferenceUnitofMeasure": "",
+            "ItemReferenceType": " ",
+            "ItemReferenceTypeNo_": "",
+            "CompletelyShipped": "false",
+            "RequestedDeliveryDate": "",
+            "PromisedDeliveryDate": "",
+            "ShippingTime": "",
+            "PlannedDeliveryDate": "2026-11-01",
+            "ShippingAgentCode": "",
+            "ShippingAgentServiceCode": "",
+            "Appl_fromItemEntry": "0",
+            "ServiceItemNo_": "XA946F4B36E2000002",
+            "Appl_toServiceEntry": "0",
+            "ServiceItemLineNo_": "10000",
+            "ServiceItemSerialNo_": "",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "PostingDate": "2026-11-01",
+            "OrderDate": "2026-11-01",
+            "NeededbyDate": "2026-11-01",
+            "ShiptoCode": "",
+            "Qty_toConsume": "0",
+            "QuantityConsumed": "1",
+            "Qty_toConsumeBase": "0",
+            "Qty_ConsumedBase": "1",
+            "ServicePriceGroupCode": "",
+            "FaultAreaCode": "",
+            "SymptomCode": "",
+            "FaultCode": "",
+            "ResolutionCode": "",
+            "ExcludeWarranty": "false",
+            "Warranty": "false",
+            "ContractNo_": "",
+            "ContractDisc__": "0",
+            "WarrantyDisc__": "0",
+            "ComponentLineNo_": "0",
+            "SparePartAction": " ",
+            "FaultReasonCode": "",
+            "ReplacedItemNo_": "",
+            "ExcludeContractDiscount": "false",
+            "ReplacedItemType": " ",
+            "PriceAdjmt_Status": " ",
+            "LineDiscountType": "",
+            "CopyComponentsFrom": "None",
+            "Sust_AccountNo_": "",
+            "Sust_AccountName": "",
+            "Sust_AccountCategory": "",
+            "Sust_AccountSubcategory": "",
+            "CO2eperUnit": "0",
+            "TotalCO2e": "0",
+            "PostedTotalCO2e": "0",
+            "ReturnReasonCode": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "CustomerDisc_Group": "",
+            "Qty_Picked": "0",
+            "Qty_PickedBase": "0",
+            "CompletelyPicked": "false",
+            "PickQty_Base": "0",
+            "SystemCreatedAt": "2026-11-04T14:04:58.72Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.89Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "20000"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "LocationCode": "",
+            "PostingGroup": "",
+            "Description": "GU00000251",
+            "Description2": "",
+            "UnitofMeasure": "Bag",
+            "Quantity": "3",
+            "OutstandingQuantity": "2",
+            "Qty_toInvoice": "2",
+            "Qty_toShip": "2",
+            "UnitPrice": "10",
+            "UnitCostLCY": "25",
+            "VAT_": "0",
+            "LineDiscount_": "0",
+            "LineDiscountAmount": "0",
+            "Amount": "20",
+            "AmountIncludingVAT": "20",
+            "AllowInvoiceDisc_": "true",
+            "GrossWeight": "0",
+            "NetWeight": "0",
+            "UnitsperParcel": "0",
+            "UnitVolume": "0",
+            "Appl_toItemEntry": "0",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPriceGroup": "",
+            "JobNo_": "",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "WorkTypeCode": "",
+            "OutstandingAmount": "13.33",
+            "Qty_ShippedNotInvoiced": "0",
+            "ShippedNotInvoiced": "0",
+            "QuantityShipped": "1",
+            "QuantityInvoiced": "0",
+            "ShipmentNo_": "",
+            "ShipmentLineNo_": "0",
+            "OrderNo_": "",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "Inv_DiscountAmount": "0",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "VATCalculationType": "Normal VAT",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "AttachedtoLineNo_": "0",
+            "ExitPoint": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "TaxGroupCode": "",
+            "VATClauseCode": "NO TAX",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATProd_PostingGroup": "NO TAX",
+            "CurrencyCode": "GBP",
+            "OutstandingAmountLCY": "13.33",
+            "ShippedNotInvoicedLCY": "0",
+            "Reserve": "Never",
+            "VATBaseAmount": "20",
+            "UnitCost": "25",
+            "SystemCreatedEntry": "false",
+            "LineAmount": "20",
+            "VATDifference": "0",
+            "Inv_Disc_AmounttoInvoice": "0",
+            "VATIdentifier": "NO TAX",
+            "Pmt_DiscountAmount": "0",
+            "DimensionSetID": [],
+            "TimeSheetNo_": "",
+            "TimeSheetLineNo_": "0",
+            "TimeSheetDate": "",
+            "JobPlanningLineNo_": "0",
+            "JobRemainingQty_": "0",
+            "JobRemainingQty_Base": "0",
+            "JobRemainingTotalCost": "0",
+            "JobRemainingTotalCostLCY": "0",
+            "JobRemainingLineAmount": "0",
+            "VariantCode": "",
+            "BinCode": "",
+            "Qty_perUnitofMeasure": "1",
+            "Planned": "false",
+            "UnitofMeasureCode": "BAG",
+            "Qty_RoundingPrecision": "0",
+            "Qty_RoundingPrecisionBase": "0",
+            "QuantityBase": "3",
+            "OutstandingQty_Base": "2",
+            "Qty_toInvoiceBase": "2",
+            "Qty_toShipBase": "2",
+            "Qty_ShippedNotInvd_Base": "0",
+            "Qty_ShippedBase": "1",
+            "Qty_InvoicedBase": "0",
+            "ResponsibilityCenter": "",
+            "ItemCategoryCode": "",
+            "Nonstock": "false",
+            "ItemReferenceNo_": "",
+            "ItemReferenceUnitofMeasure": "",
+            "ItemReferenceType": " ",
+            "ItemReferenceTypeNo_": "",
+            "CompletelyShipped": "false",
+            "RequestedDeliveryDate": "",
+            "PromisedDeliveryDate": "",
+            "ShippingTime": "",
+            "PlannedDeliveryDate": "2026-11-01",
+            "ShippingAgentCode": "",
+            "ShippingAgentServiceCode": "",
+            "Appl_fromItemEntry": "0",
+            "ServiceItemNo_": "XA946F4B36E2000002",
+            "Appl_toServiceEntry": "0",
+            "ServiceItemLineNo_": "10000",
+            "ServiceItemSerialNo_": "",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "PostingDate": "2026-11-01",
+            "OrderDate": "2026-11-01",
+            "NeededbyDate": "2026-11-01",
+            "ShiptoCode": "",
+            "Qty_toConsume": "0",
+            "QuantityConsumed": "1",
+            "Qty_toConsumeBase": "0",
+            "Qty_ConsumedBase": "1",
+            "ServicePriceGroupCode": "",
+            "FaultAreaCode": "",
+            "SymptomCode": "",
+            "FaultCode": "",
+            "ResolutionCode": "",
+            "ExcludeWarranty": "false",
+            "Warranty": "false",
+            "ContractNo_": "",
+            "ContractDisc__": "0",
+            "WarrantyDisc__": "0",
+            "ComponentLineNo_": "0",
+            "SparePartAction": " ",
+            "FaultReasonCode": "",
+            "ReplacedItemNo_": "",
+            "ExcludeContractDiscount": "false",
+            "ReplacedItemType": " ",
+            "PriceAdjmt_Status": " ",
+            "LineDiscountType": "",
+            "CopyComponentsFrom": "None",
+            "Sust_AccountNo_": "",
+            "Sust_AccountName": "",
+            "Sust_AccountCategory": "",
+            "Sust_AccountSubcategory": "",
+            "CO2eperUnit": "0",
+            "TotalCO2e": "0",
+            "PostedTotalCO2e": "0",
+            "ReturnReasonCode": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "CustomerDisc_Group": "",
+            "Qty_Picked": "0",
+            "Qty_PickedBase": "0",
+            "CompletelyPicked": "false",
+            "PickQty_Base": "0",
+            "SystemCreatedAt": "2026-11-04T14:04:58.893Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.9Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 2
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:11.504Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Data.Records.Set",
+      "data": {
+        "tableName": "Service Line",
+        "data": [
+          {
+            "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+            "fields": {
+              "Qty_toShip": 1,
+              "Qty_toConsume": 0,
+              "Qty_toInvoice": 1
+            }
+          },
+          {
+            "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+            "fields": {
+              "Qty_toShip": 2,
+              "Qty_toConsume": 0,
+              "Qty_toInvoice": 2
+            }
+          }
+        ]
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Data.Records.Set",
+      "result": [
+        {
+          "id": "7C5FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "10000"
+          },
+          "fields": {
+            "Qty_toShip": "1",
+            "Qty_toConsume": "0",
+            "Qty_toInvoice": "1"
+          }
+        },
+        {
+          "id": "C85FEAB5-58D8-F111-B7A5-A68D8B011E50",
+          "primaryKey": {
+            "DocumentType": "Order",
+            "DocumentNo_": "XA946F4B36E2000001",
+            "LineNo_": "20000"
+          },
+          "fields": {
+            "Qty_toShip": "2",
+            "Qty_toConsume": "0",
+            "Qty_toInvoice": "2"
+          }
+        }
+      ],
+      "status": "Success",
+      "insertedCount": 0,
+      "modifiedCount": 2
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:12.055Z",
+    "tool": "invoke_message_type",
+    "args": {
+      "type": "Service.Order.Post",
+      "data": {
+        "no": "XA946F4B36E2000001",
+        "ship": true,
+        "invoice": true,
+        "expectedCount": 1
+      },
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "messageType": "Service.Order.Post",
+      "status": "Success",
+      "documentNo": "XA946F4B36E2000001",
+      "customerNo": "X07A7E3B91CB44C66BCB",
+      "customerName": "GL00000209",
+      "ship": true,
+      "consume": false,
+      "invoice": true,
+      "postedDocuments": [
+        {
+          "type": "Service Shipment",
+          "no": "PSVS000057",
+          "recordSystemId": "FAAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "postingDate": "2026-11-01"
+        },
+        {
+          "type": "Service Invoice",
+          "no": "PSVI000034",
+          "recordSystemId": "FEAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "postingDate": "2026-11-01",
+          "amount": 30,
+          "amountIncludingVAT": 31,
+          "custLedgerEntryNo": 4314
+        }
+      ],
+      "serviceLedgerEntries": 4,
+      "orderDeleted": true,
+      "lines": []
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:12.355Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Shipment Header",
+      "filter": "WHERE(Order No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Shipment Header",
+      "skip": 0,
+      "take": 100,
+      "count": 2,
+      "records": [
+        {
+          "id": "BBAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "No_": "PSVS000056"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoName": "GL00000209",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ShiptoName": "GL00000209",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-01",
+            "PostingDate": "2026-11-01",
+            "PostingDescription": "Order XA946F4B36E2000001",
+            "PaymentTermsCode": "COD",
+            "DueDate": "2026-11-01",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "2026-11-01",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "X07A7E3B91CB44C66BCB",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "OrderNo_": "XA946F4B36E2000001",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "VATRegistrationNo_": "",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "GL00000209",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-01",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "ACCOUNT",
+            "ShippingAgentCode": "",
+            "No_Series": "SVC-SHIP+",
+            "OrderNo_Series": "XA946F4B36E2F4307A31",
+            "UserID": "GUNNAR",
+            "SourceCode": "SERVICE",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATBaseDiscount_": "0",
+            "CompanyBankAccountCode": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "ContactNo_": "CT000133",
+            "BilltoContactNo_": "CT000133",
+            "ResponsibilityCenter": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Dainn worker7 issue7 MCP 1033",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "14:04:58.263",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "",
+            "ResponseTime": "",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-04T14:37:10.877Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.877Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "FAAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "No_": "PSVS000057"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoName": "GL00000209",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ShiptoName": "GL00000209",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-01",
+            "PostingDate": "2026-11-01",
+            "PostingDescription": "Order XA946F4B36E2000001",
+            "PaymentTermsCode": "COD",
+            "DueDate": "2026-11-01",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "2026-11-01",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "X07A7E3B91CB44C66BCB",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "OrderNo_": "XA946F4B36E2000001",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "VATRegistrationNo_": "",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "GL00000209",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-01",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "ACCOUNT",
+            "ShippingAgentCode": "",
+            "No_Series": "SVC-SHIP+",
+            "OrderNo_Series": "XA946F4B36E2F4307A31",
+            "UserID": "GUNNAR",
+            "SourceCode": "SERVICE",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATBaseDiscount_": "0",
+            "CompanyBankAccountCode": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "ContactNo_": "CT000133",
+            "BilltoContactNo_": "CT000133",
+            "ResponsibilityCenter": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Dainn worker7 issue7 MCP 1033",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "14:04:58.263",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "",
+            "ResponseTime": "",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-04T14:37:11.803Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.803Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 2
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:12.665Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Invoice Header",
+      "filter": "WHERE(Order No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Invoice Header",
+      "skip": 0,
+      "take": 100,
+      "count": 1,
+      "records": [
+        {
+          "id": "FEAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "No_": "PSVI000034"
+          },
+          "fields": {
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "BilltoName": "GL00000209",
+            "BilltoName2": "",
+            "BilltoAddress": "",
+            "BilltoAddress2": "",
+            "BilltoCity": "",
+            "BilltoContact": "",
+            "YourReference": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ShiptoName": "GL00000209",
+            "ShiptoName2": "",
+            "ShiptoAddress": "",
+            "ShiptoAddress2": "",
+            "ShiptoCity": "",
+            "ShiptoContact": "",
+            "OrderDate": "2026-11-01",
+            "PostingDate": "2026-11-01",
+            "PostingDescription": "Order XA946F4B36E2000001",
+            "PaymentTermsCode": "COD",
+            "DueDate": "2026-11-01",
+            "PaymentDiscount_": "0",
+            "Pmt_DiscountDate": "2026-11-01",
+            "ShipmentMethodCode": "",
+            "LocationCode": "",
+            "ShortcutDimension1Code": "",
+            "ShortcutDimension2Code": "",
+            "CustomerPostingGroup": "DOMESTIC",
+            "CurrencyCode": "GBP",
+            "CurrencyFactor": "0",
+            "CustomerPriceGroup": "",
+            "PricesIncludingVAT": "false",
+            "InvoiceDisc_Code": "X07A7E3B91CB44C66BCB",
+            "CustomerDisc_Group": "",
+            "LanguageCode": "",
+            "FormatRegion": "",
+            "SalespersonCode": "",
+            "OrderNo_": "XA946F4B36E2000001",
+            "No_Printed": "0",
+            "AppliestoDoc_Type": " ",
+            "AppliestoDoc_No_": "",
+            "Bal_AccountNo_": "",
+            "ShippingNo_": "PSVS000057",
+            "PostingNo_": "PSVI000034",
+            "LastShippingNo_": "PSVS000056",
+            "LastPostingNo_": "",
+            "VATRegistrationNo_": "",
+            "ReasonCode": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "EU3PartyTrade": "false",
+            "TransactionType": "",
+            "TransportMethod": "",
+            "VATCountry_RegionCode": "",
+            "Name": "GL00000209",
+            "Name2": "",
+            "Address": "",
+            "Address2": "",
+            "City": "",
+            "ContactName": "",
+            "BilltoPostCode": "",
+            "BilltoCounty": "",
+            "BilltoCountry_RegionCode": "",
+            "PostCode": "",
+            "County": "",
+            "Country_RegionCode": "",
+            "ShiptoPostCode": "",
+            "ShiptoCounty": "",
+            "ShiptoCountry_RegionCode": "",
+            "Bal_AccountType": "G/L Account",
+            "ExitPoint": "",
+            "Correction": "false",
+            "DocumentDate": "2026-11-01",
+            "ExternalDocumentNo_": "",
+            "Area": "",
+            "TransactionSpecification": "",
+            "PaymentMethodCode": "ACCOUNT",
+            "ShippingAgentCode": "",
+            "PreAssignedNo_Series": "",
+            "No_Series": "SVC-INV+",
+            "ShippingNo_Series": "SVC-SHIP+",
+            "OrderNo_Series": "XA946F4B36E2F4307A31",
+            "PreAssignedNo_": "",
+            "UserID": "GUNNAR",
+            "SourceCode": "SERVICE",
+            "TaxAreaCode": "",
+            "TaxLiable": "false",
+            "VATBus_PostingGroup": "DOMESTIC",
+            "VATBaseDiscount_": "0",
+            "CompanyBankAccountCode": "",
+            "VATReportingDate": "2026-11-01",
+            "PaymentReference": "",
+            "WorkDescription": "",
+            "DimensionSetID": [],
+            "DocumentExchangeIdentifier": "",
+            "DocumentExchangeStatus": "Not Sent",
+            "Doc_Exch_OriginalIdentifier": "",
+            "DirectDebitMandateID": "",
+            "ContactNo_": "CT000133",
+            "BilltoContactNo_": "CT000133",
+            "ResponsibilityCenter": "",
+            "ShippingAgentServiceCode": "",
+            "Description": "Dainn worker7 issue7 MCP 1033",
+            "ServiceOrderType": "",
+            "LinkServicetoServiceItem": "false",
+            "Priority": "Low",
+            "PhoneNo_": "",
+            "EMail": "",
+            "PhoneNo_2": "",
+            "FaxNo_": "",
+            "OrderTime": "14:04:58.263",
+            "DefaultResponseTimeHours": "0",
+            "ActualResponseTimeHours": "0",
+            "ServiceTimeHours": "0",
+            "ResponseDate": "",
+            "ResponseTime": "",
+            "StartingDate": "",
+            "StartingTime": "",
+            "FinishingDate": "",
+            "FinishingTime": "",
+            "NotifyCustomer": "No",
+            "Max_LaborUnitPrice": "0",
+            "WarningStatus": " ",
+            "ContractNo_": "",
+            "ShiptoFaxNo_": "",
+            "ShiptoEMail": "",
+            "ShiptoPhone": "",
+            "ShiptoPhone2": "",
+            "ServiceZoneCode": "",
+            "ExpectedFinishingDate": "",
+            "QRCodeImage": "",
+            "QRCodeBase64": "",
+            "PriceCalculationMethod": "Lowest Price",
+            "AllowLineDisc_": "true",
+            "QuoteNo_": "",
+            "SystemCreatedAt": "2026-11-04T14:37:11.81Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.81Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 1
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:13.293Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Ledger Entry",
+      "filter": "WHERE(Service Order No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Ledger Entry",
+      "skip": 0,
+      "take": 100,
+      "count": 8,
+      "records": [
+        {
+          "id": "AEAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "193"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000056",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "10000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "0",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "CostAmount": "0",
+            "DiscountAmount": "0",
+            "UnitCost": "0",
+            "Quantity": "1",
+            "ChargedQty_": "0",
+            "UnitPrice": "10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GL00000210",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Usage",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "0",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:10.803Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.803Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "AFAAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "194"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000056",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "10000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "0",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "CostAmount": "0",
+            "DiscountAmount": "0",
+            "UnitCost": "0",
+            "Quantity": "-1",
+            "ChargedQty_": "0",
+            "UnitPrice": "-10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GL00000210",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Consume",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "0",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:10.807Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.807Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "B4AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "195"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000056",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "20000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "0",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "CostAmount": "25",
+            "DiscountAmount": "0",
+            "UnitCost": "25",
+            "Quantity": "1",
+            "ChargedQty_": "0",
+            "UnitPrice": "10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GU00000251",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Usage",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "0",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:10.837Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.837Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "B5AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "196"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000056",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "20000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "0",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "CostAmount": "-25",
+            "DiscountAmount": "0",
+            "UnitCost": "-25",
+            "Quantity": "-1",
+            "ChargedQty_": "0",
+            "UnitPrice": "-10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GU00000251",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Consume",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "0",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:10.84Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:10.84Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "E0AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "197"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000057",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "10000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "10",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "CostAmount": "0",
+            "DiscountAmount": "0",
+            "UnitCost": "0",
+            "Quantity": "1",
+            "ChargedQty_": "1",
+            "UnitPrice": "10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GL00000210",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Usage",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "10",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:11.683Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.683Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "E1AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "198"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Invoice",
+            "DocumentNo_": "PSVI000034",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "10000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "-10",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Item",
+            "No_": "XF88175DB738541CABDF",
+            "CostAmount": "0",
+            "DiscountAmount": "0",
+            "UnitCost": "0",
+            "Quantity": "-1",
+            "ChargedQty_": "-1",
+            "UnitPrice": "-10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GL00000210",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MISC",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Sale",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "-10",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:11.687Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.687Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "E5AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "199"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Shipment",
+            "DocumentNo_": "PSVS000057",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "20000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "20",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "CostAmount": "50",
+            "DiscountAmount": "0",
+            "UnitCost": "25",
+            "Quantity": "2",
+            "ChargedQty_": "2",
+            "UnitPrice": "10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GU00000251",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Usage",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "20",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:11.73Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.73Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        },
+        {
+          "id": "E6AAB533-5DD8-F111-B7A5-83ACBC861B81",
+          "primaryKey": {
+            "EntryNo_": "200"
+          },
+          "fields": {
+            "ServiceContractNo_": "",
+            "DocumentType": "Invoice",
+            "DocumentNo_": "PSVI000034",
+            "Serv_ContractAcc_Gr_Code": "",
+            "DocumentLineNo_": "20000",
+            "MovedfromPrepaidAcc_": "true",
+            "PostingDate": "2026-11-01",
+            "AmountLCY": "-20",
+            "CustomerNo_": "X07A7E3B91CB44C66BCB",
+            "ShiptoCode": "",
+            "ItemNo_Serviced": "",
+            "SerialNo_Serviced": "",
+            "UserID": "GUNNAR",
+            "ContractInvoicePeriod": "",
+            "GlobalDimension1Code": "",
+            "GlobalDimension2Code": "",
+            "ServiceItemNo_Serviced": "XA946F4B36E2000002",
+            "VariantCodeServiced": "",
+            "ContractGroupCode": "",
+            "Type": "Resource",
+            "No_": "X7D80082BCAE244DBAF8",
+            "CostAmount": "-50",
+            "DiscountAmount": "0",
+            "UnitCost": "-25",
+            "Quantity": "-2",
+            "ChargedQty_": "-2",
+            "UnitPrice": "-10",
+            "Discount_": "0",
+            "ContractDisc_Amount": "0",
+            "BilltoCustomerNo_": "X07A7E3B91CB44C66BCB",
+            "FaultReasonCode": "",
+            "Description": "GU00000251",
+            "ServiceOrderType": "",
+            "ServiceOrderNo_": "XA946F4B36E2000001",
+            "JobNo_": "",
+            "Gen_Bus_PostingGroup": "DOMESTIC",
+            "Gen_Prod_PostingGroup": "MANUFACT",
+            "LocationCode": "",
+            "UnitofMeasureCode": "BAG",
+            "WorkTypeCode": "",
+            "BinCode": "",
+            "ResponsibilityCenter": "",
+            "VariantCode": "",
+            "EntryType": "Sale",
+            "Open": "false",
+            "Serv_PriceAdjmt_Gr_Code": "",
+            "ServicePriceGroupCode": "",
+            "Prepaid": "false",
+            "ApplyUntilEntryNo_": "0",
+            "AppliestoEntryNo_": "0",
+            "Amount": "-20",
+            "JobTaskNo_": "",
+            "JobLineType": " ",
+            "JobPosted": "false",
+            "ExternalDocumentNo_": "",
+            "DimensionSetID": [],
+            "SystemCreatedAt": "2026-11-04T14:37:11.733Z",
+            "SystemCreatedBy": "3F72E3CC-689C-435B-B024-23FA4F186433",
+            "SystemModifiedAt": "2026-11-04T14:37:11.733Z",
+            "SystemModifiedBy": "3F72E3CC-689C-435B-B024-23FA4F186433"
+          }
+        }
+      ],
+      "noOfRecords": 8
+    },
+    "isError": false
+  },
+  {
+    "at": "2026-11-04T14:37:13.541Z",
+    "tool": "get_records",
+    "args": {
+      "table": "Service Header",
+      "filter": "WHERE(Document Type=CONST(Order),No.=CONST(XA946F4B36E2000001))",
+      "take": 100,
+      "lcid": 1033
+    },
+    "result": {
+      "company": "CRONUS International Ltd.",
+      "table": "Service Header",
+      "skip": 0,
+      "take": 100,
+      "count": 0,
+      "records": [],
+      "noOfRecords": 0
+    },
+    "isError": false
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "verified": true,
+  "lcids": [
+    1033,
+    1039
+  ],
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "scenarios": "Each language: native own service order/customer/marker before posting; posted service invoice/customer/source order/item and resource quantities and10+20net lines match canonical MCP result.",
+  "evidenceFiles": [
+    "ui1033-receipt.json",
+    "ui1039-receipt.json",
+    "ui-order1033.png",
+    "ui-order1039.png",
+    "ui-invoice1033.png",
+    "ui-invoice1039.png"
+  ],
+  "acceptanceUat": "AC21 and original Premium UI UAT remain pending Bifr\u00f6st Tester after Architect same-SHA deployment; no UAT pass claimed."
+}

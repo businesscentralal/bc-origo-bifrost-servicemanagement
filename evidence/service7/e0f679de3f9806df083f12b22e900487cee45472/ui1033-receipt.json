@@ -1,0 +1,32 @@
+{
+  "sha": "e0f679de3f9806df083f12b22e900487cee45472",
+  "containerId": "f015bb440386",
+  "lcid": 1033,
+  "verified": true,
+  "scenarios": [
+    {
+      "name": "Own service order/customer before posting",
+      "order": "XA946F4B36E2000001",
+      "customer": "X07A7E3B91CB44C66BCB",
+      "marker": "Dainn worker7 issue7 MCP1033",
+      "screenshot": "ui-order1033.png"
+    },
+    {
+      "name": "MCP result matches native Posted Service Invoice",
+      "invoice": "PSVI000034",
+      "order": "XA946F4B36E2000001",
+      "customer": "X07A7E3B91CB44C66BCB",
+      "itemQuantity": 1,
+      "resourceQuantity": 2,
+      "lineAmounts": [
+        10,
+        20
+      ],
+      "netAmount": 30,
+      "screenshot": "ui-invoice1033.png"
+    }
+  ],
+  "method": "Playwright MCP browser_run_code_unsafe, standard BC pages5900/5978",
+  "checkedAt": "2026-11-04T14:38:47.310462+00:00",
+  "harnessNotes": "Browser refresh invalidated prior session; re-authenticated with existing own-container credentials. Duplicate beforeunload handler errors retained separately; verified assertions and screenshots captured after actual navigation."
+}
