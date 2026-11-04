@@ -95,8 +95,9 @@ codeunit 97718 "Svc Quote Perm Tests ori"
     begin
         LowerPermissions.AddPermissionSet('D365 BASIC');
         LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
-        // Native quote conversion checks Item availability across transfers and project planning.
-        LowerPermissions.AddPermissionSet('D365 ITEM AVAIL CALC');
+        // Native Item availability FlowFields require direct reads, including transfers and project planning.
+        // Give the same read-only native baseline to both Bifrost role scenarios.
+        LowerPermissions.AddPermissionSet('D365 READ');
         LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
     end;
 }
