@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-05T00:42:07.430Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Set",
+    "data": {
+      "tableNumber": 10076075,
+      "data": [
+        {
+          "primaryKey": {
+            "PrimaryKey": "W8S7TOKEN"
+          },
+          "fields": {}
+        }
+      ]
+    },
+    "lcid": 1033
+  },
+  "value": {
+    "status": "Error",
+    "code": "PermissionDenied",
+    "error": "Table 10076075 (Svc Posting ori) cannot be written via Data.Records.Set. This is an internal table.",
+    "parameter": "tableNumber",
+    "received": "10076075",
+    "expected": "a table the user may write through the generic data types",
+    "nextStep": "Choose a table the user may access through the generic data types. This restriction cannot be bypassed by the request.",
+    "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+  }
+}

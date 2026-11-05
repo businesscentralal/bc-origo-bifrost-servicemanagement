@@ -1,0 +1,14 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "status": "NOT_RUN",
+  "verified": false,
+  "executed": 0,
+  "passed": 0,
+  "languages": [
+    1033,
+    1039
+  ],
+  "reason": "The accepted Gunnar02Nov Premium disposition assigns full ServiceManagement WebClient UI acceptance to Bifrost Tester on UAT/OrigoDemo after deployment; agents do not modify licences. This is not a UI pass.",
+  "decisionUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/issues/7#issuecomment-6576453271",
+  "acceptance": "AC21 remains pending after actual same-SHA deployment."
+}

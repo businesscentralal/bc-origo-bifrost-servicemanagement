@@ -1,0 +1,32 @@
+{
+  "owner": "worker-8",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "name": "worker8-service7-post-20261105",
+  "preDeleteState": {
+    "state": "Running",
+    "statusMessage": "Running",
+    "imageBuilding": false,
+    "imageBuildError": false
+  },
+  "startedAt": "2026-11-05T00:46:20.958Z",
+  "delete": {
+    "at": "2026-11-05T00:46:21.216Z",
+    "ok": true,
+    "statusCode": 204
+  },
+  "readback": {
+    "at": "2026-11-05T00:46:29.936Z",
+    "statusCode": 404,
+    "ok": false,
+    "state": 404
+  },
+  "verified": true,
+  "scope": "Whole owned container removed, including both isolated companies, all seeded/posted records, native-created companies, fixture extension and test settings. No foreign container deleted.",
+  "previousOwnedResource": {
+    "id": "f0b5efcc1df3",
+    "status": "Stopped",
+    "verified": true,
+    "reason": "Reuse was abandoned after prior cleanup showed no compatible demo company; restart was reversed."
+  }
+}

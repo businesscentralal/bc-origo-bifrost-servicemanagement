@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-05T00:45:10.400Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Get",
+    "data": {
+      "tableNumber": 5992,
+      "tableView": "WHERE(Order No.=CONST(X8D290F10823000001))"
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Data.Records.Get",
+    "status": "Success",
+    "noOfRecords": 0,
+    "result": []
+  }
+}

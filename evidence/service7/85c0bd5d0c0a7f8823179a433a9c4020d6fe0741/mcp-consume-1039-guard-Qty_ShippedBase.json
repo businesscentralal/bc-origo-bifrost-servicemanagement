@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-05T00:42:38.249Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Set",
+    "data": {
+      "tableNumber": 5902,
+      "data": [
+        {
+          "id": "FCDE2D86-B1D8-F111-B7A5-DF6B996FA462",
+          "fields": {
+            "Qty_ShippedBase": 1
+          }
+        }
+      ]
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "status": "Error",
+    "code": "PermissionDenied",
+    "error": "Ekki er hægt að skrifa í reit Qty. Shipped (Base) (5460) í töflu 5902 (Service Line) með Data.Records.Set.",
+    "parameter": "data[0].fields.Qty_ShippedBase",
+    "received": "1",
+    "expected": "reitur sem notandinn má skrifa í (Reitaaðgangur Bifröst)",
+    "nextStep": "Notaðu Service.Order.Post",
+    "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+  }
+}

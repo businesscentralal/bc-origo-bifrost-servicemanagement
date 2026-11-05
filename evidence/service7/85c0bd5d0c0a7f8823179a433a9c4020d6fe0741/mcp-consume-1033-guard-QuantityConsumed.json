@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-05T00:42:05.369Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Set",
+    "data": {
+      "tableNumber": 5902,
+      "data": [
+        {
+          "id": "00DE2D86-B1D8-F111-B7A5-DF6B996FA462",
+          "fields": {
+            "QuantityConsumed": 1
+          }
+        }
+      ]
+    },
+    "lcid": 1033
+  },
+  "value": {
+    "status": "Error",
+    "code": "PermissionDenied",
+    "error": "Field Quantity Consumed (5918) in table 5902 (Service Line) cannot be written via Data.Records.Set.",
+    "parameter": "data[0].fields.QuantityConsumed",
+    "received": "1",
+    "expected": "a field the user may write (Bifrost Field Access)",
+    "nextStep": "Use Service.Order.Post",
+    "hint": "For usage details, call the \"Help.Implementation.Get\" message type with subject \"Data.Records.Set\". Always read the help before calling a message type."
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "at": "2026-11-05T00:41:38.630Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "get_message_type_help",
+  "args": {
+    "messageType": "Service.Order.PreviewPost",
+    "detail": "full",
+    "lcid": 1039
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Service.Order.PreviewPost",
+    "status": "Success",
+    "contract": "json",
+    "format": "chapters",
+    "catalogue": {
+      "name": "Service.Order.PreviewPost",
+      "isEnabled": true,
+      "filterTableNo": 5900,
+      "description": "Sýnir færslurnar sem bókun þjónustupöntunar myndi búa til. Breytir engu.",
+      "selectionDescription": "Sýnir færslurnar sem bókun þjónustupöntunar myndi búa til. Breytir engu.",
+      "messageDirection": "Both",
+      "keywords": [
+        "forskoða bókun þjónustupöntunar",
+        "herma bókun",
+        "hvað myndi bókast",
+        "athuga áður en þjónustupöntun er reikningsfærð"
+      ],
+      "chargeable": true
+    },
+    "chapters": {
+      "envelope": {
+        "subject": {
+          "use": "documentNo",
+          "description": "Optional plain service document number. Every supplied identifier must agree."
+        },
+        "dataRequired": false,
+        "version": "1.0",
+        "contentType": "text/json"
+      },
+      "target": [
+        {
+          "source": "data.no",
+          "form": "document no.",
+          "description": "Service document number in the message type's document scope."
+        },
+        {
+          "source": "data.systemId",
+          "form": "guid",
+          "description": "Service Header SystemId. The document type must match the message type."
+        },
+        {
+          "source": "subject",
+          "form": "document no.",
+          "description": "Plain service document number, as an alternative to data.no."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "no",
+          "type": "string",
+          "required": false,
+          "description": "Service document number, at most 20 characters. Required unless systemId or plain subject is supplied."
+        },
+        {
+          "name": "systemId",
+          "type": "string",
+          "required": false,
+          "description": "Nonempty Service Header GUID. Every supplied identifier must identify the same document."
+        },
+        {
+          "name": "ship",
+          "type": "boolean",
+          "required": false,
+          "description": "Post the shipment (Qty. to Ship on the lines). When none of ship, consume and invoice is sent, ship and invoice are both true. A flag that is not sent is false once another flag is sent."
+        },
+        {
+          "name": "consume",
+          "type": "boolean",
+          "required": false,
+          "description": "Post consumption (Qty. to Consume). Only together with ship = true, never with invoice. Default false."
+        },
+        {
+          "name": "invoice",
+          "type": "boolean",
+          "required": false,
+          "description": "Post the invoice (Qty. to Invoice). Send invoice alone to invoice what was shipped."
+        }
+      ],
+      "response": {
+        "contentType": "text/json",
+        "fields": [
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Success."
+          },
+          {
+            "name": "entryCount",
+            "type": "integer",
+            "description": "Captured entries across every preview table, and the G/L entries among them."
+          },
+          {
+            "name": "glEntryCount",
+            "type": "integer",
+            "description": "Captured entries across every preview table, and the G/L entries among them."
+          },
+          {
+            "name": "rollback",
+            "type": "boolean",
+            "description": "Always true: nothing was posted."
+          },
+          {
+            "name": "summary",
+            "type": "string",
+            "description": "One-sentence summary and the previewed order."
+          },
+          {
+            "name": "documentNo",
+            "type": "string",
+            "description": "One-sentence summary and the previewed order."
+          },
+          {
+            "name": "ship",
+            "type": "boolean",
+            "description": "The options previewed."
+          },
+          {
+            "name": "consume",
+            "type": "boolean",
+            "description": "The options previewed."
+          },
+          {
+            "name": "invoice",
+            "type": "boolean",
+            "description": "The options previewed."
+          },
+          {
+            "name": "totals",
+            "type": "object",
+            "description": "G/L totals over the captured entries."
+          },
+          {
+            "name": "preview",
+            "type": "array",
+            "description": "One element per ledger table the preview filled, in the Data.Records.Get entry shape."
+          }
+        ]
+      },
+      "errors": [
+        {
+          "code": "MissingParameter",
+          "when": "No document identifier was supplied.",
+          "fix": "Send no, systemId or a plain subject."
+        },
+        {
+          "code": "InvalidParameter",
+          "when": "An identifier is empty, too long or identifies the wrong document type.",
+          "fix": "Use an identifier in the documented document scope."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "when": "An identifier is not a JSON string or systemId is not a GUID.",
+          "fix": "Correct the identifier type and format."
+        },
+        {
+          "code": "RecordNotFound",
+          "when": "The service document was not found.",
+          "fix": "Read Service Header with Data.Records.Get."
+        },
+        {
+          "code": "ConflictingIdentifiers",
+          "when": "Identifiers name different service documents.",
+          "fix": "Send identifiers belonging to the same document."
+        },
+        {
+          "code": "MultipleErrors",
+          "when": "Several declared parameters are invalid; nothing changed.",
+          "fix": "Correct each returned parameter error."
+        },
+        {
+          "code": "UnknownParameter",
+          "when": "Foundation rejected an undeclared parameter before executing the message type.",
+          "fix": "Remove the undeclared parameter."
+        },
+        {
+          "code": "InvalidParameter",
+          "when": "consume with invoice, consume without ship, or all three flags false.",
+          "fix": "The four combinations of the Business Central posting menu are Ship, Invoice, Ship and Invoice, and Ship and Consume."
+        },
+        {
+          "code": "InvalidParameterFormat",
+          "when": "ship, consume or invoice is not a JSON boolean (null, a string or a number).",
+          "fix": "Send true or false, or leave the key out."
+        },
+        {
+          "code": "PreconditionFailed",
+          "when": "There is nothing to post, or the service invoice posting policy of the user does not allow the combination.",
+          "fix": "Set Qty. to Ship, Qty. to Consume or Qty. to Invoice on the lines with Data.Records.Set; ask an administrator to check User Setup."
+        },
+        {
+          "code": "BusinessCentralError",
+          "when": "Business Central refused the posting (missing posting setup, closed period, blocked customer, item tracking); its text is returned and nothing was posted.",
+          "fix": "Correct the Business Central error and retry."
+        },
+        {
+          "code": "PreconditionFailed",
+          "when": "Preview needs its own transaction and cannot run under Omit Commit.",
+          "fix": "Run the preview without Omit Commit."
+        }
+      ],
+      "effect": {
+        "effect": "read",
+        "changes": "Nothing: the preview runs through Business Central's posting preview and the transaction is rolled back. No entry, posted document or number-series use remains.",
+        "idempotent": true,
+        "permissionSet": "BIFROST SvcPost ori",
+        "preconditions": "Quantities on the lines for the chosen options."
+      },
+      "metering": {
+        "chargeable": true,
+        "chargedAs": "message"
+      },
+      "related": [
+        {
+          "name": "Service.Order.Post",
+          "useInsteadWhen": "You want to post for real."
+        },
+        {
+          "name": "Service.Order.Release",
+          "useInsteadWhen": "The order must be released for warehouse handling."
+        },
+        {
+          "name": "Service.Allocation.Allocate",
+          "useInsteadWhen": "Allocate a resource before service starts."
+        },
+        {
+          "name": "Data.Records.Set",
+          "useInsteadWhen": "Set Qty. to Ship, Qty. to Consume and Qty. to Invoice on the service lines."
+        }
+      ],
+      "workflow": {
+        "steps": [
+          {
+            "messageType": "Service.Quote.MakeOrder",
+            "purpose": "Convert an accepted quote; this call commits."
+          },
+          {
+            "messageType": "Service.Allocation.Allocate",
+            "purpose": "Allocate or reallocate a resource on a service order."
+          },
+          {
+            "messageType": "Service.Order.Release",
+            "purpose": "Release an open order for warehouse handling."
+          },
+          {
+            "messageType": "Service.Order.Reopen",
+            "purpose": "Reopen a released order when further edits are needed."
+          }
+        ],
+        "description": "The planned complete service job is Service.Quote.MakeOrder, Service.Allocation.Allocate, Service.Order.Release, then Service.Order.Post. Quote conversion, allocation, release and reopen are provided. Posting is delivered by the subsequent lifecycle story."
+      },
+      "examples": [
+        {
+          "title": "Preview ship and invoice",
+          "request": {
+            "type": "Service.Order.PreviewPost",
+            "data": {
+              "no": "SVC-ORDER1"
+            }
+          },
+          "response": {
+            "status": "Success",
+            "entryCount": 6,
+            "glEntryCount": 3,
+            "rollback": true,
+            "documentNo": "SVC-ORDER1",
+            "ship": true,
+            "consume": false,
+            "invoice": true
+          }
+        }
+      ],
+      "overview": "Simulates posting a service order and returns every ledger entry the posting would create, then rolls back. Use it before Service.Order.Post; nothing is changed.",
+      "notes": "The type is listed only for callers holding BIFROST SvcPost ori but runs no posting gate itself. In a preview Business Central writes the placeholder *** as every Document No. Under Omit Commit the preview is refused because it needs its own transaction."
+    },
+    "conventions": "## Errors and warnings\r\nAn error response has `status` = `Error`, a stable `code`, the `error` text and, when they apply, `parameter` (the request parameter concerned, e.g. `lines[2].no`), `received` (the value received), `expected` (what was expected) and `nextStep` (what to do now). `hint` says where to read more.\r\nWhen a request has several problems, all of them are listed in `errors[]` - each with the same fields - under a top-level `code` (`MultipleErrors`, or a shared code such as `InvalidLine` for the `lines` of a Create type) and a summary `error`. Fix them all before calling again. One problem is reported at the top level, with no `errors[]`.\r\nRequest values are checked first and every problem found is reported together. A Business Central validation error raised afterwards, while a record is being written, stops the call and is reported on its own: `code` = `BusinessCentralError`, Business Central's own `error` text, and `parameter` naming the request parameter being applied, e.g. `lines[1].accountNo`. Nothing is written.\r\nRequest values are read in one format, whatever the language: dates `YYYY-MM-DD`; date-times ISO 8601 with `Z` or an offset; amounts as JSON numbers (or a string such as `\"1234.56\"`, no thousands separator); integers as JSON integers; booleans `true` or `false`. Any other value is `InvalidParameterFormat` with `received` and `expected`; for an unambiguous local form such as `26.09.2026`, `nextStep` gives the value to resend. Every bad value of a request is reported together.\r\nAnswers are written in one format as well, whatever the language of the call: dates `YYYY-MM-DD`, date-times ISO 8601, numbers with a dot and no thousands separator, and the option and enum values of every answer except `Data.Records.Get` and `Data.Records.Set` as their English names, so a value read from an answer can be sent back. Those two answer the caption of the language of the call, for a person to read. The language of the call (`lcid`) changes captions and message texts, not these forms. Two things are outside Bifrost's control: Business Central writes its own texts (a ledger entry description such as `Direct Cost V00010 on 10/02/26`, the text of a `BusinessCentralError`) with the regional settings of the server session, which `lcid` does not change, so a date in such a text can be in month-day order; and a table view is read with those settings too, so write dates in a view as `YYYY-MM-DD` and decimals with a dot.\r\nBoth success and error responses can carry `warnings[]`, each with `code`, `message` and, when they apply, `parameter` and `nextStep`.\r\n`UnknownParameter` refuses undeclared data keys before execution for every type whose effect is not read, including a missing effect. The root envelope option `strict:false` cannot opt out. Read types keep warnings without changing status, validationResult or domain warningCount unless the caller sets `strict:true` (next to type and subject, never inside data). Refusals list the keys and localized nextStep corrections; no business changes or successful execution charges occur. Example: {\"type\":\"Memory.User.Set\",\"strict\":true,\"data\":{\"memory\":\"test\",\"memry\":\"typo\"}} is refused.\r\n`FieldChangedByBC` is a warning from Data.Records.Set: another field validation or the write changed a sent field after its own validation. `parameter` names data[n].fields.{jsonName}, counting from 0. Status stays Success. Compare the returned values with what you sent; follow `nextStep` to use validation order or send the field again in a separate call. Normalisation of the field itself, LCY, Dimension Set ID, BLOB, Media, MediaSet and skipped fields are excluded.\r\nFeature apps (Foundation 28.0.8 or later) can call `Argument.SetErrorContext(Parameter, Expected, NextStep)` before an operation that may fail after writes, then `Argument.ClearErrorContext()` after success. Supply the parameter name and translated labels, never request values, file content, credentials or a call stack. Foundation returns that context on the original `BusinessCentralError` after rollback, including uncaught task errors; `RespondWithLastError()` also uses it. The API does not catch errors, commit data or change the transaction boundary. Keep no-return `Codeunit.Run` and let errors propagate for chained `OmitCommit` calls; never add a Boolean `Codeunit.Run` or a writing `TryFunction` to recover context. Context is cleared between messages. Existing callers without context keep their response shape; recognized lock errors keep their existing `Retryable` guidance.\r\nA message type that must run only one way (Foundation 28.0.9 or later) reads `Argument.GetInvocationSource()`: `Queue` when the task scheduler runs a message the queue API scheduled, `Task` for the Task API (`/tasks`), `Dispatcher` for an internal call through `Dispatcher ori` (the in-product MCP tool server, a nested dispatch from another message type), `Direct` for the Messages page Run Task action and anything unset. Only Foundation sets it; request values, parameters, source, subject and writes to the argument cannot change it. Refuse the other paths with `PreconditionFailed` and a `nextStep` that names the path to use.\r\n`Retryable` means a transient lock or deadlock caught while writing or posting. `error` keeps Business Central's original text. `expected` is \"no concurrent lock on the same records\"; `nextStep` is \"Retry the same call after a few seconds; nothing was changed.\" Bifrost does not retry automatically. Uncaught recognized lock errors are also `Retryable` for `write` types. Uncaught `read` and `irreversible` errors remain `BusinessCentralError`, because an irreversible operation may already have committed.\r\n`ConfirmationRequired` is the preview refusal for an irreversible type called without `expectedCount`. Nothing was changed; inspect `expected` and the description before sending the same request with that count. `ConfirmationMismatch` means the count has changed or the sent count was wrong; nothing was changed. Inspect the new preview before confirming again. Feature apps may implement `Msg Confirm ori` or call public `Confirm Gate ori.Confirm` to use the same protocol.\r\nCodes: `MissingParameter`, `InvalidParameterFormat`, `InvalidParameter`, `RecordNotFound`, `AmbiguousRecord`, `ConflictingIdentifiers`, `InvalidFilterField`, `InvalidLine`, `NothingToPreview`, `LinesSkipped`, `BlockedByWriteGuard`, `PreconditionFailed`, `PermissionDenied`, `LimitExceeded`, `BusinessCentralError`, `MultipleErrors`, `DeprecatedParameter`, `UnknownParameter`, `FieldChangedByBC`, `Retryable`, `EULA_REQUIRED`, `TRIAL_NOT_STARTED`, `ConfirmationRequired`, `ConfirmationMismatch`. The `error` text may be translated; the code never is.\r\n"
+  }
+}

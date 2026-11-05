@@ -1,0 +1,23 @@
+{
+  "owner": "worker-8",
+  "containerId": "f056341c29a8",
+  "companyName": "CRONUS W8 S7 MCP",
+  "companyId": "b876a258-afd8-f111-b7a5-d02d42989a0e",
+  "sourceSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "fixtureExtensionId": "31f6f147-b770-4888-a975-9c84c36f7007",
+  "fixtureAppSha256": "080ed6ad01ced713c7ee1ef7bee4e4b8a85bf203a66c044d85cd06297b114b9a",
+  "createdData": "Eight unique orders, each with own customer,service item,item andresource through existing native test library helpers. Configure real ChangeLog coverage only in own disposablecompany. Calls use canonical origo MCP.",
+  "policySetup": "Allowed/Mandatory policy set only for the authenticated fixture user in the isolatedcompany; entirecompany/container removed after verification.",
+  "notProductEvidence": "Fixture helper preparesdata only; all message execution and assertions use public MCPserver, not helper dispatch. No EULA,trial,licence,counter or backend writes.",
+  "publication": "Product/test candidate already published and read back at exactSHA; temporary fixture extension remains private and is removed with owned environment.",
+  "fixtureVersion": "1.0.0.2",
+  "seedEntry": "Private fixture-only test runner entry SeedData, no acceptance test count claimed.",
+  "policyEntry": "Private fixture-only SetAllowedPolicy / SetMandatoryPolicy entrypoints via authenticated native runner; not acceptance tests.",
+  "firstSeedAttempt": {
+    "result": "Authentication_InvalidCredentials401, noAL execution",
+    "readback": "seed-pre-retry-state.json shows0ownedorders",
+    "noCredentialChange": true
+  },
+  "confirmationConfiguration": "Set Require Irreversible Confirm=true through public Setup testpage in isolated MCP company before refusal tests; no consent/licence fields touched.",
+  "seedCompletedAt": "2026-11-05T00:41:09.584093+00:00"
+}

@@ -1,0 +1,255 @@
+{
+  "issue": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/issues/7",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "acceptance": [
+    {
+      "id": "AC01",
+      "criterion": "Post with `ship` and `invoice` (with `expectedCount` 1) of an order with an Item line and a Resource line, full quantities: one `Service Shipment` and one `Service Invoice` in `postedDocuments`, item, resource, service and customer ledger entries exist, `orderDeleted` true when BC removed the order; response counts equal the entries",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC02",
+      "criterion": "Post `ship` only, then `invoice` only: first call gives a shipment and `quantityShipped` on the lines; second gives an invoice for the shipped quantity",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC03",
+      "criterion": "Post `ship` and `consume` with `Qty. to Consume` on the lines: consumption is posted (service ledger entries of type Consume, `quantityConsumed`), no invoice",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC04",
+      "criterion": "Partial quantities: `Qty. to Ship` 1 of 3: the order stays, `quantityShipped` = 1; a second Post continues from the remaining quantity",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC05",
+      "criterion": "No flag sent: Ship and Invoice is posted (default). `consume` with `invoice`, or `consume` without `ship`: `InvalidParameter`, nothing posted",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC06",
+      "criterion": "Nothing to post (all `Qty. to ...` 0): BC's \"nothing to post\" text as `PreconditionFailed` with the nextStep naming the line fields; nothing posted",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC07",
+      "criterion": "User Setup service invoice posting policy Prohibited and `invoice = true`: `PreconditionFailed` naming the policy; policy Mandatory and `ship` without `invoice`: `PreconditionFailed`; nothing posted",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC08",
+      "criterion": "BC refusals (missing posting setup, posting date outside the allowed period, blocked customer) are returned as `BusinessCentralError` with BC's text; no entries, no posted document, the order unchanged (atomic)",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC09",
+      "criterion": "Post without `expectedCount` answers `ConfirmationRequired` (`expected` = 1, summary names the order and the options), nothing posted; wrong count `ConfirmationMismatch`; with the company setting off omission posts; a supplied wrong count still refuses",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC10",
+      "criterion": "Without `BIFROST SvcPost ori`: Post and PreviewPost are not listed and a direct Post answers `PermissionDenied` naming the set; with only the token set plus the base permissions Post runs",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC11",
+      "criterion": "PreviewPost returns the entries Post would create (`entryCount` equals the entries a following Post creates for the same options), leaves no entry, no posted document and no number-series use; under Omit Commit it answers `PreconditionFailed`",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC12",
+      "criterion": "Parameter validation: missing identifier `MissingParameter`; `ship` / `consume` / `invoice` not a boolean (also `null`) `InvalidParameterFormat`; several problems with declared parameters in one call (for example `\"ship\":\"yes\"` and `\"invoice\":3`) answer `MultipleErrors` and post nothing. An undeclared key is refused by Foundation's strict dispatcher with `UnknownParameter` before the app runs; that is Foundation's contract, so test it on its own (`{\"no\":\"<order>\",\"ship\":true,\"extra\":\"x\"}` answers `UnknownParameter` for `extra`) and do not expect it inside `MultipleErrors`",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC13",
+      "criterion": "Commit and Omit Commit: Post behaves like Warehouse's posting types (`Whse Omit Commit Tests`): BC's commit is not suppressed, so the call is documented as committing; the test asserts the documented behaviour and that a failing call leaves nothing posted",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json"
+      ]
+    },
+    {
+      "id": "AC14",
+      "criterion": "Write guard: `Data.Records.Set` on `Service Line` Quantity Shipped, Quantity Invoiced, Quantity Consumed or their Base fields is refused with Foundation's field-restriction answer `PermissionDenied` (as Foundation emits it for every app; `BlockedByWriteGuard` is the separate Change Log guard) and the hint `Service.Order.Post`; `Qty. to Ship`, `Qty. to Invoice`, `Qty. to Consume` stay writable; `Svc Posting ori` is hidden from `Data.Records.Set`",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC15",
+      "criterion": "End to end (97746): create a quote with `Data.Records.Set`, `Service.Quote.MakeOrder`, `Service.Allocation.Allocate`, `Service.Order.Release`, set `Qty. to Ship` and `Qty. to Consume`, `Service.Order.PreviewPost`, `Service.Order.Post` ship and consume, then the rest ship and invoice; every step through `Dispatcher ori`",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json"
+      ]
+    },
+    {
+      "id": "AC16",
+      "criterion": "Contracts: both types declare envelope, target, parameters, response, errors, effect (`irreversible` for Post, `read` for PreviewPost), related, workflow, examples (each of the four combinations), overview, notes; Post's effect text says it commits; `expectedCount` appears in the described Post contract; errors include `ConfirmationRequired`, `ConfirmationMismatch`, `PermissionDenied`, `PreconditionFailed`",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC17",
+      "criterion": "Licence: an unlicensed company answers `EULA_REQUIRED` and posts nothing",
+      "layer": "native",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json"
+      ]
+    },
+    {
+      "id": "AC18",
+      "criterion": "Texts in English and Icelandic (table below) are labels with `is-IS=` comments and xlf targets; at lcid 1039 each answers in Icelandic. Catalogue: Post EN \"Posts a service order: ships, consumes or invoices the quantities on its lines with the standard Business Central service posting. Commits and cannot be undone.\" IS \"B\u00f3kar \u00fej\u00f3nustup\u00f6ntun: afhendir, notar e\u00f0a reikningsf\u00e6rir magni\u00f0 \u00e1 l\u00ednum hennar me\u00f0 venjulegri \u00fej\u00f3nustub\u00f3kun Business Central. Framkv\u00e6mir Commit og ekki er h\u00e6gt a\u00f0 afturkalla.\" PreviewPost EN \"Shows the entries that posting a service order would create. Changes nothing.\" IS \"S\u00fdnir f\u00e6rslurnar sem b\u00f3kun \u00fej\u00f3nustup\u00f6ntunar myndi b\u00faa til. Breytir engu.\" Keywords EN include \"post service order, ship and invoice, consume\"; IS include \"b\u00f3ka \u00fej\u00f3nustup\u00f6ntun, afhenda og reikningsf\u00e6ra, nota\". Icelandic keyword lists are not shorter than English",
+      "layer": "native + CI guard",
+      "state": "verified-current-tip-full-native-suite",
+      "evidence": [
+        "native-summary.json",
+        "full-suite.junit.xml",
+        "method-reconciliation.json",
+        "mcp-summary.json"
+      ]
+    },
+    {
+      "id": "AC19",
+      "criterion": "The Foundation dependency is the release that contains `Confirm Gate ori` (same as group 2); `BIFROST SvcPost ori` name length 19; `Test-PermissionCoverage`, `Test-ObjectIdsUnique`, `Test-MessageTypeNames`, `Test-IcelandicXlfInSync`, `Test-MixedLanguageLabels`, `Test-ContractParameterKeys` green; AL-Go build green with 0 warnings; CHANGELOG, README and `.claude/CLAUDE.md` list ids, types and the new set",
+      "layer": "CI",
+      "state": "verified-current-tip-compile-guards-CI",
+      "evidence": [
+        "compile-summary.json",
+        "guards.json",
+        "ci-summary.json"
+      ]
+    },
+    {
+      "id": "AC20",
+      "criterion": "Receipt on bc29-w1 (CRONUS): the AC15 flow on demo data (customer, an item, resource LINA), Post without count (refusal), PreviewPost, Post ship and consume, Post ship and invoice; read back the posted documents and ledger entries with `Data.Records.Get`; at 1033 and 1039; one refusal each: missing `expectedCount`, missing token, consume with invoice",
+      "layer": "Claude Code receipt",
+      "state": "independent-verification-pending",
+      "evidence": []
+    },
+    {
+      "id": "AC21",
+      "criterion": "UAT: the Bifr\u00f6st Tester runs a service job end to end in English and Icelandic (quote, order, allocate, release, preview, post in two steps) and compares the posted documents with the BC pages",
+      "layer": "UAT",
+      "state": "pending-Tester-UAT-after-deploy",
+      "evidence": []
+    }
+  ],
+  "dependency": {
+    "issue5": "Resolved: PR17 merged into main; current candidate85c0bd5 includes main@a14a770404710e8fd816d760867c4282132c5f1c and PR16 targets main. No remaining stack hold.",
+    "foreignResources": "Original worker29/worker4 private resources retained with original owners; no foreign cleanup claimed."
+  },
+  "premiumUi": {
+    "status": "NOT_RUN",
+    "passed": 0,
+    "reason": "Gunnar02Nov decision assigns bilingual service UI to Tester on UAT/OrigoDemo after deployment. No Premium licence modifications by agent.",
+    "sourceUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/issues/7#issuecomment-6576453271"
+  },
+  "regression": "AC02 extra coverage: shipped order preview/post with default and explicit ship+invoice under Allowed/Mandatory in1033/1039."
+}

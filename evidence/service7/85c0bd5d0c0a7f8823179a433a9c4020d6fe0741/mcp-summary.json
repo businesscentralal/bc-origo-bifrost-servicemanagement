@@ -1,0 +1,312 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "owner": "worker-8",
+  "company": "CRONUS W8 S7 MCP",
+  "languages": [
+    1033,
+    1039
+  ],
+  "touchedMessageTypes": [
+    "Service.Order.Post",
+    "Service.Order.PreviewPost"
+  ],
+  "createsOwnData": true,
+  "complete": true,
+  "expectedChecks": 72,
+  "executed": 72,
+  "passed": 72,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    {
+      "name": "help Service.Order.Post 1033",
+      "passed": true
+    },
+    {
+      "name": "help Service.Order.PreviewPost 1033",
+      "passed": true
+    },
+    {
+      "name": "help Service.Order.Post 1039",
+      "passed": true
+    },
+    {
+      "name": "help Service.Order.PreviewPost 1039",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 missing-count",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 wrong-count",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 invalid-options",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 bad-boolean",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 unknown-key",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 refusals atomic",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 default preview",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard QuantityShipped",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard QuantityInvoiced",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard QuantityConsumed",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard Qty_ShippedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard Qty_InvoicedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 guard Qty_ConsumedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 token guard",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 writable quantities",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 preview consumption",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 preview rollback",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 post consumption",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 set invoice quantities",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 invoice remainder",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 posted document readback",
+      "passed": true
+    },
+    {
+      "name": "consume-1033 ledger readback",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 missing-count",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 wrong-count",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 invalid-options",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 bad-boolean",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 unknown-key",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 refusals atomic",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 default preview",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard QuantityShipped",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard QuantityInvoiced",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard QuantityConsumed",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard Qty_ShippedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard Qty_InvoicedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 guard Qty_ConsumedBase",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 token guard",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 writable quantities",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 preview consumption",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 preview rollback",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 post consumption",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 set invoice quantities",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 invoice remainder",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 posted document readback",
+      "passed": true
+    },
+    {
+      "name": "consume-1039 ledger readback",
+      "passed": true
+    },
+    {
+      "name": "shipped-3 ship only",
+      "passed": true
+    },
+    {
+      "name": "shipped-3 preview already shipped Allowed",
+      "passed": true
+    },
+    {
+      "name": "shipped-3 preview no duplicate",
+      "passed": true
+    },
+    {
+      "name": "shipped-3 invoice already shipped",
+      "passed": true
+    },
+    {
+      "name": "shipped-3 no duplicate shipment",
+      "passed": true
+    },
+    {
+      "name": "shipped-4 ship only",
+      "passed": true
+    },
+    {
+      "name": "shipped-4 preview already shipped Allowed",
+      "passed": true
+    },
+    {
+      "name": "shipped-4 preview no duplicate",
+      "passed": true
+    },
+    {
+      "name": "shipped-4 invoice already shipped",
+      "passed": true
+    },
+    {
+      "name": "shipped-4 no duplicate shipment",
+      "passed": true
+    },
+    {
+      "name": "shipped-5 ship only",
+      "passed": true
+    },
+    {
+      "name": "shipped-5 preview already shipped Mandatory",
+      "passed": true
+    },
+    {
+      "name": "shipped-5 preview no duplicate",
+      "passed": true
+    },
+    {
+      "name": "shipped-5 invoice already shipped",
+      "passed": true
+    },
+    {
+      "name": "shipped-5 no duplicate shipment",
+      "passed": true
+    },
+    {
+      "name": "shipped-6 ship only",
+      "passed": true
+    },
+    {
+      "name": "shipped-6 preview already shipped Mandatory",
+      "passed": true
+    },
+    {
+      "name": "shipped-6 preview no duplicate",
+      "passed": true
+    },
+    {
+      "name": "shipped-6 invoice already shipped",
+      "passed": true
+    },
+    {
+      "name": "shipped-6 no duplicate shipment",
+      "passed": true
+    },
+    {
+      "name": "full-1033 default ship invoice",
+      "passed": true
+    },
+    {
+      "name": "full-1033 readback",
+      "passed": true
+    },
+    {
+      "name": "full-1039 default ship invoice",
+      "passed": true
+    },
+    {
+      "name": "full-1039 readback",
+      "passed": true
+    }
+  ],
+  "finishedAt": "2026-11-05T00:45:29.153Z"
+}

@@ -1,0 +1,751 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "total": 149,
+  "methods": [
+    {
+      "codeunit": 97728,
+      "name": "Scenario_Contract_HasChaptersWriteEffectAndRetryable",
+      "file": "test/src/SvcAllocContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97728,
+      "name": "Scenario_Catalogue_BothLanguages",
+      "file": "test/src/SvcAllocContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97728,
+      "name": "Scenario_NewOrdinaryCompany_RequiresEula",
+      "file": "test/src/SvcAllocContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97729,
+      "name": "Scenario_FullRole_CanAllocate",
+      "file": "test/src/SvcAllocPermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97729,
+      "name": "Scenario_ReadRole_CannotAllocate",
+      "file": "test/src/SvcAllocPermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97727,
+      "name": "Scenario_GuardedFields_PermissionDeniedWithHint",
+      "file": "test/src/SvcAllocRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97727,
+      "name": "Scenario_HoursAndRead_RemainAllowed",
+      "file": "test/src/SvcAllocRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_Allocate_ByDocumentNo_ActivatesEntry",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_Allocate_BySystemIdSubjectAndEntryNo",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_Allocate_GroupOnly_AndTimes",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_Allocate_DefaultAndPastDate",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_Validation_MissingInvalidAndUnknown",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_OrdersOnly_AndSeveralLines",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_NoOpenEntry_AndOutsideZone",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_ZoneText_Icelandic",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_FinishedOrderAndLine_Precondition",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_SkillWarning_IsBusinessCentralError",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97725,
+      "name": "Scenario_OmitCommit_CallerRollback",
+      "file": "test/src/SvcAllocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97711,
+      "name": "Suite_SelectsRegistrationAndFixtureTests",
+      "file": "test/src/SvcFixtureTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97711,
+      "name": "Fixture_OrderHasOwnItemAndResourceLines",
+      "file": "test/src/SvcFixtureTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97711,
+      "name": "Fixture_QuoteHasOwnItemAndResourceLines",
+      "file": "test/src/SvcFixtureTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97711,
+      "name": "Fixture_SetupQuoteCleanup_RequiresMarker",
+      "file": "test/src/SvcFixtureTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_NumberResolvesOrder",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_SystemIdResolvesOrder",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_SubjectResolvesOrder",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_AllIdentifiersMustAgree",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_CallerCanResolveQuote",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_DifferentNumbersConflict",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_ConflictingSubjectIsNotIgnored",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_WrongDocumentTypeIsRefused",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_MissingIdentifierIsRefused",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_UnknownNumberIsNotFound",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_MalformedGuidIsRefused",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_NumericNumberIsNotCoerced",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_LongNumberIsNotTruncated",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_DeclaredErrorsAreCollected",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97712,
+      "name": "Component_MissingIdentifierLocalizes",
+      "file": "test/src/SvcLookupTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC01_ShipAndInvoice_PostsBothDocuments",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC02_ShipOnly_ThenInvoiceOnly",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC02_Shipped_DefaultInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC02_Shipped_ExplicitInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC02_Shipped_MandatoryDefaultInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC02_Shipped_MandatoryExplicitInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC03_ShipAndConsume_NoInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC04_PartialQuantity_OrderStays",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC05_NoFlags_DefaultsToShipAndInvoice",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC05_ConsumeWithInvoice_Refused",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC05_ConsumeWithoutShip_Refused",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC06_NothingToPost_PreconditionFailed",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC06_InvoiceBeforeShipment_PreconditionFailed",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC07_PolicyProhibitsInvoice_PreconditionFailed",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC07_Mandatory_InvoiceOnlyRefused",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC08_BcRefusal_AtomicBusinessCentralError",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC12_NonBooleanFlag_InvalidParameterFormat",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC12_TwoBadFlags_MultipleErrors",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC12_MissingIdentifier_MissingParameter",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC12_UnknownKey_FoundationRefuses",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC13_FailedCall_LeavesNothingPosted",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC13_OmitCommit_NativeErrorRollsBack",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97740,
+      "name": "Scenario_AC13_OmitCommit_PostSurvivesCallerRollback",
+      "file": "test/src/SvcOrderPostTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97741,
+      "name": "Scenario_AC11_Preview_MatchesPost_AndChangesNothing",
+      "file": "test/src/SvcOrderPreviewTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97741,
+      "name": "Scenario_AC11_OmitCommit_PreconditionFailed",
+      "file": "test/src/SvcOrderPreviewTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97741,
+      "name": "Scenario_AC18_Icelandic_PreviewSummary",
+      "file": "test/src/SvcOrderPreviewTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC01_Release_ReturnsRecalculatedOrder",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC02_Release_BysystemId",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC02_Release_Bysubject",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC03_NoQuantity_Refused",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC04_LocationRequired_RollsBack",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC07_RejectQuoteSystemId",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC07_RejectInvoiceSystemId",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC07_RejectCreditMemoSystemId",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC07_ConflictingIdentifiers",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC08_Validation_BothTypes",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97705,
+      "name": "Scenario_AC09_Release_CallerRollback",
+      "file": "test/src/SvcOrderReleaseTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97706,
+      "name": "Scenario_AC06_Reopen_ReleasedOrder",
+      "file": "test/src/SvcOrderReopenTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97706,
+      "name": "Scenario_AC05_AC14_RepeatRefusals_Bilingual",
+      "file": "test/src/SvcOrderReopenTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97706,
+      "name": "Scenario_AC09_Reopen_CallerRollback",
+      "file": "test/src/SvcOrderReopenTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97742,
+      "name": "Scenario_AC09_MissingCount_ConfirmationRequired",
+      "file": "test/src/SvcPostConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97742,
+      "name": "Scenario_AC09_WrongCount_ConfirmationMismatch",
+      "file": "test/src/SvcPostConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97742,
+      "name": "Scenario_AC18_Icelandic_ConfirmationSummary",
+      "file": "test/src/SvcPostConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97742,
+      "name": "Scenario_AC09_Optional_MissingCount_Posts",
+      "file": "test/src/SvcPostConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97742,
+      "name": "Scenario_AC09_Optional_WrongCount_Refuses",
+      "file": "test/src/SvcPostConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97745,
+      "name": "Scenario_AC16_PostContract_HasAllChapters_AndCommits",
+      "file": "test/src/SvcPostContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97745,
+      "name": "Scenario_AC16_PreviewContract_HasAllChapters_AndIsRead",
+      "file": "test/src/SvcPostContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97745,
+      "name": "Scenario_AC18_Catalogue_BothLanguages",
+      "file": "test/src/SvcPostContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97747,
+      "name": "Scenario_AC17_OrdinaryCompany_RequiresEula",
+      "file": "test/src/SvcPostLicenceTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97746,
+      "name": "Scenario_AC15_QuoteToConsumedAndInvoiced_English",
+      "file": "test/src/SvcPostLifecycleTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97746,
+      "name": "Scenario_AC15_QuoteToConsumedAndInvoiced_Icelandic",
+      "file": "test/src/SvcPostLifecycleTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97744,
+      "name": "Scenario_AC14_PostedQuantity_IsRefused_WithHint",
+      "file": "test/src/SvcPostRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97744,
+      "name": "Scenario_AC14_QtyToShip_StaysWritable",
+      "file": "test/src/SvcPostRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97744,
+      "name": "Scenario_AC14_TokenTable_HiddenEvenWithForce",
+      "file": "test/src/SvcPostRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97743,
+      "name": "Scenario_AC10_FullRole_DoesNotHoldPostingToken",
+      "file": "test/src/SvcPostingGateTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97743,
+      "name": "Scenario_AC10_PostingSet_GrantsToken",
+      "file": "test/src/SvcPostingGateTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97743,
+      "name": "Scenario_AC10_Name_Is19Characters",
+      "file": "test/src/SvcPostingGateTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97743,
+      "name": "Scenario_AC10_WithoutToken_DirectPost_PermissionDenied",
+      "file": "test/src/SvcPostingGateTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97743,
+      "name": "Scenario_AC10_WithToken_PostRuns",
+      "file": "test/src/SvcPostingGateTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97716,
+      "name": "Scenario_AC03_Required_MissingCount",
+      "file": "test/src/SvcQuoteConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97716,
+      "name": "Scenario_AC03_Required_WrongCount",
+      "file": "test/src/SvcQuoteConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97716,
+      "name": "Scenario_AC03_Optional_OmissionRuns",
+      "file": "test/src/SvcQuoteConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97716,
+      "name": "Scenario_AC03_Optional_WrongCountStillRefuses",
+      "file": "test/src/SvcQuoteConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97716,
+      "name": "Scenario_AC14_Icelandic_ConfirmationSummary",
+      "file": "test/src/SvcQuoteConfirmTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97717,
+      "name": "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect",
+      "file": "test/src/SvcQuoteContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97717,
+      "name": "Scenario_AC13_Catalogue_BothLanguages",
+      "file": "test/src/SvcQuoteContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97717,
+      "name": "Scenario_AC12_NewOrdinaryCompany_RequiresEula",
+      "file": "test/src/SvcQuoteContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC01_No_ConvertsAllLines",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC02_SystemId_ConvertsQuote",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC02_Subject_ConvertsQuote",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC10_OmitCommit_StillCommits",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC10_CallerRollback_OrderPersists",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC14_Icelandic_ConvertsQuote",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC04_ActiveAllocation_NeedsReallocation",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC05_MissingCustomer_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC05_MissingBillTo_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC06_BlockedCustomer_RollsBack",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC06_BlockedServiceItem_RollsBack",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC06_ServiceBlockedItem_RollsBack",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC07_NoOrderSeries_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC08_OrderSystemId_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC08_UnknownNumber_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC09_MissingIdentifier_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC09_MalformedGuid_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC09_MultipleErrors_Collected",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC09_UnknownParameter_DispatcherRefuses",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_ConflictingIdentifiers_Refused",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC14_QuoteRefusals_Localized",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97719,
+      "name": "Scenario_AC12_QuoteGenericWrite_RemainsAllowed",
+      "file": "test/src/SvcQuoteMakeOrderTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97718,
+      "name": "Scenario_AC15_FullRole_ConvertsQuote",
+      "file": "test/src/SvcQuotePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97718,
+      "name": "Scenario_AC15_ReadRole_DeniedConversion",
+      "file": "test/src/SvcQuotePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97718,
+      "name": "Scenario_WriteGate_ReadDeniedFullGranted",
+      "file": "test/src/SvcQuotePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_Reallocate_KeepsEntryAndReason",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_ReallocationNeeded_AndServiceStarted",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_InitialRepairStatus_BecomesReferred",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_OneResource_UsesBusinessCentralText",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_EntryNo_SelectsAmongSeveralOpenEntries",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97726,
+      "name": "Scenario_InvalidTime_RollsBackInsertedHistory",
+      "file": "test/src/SvcReallocationTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97702,
+      "name": "GetApps_ListsServiceManagement",
+      "file": "test/src/SvcRegistrationTst.Codeunit.al"
+    },
+    {
+      "codeunit": 97702,
+      "name": "GetApps_UnderLicenseAdminRole_ListsServiceManagement",
+      "file": "test/src/SvcRegistrationTst.Codeunit.al"
+    },
+    {
+      "codeunit": 97708,
+      "name": "Scenario_AC11_BothContracts_HaveAllChaptersAndWriteEffect",
+      "file": "test/src/SvcReleaseContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97708,
+      "name": "Scenario_AC13_Catalogue_BothLanguages",
+      "file": "test/src/SvcReleaseContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97708,
+      "name": "Scenario_AC12_NewOrdinaryCompany_RequiresEula",
+      "file": "test/src/SvcReleaseContractTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97709,
+      "name": "Scenario_AC15_FullRole_ReleaseAndReopen",
+      "file": "test/src/SvcReleasePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97709,
+      "name": "Scenario_AC15_ReadRole_DeniedBothWrites",
+      "file": "test/src/SvcReleasePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97709,
+      "name": "Scenario_WriteGate_ReadDeniedFullGranted",
+      "file": "test/src/SvcReleasePermTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97707,
+      "name": "Scenario_AC10_ReleaseStatus_BlockedWithHint",
+      "file": "test/src/SvcReleaseRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97707,
+      "name": "Scenario_AC10_OrdinaryFieldAndRead_RemainAllowed",
+      "file": "test/src/SvcReleaseRestrictTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97715,
+      "name": "Scenario_AC01_AC03_ReleaseQuote_NamesTypeInCallerLanguage",
+      "file": "test/src/SvcWrongTypeTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97715,
+      "name": "Scenario_AC01_AC03_ReopenQuote_NamesTypeInCallerLanguage",
+      "file": "test/src/SvcWrongTypeTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97715,
+      "name": "Scenario_AC02_StructuredFields_StayEnglish",
+      "file": "test/src/SvcWrongTypeTests.Codeunit.al"
+    },
+    {
+      "codeunit": 97715,
+      "name": "Scenario_AC12_SuiteUsesSessionRunner",
+      "file": "test/src/SvcWrongTypeTests.Codeunit.al"
+    }
+  ]
+}

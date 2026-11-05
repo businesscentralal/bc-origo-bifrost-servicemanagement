@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-05T00:42:34.812Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Service.Order.Post",
+    "data": {
+      "no": "XEC469080A3E000001",
+      "extra": "x",
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "status": "Error",
+    "code": "UnknownParameter",
+    "error": "Viðfangið \"extra\" er ekki skilgreint fyrir þessa skilaboðategund. Ekkert var keyrt.",
+    "parameter": "extra",
+    "expected": "skilgreind beiðniviðföng",
+    "nextStep": "Fjarlægðu þennan lykil eða skoðaðu Help.Implementation.Get til að sjá skilgreind viðföng.",
+    "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Post\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+  }
+}

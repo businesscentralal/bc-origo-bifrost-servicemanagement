@@ -1,0 +1,10 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "at": "2026-11-05T00:29:20.430995+00:00",
+  "outcome": "runner-invocation-failed-before-AL-execution",
+  "actualNativeExecuted": 0,
+  "actualNativePassed": 0,
+  "toolReportedFailed": 2,
+  "reason": "PsTestFunctions refuses simultaneous testSuite and extensionId. Fallback attempts then fail runner/session setup. No native suite pass.",
+  "repair": "Use SERVICEMGT plus complete97700..97799 range and130451runner, omit extensionId. No source/test/CI change or exclusion."
+}

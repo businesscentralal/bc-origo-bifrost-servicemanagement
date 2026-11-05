@@ -1,0 +1,76 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "owner": "worker-8",
+  "containerId": "f056341c29a8",
+  "runtime": "BC28.5 W1, Microsoft28.5.54151.57488",
+  "productVersion": "28.0.0.0",
+  "testVersion": "28.0.0.0",
+  "Foundation": "published28.0.11.669",
+  "publication": {
+    "repo": "businesscentralal/bc-origo-bifrost-servicemanagement",
+    "branch": "feat/7-service-order-post-worker29",
+    "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+    "branchUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/tree/feat/7-service-order-post-worker29",
+    "commitUrl": "https://github.com/businesscentralal/bc-origo-bifrost-servicemanagement/commit/85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+    "remoteVerifiedAt": "2026-11-05T00:13:11.625Z"
+  },
+  "artifacts": {
+    "app": {
+      "sha256": "1449ad0f49a10f9055835858a0eb2bfd1031fd0772d0120c813afd52c091109f",
+      "compileErrors": 0,
+      "compileWarnings": 0,
+      "deploy": {
+        "at": "2026-11-05T00:23:36.669Z",
+        "kind": "app",
+        "containerId": "f056341c29a8",
+        "sha256": "1449ad0f49a10f9055835858a0eb2bfd1031fd0772d0120c813afd52c091109f",
+        "sourceSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+        "status": 200,
+        "body": ""
+      }
+    },
+    "test": {
+      "sha256": "32fd560d50c7e15d91bf5ed3b1a907763845ceaa131589110f67e8d6715e1394",
+      "compileErrors": 0,
+      "compileWarnings": 0,
+      "deploy": {
+        "at": "2026-11-05T00:24:03.789Z",
+        "kind": "test",
+        "containerId": "f056341c29a8",
+        "sha256": "32fd560d50c7e15d91bf5ed3b1a907763845ceaa131589110f67e8d6715e1394",
+        "sourceSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+        "status": 200,
+        "body": ""
+      }
+    }
+  },
+  "provenanceLimit": "Hash of bytes actually sent to developer endpoint; HTTP200 deployment receipts plus app/version readback. No claim that app/version readback is a remote binary checksum.",
+  "deployedAppReadback": [
+    {
+      "Name": "Bifrost Service Management - Tests",
+      "Version": "28.0.0.0",
+      "IsInstalled": true,
+      "NeedsUpgrade": false
+    },
+    {
+      "Name": "Bifrost Foundation",
+      "Version": "28.0.11.669",
+      "IsInstalled": true,
+      "NeedsUpgrade": false
+    },
+    {
+      "Name": "Bifrost Service Management",
+      "Version": "28.0.0.0",
+      "IsInstalled": true,
+      "NeedsUpgrade": false
+    }
+  ],
+  "nativeCompany": {
+    "name": "CRONUS W8 S7 Native",
+    "id": "885c8e43-afd8-f111-b7a5-d02d42989a0e"
+  },
+  "mcpCompany": {
+    "name": "CRONUS W8 S7 MCP",
+    "id": "b876a258-afd8-f111-b7a5-d02d42989a0e"
+  }
+}

@@ -1,0 +1,510 @@
+{
+  "at": "2026-11-05T00:43:58.539Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Service.Order.PreviewPost",
+    "data": {
+      "no": "XB09B37F17CA000001",
+      "ship": true,
+      "invoice": true
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Service.Order.PreviewPost",
+    "status": "Success",
+    "entryCount": 12,
+    "glEntryCount": 4,
+    "rollback": true,
+    "summary": "Forskoðun bókunar þjónustupöntunar XB09B37F17CA000001 (afhenda og reikningsfæra) myndi búa til 12 færslur í 7 töflum. Færslan er í jafnvægi.",
+    "documentNo": "XB09B37F17CA000001",
+    "ship": true,
+    "consume": false,
+    "invoice": true,
+    "totals": {
+      "balanced": true,
+      "totalDebitLCY": 52,
+      "totalCreditLCY": 52
+    },
+    "preview": [
+      {
+        "tableId": 17,
+        "tableName": "G/L Entry",
+        "tableCaption": "G/L Entry",
+        "entryCount": 4,
+        "entries": [
+          {
+            "id": "E7AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4191"
+            },
+            "fields": {
+              "G_LAccountNo_": "6110",
+              "Description": "Order XB09B37F17CA000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_PostingType": "Sale",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "Amount": "-30",
+              "DebitAmount": "0",
+              "CreditAmount": "30",
+              "VATAmount": "0",
+              "Bal_AccountType": "G/L Account",
+              "Bal_AccountNo_": "",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "NO TAX",
+              "Quantity": "0",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0",
+              "JobNo_": ""
+            }
+          },
+          {
+            "id": "EAAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4192"
+            },
+            "fields": {
+              "G_LAccountNo_": "6110",
+              "Description": "Order XB09B37F17CA000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_PostingType": "Sale",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "Amount": "-20",
+              "DebitAmount": "0",
+              "CreditAmount": "20",
+              "VATAmount": "-2",
+              "Bal_AccountType": "G/L Account",
+              "Bal_AccountNo_": "",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "REDUCED",
+              "Quantity": "0",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0",
+              "JobNo_": ""
+            }
+          },
+          {
+            "id": "EBAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4193"
+            },
+            "fields": {
+              "G_LAccountNo_": "5611",
+              "Description": "Order XB09B37F17CA000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_PostingType": " ",
+              "Gen_Bus_PostingGroup": "",
+              "Gen_Prod_PostingGroup": "",
+              "Amount": "-2",
+              "DebitAmount": "0",
+              "CreditAmount": "2",
+              "VATAmount": "0",
+              "Bal_AccountType": "G/L Account",
+              "Bal_AccountNo_": "",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "VATBus_PostingGroup": "",
+              "VATProd_PostingGroup": "",
+              "Quantity": "0",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0",
+              "JobNo_": ""
+            }
+          },
+          {
+            "id": "EFAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4194"
+            },
+            "fields": {
+              "G_LAccountNo_": "2310",
+              "Description": "Order XB09B37F17CA000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_PostingType": " ",
+              "Gen_Bus_PostingGroup": "",
+              "Gen_Prod_PostingGroup": "",
+              "Amount": "52",
+              "DebitAmount": "52",
+              "CreditAmount": "0",
+              "VATAmount": "0",
+              "Bal_AccountType": "G/L Account",
+              "Bal_AccountNo_": "",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "VATBus_PostingGroup": "",
+              "VATProd_PostingGroup": "",
+              "Quantity": "0",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0",
+              "JobNo_": ""
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 21,
+        "tableName": "Cust. Ledger Entry",
+        "tableCaption": "Cust. Ledger Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "EDAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4194"
+            },
+            "fields": {
+              "Description": "Order XB09B37F17CA000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Amount": "52",
+              "DebitAmount": "0",
+              "CreditAmount": "0",
+              "Bal_AccountType": "G/L Account",
+              "Bal_AccountNo_": "",
+              "DimensionSetID": [],
+              "ClosedbyEntryNo_": "0",
+              "Open": "true",
+              "MessagetoRecipient": "",
+              "CurrencyCode": "GBP",
+              "DueDate": "2026-11-01",
+              "Pmt_DiscountDate": "2026-11-01",
+              "OriginalPmt_Disc_Possible": "0",
+              "RemainingPmt_Disc_Possible": "0",
+              "PaymentMethodCode": "ACCOUNT",
+              "OnHold": "",
+              "AmountLCY": "52",
+              "RemainingAmount": "52",
+              "RemainingAmt_LCY": "52",
+              "OriginalAmount": "52",
+              "OriginalAmt_LCY": "52",
+              "CustomerNo_": "XDAB0F6096CED4D90B1D",
+              "SalespersonCode": "",
+              "Pmt_Disc_ToleranceDate": "2026-11-01",
+              "Max_PaymentTolerance": "0",
+              "ExportedtoPaymentFile": "false",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 203,
+        "tableName": "Res. Ledger Entry",
+        "tableCaption": "Res. Ledger Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "E4AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "14"
+            },
+            "fields": {
+              "Description": "GU00000011",
+              "PostingDate": "2026-11-01",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "EntryType": "Sale",
+              "Quantity": "-3",
+              "OrderType": "Service",
+              "JobNo_": "",
+              "UnitCost": "36",
+              "TotalCost": "-108",
+              "UnitPrice": "10",
+              "TotalPrice": "-30",
+              "ResourceNo_": "X1FF0E906B3874E97A4A",
+              "Chargeable": "true"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 254,
+        "tableName": "VAT Entry",
+        "tableCaption": "VAT Entry",
+        "entryCount": 2,
+        "entries": [
+          {
+            "id": "E6AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "549"
+            },
+            "fields": {
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "Amount": "0",
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "NO TAX",
+              "Type": "Sale",
+              "Base": "-30",
+              "VATCalculationType": "Normal VAT",
+              "Billto_PaytoNo_": "XDAB0F6096CED4D90B1D",
+              "Country_RegionCode": "",
+              "EU3PartyTrade": "false",
+              "Closed": "false",
+              "ClosedbyEntryNo_": "0",
+              "InternalRef_No_": "",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0"
+            }
+          },
+          {
+            "id": "E9AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "550"
+            },
+            "fields": {
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "Amount": "-2",
+              "VATBus_PostingGroup": "DOMESTIC",
+              "VATProd_PostingGroup": "REDUCED",
+              "Type": "Sale",
+              "Base": "-20",
+              "VATCalculationType": "Normal VAT",
+              "Billto_PaytoNo_": "XDAB0F6096CED4D90B1D",
+              "Country_RegionCode": "",
+              "EU3PartyTrade": "false",
+              "Closed": "false",
+              "ClosedbyEntryNo_": "0",
+              "InternalRef_No_": "",
+              "Reversed": "false",
+              "ReversedbyEntryNo_": "0",
+              "ReversedEntryNo_": "0"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 379,
+        "tableName": "Detailed Cust. Ledg. Entry",
+        "tableCaption": "Detailed Cust. Ledg. Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "EEAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "1149"
+            },
+            "fields": {
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "Gen_Bus_PostingGroup": "",
+              "Gen_Prod_PostingGroup": "",
+              "Amount": "52",
+              "DebitAmount": "52",
+              "CreditAmount": "0",
+              "VATBus_PostingGroup": "",
+              "VATProd_PostingGroup": "",
+              "EntryType": "Initial Entry",
+              "CurrencyCode": "GBP",
+              "RemainingPmt_Disc_Possible": "0",
+              "AmountLCY": "52",
+              "InitialEntryDueDate": "2026-11-01",
+              "CustomerNo_": "XDAB0F6096CED4D90B1D",
+              "Max_PaymentTolerance": "0",
+              "Cust_LedgerEntryNo_": "4194",
+              "Unapplied": "false"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 5802,
+        "tableName": "Value Entry",
+        "tableCaption": "Value Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "E1AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "841"
+            },
+            "fields": {
+              "Description": "",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Service Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "SourceType": "Customer",
+              "SourceNo_": "XDAB0F6096CED4D90B1D",
+              "DimensionSetID": [],
+              "Type": " ",
+              "ItemNo_": "X1E7E7F4081EE45DC8B9",
+              "EntryType": "Direct Cost",
+              "LocationCode": "",
+              "InvoicedQuantity": "-2",
+              "OrderType": "Service",
+              "SalesAmountExpected": "-20",
+              "SalesAmountActual": "20",
+              "CostAmountExpected": "0",
+              "CostAmountActual": "0",
+              "CostAmountNonInvtbl_": "0",
+              "CostAmountExpectedACY": "0",
+              "CostAmountActualACY": "0",
+              "CostAmountNonInvtbl_ACY": "0",
+              "ItemLedgerEntryType": "Sale",
+              "Adjustment": "false",
+              "ItemChargeNo_": "",
+              "CostPostedtoG_L": "0",
+              "ItemLedgerEntryQuantity": "0",
+              "ValuedQuantity": "-2",
+              "CostperUnit": "0",
+              "ValuedByAverageCost": "false",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "No_": "",
+              "DiscountAmount": "0"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 5907,
+        "tableName": "Service Ledger Entry",
+        "tableCaption": "Service Ledger Entry",
+        "entryCount": 2,
+        "entries": [
+          {
+            "id": "DFAC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "23"
+            },
+            "fields": {
+              "Description": "GL00000007",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "Amount": "-20",
+              "DimensionSetID": [],
+              "Type": "Item",
+              "EntryType": "Sale",
+              "LocationCode": "",
+              "Quantity": "-2",
+              "Open": "false",
+              "AmountLCY": "-20",
+              "CustomerNo_": "XDAB0F6096CED4D90B1D",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "0",
+              "UnitPrice": "-10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XB09B37F17CA000001",
+              "ServiceItemNo_Serviced": "XB09B37F17CA000002",
+              "ItemNo_Serviced": "",
+              "No_": "X1E7E7F4081EE45DC8B9",
+              "CostAmount": "0",
+              "DiscountAmount": "0",
+              "ChargedQty_": "-2",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "XDAB0F6096CED4D90B1D",
+              "SerialNo_Serviced": ""
+            }
+          },
+          {
+            "id": "E2AC87F7-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "24"
+            },
+            "fields": {
+              "Description": "GU00000011",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Invoice",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "Amount": "-30",
+              "DimensionSetID": [],
+              "Type": "Resource",
+              "EntryType": "Sale",
+              "LocationCode": "",
+              "Quantity": "-3",
+              "Open": "false",
+              "AmountLCY": "-30",
+              "CustomerNo_": "XDAB0F6096CED4D90B1D",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "-36",
+              "UnitPrice": "-10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XB09B37F17CA000001",
+              "ServiceItemNo_Serviced": "XB09B37F17CA000002",
+              "ItemNo_Serviced": "",
+              "No_": "X1FF0E906B3874E97A4A",
+              "CostAmount": "-108",
+              "DiscountAmount": "0",
+              "ChargedQty_": "-3",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "XDAB0F6096CED4D90B1D",
+              "SerialNo_Serviced": ""
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

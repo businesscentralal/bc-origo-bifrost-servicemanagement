@@ -1,0 +1,24 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "target": "main@a14a770404710e8fd816d760867c4282132c5f1c",
+  "tier": "Full",
+  "layer1": "pr-gateway-layer1-current.json",
+  "triage": "gateway-triage.json",
+  "layer2": {
+    "compile": "Both apps0errors0warnings, exactSHA, three analyzers.",
+    "identifiers": "App10076075..10076086, tests97740..97750 fit approved range; suffix ori and30character limits pass guards.",
+    "compatibility": "PR adds types and posting token; preserves released/main public types; no public removals.",
+    "permissions": "Dedicated posting token excluded from Full/Read; Post checks write role and posting permission. Preview discovery requires token; dedicated generic fields and token-table guard retained.",
+    "locking": "Header/Line locked inside posting boundary. ServicePost.Run used without consumed Boolean, preserving locks; native commits retained.",
+    "preview": "Manual subscriber scoped by Bind/Unbind. Native preview captures and rolls back through helper; OmitCommit refused.",
+    "regression": "Repaired precheck verified by allfournative regressions and bilingual canonicalMCP scenarios underAllowed/Mandatory. Preview leaves oneexisting shipment/noinvoice; Post yields exactlyoneinvoice/noextra shipment.",
+    "translations": "XLF and bilingual label/keyword guards green; locked message IDs intentionally unlocalized.",
+    "documentation": "README/CHANGELOG/help and object map updated; two consecutive Fixed headings are cosmetic prior reviewer suggestion, no product change needed for this verification-only continuation. PR body/status are stale and will be refreshed at handoff.",
+    "tests": "Full configured149suite and72self-seededMCP checks pass at exactSHA. No productsource changed in this continuation.",
+    "limits": "AC20 independent actual live lifecycle incomplete in current Claude comment; AC21/UI Premium remains Tester UAT under recorded Gunnar decision. No pass inferred.",
+    "nativeExecution": "149executed149passed0failed0skipped; all149source methods reconciled. Initial invocation rejection retained separately, zeroALexecutions."
+  },
+  "confirmedNewDefects": 0,
+  "developerVerdict": "ready-for-review-handoff",
+  "cleanup": "Owned container delete204 thenGET404verified; cleanup.json"
+}

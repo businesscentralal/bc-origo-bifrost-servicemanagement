@@ -1,0 +1,39 @@
+{
+  "at": "2026-11-05T00:45:10.847Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Service.Order.Post",
+    "data": {
+      "no": "X8D290F10823000001",
+      "expectedCount": 1
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Service.Order.Post",
+    "status": "Success",
+    "documentNo": "X8D290F10823000001",
+    "customerNo": "X88014770489446829E3",
+    "customerName": "GL00000010",
+    "ship": true,
+    "consume": false,
+    "invoice": true,
+    "postedDocuments": [
+      {
+        "type": "Service Invoice",
+        "no": "PSVI000006",
+        "recordSystemId": "EC14A521-B2D8-F111-B7A5-DF6B996FA462",
+        "postingDate": "2026-11-01",
+        "amount": 50,
+        "amountIncludingVAT": 52,
+        "custLedgerEntryNo": 4202
+      }
+    ],
+    "serviceLedgerEntries": 2,
+    "orderDeleted": true,
+    "lines": []
+  }
+}

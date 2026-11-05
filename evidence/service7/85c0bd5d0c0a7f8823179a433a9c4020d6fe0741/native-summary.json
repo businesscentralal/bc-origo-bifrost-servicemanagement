@@ -1,0 +1,23 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "owner": "worker-8",
+  "fullSuite": true,
+  "total": 149,
+  "passed": 149,
+  "failed": 0,
+  "skipped": 0,
+  "runnerTool": {
+    "ok": true,
+    "passed": 149,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "durationMs": 386101,
+    "exitCode": 0
+  },
+  "startedAt": "2026-11-05T00:29:20.534Z",
+  "companyName": "CRONUS W8 S7 Native",
+  "runner": 130451,
+  "testCodeunitRange": "97700..97799"
+}

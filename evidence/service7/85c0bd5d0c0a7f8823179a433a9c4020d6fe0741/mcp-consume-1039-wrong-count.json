@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-05T00:42:32.843Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Service.Order.Post",
+    "data": {
+      "no": "XEC469080A3E000001",
+      "expectedCount": 2
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "status": "Error",
+    "code": "ConfirmationMismatch",
+    "error": "Þú sendir expectedCount 2, en kallið myndi nú hafa áhrif á 1 (þjónustupöntun XEC469080A3E000001 (afhenda og reikningsfæra)). Engu var breytt.",
+    "parameter": "expectedCount",
+    "received": "2",
+    "expected": "1",
+    "nextStep": "Skoðaðu forskoðunina og sendu expectedCount 1 ef það er það sem þú vilt.",
+    "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Service.Order.Post\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+  }
+}

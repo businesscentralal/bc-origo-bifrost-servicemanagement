@@ -1,0 +1,44 @@
+[
+  {
+    "project": "app",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sourceSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+    "dirty": false,
+    "command": [
+      "/workspace/evidence/core-aa0237-worker8/dotnet/dotnet",
+      "/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/alc.dll",
+      "/project:/workspace/service7-worker8/app",
+      "/packagecachepath:/workspace/evidence/service7-worker8-20261105/symbols",
+      "/out:/workspace/evidence/service7-worker8-20261105/app.app",
+      "/errorlog:/workspace/evidence/service7-worker8-20261105/app-diagnostics.json",
+      "/SourceCommit:85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.CodeCop.dll",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.AppSourceCop.dll",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.UICop.dll"
+    ],
+    "packageSha256": "1449ad0f49a10f9055835858a0eb2bfd1031fd0772d0120c813afd52c091109f"
+  },
+  {
+    "project": "test",
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "sourceSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+    "dirty": false,
+    "command": [
+      "/workspace/evidence/core-aa0237-worker8/dotnet/dotnet",
+      "/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/alc.dll",
+      "/project:/workspace/service7-worker8/test",
+      "/packagecachepath:/workspace/evidence/service7-worker8-20261105/symbols",
+      "/out:/workspace/evidence/service7-worker8-20261105/test.app",
+      "/errorlog:/workspace/evidence/service7-worker8-20261105/test-diagnostics.json",
+      "/SourceCommit:85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.CodeCop.dll",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.AppSourceCop.dll",
+      "/analyzer:/workspace/evidence/core-aa0237-worker8/compiler/extension/bin/Microsoft.Dynamics.Nav.UICop.dll"
+    ],
+    "packageSha256": "32fd560d50c7e15d91bf5ed3b1a907763845ceaa131589110f67e8d6715e1394"
+  }
+]

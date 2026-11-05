@@ -1,0 +1,354 @@
+{
+  "at": "2026-11-05T00:42:08.313Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Service.Order.PreviewPost",
+    "data": {
+      "no": "XF6A21AA7234000001",
+      "ship": true,
+      "consume": true
+    },
+    "lcid": 1033
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Service.Order.PreviewPost",
+    "status": "Success",
+    "entryCount": 7,
+    "glEntryCount": 0,
+    "rollback": true,
+    "summary": "Preview-posting service order XF6A21AA7234000001 (ship and consume) would create 7 ledger entries across 4 tables. No G/L entries would be posted.",
+    "documentNo": "XF6A21AA7234000001",
+    "ship": true,
+    "consume": true,
+    "invoice": false,
+    "totals": {
+      "totalDebitLCY": 0,
+      "totalCreditLCY": 0
+    },
+    "preview": [
+      {
+        "tableId": 32,
+        "tableName": "Item Ledger Entry",
+        "tableCaption": "Item Ledger Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "BD27E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "799"
+            },
+            "fields": {
+              "Description": "",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Service Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "SourceType": "Customer",
+              "SourceNo_": "X98FE3D0616814773B03",
+              "DimensionSetID": [],
+              "Country_RegionCode": "",
+              "ItemNo_": "X14EAD5D3640A41F1831",
+              "EntryType": "Negative Adjmt.",
+              "SerialNo_": "",
+              "LotNo_": "",
+              "PackageNo_": "",
+              "LocationCode": "",
+              "Quantity": "-1",
+              "InvoicedQuantity": "-1",
+              "RemainingQuantity": "-1",
+              "Open": "true",
+              "OrderType": "Service",
+              "SalesAmountExpected": "0",
+              "SalesAmountActual": "0",
+              "CostAmountExpected": "0",
+              "CostAmountActual": "0",
+              "CostAmountNonInvtbl_": "0",
+              "CostAmountExpectedACY": "0",
+              "CostAmountActualACY": "0",
+              "CostAmountNonInvtbl_ACY": "0",
+              "ItemLedgerEntryQuantity": "0",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": ""
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 203,
+        "tableName": "Res. Ledger Entry",
+        "tableCaption": "Res. Ledger Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "C427E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "1"
+            },
+            "fields": {
+              "Description": "GU00000005",
+              "PostingDate": "2026-11-01",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "SourceType": "Customer",
+              "SourceNo_": "X98FE3D0616814773B03",
+              "DimensionSetID": [],
+              "EntryType": "Usage",
+              "Quantity": "1",
+              "OrderType": "Service",
+              "JobNo_": "",
+              "UnitCost": "25",
+              "TotalCost": "25",
+              "UnitPrice": "0",
+              "TotalPrice": "0",
+              "ResourceNo_": "XEA52C7F234DB4FB99C3",
+              "Chargeable": "true"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 5802,
+        "tableName": "Value Entry",
+        "tableCaption": "Value Entry",
+        "entryCount": 1,
+        "entries": [
+          {
+            "id": "BF27E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "830"
+            },
+            "fields": {
+              "Description": "",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Service Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "SourceType": "Customer",
+              "SourceNo_": "X98FE3D0616814773B03",
+              "DimensionSetID": [],
+              "Type": " ",
+              "ItemNo_": "X14EAD5D3640A41F1831",
+              "EntryType": "Direct Cost",
+              "LocationCode": "",
+              "InvoicedQuantity": "-1",
+              "OrderType": "Service",
+              "SalesAmountExpected": "0",
+              "SalesAmountActual": "0",
+              "CostAmountExpected": "0",
+              "CostAmountActual": "0",
+              "CostAmountNonInvtbl_": "0",
+              "CostAmountExpectedACY": "0",
+              "CostAmountActualACY": "0",
+              "CostAmountNonInvtbl_ACY": "0",
+              "ItemLedgerEntryType": "Negative Adjmt.",
+              "Adjustment": "false",
+              "ItemChargeNo_": "",
+              "CostPostedtoG_L": "0",
+              "ItemLedgerEntryQuantity": "-1",
+              "ValuedQuantity": "-1",
+              "CostperUnit": "0",
+              "ValuedByAverageCost": "false",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "No_": "",
+              "DiscountAmount": "0"
+            }
+          }
+        ]
+      },
+      {
+        "tableId": 5907,
+        "tableName": "Service Ledger Entry",
+        "tableCaption": "Service Ledger Entry",
+        "entryCount": 4,
+        "entries": [
+          {
+            "id": "B927E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "1"
+            },
+            "fields": {
+              "Description": "GL00000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "Amount": "0",
+              "DimensionSetID": [],
+              "Type": "Item",
+              "EntryType": "Usage",
+              "LocationCode": "",
+              "Quantity": "1",
+              "Open": "false",
+              "AmountLCY": "0",
+              "CustomerNo_": "X98FE3D0616814773B03",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "0",
+              "UnitPrice": "10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XF6A21AA7234000001",
+              "ServiceItemNo_Serviced": "XF6A21AA7234000002",
+              "ItemNo_Serviced": "",
+              "No_": "X14EAD5D3640A41F1831",
+              "CostAmount": "0",
+              "DiscountAmount": "0",
+              "ChargedQty_": "0",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "X98FE3D0616814773B03",
+              "SerialNo_Serviced": ""
+            }
+          },
+          {
+            "id": "BA27E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "2"
+            },
+            "fields": {
+              "Description": "GL00000001",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MISC",
+              "Amount": "0",
+              "DimensionSetID": [],
+              "Type": "Item",
+              "EntryType": "Consume",
+              "LocationCode": "",
+              "Quantity": "-1",
+              "Open": "false",
+              "AmountLCY": "0",
+              "CustomerNo_": "X98FE3D0616814773B03",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "0",
+              "UnitPrice": "-10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XF6A21AA7234000001",
+              "ServiceItemNo_Serviced": "XF6A21AA7234000002",
+              "ItemNo_Serviced": "",
+              "No_": "X14EAD5D3640A41F1831",
+              "CostAmount": "0",
+              "DiscountAmount": "0",
+              "ChargedQty_": "0",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "X98FE3D0616814773B03",
+              "SerialNo_Serviced": ""
+            }
+          },
+          {
+            "id": "C027E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "3"
+            },
+            "fields": {
+              "Description": "GU00000005",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "Amount": "0",
+              "DimensionSetID": [],
+              "Type": "Resource",
+              "EntryType": "Usage",
+              "LocationCode": "",
+              "Quantity": "1",
+              "Open": "false",
+              "AmountLCY": "0",
+              "CustomerNo_": "X98FE3D0616814773B03",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "25",
+              "UnitPrice": "10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XF6A21AA7234000001",
+              "ServiceItemNo_Serviced": "XF6A21AA7234000002",
+              "ItemNo_Serviced": "",
+              "No_": "XEA52C7F234DB4FB99C3",
+              "CostAmount": "25",
+              "DiscountAmount": "0",
+              "ChargedQty_": "0",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "X98FE3D0616814773B03",
+              "SerialNo_Serviced": ""
+            }
+          },
+          {
+            "id": "C127E0B5-B1D8-F111-B7A5-DF6B996FA462",
+            "primaryKey": {
+              "EntryNo_": "4"
+            },
+            "fields": {
+              "Description": "GU00000005",
+              "PostingDate": "2026-11-01",
+              "DocumentType": "Shipment",
+              "DocumentNo_": "***",
+              "ExternalDocumentNo_": "",
+              "Gen_Bus_PostingGroup": "DOMESTIC",
+              "Gen_Prod_PostingGroup": "MANUFACT",
+              "Amount": "0",
+              "DimensionSetID": [],
+              "Type": "Resource",
+              "EntryType": "Consume",
+              "LocationCode": "",
+              "Quantity": "-1",
+              "Open": "false",
+              "AmountLCY": "0",
+              "CustomerNo_": "X98FE3D0616814773B03",
+              "JobNo_": "",
+              "JobTaskNo_": "",
+              "VariantCode": "",
+              "UnitCost": "-25",
+              "UnitPrice": "-10",
+              "ServiceContractNo_": "",
+              "ServiceOrderNo_": "XF6A21AA7234000001",
+              "ServiceItemNo_Serviced": "XF6A21AA7234000002",
+              "ItemNo_Serviced": "",
+              "No_": "XEA52C7F234DB4FB99C3",
+              "CostAmount": "-25",
+              "DiscountAmount": "0",
+              "ChargedQty_": "0",
+              "Discount_": "0",
+              "MovedfromPrepaidAcc_": "true",
+              "Serv_ContractAcc_Gr_Code": "",
+              "FaultReasonCode": "",
+              "ShiptoCode": "",
+              "BilltoCustomerNo_": "X98FE3D0616814773B03",
+              "SerialNo_Serviced": ""
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

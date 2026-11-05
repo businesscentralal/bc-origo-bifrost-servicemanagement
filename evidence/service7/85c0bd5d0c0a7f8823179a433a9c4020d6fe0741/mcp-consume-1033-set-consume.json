@@ -1,0 +1,62 @@
+{
+  "at": "2026-11-05T00:42:07.902Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Set",
+    "data": {
+      "tableNumber": 5902,
+      "data": [
+        {
+          "id": "00DE2D86-B1D8-F111-B7A5-DF6B996FA462",
+          "fields": {
+            "Qty_toShip": 1,
+            "Qty_toConsume": 1
+          }
+        },
+        {
+          "id": "4DDE2D86-B1D8-F111-B7A5-DF6B996FA462",
+          "fields": {
+            "Qty_toShip": 1,
+            "Qty_toConsume": 1
+          }
+        }
+      ]
+    },
+    "lcid": 1033
+  },
+  "value": {
+    "company": "CRONUS W8 S7 MCP",
+    "messageType": "Data.Records.Set",
+    "result": [
+      {
+        "id": "00DE2D86-B1D8-F111-B7A5-DF6B996FA462",
+        "primaryKey": {
+          "DocumentType": "Order",
+          "DocumentNo_": "XF6A21AA7234000001",
+          "LineNo_": "10000"
+        },
+        "fields": {
+          "Qty_toShip": "1",
+          "Qty_toConsume": "1"
+        }
+      },
+      {
+        "id": "4DDE2D86-B1D8-F111-B7A5-DF6B996FA462",
+        "primaryKey": {
+          "DocumentType": "Order",
+          "DocumentNo_": "XF6A21AA7234000001",
+          "LineNo_": "20000"
+        },
+        "fields": {
+          "Qty_toShip": "1",
+          "Qty_toConsume": "1"
+        }
+      }
+    ],
+    "status": "Success",
+    "insertedCount": 0,
+    "modifiedCount": 2
+  }
+}

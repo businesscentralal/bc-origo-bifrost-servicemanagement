@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-05T00:42:40.061Z",
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "containerId": "f056341c29a8",
+  "tool": "invoke_message_type",
+  "args": {
+    "type": "Data.Records.Set",
+    "data": {
+      "tableNumber": 10076075,
+      "data": [
+        {
+          "primaryKey": {
+            "PrimaryKey": "W8S7TOKEN"
+          },
+          "fields": {}
+        }
+      ]
+    },
+    "lcid": 1039
+  },
+  "value": {
+    "status": "Error",
+    "code": "PermissionDenied",
+    "error": "Ekki er hægt að skrifa í töflu 10076075 (Svc Posting ori) með Data.Records.Set. Þetta er innri tafla.",
+    "parameter": "tableNumber",
+    "received": "10076075",
+    "expected": "tafla sem notandinn má skrifa í með almennu Data-gerðunum",
+    "nextStep": "Veldu töflu sem notandinn má nálgast með almennu Data-gerðunum. Beiðnin getur ekki sniðgengið þessa takmörkun.",
+    "hint": "Til að sjá notkunarupplýsingar skaltu kalla á skilaboðategundina \"Help.Implementation.Get\" með subject \"Data.Records.Set\". Lestu alltaf hjálpina áður en þú kallar á skilaboðategund."
+  }
+}

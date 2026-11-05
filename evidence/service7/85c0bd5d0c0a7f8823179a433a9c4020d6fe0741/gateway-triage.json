@@ -1,0 +1,11 @@
+{
+  "sha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "mode": "diff (vs origin/main)",
+  "files": 13,
+  "confirmedFindings": 0,
+  "triage": {
+    "one_statement_per_line": "All17findings are procedure parameter declaration semicolons, not multiple executable statements.",
+    "caption_translation": "Both names are locked canonical external message identifiers; localized help and catalogues are verified separately."
+  },
+  "initialExecutionFailure": "Missing USERPROFILE on Linux at script line760; retry with actual /home/node succeeded. No guard modified."
+}

@@ -1,0 +1,589 @@
+{
+  "candidateSha": "85c0bd5d0c0a7f8823179a433a9c4020d6fe0741",
+  "owner": "worker-8",
+  "scope": "ServiceManagement#7 / PR16 developer exact-tip verification",
+  "fixtures": "All transaction records self-created inside worker8-owned COSMO f056341c29a8. Private fixture helper is data preparation, not acceptance-test or licensing evidence.",
+  "ui": "NOT_RUN (Premium) per Gunnar disposition; AC21 remains Tester UAT.",
+  "files": [
+    {
+      "file": "compile-summary.json",
+      "sha256": "0b09b59d18ee399e957241a22489b62b7447acc90173d2eca078bdb1252e0c7a",
+      "bytes": 2254
+    },
+    {
+      "file": "app-compile.log",
+      "sha256": "ac058488cc915a65f22620058b99bdad2dd6997ceb66d908419a2be4bd75bdd0",
+      "bytes": 247
+    },
+    {
+      "file": "test-compile.log",
+      "sha256": "e72b392b3b76cbfb74ccda4ed9e74f41a749d563b926d17d2388206e54a3ce6d",
+      "bytes": 255
+    },
+    {
+      "file": "publication.json",
+      "sha256": "4aacde3e5e66f4e12a424abbcaf3f2dbf5217a4a9f7458f31cbb4a43db98117c",
+      "bytes": 490
+    },
+    {
+      "file": "provenance.json",
+      "sha256": "6717c9bb06910c4cf69b9d51934f061880a3d6c367d99389bdba125811f4d5a7",
+      "bytes": 2637
+    },
+    {
+      "file": "deployed-apps.json",
+      "sha256": "7940a87d60a6190f239f48186dae79484145f39a34a452793a85049c64e91a03",
+      "bytes": 392
+    },
+    {
+      "file": "native-summary.json",
+      "sha256": "69430340267a528a5ffe402e4c2fd454688c81eeda09a7b69df9e429641ca57f",
+      "bytes": 492
+    },
+    {
+      "file": "full-suite.junit.xml",
+      "sha256": "f6376ef0bee609bc836adb69f9a849392c905a28e2b79e8c3921ae0003da4ed8",
+      "bytes": 23370
+    },
+    {
+      "file": "method-roster.json",
+      "sha256": "0e6db6d32e5aad68c87ff7eb18c6093b6f4105ee6caf82043ee1b7c0f03f7acf",
+      "bytes": 22917
+    },
+    {
+      "file": "method-reconciliation.json",
+      "sha256": "684665e8cca48e773303710255333390bcb96e7ff3fa70ed8b8423bd4df4188a",
+      "bytes": 142
+    },
+    {
+      "file": "native-attempt1-diagnosis.json",
+      "sha256": "48bc517a4b7ad272e5b3e4dc9f4ecb8a9220e01476a4fe20f1108a7131edc017",
+      "bytes": 530
+    },
+    {
+      "file": "mcp-summary.json",
+      "sha256": "974bc18590af89485ee896f5c8ff6cb5fcbc713d9db65ae4530679932b81ebc2",
+      "bytes": 6390
+    },
+    {
+      "file": "mcp-scenarios.log",
+      "sha256": "9e5f61e463cc5362a9428f430a6aa14807ba4e694c5f16f98c6b2228afc0a23d",
+      "bytes": 6547
+    },
+    {
+      "file": "fixture-plan.json",
+      "sha256": "91710da87ec4804834ff31ea72711934c2a5e4f553ea641391b4308bf4778f7f",
+      "bytes": 1836
+    },
+    {
+      "file": "fixture-manifest.json",
+      "sha256": "3e51ba55e97a698475c6918ff6a72c5dbf0cf7e3a29fb725a507ac68a17af2de",
+      "bytes": 39805
+    },
+    {
+      "file": "ui-summary.json",
+      "sha256": "d7456f7bf27af10852982641c7e9156639db0abfdbf76961e3f278e588524591",
+      "bytes": 593
+    },
+    {
+      "file": "guards.json",
+      "sha256": "2ebc4e7c2906c9b34e1064bf618ac7b1237479d5ae9ee2cbf8aa42ad937a2131",
+      "bytes": 733
+    },
+    {
+      "file": "pr-gateway-layer1-current.json",
+      "sha256": "44770822027b0291901af0fb61fd12a1962cf55a895dc7e7bf1d4dc4b2bbe978",
+      "bytes": 6680
+    },
+    {
+      "file": "pr-gateway-layer2.json",
+      "sha256": "15f3bf7fcc89df6acbbe486ca1f3ae2bfcd0613241cac884e8204222d715d16a",
+      "bytes": 2287
+    },
+    {
+      "file": "gateway-triage.json",
+      "sha256": "dd6392ff0d8f49d16dbc14d3842028b43caa3d162bcbbb7f2d80b87cc6f307d6",
+      "bytes": 566
+    },
+    {
+      "file": "acceptance-matrix.json",
+      "sha256": "78b84b2e759ab020019e4ca81db04573ffc246c6932312c09f1e65736468c8d9",
+      "bytes": 12984
+    },
+    {
+      "file": "cleanup.json",
+      "sha256": "e9e3782b61434869ac1f26463b101139ffaa0ed0a0388c59598111709f9c4420",
+      "bytes": 990
+    },
+    {
+      "file": "ci-summary.json",
+      "sha256": "9c7964f39f4ca9e36db7d9ef23bd9511e2ec01ff2d8cff4cbfe570f0a3d4992d",
+      "bytes": 4372
+    },
+    {
+      "file": "mcp-consume-1033-after-invoices.json",
+      "sha256": "722817ae71f1b09d610c374e70a8e7e17da2279dd7d55bc7614bde40cf3644a1",
+      "bytes": 5635
+    },
+    {
+      "file": "mcp-consume-1033-after-shipments.json",
+      "sha256": "fea38fd337cba71667c402aa34bd2c750cb573e45d0ff532697e921def1a96bc",
+      "bytes": 9621
+    },
+    {
+      "file": "mcp-consume-1033-bad-boolean.json",
+      "sha256": "4e33740e0d3e8ba38e1205ae7177168de3b7092eef82e4d89749beaa440e2a37",
+      "bytes": 762
+    },
+    {
+      "file": "mcp-consume-1033-before-invoices.json",
+      "sha256": "e46328cd925834b2504261175cab95356f26be2a0225f934de6fbe97de228a92",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1033-before-shipments.json",
+      "sha256": "00f803a67773ae4807b0d7b052feaa7be5e76476038eb79bfe925cc910b597c1",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1033-guard-Qty_ConsumedBase.json",
+      "sha256": "f7f127627183937e9f73b58676c3fc29dcd4ea1df410e5ae6da39ec37b92ada9",
+      "bytes": 985
+    },
+    {
+      "file": "mcp-consume-1033-guard-Qty_InvoicedBase.json",
+      "sha256": "9adbfc1678e11199d079d67654cf6f759078c55de51fa4c04f4fffcdb53f20a8",
+      "bytes": 985
+    },
+    {
+      "file": "mcp-consume-1033-guard-Qty_ShippedBase.json",
+      "sha256": "8e480773e244dbe54f3abde82e715335b0197027307b44adee2a246d15246bd6",
+      "bytes": 982
+    },
+    {
+      "file": "mcp-consume-1033-guard-QuantityConsumed.json",
+      "sha256": "918b4601803553df44a850c6d74494681798cf31ee2c9a39cd0ccb67dcb62939",
+      "bytes": 982
+    },
+    {
+      "file": "mcp-consume-1033-guard-QuantityInvoiced.json",
+      "sha256": "e405655abbe8acea3f50a57b8e97bcc987de47e943cd5299813b6c2d6a84beca",
+      "bytes": 980
+    },
+    {
+      "file": "mcp-consume-1033-guard-QuantityShipped.json",
+      "sha256": "e5fc9bc245cdc60293a05d2e7fb1fa749b2d5fa4c32c11c40bb13e327a661ef7",
+      "bytes": 977
+    },
+    {
+      "file": "mcp-consume-1033-invalid-options.json",
+      "sha256": "2e4e235a49ba33507a9b87f0c6e99dfe8e0666c37164a89ac3d28491519c8941",
+      "bytes": 844
+    },
+    {
+      "file": "mcp-consume-1033-lines.json",
+      "sha256": "947b74637c1a09f6fde210f0ef8aab0fa7d43dd5b573b652f494f9edac7546ca",
+      "bytes": 12469
+    },
+    {
+      "file": "mcp-consume-1033-missing-count.json",
+      "sha256": "006466c00ec6a44103facff07979b86a371588ac02b973d4cdc7e1b37d6e3323",
+      "bytes": 813
+    },
+    {
+      "file": "mcp-consume-1033-post-consume.json",
+      "sha256": "f24919a14c7d4a439da1a4623203a0d0a2b6a2c3f9ceb1d1888d217465288167",
+      "bytes": 1376
+    },
+    {
+      "file": "mcp-consume-1033-post-invoice.json",
+      "sha256": "63150c156cac967e50922e235b1b6618722de4976553f1cb0f0fffd491b68899",
+      "bytes": 1204
+    },
+    {
+      "file": "mcp-consume-1033-preview-consume.json",
+      "sha256": "7ff4318b0626acde5e6ff1b5c14a2fdf6239790cff6ffb1b57c6faa8bf6389f1",
+      "bytes": 12086
+    },
+    {
+      "file": "mcp-consume-1033-preview-invoice.json",
+      "sha256": "52236230da564e7fbc838fdbac4f83981fb5d1b975295e2f73e760b7e89f4241",
+      "bytes": 23157
+    },
+    {
+      "file": "mcp-consume-1033-preview-readback-invoices.json",
+      "sha256": "5ed1ce555ca7daae5b0e6c7e18623e765a3c600ffece3cc0f4c02f26cfc4f2c3",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1033-preview-readback-shipments.json",
+      "sha256": "138a78fe51d297d814ff529daad6c2112376e763965c239c1c5b9b1abd61140c",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1033-remaining-lines.json",
+      "sha256": "026548eda18f1f26481e9260812b6141840b08e25ffb6e5e85fa77859f6e7542",
+      "bytes": 12478
+    },
+    {
+      "file": "mcp-consume-1033-service-ledger.json",
+      "sha256": "2d51a4084d9cbbef4707d30acdecf7e74b76e66052bf6a717917f1a4bde66cef",
+      "bytes": 19647
+    },
+    {
+      "file": "mcp-consume-1033-set-consume.json",
+      "sha256": "775a66afd55014d3a60e4e0ca466d4b65b63534e9cf34bddc2ee77a7a7f75310",
+      "bytes": 1436
+    },
+    {
+      "file": "mcp-consume-1033-set-invoice.json",
+      "sha256": "d13b44218b9da438d405a5489a737be13da0951b6a24add265841f65d32c9724",
+      "bytes": 1564
+    },
+    {
+      "file": "mcp-consume-1033-token-guard.json",
+      "sha256": "610934a65743b9728a3c30249f0f9f01bfbd1f38bf798219321816856243e4c4",
+      "bytes": 1053
+    },
+    {
+      "file": "mcp-consume-1033-unknown-key.json",
+      "sha256": "27e3bebb55cd706c878c2cb56ff32ac12e2a5207f14d482ea56493e3cfb02050",
+      "bytes": 838
+    },
+    {
+      "file": "mcp-consume-1033-wrong-count.json",
+      "sha256": "6b11aa47f7ae09c8f182092d5b04f1108d557a690e4b2e7e5c241bed8f405b73",
+      "bytes": 868
+    },
+    {
+      "file": "mcp-consume-1039-after-invoices.json",
+      "sha256": "4eb6d8220214294760529c41789c4d2f098c24be6737c53be96815eaf5b33d81",
+      "bytes": 5633
+    },
+    {
+      "file": "mcp-consume-1039-after-shipments.json",
+      "sha256": "391da819801fb2ec8f6c62b12737b86e2ed66f8a6b5055c92f96f32be45fa07b",
+      "bytes": 9621
+    },
+    {
+      "file": "mcp-consume-1039-bad-boolean.json",
+      "sha256": "887fb8909ba40dbf0b986b8de00fb92d61f2e4ecfcaedcbfd1adc5be39f66509",
+      "bytes": 816
+    },
+    {
+      "file": "mcp-consume-1039-before-invoices.json",
+      "sha256": "a46ef279f1d6659bde279ea865fd993b955e71c4b03be75d86ca4550ed8188f7",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1039-before-shipments.json",
+      "sha256": "5b28f5eacc84c5abfbbe686c30e76996136a301731ce4abec58731ad54ace491",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1039-guard-Qty_ConsumedBase.json",
+      "sha256": "6bcec8ce4aad7ddb08432713f984783641a150867e3f13a63bcbcbf959a31aff",
+      "bytes": 1054
+    },
+    {
+      "file": "mcp-consume-1039-guard-Qty_InvoicedBase.json",
+      "sha256": "8f35aeb5c6fe15e2301baa4f581be451d224c2ddaa74b6e2bebad78039c2da0e",
+      "bytes": 1054
+    },
+    {
+      "file": "mcp-consume-1039-guard-Qty_ShippedBase.json",
+      "sha256": "718ab1ec2a4fd9cf066e38e4bcb1717eca3a327b962ec63f22e823ac9385095d",
+      "bytes": 1051
+    },
+    {
+      "file": "mcp-consume-1039-guard-QuantityConsumed.json",
+      "sha256": "52ef5809567d757dfbe71a69cc6f337c6a5b4ff486e2159a2dd450a2deb2279b",
+      "bytes": 1051
+    },
+    {
+      "file": "mcp-consume-1039-guard-QuantityInvoiced.json",
+      "sha256": "4083511a422c2c4db62ba351bddf93b87de9d21cc56728ad7dce62f9435376fd",
+      "bytes": 1049
+    },
+    {
+      "file": "mcp-consume-1039-guard-QuantityShipped.json",
+      "sha256": "386ac12a8ba09a2ca5859ecbfbe28fa9aa3de2148c1e39615f721c4f23ff5a95",
+      "bytes": 1046
+    },
+    {
+      "file": "mcp-consume-1039-invalid-options.json",
+      "sha256": "09506f55c4c2f0880c22ba6d3c8a908f6f8b70dc04022cae849ec759da10722f",
+      "bytes": 894
+    },
+    {
+      "file": "mcp-consume-1039-lines.json",
+      "sha256": "b6c5ff3473000e9bf71bbe9bb9a7c1debffd393ff6b830bce88fa34c74e29d55",
+      "bytes": 12471
+    },
+    {
+      "file": "mcp-consume-1039-missing-count.json",
+      "sha256": "c1813173b280c462e3d9e62192ebf7d8bfb29dd64be2b08600d6c8f2e5562faa",
+      "bytes": 899
+    },
+    {
+      "file": "mcp-consume-1039-post-consume.json",
+      "sha256": "c259f91f0c1f29f85829029c6dd4bd7be77407c8d02726cd3b9a7924fc65d1db",
+      "bytes": 1376
+    },
+    {
+      "file": "mcp-consume-1039-post-invoice.json",
+      "sha256": "ef4ca8873926474a47c41d192864f9fcc19c6b48f7a74f00e208e64d6af29892",
+      "bytes": 1204
+    },
+    {
+      "file": "mcp-consume-1039-preview-consume.json",
+      "sha256": "4d9e3032db93dc134d91cde3b776cba8e1fc96db596814c09c5f0ebb0a8cd30b",
+      "bytes": 12100
+    },
+    {
+      "file": "mcp-consume-1039-preview-invoice.json",
+      "sha256": "5abd158d6b7f8c0fc976964b6510330dcce6fcb9f0fb4f93ec37388c8890019a",
+      "bytes": 23177
+    },
+    {
+      "file": "mcp-consume-1039-preview-readback-invoices.json",
+      "sha256": "b34279fd33110a396adef5b96b647809895b12cee117ec2e2467ec544ec660c0",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1039-preview-readback-shipments.json",
+      "sha256": "e221147165939e56a393e1f84e2c80f11ba9ebe97790135acb356e3eda8543a5",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-consume-1039-remaining-lines.json",
+      "sha256": "c5656cc27a9d516c155f037a7c28100985ff87993b79f4059158aebe85b0c3a9",
+      "bytes": 12478
+    },
+    {
+      "file": "mcp-consume-1039-service-ledger.json",
+      "sha256": "73b0e3451e5ccacf00245e48e10fa938390308e0c971b1854cdd3a0cc6864fd4",
+      "bytes": 19662
+    },
+    {
+      "file": "mcp-consume-1039-set-consume.json",
+      "sha256": "b1eb7dd939bff84ac93b6a32be7dfbbcf3763e103c7b1e5bbeadd628588e0a24",
+      "bytes": 1436
+    },
+    {
+      "file": "mcp-consume-1039-set-invoice.json",
+      "sha256": "47ab69ba1623657daca72f389749bbbe01a995dfd35f23f007d912cb7c895150",
+      "bytes": 1564
+    },
+    {
+      "file": "mcp-consume-1039-token-guard.json",
+      "sha256": "79b439efd96ae68ab61e5db7372d33fe2d87c2e49f943968409e8c7e2e3c0f17",
+      "bytes": 1110
+    },
+    {
+      "file": "mcp-consume-1039-unknown-key.json",
+      "sha256": "523aef5d70c904bef9704eb85e3b7bccb9394ea420485da0b204cc66e6145cb3",
+      "bytes": 911
+    },
+    {
+      "file": "mcp-consume-1039-wrong-count.json",
+      "sha256": "33489b0582128cfaaae5904f6af53b4007f48a44ad42f99c6da8dca8f8d1bc70",
+      "bytes": 942
+    },
+    {
+      "file": "mcp-fixtures.json",
+      "sha256": "3a657d3444ef3b7ab79302ff3f2a646542bf39d83bb86e8e3b576cc7490db2fe",
+      "bytes": 42497
+    },
+    {
+      "file": "mcp-full-1033-counts-invoices.json",
+      "sha256": "521a8796aa6ea85c04cbbc7d9630a489221bab05d9bafa32610d853db412f273",
+      "bytes": 5621
+    },
+    {
+      "file": "mcp-full-1033-counts-shipments.json",
+      "sha256": "9fd66dda752798c237f903db3e3b5b0fe84b56d9b33e61779f9186e5069b8f9a",
+      "bytes": 5058
+    },
+    {
+      "file": "mcp-full-1033-post.json",
+      "sha256": "8d571ff6cfdb3ee47e0056d78b696160360a45a128bf028883ac31d68a4638a3",
+      "bytes": 1161
+    },
+    {
+      "file": "mcp-full-1039-counts-invoices.json",
+      "sha256": "25722471728013d3ee3bbe6e672f6a075ce245ee0abf4ef4aa95deb8850ec4f4",
+      "bytes": 5624
+    },
+    {
+      "file": "mcp-full-1039-counts-shipments.json",
+      "sha256": "83888017c3700105b1797a90a7bb82ff9eb99fb4c3ff193088f5dbafd75e91cc",
+      "bytes": 5057
+    },
+    {
+      "file": "mcp-full-1039-post.json",
+      "sha256": "cf5e0fdc02d1747789cb9993284b61672d3a57eb24fbc400b9b5abe96d50dc2e",
+      "bytes": 1161
+    },
+    {
+      "file": "mcp-help-Post-1033.json",
+      "sha256": "bded87ebc8fdac30ffcc4d864e7661510f928185cad0de5af2ee87f789b1f639",
+      "bytes": 23697
+    },
+    {
+      "file": "mcp-help-Post-1039.json",
+      "sha256": "f5adf61c98637fae3ba7a1078970a8188c010801a07c292cbb597a10f6bcadd9",
+      "bytes": 23783
+    },
+    {
+      "file": "mcp-help-PreviewPost-1033.json",
+      "sha256": "dc4735378d4c6392c819f5569f209844f6c3aa7ef0e02969458ecb6378bd8f64",
+      "bytes": 17576
+    },
+    {
+      "file": "mcp-help-PreviewPost-1039.json",
+      "sha256": "dffaffb5bd0e6461b981c608c1228efcdd0a9588c43de6310aa5e428f775e0f0",
+      "bytes": 17602
+    },
+    {
+      "file": "mcp-shipped-3-invoice.json",
+      "sha256": "4e6d1bdec56c68e1ee81a3ccbcdc0e3a03da33684cf01e86470a73f44eb9f1a9",
+      "bytes": 978
+    },
+    {
+      "file": "mcp-shipped-3-posted-count-invoices.json",
+      "sha256": "032d6611c6c8521c9ee3310109038ae80bf0cddafbc951aed8e5838fcf186e40",
+      "bytes": 5622
+    },
+    {
+      "file": "mcp-shipped-3-posted-count-shipments.json",
+      "sha256": "84bc1022a26578cea8739e10f0b8b80fc39284cdd1c4390e60b259ff08c8cd11",
+      "bytes": 5055
+    },
+    {
+      "file": "mcp-shipped-3-preview-count-invoices.json",
+      "sha256": "79486a47b2ef6b93d169b23d2b1e69bfea440302840966c3de43120ba9502269",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-shipped-3-preview-count-shipments.json",
+      "sha256": "62e67b73f9a37e3b1c1449f4f0cff28a692f9ffaaeb02b12000f4260c06f88e9",
+      "bytes": 5055
+    },
+    {
+      "file": "mcp-shipped-3-preview.json",
+      "sha256": "b26d1189cc5e77b600a4fc3f02d2928e48550b7acd6e2a0114e8aa387e56c9e7",
+      "bytes": 17377
+    },
+    {
+      "file": "mcp-shipped-3-ship.json",
+      "sha256": "43b55bc9bc064c91a1f02337831d5c9887a8b1ea638548a488c5879067357791",
+      "bytes": 1354
+    },
+    {
+      "file": "mcp-shipped-4-invoice.json",
+      "sha256": "5b1d54faf4c4fb5c12d92b8112eafdf3868c70a7229d7177ce54c70f1846c91a",
+      "bytes": 1021
+    },
+    {
+      "file": "mcp-shipped-4-posted-count-invoices.json",
+      "sha256": "841f82962cf5226359f37958ff4710a5895dd0d8862b7078fd132327daefbd80",
+      "bytes": 5622
+    },
+    {
+      "file": "mcp-shipped-4-posted-count-shipments.json",
+      "sha256": "1da979cab52ce432425cef5d690cdcccbef8381ec10f45a724102f0b0ba74dc8",
+      "bytes": 5057
+    },
+    {
+      "file": "mcp-shipped-4-preview-count-invoices.json",
+      "sha256": "47cc003c19fd7641dff6a3a723aa2d2566c892357e5c0a8d65af328ff76368e6",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-shipped-4-preview-count-shipments.json",
+      "sha256": "d1e4a08f921d9922ef1373bd046381a12eea37f117a00b867417363bc6e2ab87",
+      "bytes": 5057
+    },
+    {
+      "file": "mcp-shipped-4-preview.json",
+      "sha256": "c457f7dd1fc491c9ae398eb87bd742f6ea6206a7fa62d664351f0c83251e07a5",
+      "bytes": 17433
+    },
+    {
+      "file": "mcp-shipped-4-ship.json",
+      "sha256": "0986939ab711959f75a1d87f666f283e31466545afbe4107d87534bcaa251ff6",
+      "bytes": 1354
+    },
+    {
+      "file": "mcp-shipped-5-invoice.json",
+      "sha256": "d02c94ce0f8ba27a53a9e21b652ea6528f9dca698de77d72eb620d7d4dde4d02",
+      "bytes": 1021
+    },
+    {
+      "file": "mcp-shipped-5-posted-count-invoices.json",
+      "sha256": "8890560d448da3cbe78b9f97f6086625559b10606411fc3457569e530aaea1a5",
+      "bytes": 5623
+    },
+    {
+      "file": "mcp-shipped-5-posted-count-shipments.json",
+      "sha256": "a7027ffd452cae75ae2471af13524b1eb6dfa9f2a7cb73b927f8db5771daffb4",
+      "bytes": 5058
+    },
+    {
+      "file": "mcp-shipped-5-preview-count-invoices.json",
+      "sha256": "f281dc1afc19747be6712e40c076e13400119ab20f36a5b039b1bafdff8329a7",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-shipped-5-preview-count-shipments.json",
+      "sha256": "a0ad17ab1bf44ebd4c0d9f5f3441012faecc518bc1ae5b4ce67f6e1ff0872800",
+      "bytes": 5058
+    },
+    {
+      "file": "mcp-shipped-5-preview.json",
+      "sha256": "6c379555f534deba5d8555ff06ce860543cd1d66336b04641d00870f0337818e",
+      "bytes": 17418
+    },
+    {
+      "file": "mcp-shipped-5-ship.json",
+      "sha256": "6646feb6b88f6111f0dc6cf5c10ecd5f24c94e69affd38d82c0b293da900b229",
+      "bytes": 1354
+    },
+    {
+      "file": "mcp-shipped-6-invoice.json",
+      "sha256": "09f7c19d9e1ca8e6cc7bdf1e61c628509d9c18c44c437f3c21c9ee89b52085e4",
+      "bytes": 978
+    },
+    {
+      "file": "mcp-shipped-6-posted-count-invoices.json",
+      "sha256": "cd87edc6060322a619b8f89bb0bda65c3ed7aa080e6e68447acb922ac4cf81b8",
+      "bytes": 5625
+    },
+    {
+      "file": "mcp-shipped-6-posted-count-shipments.json",
+      "sha256": "12916e048fe778139ca5bc882784940a363398b8b0fff41bb599e4701b45d297",
+      "bytes": 5058
+    },
+    {
+      "file": "mcp-shipped-6-preview-count-invoices.json",
+      "sha256": "f5ad6c7be6025b255878c8ac7403d0e208cf257df16dca2c4d94f8099260d522",
+      "bytes": 491
+    },
+    {
+      "file": "mcp-shipped-6-preview-count-shipments.json",
+      "sha256": "47ed920315efeab8971d7c6364de184a2b3c205b67f39b6cd5e5950366ba6164",
+      "bytes": 5058
+    },
+    {
+      "file": "mcp-shipped-6-preview.json",
+      "sha256": "2f30a6c5bb1befa94b3962a400d973c11786ead0802b6f840747385faf17c758",
+      "bytes": 17384
+    },
+    {
+      "file": "mcp-shipped-6-ship.json",
+      "sha256": "84ae4e670b260bd262cd8bd597c3bb1a0cd43d6fc813c710c0d30b8d9128711a",
+      "bytes": 1354
+    }
+  ]
+}

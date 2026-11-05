@@ -1,0 +1,207 @@
+{
+  "files_scanned": 13,
+  "publisher": "Origo",
+  "total_al_files": 33,
+  "mode": "diff (vs origin/main)",
+  "version": "28.0.0.0",
+  "summary": {
+    "passed": 21,
+    "ready": false,
+    "failed": 2,
+    "total": 23
+  },
+  "project": "Bifrost Service Management",
+  "checks": {
+    "data_classification": {
+      "pass": true,
+      "findings": []
+    },
+    "set_load_fields": {
+      "advisory": "Loops without SetLoadFields - consider it only for wide tables; not a gate failure",
+      "findings": [],
+      "pass": true
+    },
+    "format_guid": {
+      "pass": true,
+      "findings": []
+    },
+    "try_prefix_convention": {
+      "pass": true,
+      "findings": []
+    },
+    "changelog": {
+      "pass": true,
+      "findings": []
+    },
+    "page_code_minimal": {
+      "pass": true,
+      "findings": []
+    },
+    "with_statements": {
+      "pass": true,
+      "findings": []
+    },
+    "hardcoded_values": {
+      "pass": true,
+      "findings": []
+    },
+    "modernization": {
+      "pass": true,
+      "findings": []
+    },
+    "global_variables": {
+      "pass": true,
+      "findings": []
+    },
+    "format_evaluate_enum": {
+      "pass": true,
+      "findings": []
+    },
+    "xml_doc_comments": {
+      "pass": true,
+      "findings": []
+    },
+    "one_statement_per_line": {
+      "pass": false,
+      "findings": [
+        {
+          "file": "SvcOrderPostProc.Codeunit.al",
+          "line": 78,
+          "text": "local procedure BuildResponse(Options: Codeunit \"Svc Post Options ori\"; OrderNo: Code[20]; CustomerNo: Code[20]; CustomerName: Text[100]; Shipments: List of [Code[20]]; Invoices: List of [Code[20]]; LastLedgerEntryNo: Integer; Ship: Boolean; Consume: Boolean; Invoice: Boolean; var Response: JsonObject)"
+        },
+        {
+          "file": "SvcOrderPreviewProc.Codeunit.al",
+          "line": 26,
+          "text": "internal procedure Preview(ServiceHeader: Record \"Service Header\"; Ship: Boolean; Consume: Boolean; Invoice: Boolean; var PostingPreviewEventHandler: Codeunit \"Posting Preview Event Handler\"; var ErrorText: Text): Boolean"
+        },
+        {
+          "file": "SvcOrderPreviewProc.Codeunit.al",
+          "line": 46,
+          "text": "internal procedure SetOptions(Ship: Boolean; Consume: Boolean; Invoice: Boolean)"
+        },
+        {
+          "file": "SvcOrderPreviewProc.Codeunit.al",
+          "line": 54,
+          "text": "local procedure OnRunPreview(var Result: Boolean; Subscriber: Variant; RecVar: Variant)"
+        },
+        {
+          "file": "SvcPostConfirm.Codeunit.al",
+          "line": 16,
+          "text": "procedure GetConfirmCount(var Argument: Record \"Message Argument ori\"; var Count: Integer; var Summary: Text): Boolean"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 28,
+          "text": "internal procedure ReadFlags(var Argument: Record \"Message Argument ori\"; var Ship: Boolean; var Consume: Boolean; var Invoice: Boolean; var AnySent: Boolean)"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 73,
+          "text": "internal procedure Resolve(var Argument: Record \"Message Argument ori\"; var Ship: Boolean; Consume: Boolean; var Invoice: Boolean; AnySent: Boolean): Boolean"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 108,
+          "text": "internal procedure CheckPolicy(var Argument: Record \"Message Argument ori\"; Ship: Boolean; Consume: Boolean; Invoice: Boolean): Boolean"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 142,
+          "text": "internal procedure CheckSomethingToPost(var Argument: Record \"Message Argument ori\"; Header: Record \"Service Header\"; Ship: Boolean; Consume: Boolean; Invoice: Boolean): Boolean"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 177,
+          "text": "internal procedure OptionName(Ship: Boolean; Consume: Boolean; Invoice: Boolean): Text"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 194,
+          "text": "internal procedure OptionToken(Ship: Boolean; Consume: Boolean; Invoice: Boolean): Text"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 206,
+          "text": "internal procedure CapturePosted(OrderNo: Code[20]; var Shipments: List of [Code[20]]; var Invoices: List of [Code[20]]; var LastLedgerEntryNo: Integer)"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 237,
+          "text": "internal procedure CollectPosted(OrderNo: Code[20]; Shipments: List of [Code[20]]; Invoices: List of [Code[20]]; var Posted: JsonArray)"
+        },
+        {
+          "file": "SvcPostOptions.Codeunit.al",
+          "line": 319,
+          "text": "local procedure ReadFlag(Request: JsonObject; KeyName: Text; var Sent: Boolean): Boolean"
+        },
+        {
+          "file": "SvcPostRestrict.Codeunit.al",
+          "line": 12,
+          "text": "local procedure RestrictPostedQuantities(TableNo: Integer; FieldNo: Integer; Force: Boolean; var IsRestricted: Boolean)"
+        },
+        {
+          "file": "SvcPostRestrict.Codeunit.al",
+          "line": 19,
+          "text": "local procedure PostedQuantityHint(TableNo: Integer; FieldNo: Integer; var Hint: Text)"
+        },
+        {
+          "file": "SvcPostRestrict.Codeunit.al",
+          "line": 35,
+          "text": "local procedure RestrictPostingToken(TableNo: Integer; Force: Boolean; var IsRestricted: Boolean)"
+        }
+      ]
+    },
+    "event_subscriber_placement": {
+      "pass": true,
+      "findings": []
+    },
+    "commit_in_loop": {
+      "pass": true,
+      "findings": []
+    },
+    "caption_translation": {
+      "findings": [
+        {
+          "file": "SvcPostMsgType.EnumExt.al",
+          "line": 10,
+          "text": "Caption = 'Service.Order.Post', Locked = true;"
+        },
+        {
+          "file": "SvcPostMsgType.EnumExt.al",
+          "line": 15,
+          "text": "Caption = 'Service.Order.PreviewPost', Locked = true;"
+        }
+      ],
+      "pass": false,
+      "skipped": null
+    },
+    "namespace": {
+      "pass": true,
+      "findings": []
+    },
+    "today_vs_workdate": {
+      "pass": true,
+      "findings": []
+    },
+    "app_json": {
+      "pass": true,
+      "findings": []
+    },
+    "confirm_in_page": {
+      "pass": true,
+      "findings": []
+    },
+    "read_isolation": {
+      "pass": true,
+      "findings": []
+    },
+    "reserved_var_names": {
+      "pass": true,
+      "findings": []
+    },
+    "object_naming": {
+      "pass": true,
+      "findings": []
+    }
+  }
+}
