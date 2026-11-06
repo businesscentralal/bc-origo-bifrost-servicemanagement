@@ -170,3 +170,40 @@ Story test id 97715 was already occupied on main by `Svc Wrong Type Tests ori` (
 The caller-rollback regression verifies that Omit Commit conversion remains committed while a later unrelated caller write rolls back.
 
 Native conversion may calculate Item availability. The caller needs its standard base permissions for that calculation (the test fixture uses `D365 READ`; indirect-only `D365 ITEM AVAIL CALC` is insufficient for its FlowFields) as well as service editing. The Bifröst permission set grants no additional native table access. The read-role regression keeps these same native permissions and must still refuse conversion.
+
+## Service.Order.Post and Service.Order.PreviewPost (#7)
+
+Post a service order (ship, consume, invoice) and preview the entries first.
+
+```json
+{"type":"Service.Order.PreviewPost","data":{"no":"SO000001"}}
+{"type":"Service.Order.Post","data":{"no":"SO000001","ship":true,"consume":true,"expectedCount":1}}
+```
+
+- Options: Ship, Invoice, Ship and Invoice (default when no flag is sent) and Ship and Consume. `consume` only with `ship`, never with `invoice`. The user's service invoice posting policy applies.
+- Set `Qty. to Ship`, `Qty. to Consume` and `Qty. to Invoice` on the lines with `Data.Records.Set`. The posted-quantity fields are refused there.
+- In an AL Omit Commit chain, native posting errors propagate unchanged so the caller can roll back. Normal calls return `BusinessCentralError` JSON. A successful post retains BC commits in both modes.
+- Post commits (Business Central's own commit in `Service-Post` is kept) and needs the permission set `BIFROST SvcPost ori`, which is not part of `BIFROST SvcFull ori` or `BIFROST SvcRead ori`. PreviewPost is listed only for holders of that set.
+
+Object ids: app 10076075–10076086, tests 97740–97750.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076075 | table | Svc Posting ori |
+| 10076076 | permissionset | BIFROST SvcPost ori |
+| 10076077 | enumextension | Svc Post MsgType ori |
+| 10076078 | codeunit | Svc Posting Gate ori |
+| 10076079 | codeunit | Svc Order Post Impl ori |
+| 10076080 | codeunit | Svc Order Post Proc ori |
+| 10076081 | codeunit | Svc Order Preview Impl ori |
+| 10076082 | codeunit | Svc Order Preview Proc ori |
+| 10076083 | codeunit | Svc Post Options ori |
+| 10076084 | codeunit | Svc Post Restrict ori |
+| 10076085 | codeunit | Svc Post Confirm ori |
+| 10076086 | codeunit | Svc Post Contract ori |
+| 97740–97745 | codeunit (test) | Svc Order Post / Preview / Post Confirm / Posting Gate / Post Restrict / Post Contract Tests ori |
+| 97746 | codeunit (test) | Svc Post Lifecycle Tests ori |
+| 97747 | codeunit (test) | Svc Post Licence Tests ori |
+| 97748 | codeunit | Svc Post Licence Probe ori |
+| 97749 | codeunit (test) | Svc Post Data ori |
+| 97750 | codeunit | Svc Post Caller Rollback ori |
