@@ -176,7 +176,7 @@ codeunit 10076093 "Svc Undo Contract ori"
     var
         Notes: Text;
     begin
-        Notes := 'This call commits, including when Omit Commit is requested; Business Central''s own undo posting is kept. In an AL rollback chain (Omit Commit), a native error is raised to the caller unchanged; normal calls return BusinessCentralError JSON. Every requested line is checked before anything is posted. Not retry-safe: an undone line becomes a correction line and is refused the next time.';
+        Notes := 'This call commits when Omit Commit is not requested. With Omit Commit, Business Central''s undo does not commit: the correcting entries stay in the caller''s transaction, so a later caller error rolls the undo back too, and a native error is raised to the caller unchanged; normal calls return BusinessCentralError JSON. Every requested line is checked before anything is posted. Not retry-safe: an undone line becomes a correction line and is refused the next time.';
         if not Consumption then
             Notes += ' Lines whose shipment created service items are refused, because the undo would delete those service items.';
         exit(Notes);

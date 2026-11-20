@@ -194,7 +194,7 @@ codeunit 10076088 "Svc Shipment Undo Impl ori" implements "Msg Interface ori", "
     /// <returns>True.</returns>
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Undoes lines of a posted service shipment that were shipped but not consumed or invoiced, with the standard Business Central undo: correcting entries are posted, correction lines are added to the shipment and the quantity returns to the service order line. Send expectedCount 1. This call commits.';
+        Overview := 'Undoes lines of a posted service shipment that were shipped but not consumed or invoiced, with the standard Business Central undo: correcting entries are posted, correction lines are added to the shipment and the quantity returns to the service order line. Send expectedCount 1. This call commits unless Omit Commit is requested.';
         exit(true);
     end;
 }

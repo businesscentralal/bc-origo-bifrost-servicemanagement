@@ -312,4 +312,60 @@ codeunit 97751 "Svc Undo Tests ori"
         Assert.IsTrue(ServiceItem.Get(ServiceItem."No."), 'The service item still exists.');
         Assert.IsTrue(Serialized.Contains('service item'), 'The refusal names the service items: ' + Serialized);
     end;
+
+    [Test]
+    procedure Scenario_OmitCommit_ShipmentUndo_RollsBackWithCaller()
+    var
+        Header: Record "Service Header";
+        ItemShipment: Record "Service Shipment Line";
+        OrderLine: Record "Service Line";
+        ItemEntry: Record "Item Ledger Entry";
+        Caller: Codeunit "Svc Undo Caller Rollback ori";
+        ShipmentNo: Code[20];
+    begin
+        // Story #20 Omit Commit | Time: WorkDate | Risk: the standard undo has no commit of its own, so the caller's rollback must reverse it completely.
+        ShipmentNo := UndoData.ShipOrder(Header, false);
+        UndoData.FindLine(ShipmentNo, ItemShipment.Type::Item, ItemShipment);
+        Commit();
+        Caller.SetConsumption(false);
+        asserterror Caller.Run(ItemShipment);
+        Assert.ExpectedError('X-SVC20-EXPECTED-CALLER-ROLLBACK');
+        Assert.AreEqual(0, UndoData.CorrectionLines(ShipmentNo), 'The caller rollback removes the correction line.');
+        ItemShipment.Get(ItemShipment."Document No.", ItemShipment."Line No.");
+        Assert.IsFalse(ItemShipment.Correction, 'The shipment line is not marked as corrected after the caller rollback.');
+        ItemEntry.SetRange("Item No.", ItemShipment."No.");
+        ItemEntry.SetRange("Document No.", ShipmentNo);
+        Assert.AreEqual(1, ItemEntry.Count(), 'The caller rollback removes the correcting item ledger entry.');
+        OrderLine.Get(OrderLine."Document Type"::Order, Header."No.", ItemShipment."Order Line No.");
+        Assert.AreEqual(2, OrderLine."Quantity Shipped", 'Quantity Shipped is back to the posted shipment.');
+        Header.Get(Header."Document Type", Header."No.");
+        Assert.AreNotEqual('X-SVC20-CALLER-WRITE', Header.Description, 'The caller write rolls back with the undo.');
+        PostData.AssertSuccess(UndoData.UndoLine(false, ShipmentNo, ItemShipment."Line No."));
+        Assert.AreEqual(1, UndoData.CorrectionLines(ShipmentNo), 'After the rollback the same line can still be undone.');
+    end;
+
+    [Test]
+    procedure Scenario_OmitCommit_ConsumptionUndo_RollsBackWithCaller()
+    var
+        Header: Record "Service Header";
+        ItemShipment: Record "Service Shipment Line";
+        OrderLine: Record "Service Line";
+        Caller: Codeunit "Svc Undo Caller Rollback ori";
+        ShipmentNo: Code[20];
+    begin
+        // Story #20 Omit Commit | Time: WorkDate | Risk: the standard undo has no commit of its own, so the caller's rollback must reverse it completely.
+        ShipmentNo := UndoData.ShipOrder(Header, true);
+        UndoData.FindLine(ShipmentNo, ItemShipment.Type::Item, ItemShipment);
+        Commit();
+        Caller.SetConsumption(true);
+        asserterror Caller.Run(ItemShipment);
+        Assert.ExpectedError('X-SVC20-EXPECTED-CALLER-ROLLBACK');
+        Assert.AreEqual(0, UndoData.CorrectionLines(ShipmentNo), 'The caller rollback removes the consumption correction.');
+        ItemShipment.Get(ItemShipment."Document No.", ItemShipment."Line No.");
+        Assert.IsFalse(ItemShipment.Correction, 'The consumed line is not marked as corrected after the caller rollback.');
+        OrderLine.Get(OrderLine."Document Type"::Order, Header."No.", ItemShipment."Order Line No.");
+        Assert.AreEqual(1, OrderLine."Quantity Consumed", 'Quantity Consumed is back to the posted consumption.');
+        Header.Get(Header."Document Type", Header."No.");
+        Assert.AreNotEqual('X-SVC20-CALLER-WRITE', Header.Description, 'The caller write rolls back with the undo.');
+    end;
 }

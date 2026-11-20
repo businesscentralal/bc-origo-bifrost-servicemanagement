@@ -53,7 +53,7 @@ codeunit 97753 "Svc Undo Contract Tests ori"
             Assert.IsTrue(Contract.Contains(Chapter), 'Missing contract chapter: ' + Chapter);
         Contract.Get('effect', Token);
         Assert.AreEqual('irreversible', Data.TextValue(Token.AsObject(), 'effect'), 'Effect.');
-        foreach Chapter in 'This call commits|lineNos|expectedCount|ConfirmationRequired|ConfirmationMismatch|PermissionDenied|PreconditionFailed|RecordNotFound|ConflictingIdentifiers|InvalidParameterFormat'.Split('|') do
+        foreach Chapter in 'This call commits|a later caller error rolls the undo back|lineNos|expectedCount|ConfirmationRequired|ConfirmationMismatch|PermissionDenied|PreconditionFailed|RecordNotFound|ConflictingIdentifiers|InvalidParameterFormat'.Split('|') do
             Assert.IsTrue(Serialized.Contains(Chapter), 'Help names ' + Chapter);
         // Only the chapters this app writes; Foundation's own wrapper text is not part of this help.
         foreach Chapter in 'target|parameters|response|errors|effect|related|examples|overview|notes'.Split('|') do begin

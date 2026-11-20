@@ -255,9 +255,9 @@ Undo posted service shipment lines (shipped, not consumed, not invoiced) or the 
 - `documentNo`, `systemId` (Service Shipment Header) or a plain subject; `lineNos` (1-200 distinct positive line numbers) or leave it out for every line that can be undone.
 - `expectedCount` is 1: the posted shipment, not its lines. Without it the answer is `ConfirmationRequired` with the line list.
 - Every requested line is checked before anything is posted. A shipment line whose shipment created service items is refused with `PreconditionFailed`, because the standard undo would delete those service items (Gunnar 20.11.2026, card `plan-sm-delete-paths` option a). Consumed lines need `Service.Consumption.Undo` first; invoiced lines need a service credit memo.
-- Needs `BIFROST SvcPost ori` (checked before any line validation, also on the confirmation path). Commits like `Service.Order.Post`.
+- Needs `BIFROST SvcPost ori` (checked before any line validation, also on the confirmation path). Commits on a normal call. With Omit Commit the standard undo does not commit: it stays in the caller's transaction and a later caller error rolls it back (regression 97751 with caller 97756).
 
-Object ids: app 10076087–10076093, tests 97751–97755.
+Object ids: app 10076087–10076093, tests 97751–97756.
 
 | Id | Object | Name |
 | --- | --- | --- |
@@ -273,6 +273,7 @@ Object ids: app 10076087–10076093, tests 97751–97755.
 | 97753 | codeunit (test) | Svc Undo Contract Tests ori |
 | 97754 | codeunit | Svc Undo Data ori |
 | 97755 | codeunit | Svc Undo Perm Runner ori |
+| 97756 | codeunit | Svc Undo Caller Rollback ori |
 ## Service.Resource.Suggest (#27)
 
 `Service.Resource.Suggest` is a read. For one service item line of a service order (`documentNo` + `serviceItemLineNo`, or the line `systemId`) and a period of at most 31 days (`dateFrom`, `dateTo`, default the work date), it ranks the resources: qualified first, then in the order service zone, then most available hours (capacity minus active, unposted service order allocations), then resource no. Optional `resourceGroupNo`, `includeUnqualified` (default false) and `top` (default 20, max 100). Qualification is Business Central's own `QualifiedForServiceItemLine`. When Resource Skills Option is Not Used, every resource is returned with `qualified` = null; when Service Zones Option is Not Used or the order has no zone, `inServiceZone` = null. Blocked resources are left out. Nothing is written, so there is no confirmation and no write gate; the type is in `BIFROST SvcRead ori`. A caller without native read access to service headers, service item lines, service setup, resources, skills, service zones, capacity or allocations gets `PermissionDenied` (a standard reader has `D365 READ`).

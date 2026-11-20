@@ -194,7 +194,7 @@ codeunit 10076090 "Svc Consumption Undo Impl ori" implements "Msg Interface ori"
     /// <returns>True.</returns>
     procedure GetOverview(var Overview: Text): Boolean
     begin
-        Overview := 'Undoes the consumption on lines of a posted service shipment that were not invoiced, with the standard Business Central undo: correcting item, resource and service ledger entries are posted, correction lines are added to the shipment and the consumed quantity returns to the service order line. Send expectedCount 1. This call commits.';
+        Overview := 'Undoes the consumption on lines of a posted service shipment that were not invoiced, with the standard Business Central undo: correcting item, resource and service ledger entries are posted, correction lines are added to the shipment and the consumed quantity returns to the service order line. Send expectedCount 1. This call commits unless Omit Commit is requested.';
         exit(true);
     end;
 }

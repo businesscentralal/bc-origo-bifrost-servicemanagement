@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Added
-- Add `Service.Shipment.Undo` and `Service.Consumption.Undo` (irreversible, commit, `expectedCount` 1 = the posted shipment) through Business Central's standard undo of service shipment and consumption lines (10076087–10076093) (#20). `documentNo`/`systemId`/subject plus optional `lineNos`; all lines validated before posting; lines whose shipment created service items are refused so no service item is deleted; gated by `BIFROST SvcPost ori`. Tests 97751–97753 with helpers 97754–97755.
+- Add `Service.Shipment.Undo` and `Service.Consumption.Undo` (irreversible, commits on a normal call; under Omit Commit the undo stays in the caller's transaction and rolls back with it, `expectedCount` 1 = the posted shipment) through Business Central's standard undo of service shipment and consumption lines (10076087–10076093) (#20). `documentNo`/`systemId`/subject plus optional `lineNos`; all lines validated before posting; lines whose shipment created service items are refused so no service item is deleted; gated by `BIFROST SvcPost ori`. Tests 97751–97753 with helpers 97754–97755.
 - Add `Service.Resource.Suggest` (read; 10076130-10076132): ranks the resources for a service item line of a service order by Business Central skill qualification, service zone and available hours (capacity minus active allocations) in a period of up to 31 days, honouring the Resource Skills and Service Zones options; in `BIFROST SvcRead ori` and `BIFROST Svc ori`, `PermissionDenied` without native read access. The dispatch board stays a documented `Data.Records.Get` recipe (#27). Add ranking, setup-option, refusal, read-role and bilingual help coverage (97780-97782, fixture helper 97783).
 
 ### Fixed
