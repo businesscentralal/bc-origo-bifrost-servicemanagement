@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- Add `Service.FaultResolution.Suggest` (10076120, enum extension 10076121): a read that ranks the resolution codes from `Fault/Resol. Cod. Relationship` for a service item line or for codes sent directly, filtered by the service setup's fault reporting level and service item group, with bilingual help and refusals (#28). Calculate is dropped by Gunnar's 20.11.2026 ruling. Tests 97790–97792 cover ranking, levels, group filter, refusals, read-role and no-permission users, and help in 1033/1039.
+
 ### Fixed
 - Service.Order.Post and PreviewPost can invoice already-shipped quantities with default or explicit Ship and Invoice, including Mandatory posting policy (10076083; regression tests 97740).
 

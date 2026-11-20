@@ -242,3 +242,27 @@ Object ids: app 10076075–10076086, tests 97740–97750.
 | 97748 | codeunit | Svc Post Licence Probe ori |
 | 97749 | codeunit (test) | Svc Post Data ori |
 | 97750 | codeunit | Svc Post Caller Rollback ori |
+
+## Service.FaultResolution.Suggest (#28)
+
+Ranks the resolution codes that fixed the same fault before (table `Fault/Resol. Cod. Relationship`), most occurrences first. Read only; no confirmation and no gate. Gunnar 20.11.2026: Calculate is dropped (it deletes and rebuilds the table); the table is rebuilt in Business Central by the Insert Fault/Resol. Relations batch job.
+
+```json
+{"type":"Service.FaultResolution.Suggest","data":{"documentNo":"SO000001","serviceItemLineNo":10000,"top":5}}
+{"type":"Service.FaultResolution.Suggest","data":{"faultCode":"NOPOWER","symptomCode":"DEAD"}}
+```
+
+- `Service Mgt. Setup`.`Fault Reporting Level` decides the filter: Fault (fault code), Fault+Symptom (+ symptom), Fault+Symptom+Area (+ fault area). None is `PreconditionFailed`.
+- A line without the codes the level needs is `PreconditionFailed` with a `Data.Records.Set` next step; codes sent directly without them are `MissingParameter`. Line plus codes that disagree are `ConflictingIdentifiers`.
+- A service item group returns rows for that group and rows without a group.
+- The caller needs its own read access to `Service Item Line`, `Service Mgt. Setup` and `Fault/Resol. Cod. Relationship`; the type names the unreadable table in `PermissionDenied`. The standard `D365PREM SMG, VIEW` set does not include the relationship table; the Bifröst sets do not widen BC data access (AppSourceCop AS0110/AS0112).
+
+Object ids are an offset block (10076120–10076121, tests 97790–97792) because #20, #22, #27 and #28 were started in parallel from 10076087.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076120 | codeunit | Svc Fault Resol Suggest ori |
+| 10076121 | enumextension | Svc Fault MsgType ori |
+| 97790 | codeunit (test) | Svc Fault Suggest Tests ori |
+| 97791 | codeunit (test) | Svc Fault Perm Tests ori |
+| 97792 | codeunit (test) | Svc Fault Contract Tests ori |

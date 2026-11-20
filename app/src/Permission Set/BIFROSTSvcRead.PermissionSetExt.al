@@ -13,6 +13,7 @@ permissionsetextension 10076038 "BIFROST SvcRead ori" extends "BIFROST Read ori"
 {
     Permissions =
         codeunit "Svc Registration ori" = X,
+        codeunit "Svc Fault Resol Suggest ori" = X,
         codeunit "Svc Write Check ori" = X,
         table "Svc Write Gate ori" = X,
         tabledata "Svc Write Gate ori" = R;
