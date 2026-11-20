@@ -280,3 +280,36 @@ Object ids are an offset block (10076120–10076121, tests 97790–97792) becaus
 | 97790 | codeunit (test) | Svc Fault Suggest Tests ori |
 | 97791 | codeunit (test) | Svc Fault Perm Tests ori |
 | 97792 | codeunit (test) | Svc Fault Contract Tests ori |
+
+## Standalone service billing (#22)
+
+```json
+{"type":"Service.Invoice.GetShipmentLines","data":{"customerNo":"C0001","shipmentNos":["SS0001","SS0002"]}}
+{"type":"Service.Document.PreviewPost","data":{"documentType":"Invoice","no":"SI0001"}}
+{"type":"Service.Document.Post","data":{"documentType":"Invoice","no":"SI0001","expectedCount":1}}
+{"type":"Service.Document.Post","data":{"documentType":"CreditMemo","no":"SCM0001","expectedCount":1}}
+```
+
+Collect shipped service lines on an open invoice, preview its entries, then post it. For an existing invoice use `invoiceNo`, `systemId` or a plain subject instead of `customerNo`. Select 1–200 distinct `shipmentNos`, or `allUninvoiced: true`. All selected shipments must match the invoice customer, bill-to customer and currency. Already invoiced, consumed, corrected or already added lines are skipped with a reason. `linesAdded` includes native shipment description lines.
+
+`Service.Document.Post` and `Service.Document.PreviewPost` accept `documentType: Invoice | CreditMemo` and `no`, `systemId` or subject. Orders continue to use `Service.Order.Post` and `Service.Order.PreviewPost`. Posting needs `expectedCount: 1` and `BIFROST SvcPost ori`; the count is one document. Posting returns the posted number and systemId, customer, amounts and customer/G/L entry ranges. Preview returns ledger entries and rolls back every change. Shipment collection needs the Bifröst service write role and posts nothing.
+
+Gunnar approved standard posting cleanup for this issue on 20 November 2026 (decision `d-20261120-sm22-post-cleanup`): successful posting removes the unposted invoice or credit memo. Preview cannot run with Omit Commit. Posting retains native commits. After an uncertain posting result, inspect posted documents before retrying. There is no page or action change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 10076094 | codeunit | Svc Doc Post Impl ori |
+| 10076095 | codeunit | Svc Doc Post Proc ori |
+| 10076096 | codeunit | Svc Doc Preview Impl ori |
+| 10076097 | codeunit | Svc Doc Preview Proc ori |
+| 10076098 | codeunit | Svc Doc Confirm ori |
+| 10076099 | codeunit | Svc Doc Request ori |
+| 10076100 | codeunit | Svc Doc Contract ori |
+| 10076101 | codeunit | Svc Inv Shipment Impl ori |
+| 10076102 | codeunit | Svc Inv Shipment Proc ori |
+| 10076103 | enumextension | Svc Doc MsgType ori |
+| 97757 | test codeunit | Svc Doc Tests ori |
+| 97758 | test codeunit | Svc Doc Perm Tests ori |
+| 97759 | test codeunit | Svc Doc Contract Tests ori |
+| 97760 | codeunit | Svc Doc Fixture ori |
+| 97761 | codeunit | Svc Doc Perm Runner ori |
