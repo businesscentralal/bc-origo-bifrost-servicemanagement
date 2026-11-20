@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- Add `Service.Shipment.Undo` and `Service.Consumption.Undo` (irreversible, commit, `expectedCount` 1 = the posted shipment) through Business Central's standard undo of service shipment and consumption lines (10076087–10076093) (#20). `documentNo`/`systemId`/subject plus optional `lineNos`; all lines validated before posting; lines whose shipment created service items are refused so no service item is deleted; gated by `BIFROST SvcPost ori`. Tests 97751–97753 with helpers 97754–97755.
+
 ### Fixed
 - Service.Order.Post and PreviewPost can invoice already-shipped quantities with default or explicit Ship and Invoice, including Mandatory posting policy (10076083; regression tests 97740).
 

@@ -207,3 +207,34 @@ Object ids: app 10076075–10076086, tests 97740–97750.
 | 97748 | codeunit | Svc Post Licence Probe ori |
 | 97749 | codeunit (test) | Svc Post Data ori |
 | 97750 | codeunit | Svc Post Caller Rollback ori |
+
+## Service.Shipment.Undo and Service.Consumption.Undo (#20)
+
+Undo posted service shipment lines (shipped, not consumed, not invoiced) or the consumption on posted service shipment lines (consumed, not invoiced) with the standard Business Central undo. Correcting entries are posted, correction lines are added to the posted shipment and the quantity returns to the service order line. Nothing is deleted.
+
+```json
+{"type":"Service.Shipment.Undo","data":{"documentNo":"SSH000001","lineNos":[10000],"expectedCount":1}}
+{"type":"Service.Consumption.Undo","data":{"documentNo":"SSH000001","expectedCount":1}}
+```
+
+- `documentNo`, `systemId` (Service Shipment Header) or a plain subject; `lineNos` (1-200 distinct positive line numbers) or leave it out for every line that can be undone.
+- `expectedCount` is 1: the posted shipment, not its lines. Without it the answer is `ConfirmationRequired` with the line list.
+- Every requested line is checked before anything is posted. A shipment line whose shipment created service items is refused with `PreconditionFailed`, because the standard undo would delete those service items (Gunnar 20.11.2026, card `plan-sm-delete-paths` option a). Consumed lines need `Service.Consumption.Undo` first; invoiced lines need a service credit memo.
+- Needs `BIFROST SvcPost ori` (checked before any line validation, also on the confirmation path). Commits like `Service.Order.Post`.
+
+Object ids: app 10076087–10076093, tests 97751–97755.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076087 | enumextension | Svc Undo MsgType ori |
+| 10076088 | codeunit | Svc Shipment Undo Impl ori |
+| 10076089 | codeunit | Svc Undo Proc ori |
+| 10076090 | codeunit | Svc Consumption Undo Impl ori |
+| 10076091 | codeunit | Svc Undo Lines ori |
+| 10076092 | codeunit | Svc Undo Confirm ori |
+| 10076093 | codeunit | Svc Undo Contract ori |
+| 97751 | codeunit (test) | Svc Undo Tests ori |
+| 97752 | codeunit (test) | Svc Undo Perm Tests ori |
+| 97753 | codeunit (test) | Svc Undo Contract Tests ori |
+| 97754 | codeunit | Svc Undo Data ori |
+| 97755 | codeunit | Svc Undo Perm Runner ori |

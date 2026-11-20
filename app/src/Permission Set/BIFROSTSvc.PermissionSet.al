@@ -38,6 +38,12 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Order Post Proc ori" = X,
         codeunit "Svc Order Preview Impl ori" = X,
         codeunit "Svc Order Preview Proc ori" = X,
+        codeunit "Svc Shipment Undo Impl ori" = X,
+        codeunit "Svc Consumption Undo Impl ori" = X,
+        codeunit "Svc Undo Proc ori" = X,
+        codeunit "Svc Undo Lines ori" = X,
+        codeunit "Svc Undo Confirm ori" = X,
+        codeunit "Svc Undo Contract ori" = X,
         codeunit "Svc Write Check ori" = X,
         table "Svc Write Gate ori" = X,
         tabledata "Svc Write Gate ori" = RIMD;
