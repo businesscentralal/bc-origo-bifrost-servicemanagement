@@ -471,6 +471,162 @@
           <note from="Developer" annotates="general" priority="2">%1 = document type, is-IS=Sendu númer eða SystemId þjónustuskjals af gerðinni %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Document Lookup ori - NamedType WrongTypeNextLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 does not match the service item line (%2).</source>
+          <target>%1 passar ekki við þjónustuvörulínuna (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = value on the line, is-IS=%1 passar ekki við þjónustuvörulínuna (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3299433917" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send either the service item line or the codes, or codes that match the line.</source>
+          <target>Sendu annaðhvort þjónustuvörulínuna eða kóðana, eða kóða sem passa við línuna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort þjónustuvörulínuna eða kóðana, eða kóða sem passa við línuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType ConflictNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the value in the documented format and retry.</source>
+          <target>Sendu gildið á sniðinu sem lýst er og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu gildið á sniðinu sem lýst er og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId must be a nonempty GUID.</source>
+          <target>systemId verður að vera gilt GUID sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=systemId verður að vera gilt GUID sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3728047871" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a whole number from %2 to %3.</source>
+          <target>%1 verður að vera heiltala frá %2 til %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = minimum, %3 = maximum, is-IS=%1 verður að vera heiltala frá %2 til %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType InvalidIntegerLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 4175382522" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a nonempty JSON string of at most %2 characters.</source>
+          <target>%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = maximum length, is-IS=%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType InvalidTextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 970843557" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fault reporting is turned off in the service setup (Fault Reporting Level is None).</source>
+          <target>Villuskráning er óvirk í þjónustugrunnstillingum (Fault Reporting Level er None).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Villuskráning er óvirk í þjónustugrunnstillingum (Fault Reporting Level er None).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType LevelOffLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3442224272" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator to choose a Fault Reporting Level in Service Mgt. Setup.</source>
+          <target>Biddu kerfisstjóra að velja Fault Reporting Level í Service Mgt. Setup.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra að velja Fault Reporting Level í Service Mgt. Setup.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType LevelOffNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 1683149507" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 %2 has no %3, which the fault reporting level %4 needs.</source>
+          <target>Þjónustuvörulína %1 %2 er ekki með %3, sem villuskráningarstigið %4 þarf.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = line number, %3 = field caption, %4 = fault reporting level, is-IS=Þjónustuvörulína %1 %2 er ekki með %3, sem villuskráningarstigið %4 þarf.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType LineCodeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 325808498" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set %1 on the service item line with Data.Records.Set (table Service Item Line), then retry.</source>
+          <target>Settu %1 á þjónustuvörulínuna með Data.Records.Set (tafla Service Item Line) og reyndu svo aftur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = field caption, is-IS=Settu %1 á þjónustuvörulínuna með Data.Records.Set (tafla Service Item Line) og reyndu svo aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType LineCodeNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 740720393" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 was not found.</source>
+          <target>Þjónustuvörulína %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Þjónustuvörulína %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType LineNotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2128777440" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service order %1 has %2 service item lines.</source>
+          <target>Þjónustupöntun %1 er með %2 þjónustuvörulínur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, %2 = line count, is-IS=Þjónustupöntun %1 er með %2 þjónustuvörulínur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType ManyLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3218661525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send serviceItemLineNo to choose the service item line.</source>
+          <target>Sendu serviceItemLineNo til að velja þjónustuvörulínuna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu serviceItemLineNo til að velja þjónustuvörulínuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType ManyLinesNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 831365973" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 is required by the fault reporting level %2.</source>
+          <target>%1 er nauðsynlegt vegna villuskráningarstigsins %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = fault reporting level, is-IS=%1 er nauðsynlegt vegna villuskráningarstigsins %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingCodeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2832775744" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send %1 as well.</source>
+          <target>Sendu %1 líka.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=Sendu %1 líka.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingCodeNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2426799147" size-unit="char" translate="yes" xml:space="preserve">
+          <source>serviceItemLineNo needs documentNo.</source>
+          <target>serviceItemLineNo þarf documentNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=serviceItemLineNo þarf documentNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingDocumentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3817025178" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the service order number in documentNo.</source>
+          <target>Sendu númer þjónustupöntunarinnar í documentNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu númer þjónustupöntunarinnar í documentNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingDocumentNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a service item line (documentNo and serviceItemLineNo, or systemId) or the codes directly (faultCode).</source>
+          <target>Sendu þjónustuvörulínu (documentNo og serviceItemLineNo, eða systemId) eða kóðana beint (faultCode).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu þjónustuvörulínu (documentNo og serviceItemLineNo, eða systemId) eða kóðana beint (faultCode).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3129818787" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the service item lines with Data.Records.Get (table Service Item Line) and send documentNo and serviceItemLineNo.</source>
+          <target>Lestu þjónustuvörulínurnar með Data.Records.Get (tafla Service Item Line) og sendu documentNo og serviceItemLineNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustuvörulínurnar með Data.Records.Get (tafla Service Item Line) og sendu documentNo og serviceItemLineNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType MissingNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2658168242" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service order %1 was not found or has no service item lines.</source>
+          <target>Þjónustupöntun %1 fannst ekki eða er ekki með neinar þjónustuvörulínur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = order number, is-IS=Þjónustupöntun %1 fannst ekki eða er ekki með neinar þjónustuvörulínur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType NoLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You do not have permission to read the table %1.</source>
+          <target>Þú hefur ekki heimild til að lesa töfluna %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table name, is-IS=Þú hefur ekki heimild til að lesa töfluna %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType PermissionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 3932376842" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator for a Bifröst Service Management read permission set together with read access to service data.</source>
+          <target>Biddu kerfisstjóra um lesheimildasett Bifröst þjónustustjórnunar ásamt lesaðgangi að þjónustugögnum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesheimildasett Bifröst þjónustustjórnunar ásamt lesaðgangi að þjónustugögnum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType PermissionNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 1773691126" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 is not a parameter here.</source>
+          <target>%1 er ekki færibreyta hér.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er ekki færibreyta hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType UnknownLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - NamedType 2001379935" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove %1. The parameters are documentNo, serviceItemLineNo, systemId, faultCode, symptomCode, faultAreaCode, serviceItemGroupCode and top.</source>
+          <target>Fjarlægðu %1. Færibreyturnar eru documentNo, serviceItemLineNo, systemId, faultCode, symptomCode, faultAreaCode, serviceItemGroupCode og top.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=Fjarlægðu %1. Færibreyturnar eru documentNo, serviceItemLineNo, systemId, faultCode, symptomCode, faultAreaCode, serviceItemGroupCode og top.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - NamedType UnknownNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Suggests the resolution codes that fixed the same fault before, most frequent first, for a service item line or for fault codes sent directly. Reads only.</source>
+          <target>Stingur upp á lausnarkóðum sem lagfærðu sömu villu áður, algengasta fyrst, fyrir þjónustuvörulínu eða villukóða sem sendir eru beint. Les eingöngu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stingur upp á lausnarkóðum sem lagfærðu sömu villu áður, algengasta fyrst, fyrir þjónustuvörulínu eða villukóða sem sendir eru beint. Les eingöngu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1161915181 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>fault code, resolution code, suggest fix, repair history</source>
+          <target>villukóði, lausnarkóði, tillaga að lagfæringu, viðgerðarsaga</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=villukóði, lausnarkóði, tillaga að lagfæringu, viðgerðarsaga</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Fault Resol Suggest ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2591205528 - Method 3571782927 - NamedType 3498257463" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the setup or document named by Business Central and send the posting again. Nothing was posted.</source>
           <target>Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</target>
