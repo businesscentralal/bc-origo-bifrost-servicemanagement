@@ -266,3 +266,21 @@ Object ids are an offset block (10076120–10076121, tests 97790–97792) becaus
 | 97790 | codeunit (test) | Svc Fault Suggest Tests ori |
 | 97791 | codeunit (test) | Svc Fault Perm Tests ori |
 | 97792 | codeunit (test) | Svc Fault Contract Tests ori |
+
+## Service.Resource.Suggest (#27)
+
+`Service.Resource.Suggest` is a read. For one service item line of a service order (`documentNo` + `serviceItemLineNo`, or the line `systemId`) and a period of at most 31 days (`dateFrom`, `dateTo`, default the work date), it ranks the resources: qualified first, then in the order service zone, then most available hours (capacity minus active, unposted service order allocations), then resource no. Optional `resourceGroupNo`, `includeUnqualified` (default false) and `top` (default 20, max 100). Qualification is Business Central's own `QualifiedForServiceItemLine`. When Resource Skills Option is Not Used, every resource is returned with `qualified` = null; when Service Zones Option is Not Used or the order has no zone, `inServiceZone` = null. Blocked resources are left out. Nothing is written, so there is no confirmation and no write gate; the type is in `BIFROST SvcRead ori`. A caller without native read access to service headers, service item lines, service setup, resources, skills, service zones, capacity or allocations gets `PermissionDenied` (a standard reader has `D365 READ`).
+
+`Service.Dispatch.Get` is not built: the dispatch board is a plain read of `Service Header` (Document Type Order, sorted by Status, Response Date, Response Time, Priority, with `No. of Allocations` and `Reallocation Needed`), documented in the help as a `Data.Records.Get` recipe, as recommended in the issue (open question 2). Pre-merge Web Client UI: no UI change.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076130 | enumextension | Svc Suggest MsgType ori |
+| 10076131 | codeunit | Svc Resource Suggest Impl ori |
+| 10076132 | codeunit | Svc Resource Suggest ori |
+| 97780 | codeunit (test) | Svc Suggest Tests ori |
+| 97781 | codeunit (test) | Svc Suggest Perm Tests ori |
+| 97782 | codeunit (test) | Svc Suggest Contract Tests ori |
+| 97783 | codeunit (test helper) | Svc Suggest Data ori |
+
+Ids 10076130-10076132 and 97780-97783 were taken above the lowest free numbers because #20, #22 and #28 are built in parallel from the same range.

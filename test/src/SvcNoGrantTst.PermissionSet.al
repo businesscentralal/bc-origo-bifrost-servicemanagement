@@ -11,6 +11,8 @@ permissionset 97710 "Svc NoGrant Tst ori"
                   codeunit "Svc Alloc Perm Tests ori" = X,
                   codeunit "Svc Fault Perm Tests ori" = X,
                   codeunit "Svc Fault Suggest Tests ori" = X,
+                  codeunit "Svc Suggest Perm Tests ori" = X,
+                  codeunit "Svc Suggest Data ori" = X,
                   table "Svc Licence Result Tst ori" = X,
                   tabledata "Svc Licence Result Tst ori" = RIMD;
 }

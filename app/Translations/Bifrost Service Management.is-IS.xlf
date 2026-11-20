@@ -927,6 +927,174 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Release / Service.Order.Reopen</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Release Restrict ori - Method ReleaseStatusHint - NamedType HintLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 547220000 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lists the resources that are qualified, work in the service zone and have free hours for a service item line of a service order, best match first.</source>
+          <target>Birtir forða sem hafa hæfni, vinna á þjónustusvæðinu og eiga lausar klukkustundir fyrir þjónustuvörulínu þjónustupöntunar, bestu samsvörun fyrst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Birtir forða sem hafa hæfni, vinna á þjónustusvæðinu og eiga lausar klukkustundir fyrir þjónustuvörulínu þjónustupöntunar, bestu samsvörun fyrst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 547220000 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>suggest resource, qualified technician, available resource, dispatch</source>
+          <target>stinga upp á forða, hæfur tæknimaður, laus forði, útdeiling verka</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=stinga upp á forða, hæfur tæknimaður, laus forði, útdeiling verka</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 1564739506" size-unit="char" translate="yes" xml:space="preserve">
+          <source>includeUnqualified must be a JSON boolean.</source>
+          <target>includeUnqualified verður að vera JSON boolean.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=includeUnqualified verður að vera JSON boolean.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType BooleanLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId does not identify service item line %1 of service order %2.</source>
+          <target>systemId vísar ekki á þjónustuvörulínu %1 í þjónustupöntun %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = order number, is-IS=systemId vísar ekki á þjónustuvörulínu %1 í þjónustupöntun %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 3299433917" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send identifiers belonging to the same service item line.</source>
+          <target>Sendu auðkenni sem tilheyra sömu þjónustuvörulínunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni sem tilheyra sömu þjónustuvörulínunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType ConflictNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the value in the format documented by describe_message_type.</source>
+          <target>Sendu gildið á sniðinu sem describe_message_type lýsir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu gildið á sniðinu sem describe_message_type lýsir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 1542941690" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a yyyy-mm-dd date.</source>
+          <target>%1 verður að vera dagsetning á sniðinu yyyy-mm-dd.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 verður að vera dagsetning á sniðinu yyyy-mm-dd.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType DateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 286034047" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You do not have permission to read %1.</source>
+          <target>Þú hefur ekki heimild til að lesa %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table caption, is-IS=Þú hefur ekki heimild til að lesa %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType DeniedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2354419638" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ask an administrator for read access to service management and resources.</source>
+          <target>Biddu kerfisstjóra um lesaðgang að þjónustustjórnun og forða.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Biddu kerfisstjóra um lesaðgang að þjónustustjórnun og forða.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType DeniedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2433501187" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resource group %1 was not found.</source>
+          <target>Forðaflokkur %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = resource group, is-IS=Forðaflokkur %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType GroupMissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId must be a nonempty GUID.</source>
+          <target>systemId verður að vera gilt GUID sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=systemId verður að vera gilt GUID sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2663205696" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a positive whole number.</source>
+          <target>%1 verður að vera jákvæð heiltala.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 verður að vera jákvæð heiltala.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType IntegerLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2647022316" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 was not found on service order %2.</source>
+          <target>Þjónustuvörulína %1 fannst ekki á þjónustupöntun %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = order number, is-IS=Þjónustuvörulína %1 fannst ekki á þjónustupöntun %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType LineMissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2426799147" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send documentNo with serviceItemLineNo.</source>
+          <target>Sendu documentNo ásamt serviceItemLineNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentNo ásamt serviceItemLineNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType MissingDocumentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 1523467692" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send documentNo with serviceItemLineNo, or systemId of a service item line.</source>
+          <target>Sendu documentNo ásamt serviceItemLineNo, eða systemId þjónustuvörulínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentNo ásamt serviceItemLineNo, eða systemId þjónustuvörulínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType MissingLineLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 4175281275" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send serviceItemLineNo with documentNo.</source>
+          <target>Sendu serviceItemLineNo ásamt documentNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu serviceItemLineNo ásamt documentNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType MissingLineNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 832915291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 belongs to service document %2, which is not an order.</source>
+          <target>Þjónustuvörulína %1 tilheyrir þjónustuskjali %2 sem er ekki pöntun.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = document number, is-IS=Þjónustuvörulína %1 tilheyrir þjónustuskjali %2 sem er ekki pöntun.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType NotOrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 839602570" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a service item line of a service order.</source>
+          <target>Sendu þjónustuvörulínu þjónustupöntunar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu þjónustuvörulínu þjónustupöntunar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType NotOrderNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 1210317888" size-unit="char" translate="yes" xml:space="preserve">
+          <source>dateTo %1 is before dateFrom %2.</source>
+          <target>dateTo %1 er á undan dateFrom %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = last date, %2 = first date, is-IS=dateTo %1 er á undan dateFrom %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType OrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 3371615541" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a dateTo on or after dateFrom.</source>
+          <target>Sendu dateTo sem er sama dag eða á eftir dateFrom.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu dateTo sem er sama dag eða á eftir dateFrom.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType OrderNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 894566561" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The period from %1 to %2 is longer than 31 days.</source>
+          <target>Tímabilið frá %1 til %2 er lengra en 31 dagur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = first date, %2 = last date, is-IS=Tímabilið frá %1 til %2 er lengra en 31 dagur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType PeriodLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 749343252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send dateFrom and dateTo at most 31 days apart.</source>
+          <target>Sendu dateFrom og dateTo með að hámarki 31 dags millibili.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu dateFrom og dateTo með að hámarki 31 dags millibili.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType PeriodNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 1300278838" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Several parameters are invalid. Nothing was read.</source>
+          <target>Nokkrar færibreytur eru ógildar. Ekkert var lesið.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Nokkrar færibreytur eru ógildar. Ekkert var lesið.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType ProblemsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 333858921" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read resource groups with Data.Records.Get (table Resource Group).</source>
+          <target>Lestu forðaflokka með Data.Records.Get (tafla Resource Group).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu forðaflokka með Data.Records.Get (tafla Resource Group).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType ReadGroupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 445429610" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read service item lines with Data.Records.Get (table Service Item Line).</source>
+          <target>Lestu þjónustuvörulínur með Data.Records.Get (tafla Service Item Line).</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustuvörulínur með Data.Records.Get (tafla Service Item Line).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType ReadLineLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 2787113793" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a nonempty JSON string of at most %2 characters.</source>
+          <target>%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = maximum, is-IS=%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType StringLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 532142165" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No service item line has systemId %1.</source>
+          <target>Engin þjónustuvörulína er með systemId %1.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = GUID, is-IS=Engin þjónustuvörulína er með systemId %1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType SystemMissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2490755880 - NamedType 4055747475" size-unit="char" translate="yes" xml:space="preserve">
+          <source>top must be a whole number from 1 to 100.</source>
+          <target>top verður að vera heiltala frá 1 til 100.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=top verður að vera heiltala frá 1 til 100.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType TopLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3956670547 - NamedType 1624787246" size-unit="char" translate="yes" xml:space="preserve">
           <source>You do not have permission to run the Service Management message type %1. Ask your administrator for the BIFROST Svc ori or BIFROST Full ori permission set.</source>
           <target>Þú hefur ekki heimild til að keyra þjónustustjórnunarskeytagerðina %1. Biddu kerfisstjóra um heimildasamstæðuna BIFROST Svc ori eða BIFROST Full ori.</target>
