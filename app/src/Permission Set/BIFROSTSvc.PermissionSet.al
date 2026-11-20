@@ -45,6 +45,8 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Undo Confirm ori" = X,
         codeunit "Svc Undo Contract ori" = X,
         codeunit "Svc Write Check ori" = X,
+        codeunit "Svc Resource Suggest Impl ori" = X,
+        codeunit "Svc Resource Suggest ori" = X,
         table "Svc Write Gate ori" = X,
         tabledata "Svc Write Gate ori" = RIMD;
 }
