@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- Add `Service.Resource.Suggest` (read; 10076130-10076132): ranks the resources for a service item line of a service order by Business Central skill qualification, service zone and available hours (capacity minus active allocations) in a period of up to 31 days, honouring the Resource Skills and Service Zones options; in `BIFROST SvcRead ori` and `BIFROST Svc ori`, `PermissionDenied` without native read access. The dispatch board stays a documented `Data.Records.Get` recipe (#27). Add ranking, setup-option, refusal, read-role and bilingual help coverage (97780-97782, fixture helper 97783).
+
 ### Fixed
 - Service.Order.Post and PreviewPost can invoice already-shipped quantities with default or explicit Ship and Invoice, including Mandatory posting policy (10076083; regression tests 97740).
 
