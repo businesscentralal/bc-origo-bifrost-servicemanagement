@@ -315,6 +315,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=þjónustutilboð %1 í þjónustupöntun</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3694755481 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undoes the consumption on posted service shipment lines that were not invoiced: posts correcting entries and puts the consumed quantity back on the service order. Commits and cannot be undone.</source>
+          <target>Afturkallar notkun á bókuðum þjónustuafhendingarlínum sem hafa ekki verið reikningsfærðar: bókar leiðréttingarfærslur og setur notaða magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afturkallar notkun á bókuðum þjónustuafhendingarlínum sem hafa ekki verið reikningsfærðar: bókar leiðréttingarfærslur og setur notaða magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Consumption Undo Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3694755481 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>undo service consumption, undo consumption line, reverse service consumption, correct consumed quantity</source>
+          <target>afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Consumption Undo Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 4166943217 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
           <source>The identifiers do not identify the same service document.</source>
           <target>Auðkennin vísa ekki á sama þjónustuskjalið.</target>
@@ -1094,6 +1106,204 @@
           <target>top verður að vera heiltala frá 1 til 100.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=top verður að vera heiltala frá 1 til 100.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Resource Suggest ori - NamedType TopLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3193347670 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undoes posted service shipment lines that were not consumed or invoiced: posts correcting entries and puts the quantity back on the service order. Commits and cannot be undone.</source>
+          <target>Afturkallar bókaðar þjónustuafhendingarlínur sem hafa hvorki verið notaðar né reikningsfærðar: bókar leiðréttingarfærslur og setur magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afturkallar bókaðar þjónustuafhendingarlínur sem hafa hvorki verið notaðar né reikningsfærðar: bókar leiðréttingarfærslur og setur magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Shipment Undo Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3193347670 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>undo service shipment, undo shipment line, reverse service shipment, correct shipped quantity</source>
+          <target>afturkalla þjónustuafhendingu, afturkalla afhendingarlínu, bakfæra þjónustuafhendingu, leiðrétta afhent magn</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=afturkalla þjónustuafhendingu, afturkalla afhendingarlínu, bakfæra þjónustuafhendingu, leiðrétta afhent magn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Shipment Undo Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2137894676 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service shipment %1, lines %2</source>
+          <target>þjónustuafhending %1, línur %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = posted shipment number, %2 = line numbers, is-IS=þjónustuafhending %1, línur %2</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers do not identify the same posted service shipment.</source>
+          <target>Auðkennin vísa ekki á sömu bókuðu þjónustuafhendinguna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa ekki á sömu bókuðu þjónustuafhendinguna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3299433917" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send identifiers belonging to the same posted service shipment.</source>
+          <target>Sendu auðkenni sem tilheyra sömu bókuðu þjónustuafhendingunni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu auðkenni sem tilheyra sömu bókuðu þjónustuafhendingunni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ConflictNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3134759214" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 has consumed quantity.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 hefur notað magn.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 hefur notað magn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ConsumedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 690869623" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undo the consumption first with Service.Consumption.Undo. Nothing was posted.</source>
+          <target>Afturkallaðu fyrst notkunina með Service.Consumption.Undo. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afturkallaðu fyrst notkunina með Service.Consumption.Undo. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ConsumedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1298369264" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 is a correction line or was already undone.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 er leiðréttingarlína eða hefur þegar verið afturkölluð.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 er leiðréttingarlína eða hefur þegar verið afturkölluð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType CorrectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3409621093" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send only original lines (Correction = false) that have not been undone.</source>
+          <target>Sendu aðeins upprunalegar línur (Correction = false) sem hafa ekki verið afturkallaðar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu aðeins upprunalegar línur (Correction = false) sem hafa ekki verið afturkallaðar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType CorrectionNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the parameter in the format documented by describe_message_type.</source>
+          <target>Sendu færibreytuna á sniðinu sem describe_message_type lýsir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu færibreytuna á sniðinu sem describe_message_type lýsir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId must be a nonempty GUID.</source>
+          <target>systemId verður að vera gilt GUID sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=systemId verður að vera gilt GUID sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1066607173" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a nonempty JSON string of at most %2 characters.</source>
+          <target>%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = maximum length, is-IS=%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType InvalidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2431676065" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 has been invoiced and cannot be undone.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 hefur verið reikningsfærð og ekki er hægt að afturkalla hana.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 hefur verið reikningsfærð og ekki er hægt að afturkalla hana.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType InvoicedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1961377812" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct an invoiced line with a service credit memo in Business Central. Nothing was posted.</source>
+          <target>Leiðréttu reikningsfærða línu með kreditreikningi þjónustu í Business Central. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reikningsfærða línu með kreditreikningi þjónustu í Business Central. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType InvoicedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1770209330" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the lines with Data.Records.Get (table Service Shipment Line, Document No. = %1) and send their Line No.</source>
+          <target>Lestu línurnar með Data.Records.Get (tafla Service Shipment Line, Document No. = %1) og sendu Line No. þeirra.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = shipment number, is-IS=Lestu línurnar með Data.Records.Get (tafla Service Shipment Line, Document No. = %1) og sendu Line No. þeirra.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType LineLookupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2427415570" size-unit="char" translate="yes" xml:space="preserve">
+          <source>lineNos must be a JSON array of 1 to 200 distinct positive whole line numbers.</source>
+          <target>lineNos verður að vera JSON-fylki með 1 til 200 ólíkum jákvæðum heiltölum línunúmera.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lineNos verður að vera JSON-fylki með 1 til 200 ólíkum jákvæðum heiltölum línunúmera.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType LineNosLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 740720393" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 was not found on posted service shipment %2.</source>
+          <target>Lína %1 fannst ekki á bókuðu þjónustuafhendingunni %2.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 fannst ekki á bókuðu þjónustuafhendingunni %2.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType LineNotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1392983852" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the posted service shipments with Data.Records.Get (table Service Shipment Header) and send an existing number.</source>
+          <target>Lestu bókaðar þjónustuafhendingar með Data.Records.Get (tafla Service Shipment Header) og sendu númer sem er til.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu bókaðar þjónustuafhendingar með Data.Records.Get (tafla Service Shipment Header) og sendu númer sem er til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType LookupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send documentNo, systemId or a plain subject with the posted service shipment number.</source>
+          <target>Sendu documentNo, systemId eða númer bókuðu þjónustuafhendingarinnar í subject.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentNo, systemId eða númer bókuðu þjónustuafhendingarinnar í subject.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2658168242" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted service shipment %1 has no line that can be undone.</source>
+          <target>Bókuð þjónustuafhending %1 hefur enga línu sem hægt er að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = shipment number, is-IS=Bókuð þjónustuafhending %1 hefur enga línu sem hægt er að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NoLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3511091107" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the lines with Data.Records.Get (table Service Shipment Line) and send lineNos for the lines you want to undo.</source>
+          <target>Lestu línurnar með Data.Records.Get (tafla Service Shipment Line) og sendu lineNos fyrir línurnar sem á að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu línurnar með Data.Records.Get (tafla Service Shipment Line) og sendu lineNos fyrir línurnar sem á að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NoLinesNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2413115444" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 has no quantity to undo.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 hefur ekkert magn til að afturkalla.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 hefur ekkert magn til að afturkalla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NoQuantityLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3240813601" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send a line with a shipped quantity.</source>
+          <target>Sendu línu með afhentu magni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu línu með afhentu magni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NoQuantityNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2408311465" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 has no consumed quantity.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 hefur ekkert notað magn.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 hefur ekkert notað magn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NotConsumedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 2548880988" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undo a shipped line that was not consumed with Service.Shipment.Undo.</source>
+          <target>Afturkallaðu afhenta línu sem var ekki notuð með Service.Shipment.Undo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afturkallaðu afhenta línu sem var ekki notuð með Service.Shipment.Undo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NotConsumedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted service shipment %1 was not found.</source>
+          <target>Bókuð þjónustuafhending %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Bókuð þjónustuafhending %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 1000175713" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nothing was posted.</source>
+          <target>Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType NothingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 602349982" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The service order line of line %1 (order %2) no longer exists.</source>
+          <target>Línan á þjónustupöntuninni fyrir línu %1 (pöntun %2) er ekki lengur til.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = service order number, is-IS=Línan á þjónustupöntuninni fyrir línu %1 (pöntun %2) er ekki lengur til.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType OrderLineLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3197546535" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the posted line with a service credit memo in Business Central. Nothing was posted.</source>
+          <target>Leiðréttu bókuðu línuna með kreditreikningi þjónustu í Business Central. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu bókuðu línuna með kreditreikningi þjónustu í Business Central. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType OrderLineNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 977941422" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line %1 of posted service shipment %2 created service items; undoing it would delete them.</source>
+          <target>Lína %1 á bókuðu þjónustuafhendingunni %2 stofnaði þjónustuvörur; afturköllun hennar myndi eyða þeim.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = shipment number, is-IS=Lína %1 á bókuðu þjónustuafhendingunni %2 stofnaði þjónustuvörur; afturköllun hennar myndi eyða þeim.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ServiceItemLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 688208089 - NamedType 3199154167" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undo this line in Business Central, where you decide about the service items, or correct it with a service credit memo. Nothing was posted.</source>
+          <target>Afturkallaðu þessa línu í Business Central, þar sem þú ákveður hvað verður um þjónustuvörurnar, eða leiðréttu hana með kreditreikningi þjónustu. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Afturkallaðu þessa línu í Business Central, þar sem þú ákveður hvað verður um þjónustuvörurnar, eða leiðréttu hana með kreditreikningi þjónustu. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Lines ori - NamedType ServiceItemNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 768053152 - Method 3637530476 - NamedType 833500511" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the entries or document named by Business Central and send the undo again. Nothing was posted.</source>
+          <target>Leiðréttu færslurnar eða skjalið sem Business Central nefnir og sendu afturköllunina aftur. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu færslurnar eða skjalið sem Business Central nefnir og sendu afturköllunina aftur. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Proc ori - Method Dispatch - NamedType UndoNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 768053152 - Method 672088185 - NamedType 833500511" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the entries or document named by Business Central and send the undo again. Nothing was posted.</source>
+          <target>Leiðréttu færslurnar eða skjalið sem Business Central nefnir og sendu afturköllunina aftur. Ekkert var bókað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu færslurnar eða skjalið sem Business Central nefnir og sendu afturköllunina aftur. Ekkert var bókað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Undo Proc ori - Method ExecuteUndo - NamedType UndoNextLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3956670547 - NamedType 1624787246" size-unit="char" translate="yes" xml:space="preserve">
           <source>You do not have permission to run the Service Management message type %1. Ask your administrator for the BIFROST Svc ori or BIFROST Full ori permission set.</source>
