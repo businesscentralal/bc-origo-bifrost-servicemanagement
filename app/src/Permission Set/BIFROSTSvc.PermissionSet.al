@@ -49,5 +49,14 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Resource Suggest Impl ori" = X,
         codeunit "Svc Resource Suggest ori" = X,
         table "Svc Write Gate ori" = X,
-        tabledata "Svc Write Gate ori" = RIMD;
+        tabledata "Svc Write Gate ori" = RIMD,
+        codeunit "Svc Doc Post Impl ori" = X,
+        codeunit "Svc Doc Post Proc ori" = X,
+        codeunit "Svc Doc Preview Impl ori" = X,
+        codeunit "Svc Doc Preview Proc ori" = X,
+        codeunit "Svc Doc Confirm ori" = X,
+        codeunit "Svc Doc Request ori" = X,
+        codeunit "Svc Doc Contract ori" = X,
+        codeunit "Svc Inv Shipment Impl ori" = X,
+        codeunit "Svc Inv Shipment Proc ori" = X;
 }
