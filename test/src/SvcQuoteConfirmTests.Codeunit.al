@@ -20,36 +20,36 @@ codeunit 97716 "Svc Quote Confirm Tests ori"
         Assert: Codeunit "Library Assert";
 
     [Test]
-    procedure Scenario_AC03_Required_MissingCount()
+    procedure Scenario_AC02_Required_NoCount_Runs()
     begin
-        CheckConfirmation(true, false, 0, 'ConfirmationRequired', 1033);
+        CheckConversion(true, false, 0, 1033);
     end;
 
     [Test]
-    procedure Scenario_AC03_Required_WrongCount()
+    procedure Scenario_AC02_Required_WrongCountIgnored()
     begin
-        CheckConfirmation(true, true, 2, 'ConfirmationMismatch', 1033);
+        CheckConversion(true, true, 2, 1033);
     end;
 
     [Test]
-    procedure Scenario_AC03_Optional_OmissionRuns()
+    procedure Scenario_AC02_Optional_NoCount_Runs()
     begin
-        CheckConfirmation(false, false, 0, 'Success', 1033);
+        CheckConversion(false, false, 0, 1033);
     end;
 
     [Test]
-    procedure Scenario_AC03_Optional_WrongCountStillRefuses()
+    procedure Scenario_AC02_Optional_CountOneIgnored()
     begin
-        CheckConfirmation(false, true, 0, 'ConfirmationMismatch', 1033);
+        CheckConversion(false, true, 1, 1033);
     end;
 
     [Test]
-    procedure Scenario_AC14_Icelandic_ConfirmationSummary()
+    procedure Scenario_AC02_Icelandic_NoConfirmation()
     begin
-        CheckConfirmation(true, false, 0, 'ConfirmationRequired', 1039);
+        CheckConversion(true, false, 0, 1039);
     end;
 
-    local procedure CheckConfirmation(Required: Boolean; SupplyCount: Boolean; Count: Integer; Expected: Text; LanguageId: Integer)
+    local procedure CheckConversion(Required: Boolean; SupplyCount: Boolean; Count: Integer; LanguageId: Integer)
     var
         Header: Record "Service Header";
         OrderHeader: Record "Service Header";
@@ -57,7 +57,6 @@ codeunit 97716 "Svc Quote Confirm Tests ori"
         PriorRequired: Boolean;
         Request: JsonObject;
         Response: JsonObject;
-        Text: Text;
     begin
         Data.CreateDocument(Header, Header."Document Type"::Quote);
         SetupPage.OpenEdit();
@@ -73,21 +72,10 @@ codeunit 97716 "Svc Quote Confirm Tests ori"
         SetupPage."Require Irreversible Confirm".SetValue(PriorRequired);
         SetupPage.Close();
         Commit();
-        if Expected = 'Success' then begin
-            Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Administrator may turn required count off.');
-            Assert.IsFalse(Header.Get(Header."Document Type", Header."No."), 'Successful conversion removes quote.');
-            exit;
-        end;
-        Data.AssertRefusal(Response, Expected);
-        Assert.IsTrue(Header.Get(Header."Document Type", Header."No."), 'Refusal retains quote.');
+        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Conversion needs no confirmation and ignores expectedCount.');
+        Assert.IsFalse(Header.Get(Header."Document Type", Header."No."), 'Successful conversion removes quote.');
         OrderHeader.SetRange("Document Type", OrderHeader."Document Type"::Order);
         OrderHeader.SetRange("Quote No.", Header."No.");
-        Assert.IsTrue(OrderHeader.IsEmpty(), 'Refusal creates no order.');
-        if Expected = 'ConfirmationRequired' then begin
-            Response.WriteTo(Text);
-            Assert.IsTrue(Text.Contains(Header."No."), 'Summary identifies the quote.');
-            if LanguageId = 1039 then
-                Assert.IsTrue(Text.Contains('þjónustutilboð'), 'Icelandic confirmation summary.');
-        end;
+        Assert.IsFalse(OrderHeader.IsEmpty(), 'Conversion creates the order.');
     end;
 }

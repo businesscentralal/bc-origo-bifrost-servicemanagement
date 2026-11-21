@@ -15,13 +15,12 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
         ExecuteBifrostTask(Rec);
     end;
 
-    /// <summary>Validates the quote, commits, confirms its count and runs native BC conversion.</summary>
+    /// <summary>Validates the quote, commits and runs native BC conversion.</summary>
     procedure ExecuteBifrostTask(var Argument: Record "Message Argument ori")
     var
         Header: Record "Service Header";
         OrderHeader: Record "Service Header";
         Lookup: Codeunit "Svc Document Lookup ori";
-        ConfirmGate: Codeunit "Confirm Gate ori";
         ConvertQuote: Codeunit "Service-Quote to Order";
         WriteCheck: Codeunit "Svc Write Check ori";
         Response: JsonObject;
@@ -37,9 +36,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
             exit;
         QuoteNo := Header."No.";
         Commit();
-        if not ConfirmGate.Check(Argument, Argument.Type) then
-            exit;
-        // Re-resolve the quote after Commit and confirmation. BC owns the conversion transaction.
+        // Re-resolve the quote after Commit. BC owns the conversion transaction.
         if not Lookup.FindDocument(Argument, "Service Document Type"::Quote, Header) then
             exit;
         if not CheckPreconditions(Argument, Header) then
@@ -81,7 +78,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     /// <summary>Describes the operation in the caller's language.</summary>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.', Comment = 'is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.';
+        DescriptionLbl: Label 'Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits.', Comment = 'is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.';
     begin
         exit(DescriptionLbl);
     end;
@@ -122,8 +119,10 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     procedure GetParameters(var Parameters: JsonArray): Boolean
     var
         Parts: Codeunit "Svc Contract Parts ori";
+        Contract: Codeunit "Msg Contract Mgt ori";
     begin
         Parts.GetIdentityParameters(Parameters);
+        Parameters.Add(Contract.Parameter('expectedCount', 'integer', false, 'Accepted and ignored. Kept so callers written when conversion asked for a count still work; no confirmation is required.'));
         exit(true);
     end;
 
@@ -159,7 +158,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     /// <summary>Returns the effect contract chapter.</summary>
     procedure GetEffect(var Effect: JsonObject): Boolean
     begin
-        Effect.Add('effect', 'irreversible');
+        Effect.Add('effect', 'write');
         Effect.Add('changes', 'Deletes the service quote and creates a service order through Service-Quote to Order. This call commits.');
         Effect.Add('idempotent', false);
         Effect.Add('permissionSet', 'BIFROST Svc ori');
@@ -196,7 +195,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     var
         Contract: Codeunit "Msg Contract Mgt ori";
     begin
-        Examples.Add(Contract.Example('Convert an accepted quote', '{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001","expectedCount":1}}', '{"status":"Success","quoteNo":"SQ000001","orderNo":"SO000001"}'));
+        Examples.Add(Contract.Example('Convert an accepted quote', '{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001"}}', '{"status":"Success","quoteNo":"SQ000001","orderNo":"SO000001"}'));
         exit(true);
     end;
 

@@ -46,12 +46,62 @@ codeunit 97717 "Svc Quote Contract Tests ori"
             foreach Chapter in Chapters do
                 Assert.IsTrue(Contract.Contains(Chapter), 'Missing contract chapter: ' + Chapter);
             Contract.Get('effect', Token);
-            Assert.AreEqual('irreversible', Data.TextValue(Token.AsObject(), 'effect'), 'Conversion is irreversible.');
+            Assert.AreEqual('write', Data.TextValue(Token.AsObject(), 'effect'), 'Conversion is a write, not posting.');
             Assert.IsTrue(Serialized.Contains('This call commits.'), 'Commit is documented.');
-            Assert.IsTrue(Serialized.Contains('expectedCount'), 'Foundation adds count parameter.');
-            Assert.IsTrue(Serialized.Contains('ConfirmationRequired'), 'Foundation adds preview refusal.');
-            Assert.IsTrue(Serialized.Contains('ConfirmationMismatch'), 'Foundation adds mismatch refusal.');
+            Assert.IsTrue(Serialized.Contains('expectedCount'), 'The ignored count parameter stays declared.');
         end;
+    end;
+
+    [Test]
+    procedure Scenario_AC03_Description_NotIrreversible_BothLanguages()
+    var
+        Discovery: Interface "Msg Discovery ori";
+        English: Text;
+        Icelandic: Text;
+        PriorLanguage: Integer;
+    begin
+        PriorLanguage := GlobalLanguage();
+        Discovery := "Message Type ori"::"Service.Quote.MakeOrder";
+        GlobalLanguage(1033);
+        English := Discovery.GetSelectionDescription();
+        GlobalLanguage(1039);
+        Icelandic := Discovery.GetSelectionDescription();
+        GlobalLanguage(PriorLanguage);
+        Assert.IsFalse(English.ToLower().Contains('cannot be undone') or English.ToLower().Contains('irreversible'), 'English description is not irreversible.');
+        Assert.IsFalse(Icelandic.ToLower().Contains('afturkalla') or Icelandic.ToLower().Contains('óafturkræft'), 'Icelandic description is not irreversible.');
+    end;
+
+    [Test]
+    procedure Scenario_AC01_OnlyPostingTypesAreIrreversible()
+    var
+        MessageType: Enum "Message Type ori";
+        Expected: Text;
+        Found: Text;
+        Name: Text;
+        Request: JsonObject;
+        Names: JsonArray;
+        Response: JsonObject;
+        Token: JsonToken;
+        Checked: Integer;
+    begin
+        Expected := '|Service.Document.Post|Service.Order.Post|Service.Shipment.Undo|Service.Consumption.Undo|';
+        foreach Name in MessageType.Names() do
+            if Name.StartsWith('Service.') then begin
+                Clear(Request);
+                Clear(Names);
+                Names.Add(Name);
+                Request.Add('messageTypes', Names);
+                Response := Data.Invoke("Message Type ori"::"Help.Implementation.Get", Request, '', 1033, true);
+                Response.Get('result', Token);
+                Token.AsArray().Get(0, Token);
+                Token.AsObject().Get('effect', Token);
+                Checked += 1;
+                if Data.TextValue(Token.AsObject(), 'effect') = 'irreversible' then
+                    Found += '|' + Name;
+                Assert.AreEqual(Expected.Contains('|' + Name + '|'), Data.TextValue(Token.AsObject(), 'effect') = 'irreversible', 'Effect of ' + Name);
+            end;
+        Assert.IsTrue(Checked >= 13, 'The app types were walked.');
+        Assert.AreEqual(4, Found.Split('|').Count() - 1, 'Exactly the four posting types are irreversible: ' + Found);
     end;
 
     [Test]
