@@ -69,6 +69,8 @@ codeunit 97717 "Svc Quote Contract Tests ori"
         GlobalLanguage(PriorLanguage);
         Assert.IsFalse(English.ToLower().Contains('cannot be undone') or English.ToLower().Contains('irreversible'), 'English description is not irreversible.');
         Assert.IsFalse(Icelandic.ToLower().Contains('afturkalla') or Icelandic.ToLower().Contains('óafturkræft'), 'Icelandic description is not irreversible.');
+        Assert.IsTrue(English.StartsWith('Writes.'), 'English description states the write effect.');
+        Assert.IsTrue(Icelandic.StartsWith('Skrifar.'), 'Icelandic description states the write effect.');
     end;
 
     [Test]

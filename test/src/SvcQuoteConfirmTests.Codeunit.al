@@ -9,7 +9,7 @@ using Microsoft.Service.Setup;
 using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
-/// <summary>Proves the Foundation confirmation setting and count guard preserve quotes on refusal.</summary>
+/// <summary>Proves Service.Quote.MakeOrder converts a quote as a write without confirmation, with or without the Foundation confirmation setting.</summary>
 codeunit 97716 "Svc Quote Confirm Tests ori"
 {
     Subtype = Test;

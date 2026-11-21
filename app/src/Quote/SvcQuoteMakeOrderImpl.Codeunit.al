@@ -78,7 +78,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     /// <summary>Describes the operation in the caller's language.</summary>
     procedure GetDescription(): Text[250]
     var
-        DescriptionLbl: Label 'Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits.', Comment = 'is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.';
+        DescriptionLbl: Label 'Writes. Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits.', Comment = 'is-IS=Skrifar. Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.';
     begin
         exit(DescriptionLbl);
     end;

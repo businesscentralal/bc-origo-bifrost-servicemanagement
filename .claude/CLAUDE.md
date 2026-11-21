@@ -179,7 +179,7 @@ verification evidence, not inferred from this source inventory.
 {"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001"}}
 ```
 
-Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit, . A retry after success returns `RecordNotFound`.
+Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit. A retry after success returns `RecordNotFound`.
 
 The effect is `write`: no confirmation is required, with or without Require Confirmation for Irreversible Messages. `expectedCount` is accepted and ignored for existing callers.
 
@@ -212,7 +212,7 @@ Post a service order (ship, consume, invoice) and preview the entries first.
 
 ```json
 {"type":"Service.Order.PreviewPost","data":{"no":"SO000001"}}
-{"type":"Service.Order.Post","data":{"no":"SO000001","ship":true,"consume":true}}
+{"type":"Service.Order.Post","data":{"no":"SO000001","ship":true,"consume":true,"expectedCount":1}}
 ```
 
 - Options: Ship, Invoice, Ship and Invoice (default when no flag is sent) and Ship and Consume. `consume` only with `ship`, never with `invoice`. The user's service invoice posting policy applies.
@@ -247,8 +247,8 @@ Object ids: app 10076075–10076086, tests 97740–97750.
 Undo posted service shipment lines (shipped, not consumed, not invoiced) or the consumption on posted service shipment lines (consumed, not invoiced) with the standard Business Central undo. Correcting entries are posted, correction lines are added to the posted shipment and the quantity returns to the service order line. Nothing is deleted.
 
 ```json
-{"type":"Service.Shipment.Undo","data":{"documentNo":"SSH000001","lineNos":[10000]}}
-{"type":"Service.Consumption.Undo","data":{"documentNo":"SSH000001"}}
+{"type":"Service.Shipment.Undo","data":{"documentNo":"SSH000001","lineNos":[10000],"expectedCount":1}}
+{"type":"Service.Consumption.Undo","data":{"documentNo":"SSH000001","expectedCount":1}}
 ```
 
 - `documentNo`, `systemId` (Service Shipment Header) or a plain subject; `lineNos` (1-200 distinct positive line numbers) or leave it out for every line that can be undone.
@@ -320,8 +320,8 @@ Ids 10076130-10076132 and 97780-97783 were taken above the lowest free numbers b
 ```json
 {"type":"Service.Invoice.GetShipmentLines","data":{"customerNo":"C0001","shipmentNos":["SS0001","SS0002"]}}
 {"type":"Service.Document.PreviewPost","data":{"documentType":"Invoice","no":"SI0001"}}
-{"type":"Service.Document.Post","data":{"documentType":"Invoice","no":"SI0001"}}
-{"type":"Service.Document.Post","data":{"documentType":"CreditMemo","no":"SCM0001"}}
+{"type":"Service.Document.Post","data":{"documentType":"Invoice","no":"SI0001","expectedCount":1}}
+{"type":"Service.Document.Post","data":{"documentType":"CreditMemo","no":"SCM0001","expectedCount":1}}
 ```
 
 Collect shipped service lines on an open invoice, preview its entries, then post it. For an existing invoice use `invoiceNo`, `systemId` or a plain subject instead of `customerNo`. Select 1–200 distinct `shipmentNos`, or `allUninvoiced: true`. All selected shipments must match the invoice customer, bill-to customer and currency. Already invoiced, consumed, corrected or already added lines are skipped with a reason. `linesAdded` includes native shipment description lines.
