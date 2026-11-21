@@ -1,7 +1,8 @@
 namespace Origo.Bifrost.ServiceManagement.Test;
 
+using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Finance.GeneralLedger.Ledger;
-using Microsoft.Foundation.AuditCodes;
+using Origo.Bifrost.ServiceManagement;
 using Microsoft.Sales.Receivables;
 using Microsoft.Service.Document;
 using Microsoft.Service.History;
@@ -337,65 +338,56 @@ codeunit 97757 "Svc Doc Tests ori"
         Fixture.Cleanup();
     end;
     [Test]
-    procedure Scenario_AC01_InvoiceCustomerEntryRange_1033()
+    procedure Scenario_AC01_InvoiceCustomerEntryRange()
     begin
-        // Story #22 AC01 | Time: WorkDate | Risk: earlier matching entries must be included in the range.
-        AssertCustomerEntryRange("Service Document Type"::Invoice, 1033);
+        // Story #22 AC01 | Time: none | Risk: response range must include all matching entries.
+        AssertCustomerEntryRange("Gen. Journal Document Type"::Invoice, 'Invoice');
     end;
 
     [Test]
-    procedure Scenario_AC02_CreditCustomerEntryRange_1039()
+    procedure Scenario_AC02_CreditCustomerEntryRange()
     begin
-        // Story #22 AC02 | Time: WorkDate | Risk: credit memo ranges must not repeat the last entry.
-        AssertCustomerEntryRange("Service Document Type"::"Credit Memo", 1039);
+        // Story #22 AC02 | Time: none | Risk: credit memo ranges must not repeat the last entry.
+        AssertCustomerEntryRange("Gen. Journal Document Type"::"Credit Memo", 'CreditMemo');
     end;
 
-    local procedure AssertCustomerEntryRange(DocumentType: Enum "Service Document Type"; LanguageId: Integer)
+    local procedure AssertCustomerEntryRange(DocumentType: Enum "Gen. Journal Document Type"; TypeName: Text)
     var
-        Header: Record "Service Header";
         Entry: Record "Cust. Ledger Entry";
-        SourceCodeSetup: Record "Source Code Setup";
+        PostProcessor: Codeunit "Svc Doc Post Proc ori";
         Response: JsonObject;
         Ranges: JsonObject;
         Token: JsonToken;
         CustomerNo: Code[20];
         ResourceNo: Code[20];
-        EarlierEntryNo: Integer;
+        DocumentNo: Code[20];
+        FirstEntryNo: Integer;
     begin
         Fixture.Create(CustomerNo, ResourceNo);
-        Fixture.Document(Header, DocumentType, CustomerNo, ResourceNo);
-        Header."Posting No." := CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '{}-'), 1, MaxStrLen(Header."Posting No."));
-        Header.Modify(false);
-        // An owned, zero-amount historical entry makes the first and last bounds distinct.
+        DocumentNo := CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '{}-'), 1, MaxStrLen(DocumentNo));
+        // Component boundary: native posting rejects duplicate invoice identities before response assembly.
+        // Seed two owned, zero-amount matching entries to exercise the response's multi-entry bounds.
         if Entry.FindLast() then
-            EarlierEntryNo := Entry."Entry No.";
-        EarlierEntryNo += 1;
+            FirstEntryNo := Entry."Entry No.";
+        FirstEntryNo += 1;
         Entry.Init();
-        Entry."Entry No." := EarlierEntryNo;
+        Entry."Entry No." := FirstEntryNo;
         Entry."Customer No." := CustomerNo;
-        Entry."Document No." := Header."Posting No.";
-        SourceCodeSetup.Get();
-        Entry."Source Code" := SourceCodeSetup."Service Management";
-        if DocumentType = DocumentType::Invoice then
-            Entry."Document Type" := Entry."Document Type"::Invoice
-        else
-            Entry."Document Type" := Entry."Document Type"::"Credit Memo";
+        Entry."Document No." := DocumentNo;
+        Entry."Document Type" := DocumentType;
+        Entry."Source Code" := 'XSM40';
         Entry.Insert(false);
-        Commit();
-        Response := InvokeAndCheckLog("Message Type ori"::"Service.Document.Post", Fixture.Request(Header, 1), '', LanguageId, false);
-        PostData.AssertSuccess(Response);
-        Assert.AreEqual(Header."Posting No.", Data.TextValue(Response, 'postedDocumentNo'), 'Native posting used the owned document number.');
+        Entry."Entry No." += 1;
+        Entry.Insert(false);
+        // A later entry from another source must not extend the range.
+        Entry."Entry No." += 1;
+        Entry."Source Code" := 'XSM40OTHER';
+        Entry.Insert(false);
+        PostProcessor.AddPosted(Response, TypeName, DocumentNo, CreateGuid(), 20, 20, CustomerNo, 'XSM40');
         Response.Get('entryRanges', Token);
         Ranges := Token.AsObject();
-        Entry.SetRange("Customer No.", CustomerNo);
-        Entry.SetRange("Document No.", Header."Posting No.");
-        Entry.SetRange("Document Type", Entry."Document Type");
-        Entry.SetRange("Source Code", SourceCodeSetup."Service Management");
-        Assert.AreEqual(2, Entry.Count(), 'Historical and newly posted customer entries exist.');
-        Entry.FindLast();
-        Assert.IsTrue(Entry."Entry No." > EarlierEntryNo, 'Range bounds must be distinct.');
-        Assert.AreEqual(EarlierEntryNo, PostData.IntegerValue(Ranges, 'customerFirst'), 'Range starts at the first matching entry.');
-        Assert.AreEqual(Entry."Entry No.", PostData.IntegerValue(Ranges, 'customerLast'), 'Range ends at the last matching entry.');
+        Assert.AreEqual(FirstEntryNo, PostData.IntegerValue(Ranges, 'customerFirst'), 'Range starts at the first matching entry.');
+        Assert.AreEqual(FirstEntryNo + 1, PostData.IntegerValue(Ranges, 'customerLast'), 'Range ends at the last matching entry.');
         Fixture.Cleanup();
     end;
 

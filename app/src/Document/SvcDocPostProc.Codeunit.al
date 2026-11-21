@@ -67,7 +67,8 @@ codeunit 10076095 "Svc Doc Post Proc ori"
         Rec."Content Type" := Rec.GetContentTypeJson();
     end;
 
-    local procedure AddPosted(var Response: JsonObject; TypeName: Text; Number: Code[20]; Id: Guid; Amount: Decimal; AmountWithVAT: Decimal; BillToCustomerNo: Code[20]; SourceCode: Code[10])
+    /// <summary>Adds posted document identity and the bounds of its matching ledger entries.</summary>
+    internal procedure AddPosted(var Response: JsonObject; TypeName: Text; Number: Code[20]; Id: Guid; Amount: Decimal; AmountWithVAT: Decimal; BillToCustomerNo: Code[20]; SourceCode: Code[10])
     var
         CustomerEntry: Record "Cust. Ledger Entry";
         GLEntry: Record "G/L Entry";
