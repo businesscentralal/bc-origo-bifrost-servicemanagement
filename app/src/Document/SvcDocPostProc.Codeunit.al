@@ -87,8 +87,9 @@ codeunit 10076095 "Svc Doc Post Proc ori"
         else
             CustomerEntry.SetRange("Document Type", CustomerEntry."Document Type"::"Credit Memo");
         CustomerEntry.SetLoadFields("Entry No.", "Transaction No.");
-        CustomerEntry.FindLast();
+        CustomerEntry.FindFirst();
         Ranges.Add('customerFirst', CustomerEntry."Entry No.");
+        CustomerEntry.FindLast();
         Ranges.Add('customerLast', CustomerEntry."Entry No.");
         GLEntry.ReadIsolation(IsolationLevel::ReadCommitted);
         GLEntry.SetRange("Transaction No.", CustomerEntry."Transaction No.");

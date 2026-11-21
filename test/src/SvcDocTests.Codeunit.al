@@ -1,6 +1,7 @@
 namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Finance.GeneralLedger.Ledger;
+using Microsoft.Foundation.AuditCodes;
 using Microsoft.Sales.Receivables;
 using Microsoft.Service.Document;
 using Microsoft.Service.History;
@@ -335,6 +336,69 @@ codeunit 97757 "Svc Doc Tests ori"
         Assert.IsTrue(Credit.IsEmpty(), 'No partial posted document.');
         Fixture.Cleanup();
     end;
+    [Test]
+    procedure Scenario_AC01_InvoiceCustomerEntryRange_1033()
+    begin
+        // Story #22 AC01 | Time: WorkDate | Risk: earlier matching entries must be included in the range.
+        AssertCustomerEntryRange("Service Document Type"::Invoice, 1033);
+    end;
+
+    [Test]
+    procedure Scenario_AC02_CreditCustomerEntryRange_1039()
+    begin
+        // Story #22 AC02 | Time: WorkDate | Risk: credit memo ranges must not repeat the last entry.
+        AssertCustomerEntryRange("Service Document Type"::"Credit Memo", 1039);
+    end;
+
+    local procedure AssertCustomerEntryRange(DocumentType: Enum "Service Document Type"; LanguageId: Integer)
+    var
+        Header: Record "Service Header";
+        Entry: Record "Cust. Ledger Entry";
+        SourceCodeSetup: Record "Source Code Setup";
+        Response: JsonObject;
+        Ranges: JsonObject;
+        Token: JsonToken;
+        CustomerNo: Code[20];
+        ResourceNo: Code[20];
+        EarlierEntryNo: Integer;
+    begin
+        Fixture.Create(CustomerNo, ResourceNo);
+        Fixture.Document(Header, DocumentType, CustomerNo, ResourceNo);
+        Header."Posting No." := CopyStr('X' + DelChr(Format(CreateGuid(), 0, 4), '=', '{}-'), 1, MaxStrLen(Header."Posting No."));
+        Header.Modify(false);
+        // An owned, zero-amount historical entry makes the first and last bounds distinct.
+        if Entry.FindLast() then
+            EarlierEntryNo := Entry."Entry No.";
+        EarlierEntryNo += 1;
+        Entry.Init();
+        Entry."Entry No." := EarlierEntryNo;
+        Entry."Customer No." := CustomerNo;
+        Entry."Document No." := Header."Posting No.";
+        SourceCodeSetup.Get();
+        Entry."Source Code" := SourceCodeSetup."Service Management";
+        if DocumentType = DocumentType::Invoice then
+            Entry."Document Type" := Entry."Document Type"::Invoice
+        else
+            Entry."Document Type" := Entry."Document Type"::"Credit Memo";
+        Entry.Insert(false);
+        Commit();
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Document.Post", Fixture.Request(Header, 1), '', LanguageId, false);
+        PostData.AssertSuccess(Response);
+        Assert.AreEqual(Header."Posting No.", Data.TextValue(Response, 'postedDocumentNo'), 'Native posting used the owned document number.');
+        Response.Get('entryRanges', Token);
+        Ranges := Token.AsObject();
+        Entry.SetRange("Customer No.", CustomerNo);
+        Entry.SetRange("Document No.", Header."Posting No.");
+        Entry.SetRange("Document Type", Entry."Document Type");
+        Entry.SetRange("Source Code", SourceCodeSetup."Service Management");
+        Assert.AreEqual(2, Entry.Count(), 'Historical and newly posted customer entries exist.');
+        Entry.FindLast();
+        Assert.IsTrue(Entry."Entry No." > EarlierEntryNo, 'Range bounds must be distinct.');
+        Assert.AreEqual(EarlierEntryNo, PostData.IntegerValue(Ranges, 'customerFirst'), 'Range starts at the first matching entry.');
+        Assert.AreEqual(Entry."Entry No.", PostData.IntegerValue(Ranges, 'customerLast'), 'Range ends at the last matching entry.');
+        Fixture.Cleanup();
+    end;
+
     local procedure InvokeAndCheckLog(MessageType: Enum "Message Type ori"; Request: JsonObject; Subject: Text; LanguageId: Integer; OmitCommit: Boolean): JsonObject
     var
         Dispatcher: Codeunit "Dispatcher ori";
@@ -349,7 +413,6 @@ codeunit 97757 "Svc Doc Tests ori"
         Response: JsonObject;
         LogRequest: JsonObject;
         LogResponse: JsonObject;
-        LogType: Enum "Message Type ori";
         Token: JsonToken;
     begin
         Assert.IsFalse(OmitCommit, 'Billing tests exercise the persisted public dispatcher.');
@@ -361,11 +424,11 @@ codeunit 97757 "Svc Doc Tests ori"
         Output.GetSubText(ResponseText, 1);
         Assert.IsTrue(Response.ReadFrom(ResponseText), 'Persisted response must be JSON.');
         if Data.TextValue(Response, 'status') = 'Error' then begin
-            // Foundation owns the log. Inspect it through its public test API, not an internal table reference.
+            // Use Foundation's product API so the assertion also runs without Foundation Tests installed.
             LogRequest.Add('tableName', 'Message ori');
             LogRequest.Add('tableView', 'WHERE(Id=CONST(' + Format(MessageId, 0, 4) + '))');
-            LogType := Enum::"Message Type ori".FromInteger(Enum::"Message Type ori".Ordinals().Get(Enum::"Message Type ori".Names().IndexOf('Test.Records.Get')));
-            LogResponse := Data.Invoke(LogType, LogRequest, '', 1033, true);
+            LogResponse := Data.Invoke("Message Type ori"::"Data.Records.Get", LogRequest, '', 1033, true);
+            PostData.AssertSuccess(LogResponse);
             LogResponse.Get('noOfRecords', Token);
             Assert.AreEqual(1, Token.AsValue().AsInteger(), 'Foundation retained this exact error message.');
         end;
