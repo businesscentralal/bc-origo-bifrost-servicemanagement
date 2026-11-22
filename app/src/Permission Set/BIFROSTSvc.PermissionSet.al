@@ -28,7 +28,6 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Alloc Check ori" = X,
         codeunit "Svc Alloc Restrict ori" = X,
         codeunit "Svc Quote MakeOrder Impl ori" = X,
-        codeunit "Svc Confirm ori" = X,
         codeunit "Svc Post Confirm ori" = X,
         codeunit "Svc Post Options ori" = X,
         codeunit "Svc Post Contract ori" = X,

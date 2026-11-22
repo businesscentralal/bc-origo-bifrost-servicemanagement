@@ -309,12 +309,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu þjónustupöntunina eða þjónustuvörulínuna sem er lokið og reyndu aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Allocation Proc ori - NamedType FinishedNextLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3137329348 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
-          <source>service quote %1 to a service order</source>
-          <target>þjónustutilboð %1 í þjónustupöntun</target>
-          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=þjónustutilboð %1 í þjónustupöntun</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3694755481 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Undoes the consumption on posted service shipment lines that were not invoiced: posts correcting entries and puts the consumed quantity back on the service order. Commits and cannot be undone.</source>
           <target>Afturkallar notkun á bókuðum þjónustuafhendingarlínum sem hafa ekki verið reikningsfærðar: bókar leiðréttingarfærslur og setur notaða magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
@@ -1042,9 +1036,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method ExecuteBifrostTask - NamedType ConversionNextLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.</source>
-          <target>Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <source>Writes. Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits.</source>
+          <target>Skrifar. Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrifar. Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">

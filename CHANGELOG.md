@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- `Service.Quote.MakeOrder` effect is now `write` instead of `irreversible` (#43, Gunnar 21.11.2026: only posting is irreversible). It no longer asks for `expectedCount`; the parameter is still accepted and ignored. Help says "Writes."/"Skrifar." in 1033/1039. Removed codeunit 10076052 (`Svc Confirm ori`). `Service.Document.Post`, `Service.Order.Post`, `Service.Shipment.Undo` and `Service.Consumption.Undo` stay `irreversible`. Test 97716 now covers the ignored count.
+
 ### Added
 
 - Add `Service.Invoice.GetShipmentLines`, `Service.Document.Post` and `Service.Document.PreviewPost` for standalone service billing (#22). Collect compatible shipments on one invoice, preview without changes, and post invoices or credit memos with confirmation and the service posting role. Standard posting cleanup is approved by Gunnar. App objects 10076094–10076103; test objects 97757–97761. English help chapters and Icelandic discovery/refusals are included.

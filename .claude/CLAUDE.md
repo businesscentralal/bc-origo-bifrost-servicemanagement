@@ -176,12 +176,12 @@ verification evidence, not inferred from this source inventory.
 ## Service.Quote.MakeOrder (#5)
 
 ```json
-{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001","expectedCount":1}}
+{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001"}}
 ```
 
-Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit, and cannot be undone. A retry after success returns `RecordNotFound`.
+Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit. A retry after success returns `RecordNotFound`.
 
-Call without `expectedCount` to obtain `ConfirmationRequired` with count 1 and the quote summary, then confirm that count. An administrator may turn required confirmation off per company; any supplied count is still validated. A wrong count returns `ConfirmationMismatch` without converting the quote.
+The effect is `write`: no confirmation is required, with or without Require Confirmation for Irreversible Messages. `expectedCount` is accepted and ignored for existing callers.
 
 Allocations moved by BC with `Reallocation Needed` are counted in `allocationsToReallocate`; `nextStep` names `Service.Allocation.Allocate` when needed, otherwise `Service.Order.Release` / `Service.Order.Post`. Missing customer, bill-to customer or Service Order Nos. is `PreconditionFailed`. BC conversion errors are returned unchanged as `BusinessCentralError` and roll back the conversion.
 
@@ -193,7 +193,6 @@ Foundation dependency: published 28.0.11 (`28.0.11.669`), the first containing `
 | --- | --- | --- |
 | 10076050 | enumextension | Svc Quote MsgType ori |
 | 10076051 | codeunit | Svc Quote MakeOrder Impl ori |
-| 10076052 | codeunit | Svc Confirm ori |
 | 97716 | codeunit (test) | Svc Quote Confirm Tests ori |
 | 97717 | codeunit (test) | Svc Quote Contract Tests ori |
 | 97718 | codeunit (test) | Svc Quote Perm Tests ori |
