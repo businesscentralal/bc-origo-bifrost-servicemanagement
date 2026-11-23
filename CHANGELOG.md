@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — service contract lifecycle (#24)
+
+- Add contract quote conversion, signing, locking and unlocking through the native service contract lifecycle, with explicit caller choices, atomic refusals, write-role checks and English/Icelandic discovery and recovery text.
+- Protect Change Status from generic writes. Conversion files and removes the quote under Gunnar's approved conversion exception. Initial invoices remain unposted.
+- New app objects 10076140–10076149; test objects 97763–97767. No UI changes.
+
 ## Unreleased
 
 ### Changed

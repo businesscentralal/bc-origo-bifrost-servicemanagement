@@ -312,3 +312,40 @@ Gunnar approved standard posting cleanup for this issue on 20 November 2026 (dec
 | 97759 | test codeunit | Svc Doc Contract Tests ori |
 | 97760 | codeunit | Svc Doc Fixture ori |
 | 97761 | codeunit | Svc Doc Perm Runner ori |
+
+## Service contract lifecycle (#24)
+
+```json
+{"type":"Service.ContractQuote.MakeContract","data":{"contractQuoteNo":"XQUOTE001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Sign","data":{"contractNo":"XCONTRACT001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Unlock","data":{"contractNo":"XCONTRACT001"}}
+{"type":"Service.Contract.Lock","data":{"contractNo":"XCONTRACT001"}}
+```
+
+Conversion files and removes the quote, using Gunnar's 20 November conversion exception. Native conversion already creates a signed, locked contract with the same number. Sign also supports a separately created unsigned contract. Any initial invoice remains unposted; posting remains a separate permission-gated operation.
+
+All four effects are `write`, following Gunnar's 21 November ruling in #43. The explicit single-contract count required by #24 AC03 is enforced for conversion and signing independently of Foundation's irreversible-effect default. Lock and Unlock require no count, and repeating the target change status is refused.
+
+`createInvoice`, `acceptMissingServiceDate` and `acceptNonMonthEndInvoiceDate` default to true, matching BC's confirmation defaults. False declines the initial invoice or refuses the corresponding date condition before writing. `addLinesStartingLater` defaults to true; false refuses lines beginning after the contract starting date. The sign/convert action itself is confirmed by `expectedCount: 1`. Signed contracts with new lines require the native addendum workflow in the client before locking; these operations do not silently run that additional workflow. Native Status validation already refuses a direct transition to Signed. Generic Change Status writes are restricted with a Lock/Unlock hint.
+
+The processor preserves Omit Commit, catches native failures at an isolated write boundary, and binds the invoice-choice subscriber only for the current operation. No UI objects change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 10076140 | codeunit | Svc Contract Make Impl ori |
+| 10076141 | codeunit | Svc Contract Sign Impl ori |
+| 10076142 | codeunit | Svc Contract Lock Impl ori |
+| 10076143 | codeunit | Svc Contract Unlock Impl ori |
+| 10076144 | enumextension | Svc Contract MsgType ori |
+| 10076145 | codeunit | Svc Contract Proc ori |
+| 10076146 | codeunit | Svc Contract Request ori |
+| 10076147 | codeunit | Svc Contract Options ori |
+| 10076148 | codeunit | Svc Contract Restrict ori |
+| 10076149 | codeunit | Svc Contract Help ori |
+| 97763 | codeunit | Svc Contract Data ori |
+| 97764 | test codeunit | Svc Contract Lifecycle Tst ori |
+| 97765 | test codeunit | Svc Contract Validate Tst ori |
+| 97766 | test codeunit | Svc Contract Perm Tests ori |
+| 97767 | test codeunit | Svc Contract Help Tests ori |
+
+The app block starts at 10076140 to avoid the independent wave-2 issue allocations below it.
