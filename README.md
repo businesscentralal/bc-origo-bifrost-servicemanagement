@@ -404,3 +404,43 @@ The processor preserves Omit Commit, catches native failures at an isolated writ
 The app block 10076150–10076159 and test block 97774–97779 avoid the parallel wave-2 allocations in PR #45 (app 10076140–10076142, tests 97770–97773) and PR #46 (app 10076104–10076109, tests 97762–97766).
 
 Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests include native `Service Contract - Edit` through test fixture `Svc Contract Tst ori` (97779), avoiding the tenant-specific legacy role ID `SM-CONTRACT,EDIT`, and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.
+
+
+## Contract periodic processing (#25)
+
+```json
+{"type":"Service.Contract.CreateInvoices","data":{"contractNos":["XCONTRACT001"],"postingDate":"2026-01-31","invoiceToDate":"2026-01-31","expectedCount":1}}
+{"type":"Service.Contract.CreateServiceOrders","data":{"customerNo":"XCUSTOMER001","startingDate":"2026-01-01","endingDate":"2026-01-31","expectedCount":1}}
+{"type":"Service.Contract.CreateCreditMemo","data":{"contractNo":"XCONTRACT001","creditMemoDateTo":"2026-01-31","expectedCount":1}}
+```
+
+The three operations create unposted documents through standard contract processing. They are `write` effects under #43, with the explicit confirmation required by #25: `expectedCount` counts distinct selected contracts, including those with no eligible work. Omission returns `ConfirmationRequired`, `count` and `contractNos`; a wrong count returns `ConfirmationMismatch`. Neither changes data.
+
+Batch requests use 1–200 `contractNos` or exact `customerNo` / `nextInvoiceDateTo` filters. Lists and filters cannot be combined. All contracts must be signed and locked. Service order dates are inclusive, cannot reach the one-year anniversary of startingDate, and must also satisfy the company maximum period. Credit memo requests accept agreeing `contractNo`, `systemId` and plain subject; cutoff defaults to work date and cannot exceed it. Unknown keys and malformed identifiers/dates are refused.
+
+Invoices are processed separately per contract, so combining across selected contracts is not performed. The result lists created invoices with customer and amount, each item line on new orders, lines added to existing pending orders, credited contract lines and skipped contracts with reasons. Native service order processing updates the company last contract service date. Credit processing retains every contract line and marks only successful credits. Failed processing rolls back all writes, and Omit Commit preserves the caller transaction.
+
+Callers need the Bifröst full/write role plus native service contract/document permissions. Posting remains separate through `Service.Document.Post` and its posting role. Help chapters stay English; discovery, refusals and nextStep are translated. No pages or actions change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 97784 | codeunit | Svc Contr Job Data ori |
+| 97785 | codeunit | Svc Contr Job Tests ori |
+| 97786 | codeunit | Svc Contr Job Validate Tst ori |
+| 97787 | codeunit | Svc Contr Job Perm Tests ori |
+| 97788 | codeunit | Svc Contr Job Help Tests ori |
+| 97789 | codeunit | Svc Contr Job Failure ori |
+| 10076160 | codeunit | Svc Contr Invoice Impl ori |
+| 10076161 | codeunit | Svc Contr Order Impl ori |
+| 10076162 | codeunit | Svc Contr Credit Impl ori |
+| 10076163 | codeunit | Svc Contr Invoice Proc ori |
+| 10076164 | codeunit | Svc Contr Order Proc ori |
+| 10076165 | codeunit | Svc Contr Credit Proc ori |
+| 10076166 | enumextension | Svc Contr Jobs MsgType ori |
+| 10076167 | codeunit | Svc Contr Job Scope ori |
+| 10076168 | codeunit | Svc Contr Jobs ori |
+| 10076169 | codeunit | Svc Contr Job Events ori |
+| 10076170 | codeunit | Svc Contr Job Help ori |
+| 97793 | permissionset (test) | Svc Jobs Tst ori |
+
+The periodic-job role tests include native `Service Documents - Edit` through the test-only permission set, in addition to native contract editing. This supplies the interaction-log insertion rights used by standard service document creation; it does not grant the Bifröst posting token.
