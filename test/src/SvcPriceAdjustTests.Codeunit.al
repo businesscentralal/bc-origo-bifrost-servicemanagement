@@ -157,6 +157,80 @@ codeunit 97770 "Svc Price Adjust Tests ori"
     end;
 
     [Test]
+    procedure Scenario_AC02_Maximum_PricesInclVAT_NetBelowExclusiveCap()
+    var
+        Header: Record "Service Header";
+        ItemLine: Record "Service Item Line";
+        Line: Record "Service Line";
+        Request: JsonObject;
+        Response: JsonObject;
+        Net: Decimal;
+        Gross: Decimal;
+        Cap: Decimal;
+    begin
+        // [GIVEN] A prices-including-VAT order whose net total is below a VAT-exclusive maximum and whose gross total is above it
+        CreateDocument(Header, ItemLine, Header."Document Type"::Order, 1, 1, true);
+        FilterLines(ItemLine, Line);
+        Line.CalcSums("Line Amount");
+        Gross := Line."Line Amount";
+        Line.FindSet();
+        repeat
+            Net += Round(Line."Line Amount" / (1 + Line."VAT %" / 100), 0.01);
+        until Line.Next() = 0;
+        Assert.IsTrue(Gross - Net > 1, 'The fixture needs VAT on the lines.');
+        Cap := Round((Net + Gross) / 2, 1);
+        SetSetupAmount(ItemLine, Cap);
+
+        // [WHEN] The price is previewed and then adjusted
+        Request := LineRequest(ItemLine);
+        Request.Add('preview', true);
+        Response := Data.Invoke("Message Type ori"::"Service.Order.AdjustPrice", Request, '', 1033, false);
+
+        // [THEN] Both leave the order unchanged, because the net total is already below the cap
+        AssertNoOpMatchesStored(Response, ItemLine, Net);
+        Assert.AreEqual(Net, DecimalValue(Response, 'comparedTotal'), 'The cap is compared with the net total.');
+        Response := Data.Invoke("Message Type ori"::"Service.Order.AdjustPrice", LineRequest(ItemLine), '', 1033, false);
+        AssertNoOpMatchesStored(Response, ItemLine, Net);
+        Assert.AreEqual(Gross, LinesTotal(ItemLine), 'The gross total is left unchanged.');
+        Assert.AreEqual(0, AdjustedCount(ItemLine), 'No line is marked adjusted.');
+        AssertNoWorkingRows();
+    end;
+
+    [Test]
+    procedure Scenario_AC02_Maximum_DiscountsExcluded_NoOpReportsStoredPrices()
+    var
+        Header: Record "Service Header";
+        ItemLine: Record "Service Item Line";
+        Request: JsonObject;
+        Response: JsonObject;
+        Undiscounted: Decimal;
+        Stored: Decimal;
+    begin
+        // [GIVEN] Discounted lines, a setup that excludes discounts, and a maximum above the undiscounted total
+        CreateAdjustableDocument(Header, ItemLine, Header."Document Type"::Order, 1, 1);
+        Undiscounted := LinesTotal(ItemLine);
+        SetLineDiscounts(ItemLine, 10);
+        Stored := LinesTotal(ItemLine);
+        Assert.IsTrue(Stored < Undiscounted, 'The fixture lines carry a discount.');
+        SetIncludeDiscounts(ItemLine, false);
+        SetSetupAmount(ItemLine, Undiscounted * 1.5);
+
+        // [WHEN] The price is previewed and then adjusted
+        Request := LineRequest(ItemLine);
+        Request.Add('preview', true);
+        Response := Data.Invoke("Message Type ori"::"Service.Order.AdjustPrice", Request, '', 1033, false);
+
+        // [THEN] The responses report the stored discounted prices, not the undiscounted calculation basis
+        AssertNoOpMatchesStored(Response, ItemLine, Stored);
+        Assert.AreEqual(Undiscounted, DecimalValue(Response, 'comparedTotal'), 'The comparison uses the undiscounted basis.');
+        Response := Data.Invoke("Message Type ori"::"Service.Order.AdjustPrice", LineRequest(ItemLine), '', 1033, false);
+        AssertNoOpMatchesStored(Response, ItemLine, Stored);
+        Assert.AreEqual(Stored, LinesTotal(ItemLine), 'The discounted lines are left unchanged.');
+        Assert.AreEqual(0, AdjustedCount(ItemLine), 'No line is marked adjusted.');
+        AssertNoWorkingRows();
+    end;
+
+    [Test]
     procedure Scenario_AC04_InvoicedLine_PreconditionFailed()
     var
         Header: Record "Service Header";
@@ -240,6 +314,11 @@ codeunit 97770 "Svc Price Adjust Tests ori"
 
     /// <summary>Creates a service document with an item, a resource and a cost line on one service item line, and a price group setup of the given type and amount.</summary>
     procedure CreateAdjustableDocument(var Header: Record "Service Header"; var ItemLine: Record "Service Item Line"; DocumentType: Enum "Service Document Type"; AdjustmentType: Option "Fixed",Maximum,Minimum; Amount: Decimal)
+    begin
+        CreateDocument(Header, ItemLine, DocumentType, AdjustmentType, Amount, false);
+    end;
+
+    local procedure CreateDocument(var Header: Record "Service Header"; var ItemLine: Record "Service Item Line"; DocumentType: Enum "Service Document Type"; AdjustmentType: Option "Fixed",Maximum,Minimum; Amount: Decimal; PricesInclVAT: Boolean)
     var
         Customer: Record Customer;
         Item: Record Item;
@@ -257,6 +336,10 @@ codeunit 97770 "Svc Price Adjust Tests ori"
         Data.SetupNumbering();
         Sales.CreateCustomer(Customer);
         Service.CreateServiceHeader(Header, DocumentType, Customer."No.");
+        if PricesInclVAT then begin
+            Header.Validate("Prices Including VAT", true);
+            Header.Modify(true);
+        end;
         Service.CreateServiceItem(ServiceItem, Customer."No.");
         Service.CreateServiceItemLine(ItemLine, Header, ServiceItem."No.");
         Inventory.CreateItem(Item);
@@ -311,6 +394,54 @@ codeunit 97770 "Svc Price Adjust Tests ori"
         Setup.FindFirst();
         Setup.Amount := Amount;
         Setup.Modify();
+    end;
+
+    local procedure SetIncludeDiscounts(ItemLine: Record "Service Item Line"; IncludeDiscounts: Boolean)
+    var
+        Setup: Record "Serv. Price Group Setup";
+    begin
+        Setup.SetRange("Service Price Group Code", ItemLine."Service Price Group Code");
+        Setup.FindFirst();
+        Setup."Include Discounts" := IncludeDiscounts;
+        Setup.Modify();
+    end;
+
+    local procedure SetLineDiscounts(ItemLine: Record "Service Item Line"; DiscountPct: Decimal)
+    var
+        Line: Record "Service Line";
+    begin
+        FilterLines(ItemLine, Line);
+        Line.FindSet(true);
+        repeat
+            Line.Validate("Line Discount %", DiscountPct);
+            Line.Modify(true);
+        until Line.Next() = 0;
+    end;
+
+    /// <summary>Asserts a no-op response: nothing changed, totals equal, and every line reports its stored unit price and line amount as both old and new.</summary>
+    local procedure AssertNoOpMatchesStored(Response: JsonObject; ItemLine: Record "Service Item Line"; StoredTotal: Decimal)
+    var
+        Line: Record "Service Line";
+        Token: JsonToken;
+        Entry: JsonToken;
+        Value: JsonToken;
+        Object: JsonObject;
+    begin
+        AssertSuccess(Response);
+        Assert.IsFalse(BoolValue(Response, 'changed'), 'A total within the limit is not written.');
+        Assert.AreEqual(StoredTotal, DecimalValue(Response, 'totalBefore'), 'totalBefore is the stored total.');
+        Assert.AreEqual(StoredTotal, DecimalValue(Response, 'totalAfter'), 'totalAfter equals totalBefore when nothing is adjusted.');
+        Response.Get('lines', Token);
+        Assert.AreEqual(3, Token.AsArray().Count(), 'Every covered line is reported.');
+        foreach Entry in Token.AsArray() do begin
+            Object := Entry.AsObject();
+            Object.Get('lineNo', Value);
+            Line.Get(ItemLine."Document Type", ItemLine."Document No.", Value.AsValue().AsInteger());
+            Assert.AreEqual(Line."Unit Price", DecimalValue(Object, 'oldUnitPrice'), 'oldUnitPrice is the stored unit price.');
+            Assert.AreEqual(Line."Unit Price", DecimalValue(Object, 'newUnitPrice'), 'newUnitPrice is the stored unit price.');
+            Assert.AreEqual(Line."Line Amount", DecimalValue(Object, 'oldAmount'), 'oldAmount is the stored line amount.');
+            Assert.AreEqual(Line."Line Amount", DecimalValue(Object, 'newAmount'), 'newAmount is the stored line amount.');
+        end;
     end;
 
     /// <summary>Builds a request for the service item line.</summary>

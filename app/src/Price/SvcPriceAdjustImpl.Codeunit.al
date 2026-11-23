@@ -341,8 +341,9 @@ codeunit 10076140 "Svc Price Adjust Impl ori" implements "Msg Interface ori", "M
         Fields.Add(Contract.ResponseField('includeVAT', 'boolean', 'true when the target amount includes VAT (adjust only).'));
         Fields.Add(Contract.ResponseField('includeDiscounts', 'boolean', 'false means line discounts are removed before the adjustment (adjust only).'));
         Fields.Add(Contract.ResponseField('discountsRemoved', 'boolean', 'true when line discounts were removed (adjust only).'));
-        Fields.Add(Contract.ResponseField('totalBefore', 'number', 'Total of the adjusted lines before the adjustment (adjust only).'));
-        Fields.Add(Contract.ResponseField('totalAfter', 'number', 'Total of the adjusted lines after the adjustment (adjust only).'));
+        Fields.Add(Contract.ResponseField('totalBefore', 'number', 'Total of the covered lines as stored on the document, in the setup tax basis: including VAT when includeVAT is true, otherwise excluding VAT (adjust only).'));
+        Fields.Add(Contract.ResponseField('comparedTotal', 'number', 'Total that is compared with the target amount, in the same tax basis; without line discounts when includeDiscounts is false (adjust only).'));
+        Fields.Add(Contract.ResponseField('totalAfter', 'number', 'Total of the covered lines after the adjustment, in the same tax basis; equals totalBefore when nothing is adjusted (adjust only).'));
         Fields.Add(Contract.ResponseField('lines', 'array', 'Each entry has lineNo, type, no, oldUnitPrice, newUnitPrice, oldAmount, newAmount and status (None, Adjusted or Modified); adjust adds description, quantity and weight.'));
         Response.Add('fields', Fields);
         exit(true);
@@ -434,7 +435,7 @@ codeunit 10076140 "Svc Price Adjust Impl ori" implements "Msg Interface ori", "M
     /// <summary>Explains how the amount is spread.</summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'The target amount is spread over the lines by their share of the total; the last line takes the rounding difference so the lines add up to the target. Fixed always applies; Maximum only lowers a total above the amount; Minimum only raises a total below it. Warranty lines, lines outside the adjustment group and lines with nothing left to consume are left out. Posted documents are never changed. Omit Commit keeps the caller transaction.';
+        Notes := 'The target amount is spread over the lines by their share of the total; the last line takes the rounding difference so the lines add up to the target. Fixed always applies; Maximum only lowers a total above the amount; Minimum only raises a total below it. The comparison uses the setup tax basis, so a target without VAT is compared with net amounts also on a document with prices including VAT. When nothing is adjusted, every line reports its stored prices. Warranty lines, lines outside the adjustment group and lines with nothing left to consume are left out. Posted documents are never changed. Omit Commit keeps the caller transaction.';
         exit(true);
     end;
 

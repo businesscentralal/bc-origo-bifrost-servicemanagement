@@ -25,6 +25,7 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
 
     var
         ItemLine: Record "Service Item Line";
+        TempStored: Record "Service Line" temporary;
         ResetMode: Boolean;
         PreviewMode: Boolean;
         NoGroupLbl: Label 'Service item line %1 %2 has no service price group.', Comment = '%1 = document number, %2 = line number, is-IS=Þjónustuvörulína %1 %2 er ekki með þjónustuverðflokk.';
@@ -54,6 +55,7 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         Currency: Record Currency;
         PriceManagement: Codeunit "Service Price Management";
         Total: Decimal;
+        StoredTotal: Decimal;
         Apply: Boolean;
         DiscountsRemoved: Boolean;
         Lines: JsonArray;
@@ -74,10 +76,9 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         if not BuildWorkingRows(Argument, Header, Setup, TempAdjmt, DiscountsRemoved) then
             exit;
 
-        TempAdjmt.CalcSums(Amount, "Amount incl. VAT");
-        Total := TempAdjmt.Amount;
-        if Setup."Include VAT" then
-            Total := TempAdjmt."Amount incl. VAT";
+        // Compare in the setup's tax basis: a VAT-exclusive target is compared with net amounts, also on a prices-including-VAT document.
+        Total := CalculationTotal(TempAdjmt, Header, Setup, Currency);
+        StoredTotal := StoredBasisTotal(Header, Setup, Currency);
         case Setup."Adjustment Type" of
             Setup."Adjustment Type"::Fixed:
                 Apply := true;
@@ -95,7 +96,6 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
             repeat
                 Lines.Add(LineEntry(TempAdjmt, Apply));
             until TempAdjmt.Next() = 0;
-        TempAdjmt.CalcSums("New Amount", "New Amount incl. VAT");
         Response := HeaderEntry(Header, PreviewMode, 'adjust');
         Response.Add('adjustmentGroupCode', ItemLine."Serv. Price Adjmt. Gr. Code");
         Response.Add('adjustmentType', TypeName(Setup));
@@ -103,11 +103,12 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         Response.Add('includeVAT', Setup."Include VAT");
         Response.Add('includeDiscounts', Setup."Include Discounts");
         Response.Add('discountsRemoved', DiscountsRemoved and Apply);
-        Response.Add('totalBefore', Total);
-        if Setup."Include VAT" then
-            Response.Add('totalAfter', TempAdjmt."New Amount incl. VAT")
+        Response.Add('totalBefore', StoredTotal);
+        Response.Add('comparedTotal', Total);
+        if Apply then
+            Response.Add('totalAfter', NewTotal(TempAdjmt, Header, Setup, Currency))
         else
-            Response.Add('totalAfter', TempAdjmt."New Amount");
+            Response.Add('totalAfter', StoredTotal);
         Response.Add('changed', Apply and not PreviewMode);
         Response.Add('lines', Lines);
         Argument.SetResponseJson(Response);
@@ -186,6 +187,7 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
     local procedure BuildWorkingRows(var Argument: Record "Message Argument ori"; Header: Record "Service Header"; Setup: Record "Serv. Price Group Setup"; var TempAdjmt: Record "Service Line Price Adjmt." temporary; var DiscountsRemoved: Boolean): Boolean
     var
         Line: Record "Service Line";
+        Stored: Record "Service Line";
         Currency: Record Currency;
     begin
         InitCurrency(Header, Currency);
@@ -197,6 +199,8 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
                         Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StrSubstNo(InvoicedLbl, Line."Line No.", Line."Document No."), 'serviceItemLineNo', '', '', InvoicedNextLbl);
                         exit(false);
                     end;
+                    // Keep the stored line apart from the calculation basis, so responses always report what is on the document.
+                    Stored := Line;
                     TempAdjmt.Init();
                     TempAdjmt."Vat %" := Line."VAT %";
                     if Header."Prices Including VAT" then
@@ -229,8 +233,11 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
                     TempAdjmt."Adjustment Type" := Setup."Adjustment Type";
                     TempAdjmt."Service Price Group Code" := ItemLine."Service Price Group Code";
                     // A line with nothing left to consume cannot carry a new unit price.
-                    if TempAdjmt.Quantity > 0 then
+                    if TempAdjmt.Quantity > 0 then begin
                         TempAdjmt.Insert();
+                        TempStored := Stored;
+                        TempStored.Insert();
+                    end;
                 end;
             until Line.Next() = 0;
         if TempAdjmt.IsEmpty() then begin
@@ -292,10 +299,7 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         repeat
             Remaining -= 1;
             if Total <> 0 then
-                if Setup."Include VAT" then
-                    TempAdjmt.Weight := Round(TempAdjmt."Amount incl. VAT" * 100 / Total, 0.00001)
-                else
-                    TempAdjmt.Weight := Round(TempAdjmt.Amount * 100 / Total, 0.00001);
+                TempAdjmt.Weight := Round(TaxBasis(Header, Setup, Currency, TempAdjmt.Amount, TempAdjmt."Amount incl. VAT", TempAdjmt."Vat %") * 100 / Total, 0.00001);
             Target := Setup.Amount;
             if Header."Prices Including VAT" and not Setup."Include VAT" then
                 Target := Round(Target + Target * TempAdjmt."Vat %" / 100, 0.00001);
@@ -341,6 +345,40 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         until TempAdjmt.Next() = 0;
     end;
 
+    /// <summary>Returns an amount in the setup's tax basis: including VAT when the setup includes VAT, otherwise excluding VAT, whatever the document's Prices Including VAT.</summary>
+    local procedure TaxBasis(Header: Record "Service Header"; Setup: Record "Serv. Price Group Setup"; Currency: Record Currency; LineAmount: Decimal; AmountInclVAT: Decimal; VatPct: Decimal): Decimal
+    begin
+        if Setup."Include VAT" then
+            exit(AmountInclVAT);
+        if Header."Prices Including VAT" then
+            exit(Round(LineAmount / (1 + VatPct / 100), Currency."Amount Rounding Precision"));
+        exit(LineAmount);
+    end;
+
+    local procedure CalculationTotal(var TempAdjmt: Record "Service Line Price Adjmt." temporary; Header: Record "Service Header"; Setup: Record "Serv. Price Group Setup"; Currency: Record Currency) Total: Decimal
+    begin
+        if TempAdjmt.FindSet() then
+            repeat
+                Total += TaxBasis(Header, Setup, Currency, TempAdjmt.Amount, TempAdjmt."Amount incl. VAT", TempAdjmt."Vat %");
+            until TempAdjmt.Next() = 0;
+    end;
+
+    local procedure NewTotal(var TempAdjmt: Record "Service Line Price Adjmt." temporary; Header: Record "Service Header"; Setup: Record "Serv. Price Group Setup"; Currency: Record Currency) Total: Decimal
+    begin
+        if TempAdjmt.FindSet() then
+            repeat
+                Total += TaxBasis(Header, Setup, Currency, TempAdjmt."New Amount", TempAdjmt."New Amount incl. VAT", TempAdjmt."Vat %");
+            until TempAdjmt.Next() = 0;
+    end;
+
+    local procedure StoredBasisTotal(Header: Record "Service Header"; Setup: Record "Serv. Price Group Setup"; Currency: Record Currency) Total: Decimal
+    begin
+        if TempStored.FindSet() then
+            repeat
+                Total += TaxBasis(Header, Setup, Currency, TempStored."Line Amount", TempStored."Amount Including VAT", TempStored."VAT %");
+            until TempStored.Next() = 0;
+    end;
+
     local procedure InitCurrency(Header: Record "Service Header"; var Currency: Record Currency)
     begin
         if Header."Currency Code" = '' then
@@ -360,9 +398,17 @@ codeunit 10076141 "Svc Price Adjust Proc ori"
         Entry.Add('description', TempAdjmt.Description);
         Entry.Add('quantity', TempAdjmt.Quantity);
         Entry.Add('weight', TempAdjmt.Weight);
-        Entry.Add('oldUnitPrice', TempAdjmt."Unit Price");
-        Entry.Add('oldAmount', TempAdjmt.Amount);
-        if Applied and not PreviewMode then begin
+        TempStored.Get(TempAdjmt."Document Type", TempAdjmt."Document No.", TempAdjmt."Service Line No.");
+        Entry.Add('oldUnitPrice', TempStored."Unit Price");
+        Entry.Add('oldAmount', TempStored."Line Amount");
+        if not Applied then begin
+            // Nothing is written, so the new values are the stored ones.
+            Entry.Add('newUnitPrice', TempStored."Unit Price");
+            Entry.Add('newAmount', TempStored."Line Amount");
+            Entry.Add('status', StatusName(TempStored));
+            exit(Entry);
+        end;
+        if not PreviewMode then begin
             Line.SetLoadFields("Unit Price", "Line Amount", "Price Adjmt. Status");
             Line.Get(TempAdjmt."Document Type", TempAdjmt."Document No.", TempAdjmt."Service Line No.");
             Entry.Add('newUnitPrice', Line."Unit Price");
