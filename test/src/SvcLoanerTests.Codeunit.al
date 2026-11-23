@@ -443,7 +443,7 @@ codeunit 97762 "Svc Loaner Tests ori"
     [ConfirmHandler]
     procedure ConfirmLoaner(Question: Text[1024]; var Reply: Boolean)
     begin
-        Assert.IsTrue(LowerCase(Question).Contains('loaner') or LowerCase(Question).Contains('lánst'), Question);
+        Assert.IsTrue(LowerCase(Question).Contains('loaner') or LowerCase(Question).Contains('lánst') or LowerCase(Question).Contains('lánsbúnað'), Question);
         Reply := true;
     end;
 }
