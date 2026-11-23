@@ -2,6 +2,7 @@ namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Service.Contract;
 using Microsoft.Service.Document;
+using Microsoft.Service.Setup;
 using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
@@ -117,6 +118,37 @@ codeunit 97785 "Svc Contr Job Tests ori"
         Response.Get('creditMemos', Token);
         Assert.AreEqual(0, Token.AsArray().Count(), 'Credited line not credited twice.');
         Fixture.Cleanup();
+    end;
+
+    [Test]
+    procedure Scenario_AC03_CreditWorksWhenContractSeriesStartBlank()
+    var
+        Header: Record "Service Contract Header";
+        Setup: Record "Service Mgt. Setup";
+        Response: JsonObject;
+        Token: JsonToken;
+        PriorInvoiceNos: Code[20];
+        PriorCreditMemoNos: Code[20];
+    begin
+        // AC03 edge: a company without contract invoice or credit memo series still credits through owned fixture series.
+        Setup.Get();
+        PriorInvoiceNos := Setup."Contract Invoice Nos.";
+        PriorCreditMemoNos := Setup."Contract Credit Memo Nos.";
+        Setup."Contract Invoice Nos." := '';
+        Setup."Contract Credit Memo Nos." := '';
+        Setup.Modify();
+        Fixture.Create(Header);
+        Fixture.PrepareCredit(Header);
+        Commit();
+        Response := Invoke("Message Type ori"::"Service.Contract.CreateCreditMemo", Fixture.Request("Message Type ori"::"Service.Contract.CreateCreditMemo", Header));
+        Response.Get('creditMemos', Token);
+        Assert.AreEqual(1, Token.AsArray().Count(), 'Credit memo created from owned contract series.');
+        Fixture.Cleanup();
+        Setup.Get();
+        Assert.AreEqual('', Setup."Contract Credit Memo Nos.", 'Cleanup restores the blank credit memo series.');
+        Setup."Contract Invoice Nos." := PriorInvoiceNos;
+        Setup."Contract Credit Memo Nos." := PriorCreditMemoNos;
+        Setup.Modify();
     end;
 
     [Test]

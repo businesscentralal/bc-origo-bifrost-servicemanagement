@@ -5,6 +5,7 @@
 - Add `Service.Contract.CreateInvoices`, `Service.Contract.CreateServiceOrders` and `Service.Contract.CreateCreditMemo` with bounded scopes, explicit contract-count confirmation, atomic rollback and native service write permissions. Documents remain unposted and contract lines are retained.
 - Include English help and Icelandic discovery/refusals, raw owned fixtures, boundary tests and late native-error rollback tests. No UI changes.
 - App objects 10076160–10076170; tests/helpers 97784–97789 and test permission set 97793.
+- Test fixture 97784 seeds owned `Contract Invoice Nos.` and `Contract Credit Memo Nos.` series and restores them; 97785 proves crediting when both start blank.
 
 ## Unreleased — service contract lifecycle (#24)
 
