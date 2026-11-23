@@ -27,7 +27,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         // Story #24 AC01 | Time: fixed owned dates | Risk: quote conversion loses its filed copy.
         Fixture.Create(Header, true);
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Assert.AreEqual('Signed', Data.TextValue(Response, 'contractStatus'), 'Native conversion already signs.');
         Assert.IsFalse(Header.Get(Header."Contract Type"::Quote, Header."Contract No."), 'Quote removed only on success.');
@@ -39,7 +39,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Assert.IsFalse(Filed.IsEmpty(), 'Quote filed.');
         Line.Get(Header."Contract Type", Header."Contract No.", 10000);
         Assert.AreEqual(Header."Customer No.", Line."Customer No.", 'Owned item line moved.');
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Sign", Fixture.Request(Header, true), '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Sign", Fixture.Request(Header, true), '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Fixture.Cleanup();
     end;
@@ -56,7 +56,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Header."Next Invoice Period Start" := DMY2Date(1, 2, 2026);
         Header.Modify();
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Sign", Fixture.Request(Header, true), '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Sign", Fixture.Request(Header, true), '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Header.Get(Header."Contract Type", Header."Contract No.");
         Assert.AreEqual(Header.Status::Signed, Header.Status, 'Signed.');
@@ -81,7 +81,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Request := Fixture.Request(Header, true);
         Request.Replace('createInvoice', true);
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Sign", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Sign", Request, '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Assert.AreNotEqual('', Data.TextValue(Response, 'invoiceNo'), 'First invoice returned.');
         Assert.IsTrue(Invoice.Get(Invoice."Document Type"::Invoice, Data.TextValue(Response, 'invoiceNo')), 'Invoice remains unposted.');
@@ -99,17 +99,17 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Fixture.Create(Header, false);
         Request := Fixture.Request(Header, false);
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Unlock", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Unlock", Request, '', 1033, false);
         Data.AssertRefusal(Response, 'PreconditionFailed');
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Lock", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Lock", Request, '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Assert.AreEqual('Open', Data.TextValue(Response, 'changeStatusBefore'), 'Before.');
         Assert.AreEqual('Locked', Data.TextValue(Response, 'changeStatusAfter'), 'After.');
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Lock", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Lock", Request, '', 1033, false);
         Data.AssertRefusal(Response, 'PreconditionFailed');
         Clear(Request);
         Request.Add('systemId', Format(Header.SystemId, 0, 4));
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Unlock", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Unlock", Request, '', 1033, false);
         Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText(Response));
         Header.Get(Header."Contract Type", Header."Contract No.");
         Assert.AreEqual(Header."Change Status"::Open, Header."Change Status", 'Persisted state.');
@@ -133,10 +133,10 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
                 TypeValue := "Message Type ori"::"Service.ContractQuote.MakeContract";
             Request := Fixture.Request(Header, false);
             Commit();
-            Response := Data.Invoke(TypeValue, Request, '', 1033, false);
+            Response := InvokeAndCheckLog(TypeValue, Request, '', 1033, false);
             Data.AssertRefusal(Response, 'ConfirmationRequired');
             Request.Add('expectedCount', 2);
-            Response := Data.Invoke(TypeValue, Request, '', 1033, false);
+            Response := InvokeAndCheckLog(TypeValue, Request, '', 1033, false);
             Data.AssertRefusal(Response, 'ConfirmationMismatch');
             Header.Get(Header."Contract Type", Header."Contract No.");
             Assert.AreEqual(Header.Status::" ", Header.Status, 'Unchanged status.');
@@ -157,7 +157,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Header.Modify();
         Number := Header."Contract No.";
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
         Data.AssertRefusal(Response, 'BusinessCentralError');
         Assert.IsTrue(Header.Get(Header."Contract Type"::Quote, Number), 'Original quote retained.');
         Assert.IsFalse(Header.Get(Header."Contract Type"::Contract, Number), 'No partial contract.');
@@ -180,7 +180,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Request := Fixture.Request(Header, true);
         Request.Add('acceptMissingServiceDate', false);
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.Contract.Sign", Request, '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.Contract.Sign", Request, '', 1033, false);
         Data.AssertRefusal(Response, 'PreconditionFailed');
         Header.Get(Header."Contract Type", Header."Contract No.");
         Assert.AreEqual(Header.Status::" ", Header.Status, 'No signature.');
@@ -201,7 +201,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Existing."Contract Type" := Existing."Contract Type"::Contract;
         Existing.Insert();
         Commit();
-        Response := Data.Invoke("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
+        Response := InvokeAndCheckLog("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
         Data.AssertRefusal(Response, 'BusinessCentralError');
         Assert.IsTrue(Header.Get(Header."Contract Type"::Quote, Existing."Contract No."), 'Quote retained.');
         Filed.SetRange("Contract No.", Existing."Contract No.");
@@ -218,4 +218,40 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Response.WriteTo(Result);
         exit(Result);
     end;
+    local procedure InvokeAndCheckLog(MessageType: Enum "Message Type ori"; Request: JsonObject; Subject: Text; LanguageId: Integer; OmitCommit: Boolean): JsonObject
+    var
+        Dispatcher: Codeunit "Dispatcher ori";
+        Input: BigText;
+        Output: BigText;
+        RequestText: Text;
+        ResponseText: Text;
+        ContentType: Text[100];
+        TaskId: Guid;
+        MessageId: Guid;
+        ResponseTime: Duration;
+        Response: JsonObject;
+        LogRequest: JsonObject;
+        LogResponse: JsonObject;
+        Token: JsonToken;
+    begin
+        Assert.IsFalse(OmitCommit, 'Contract tests exercise the persisted public dispatcher.');
+        Request.WriteTo(RequestText);
+        Input.AddText(RequestText);
+        Dispatcher.EnqueueAndProcess(MessageType, "Message Version ori"::"1.0", CopyStr(Subject, 1, 250),
+            'Owned service contract test #24', 'text/json', Input, TaskId, LanguageId, MessageId, Output, ContentType, ResponseTime);
+        Assert.IsFalse(IsNullGuid(MessageId), 'Foundation returned the persisted message id.');
+        Output.GetSubText(ResponseText, 1);
+        Assert.IsTrue(Response.ReadFrom(ResponseText), 'Persisted response must be JSON.');
+        if Data.TextValue(Response, 'status') = 'Error' then begin
+            // Use Foundation's product API so the assertion also runs without Foundation Tests installed.
+            LogRequest.Add('tableName', 'Message ori');
+            LogRequest.Add('tableView', 'WHERE(Id=CONST(' + Format(MessageId, 0, 4) + '))');
+            LogResponse := Data.Invoke("Message Type ori"::"Data.Records.Get", LogRequest, '', 1033, true);
+            Assert.AreEqual('Success', Data.TextValue(LogResponse, 'status'), 'Read back persisted error message.');
+            LogResponse.Get('noOfRecords', Token);
+            Assert.AreEqual(1, Token.AsValue().AsInteger(), 'Foundation retained this exact error message.');
+        end;
+        exit(Response);
+    end;
+
 }
