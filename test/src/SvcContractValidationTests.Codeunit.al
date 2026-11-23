@@ -5,7 +5,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>Verifies issue 24 malformed requests and generic-write restrictions.</summary>
-codeunit 97765 "Svc Contract Validate Tst ori"
+codeunit 97776 "Svc Contract Validate Tst ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;

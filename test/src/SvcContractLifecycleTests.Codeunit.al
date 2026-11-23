@@ -6,7 +6,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>Verifies issue 24 native conversion, signing, change status and transaction refusal paths.</summary>
-codeunit 97764 "Svc Contract Lifecycle Tst ori"
+codeunit 97775 "Svc Contract Lifecycle Tst ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;

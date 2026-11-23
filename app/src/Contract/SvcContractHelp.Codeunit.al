@@ -3,7 +3,7 @@ namespace Origo.Bifrost.ServiceManagement;
 using Origo.Bifrost;
 
 /// <summary>Provides English contract chapters for service contract lifecycle operations.</summary>
-codeunit 10076149 "Svc Contract Help ori"
+codeunit 10076159 "Svc Contract Help ori"
 {
     Access = Internal;
 

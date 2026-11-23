@@ -367,22 +367,23 @@ The processor preserves Omit Commit, catches native failures at an isolated writ
 
 | ID | Object | Name |
 | --- | --- | --- |
-| 10076140 | codeunit | Svc Contract Make Impl ori |
-| 10076141 | codeunit | Svc Contract Sign Impl ori |
-| 10076142 | codeunit | Svc Contract Lock Impl ori |
-| 10076143 | codeunit | Svc Contract Unlock Impl ori |
-| 10076144 | enumextension | Svc Contract MsgType ori |
-| 10076145 | codeunit | Svc Contract Proc ori |
-| 10076146 | codeunit | Svc Contract Request ori |
-| 10076147 | codeunit | Svc Contract Options ori |
-| 10076148 | codeunit | Svc Contract Restrict ori |
-| 10076149 | codeunit | Svc Contract Help ori |
-| 97763 | codeunit | Svc Contract Data ori |
-| 97764 | test codeunit | Svc Contract Lifecycle Tst ori |
-| 97765 | test codeunit | Svc Contract Validate Tst ori |
-| 97766 | test codeunit | Svc Contract Perm Tests ori |
-| 97767 | test codeunit | Svc Contract Help Tests ori |
+| 10076150 | codeunit | Svc Contract Make Impl ori |
+| 10076151 | codeunit | Svc Contract Sign Impl ori |
+| 10076152 | codeunit | Svc Contract Lock Impl ori |
+| 10076153 | codeunit | Svc Contract Unlock Impl ori |
+| 10076154 | enumextension | Svc Contract MsgType ori |
+| 10076155 | codeunit | Svc Contract Proc ori |
+| 10076156 | codeunit | Svc Contract Request ori |
+| 10076157 | codeunit | Svc Contract Options ori |
+| 10076158 | codeunit | Svc Contract Restrict ori |
+| 10076159 | codeunit | Svc Contract Help ori |
+| 97774 | codeunit | Svc Contract Data ori |
+| 97775 | test codeunit | Svc Contract Lifecycle Tst ori |
+| 97776 | test codeunit | Svc Contract Validate Tst ori |
+| 97777 | test codeunit | Svc Contract Perm Tests ori |
+| 97778 | test codeunit | Svc Contract Help Tests ori |
+| 97779 | test permission set | Svc Contract Tst ori |
 
-The app block starts at 10076140 to avoid the independent wave-2 issue allocations below it.
+The app block 10076150–10076159 and test block 97774–97779 avoid the parallel wave-2 allocations in PR #45 (app 10076140–10076142, tests 97770–97773) and PR #46 (app 10076104–10076109, tests 97762–97766).
 
-Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests use `SM-CONTRACT,EDIT` and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.
+Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests include native `Service Contract - Edit` through test fixture `Svc Contract Tst ori` (97779), avoiding the tenant-specific legacy role ID `SM-CONTRACT,EDIT`, and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.

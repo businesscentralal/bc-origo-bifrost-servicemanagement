@@ -4,7 +4,7 @@ using Microsoft.Service.Contract;
 using Origo.Bifrost;
 
 /// <summary>Runs contract conversion, signing and change-status operations inside one rollback boundary.</summary>
-codeunit 10076145 "Svc Contract Proc ori"
+codeunit 10076155 "Svc Contract Proc ori"
 {
     Access = Internal;
     TableNo = "Message Argument ori";

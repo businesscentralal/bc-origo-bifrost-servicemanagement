@@ -4,7 +4,7 @@ using Microsoft.Service.Contract;
 using Origo.Bifrost;
 
 /// <summary>Implements Service.Contract.Unlock through the native service contract lifecycle.</summary>
-codeunit 10076143 "Svc Contract Unlock Impl ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
+codeunit 10076153 "Svc Contract Unlock Impl ori" implements "Msg Interface ori", "Msg Discovery ori", "Msg Contract ori"
 {
     Access = Internal;
     TableNo = "Message Argument ori";

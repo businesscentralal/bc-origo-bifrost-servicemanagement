@@ -4,7 +4,7 @@ using Microsoft.Service.Contract;
 using Microsoft.Service.Document;
 
 /// <summary>Applies caller invoice choices only while bound to one native contract operation.</summary>
-codeunit 10076147 "Svc Contract Options ori"
+codeunit 10076157 "Svc Contract Options ori"
 {
     Access = Internal;
     EventSubscriberInstance = Manual;

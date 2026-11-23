@@ -4,7 +4,7 @@ using Microsoft.Service.Contract;
 using Origo.Bifrost;
 
 /// <summary>Validates contract identity and caller decisions before any native writes.</summary>
-codeunit 10076146 "Svc Contract Request ori"
+codeunit 10076156 "Svc Contract Request ori"
 {
     Access = Internal;
 

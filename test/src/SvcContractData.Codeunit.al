@@ -15,7 +15,7 @@ using Microsoft.Service.Setup;
 using Origo.Bifrost;
 
 /// <summary>Builds raw owned service contracts and their posting setup without demo-data lookups.</summary>
-codeunit 97763 "Svc Contract Data ori"
+codeunit 97774 "Svc Contract Data ori"
 {
     var
         PreviousSetup: Record "Service Mgt. Setup";

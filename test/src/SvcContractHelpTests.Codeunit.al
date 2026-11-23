@@ -4,7 +4,7 @@ using Origo.Bifrost;
 using System.TestLibraries.Utilities;
 
 /// <summary>Verifies issue 24 contract help, localized discovery and refusal guidance.</summary>
-codeunit 97767 "Svc Contract Help Tests ori"
+codeunit 97778 "Svc Contract Help Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;

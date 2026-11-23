@@ -7,7 +7,7 @@ using System.TestLibraries.Security.AccessControl;
 using System.TestLibraries.Utilities;
 
 /// <summary>Verifies issue 24 service write-role boundaries on all four operations.</summary>
-codeunit 97766 "Svc Contract Perm Tests ori"
+codeunit 97777 "Svc Contract Perm Tests ori"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -56,8 +56,8 @@ codeunit 97766 "Svc Contract Perm Tests ori"
             LowerPermissions.AddPermissionSet('D365 BASIC');
             LowerPermissions.AddPermissionSet('D365 READ');
             LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
-            // Native filing needs indirect insert rights; this does not grant the Bifrost posting token.
-            LowerPermissions.AddPermissionSet('SM-CONTRACT,EDIT');
+            // Include native contract rights by AL object instead of a tenant-specific legacy role ID.
+            LowerPermissions.AddPermissionSet('Svc Contract Tst ori');
             LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
             CanPost := PostingGate.HasPostingPermission();
             Response := Data.Invoke(TypeValue, Request, '', 1033, false);
@@ -98,7 +98,7 @@ codeunit 97766 "Svc Contract Perm Tests ori"
                 LowerPermissions.AddPermissionSet('D365 BASIC');
                 LowerPermissions.AddPermissionSet('D365 READ');
                 LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
-                LowerPermissions.AddPermissionSet('SM-CONTRACT,EDIT');
+                LowerPermissions.AddPermissionSet('Svc Contract Tst ori');
             end;
             ClearLastError();
             Ran := Runner.Run();

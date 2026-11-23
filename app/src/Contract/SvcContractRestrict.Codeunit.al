@@ -4,7 +4,7 @@ using Microsoft.Service.Contract;
 using Origo.Bifrost;
 
 /// <summary>Directs generic change-status writes to the dedicated lifecycle operations.</summary>
-codeunit 10076148 "Svc Contract Restrict ori"
+codeunit 10076158 "Svc Contract Restrict ori"
 {
     Access = Internal;
 
