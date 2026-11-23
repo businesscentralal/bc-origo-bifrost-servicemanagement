@@ -82,7 +82,7 @@ codeunit 97764 "Svc Loaner Perm Tests ori"
     [ConfirmHandler]
     procedure ConfirmLoaner(Question: Text[1024]; var Reply: Boolean)
     begin
-        Assert.IsTrue(LowerCase(Question).Contains('loaner') or LowerCase(Question).Contains('lánst') or LowerCase(Question).Contains('lánsbúnað'), Question);
+        Fixture.AssertConfirmation(Question);
         Reply := true;
     end;
 }

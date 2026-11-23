@@ -7,10 +7,14 @@ using Microsoft.Service.Item;
 using Microsoft.Service.Loaner;
 using Origo.Bifrost;
 using System.Diagnostics;
+using System.TestLibraries.Utilities;
 
 /// <summary>Creates owned loaner fixtures from raw records, without company defaults or demo data.</summary>
 codeunit 97765 "Svc Loaner Data ori"
 {
+    var
+        ExpectedLoanerNo: Code[20];
+
     /// <summary>Creates a customer with a posting group, service item, order line and available loaner.</summary>
     procedure Create(var Line: Record "Service Item Line"; var Loaner: Record Loaner)
     var
@@ -50,6 +54,7 @@ codeunit 97765 "Svc Loaner Data ori"
         Loaner."No." := Number;
         Loaner.Description := 'Owned loaner test';
         Loaner.Insert();
+        ExpectedLoanerNo := Loaner."No.";
     end;
 
     /// <summary>Uses the public generic field-write operation to lend, preserving BC field validation.</summary>
@@ -108,9 +113,19 @@ codeunit 97765 "Svc Loaner Data ori"
         Data: Codeunit "Svc Test Data ori";
         Payload: JsonObject;
     begin
+        ExpectedLoanerNo := LoanerNo;
         Payload := Request(Line);
         Payload.Add('loanerNo', LoanerNo);
         exit(Data.Invoke("Message Type ori"::"Service.Loaner.Lend", Payload, '', LanguageId, false));
+    end;
+
+    /// <summary>Checks a native confirmation concerns the exact loaner selected by the test, independently of translated nouns.</summary>
+    procedure AssertConfirmation(Question: Text)
+    var
+        Assert: Codeunit "Library Assert";
+    begin
+        Assert.AreNotEqual('', ExpectedLoanerNo, 'A test must select its loaner before confirming.');
+        Assert.IsTrue(Question.Contains(ExpectedLoanerNo), 'Confirmation must name the selected owned loaner: ' + Question);
     end;
 
     /// <summary>Builds the open-order identifier set.</summary>
