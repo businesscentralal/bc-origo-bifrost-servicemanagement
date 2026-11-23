@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — service contract lifecycle (#24)
+
+- Add contract quote conversion, signing, locking and unlocking through the native service contract lifecycle, with explicit caller choices, atomic refusals, write-role checks and English/Icelandic discovery and recovery text.
+- Protect Change Status from generic writes. Conversion files and removes the quote under Gunnar's approved conversion exception. Initial invoices remain unposted.
+- Use a test-only native contract permission set (97779) so permission checks also run on CI tenants without the legacy `SM-CONTRACT,EDIT` role. The posting-token and read/no-grant refusal assertions remain enforced.
+- New app objects 10076150–10076159; test objects 97774–97779. No UI changes.
+
 ## Unreleased
 
 ### Changed

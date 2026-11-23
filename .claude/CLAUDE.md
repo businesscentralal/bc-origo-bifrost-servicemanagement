@@ -375,3 +375,43 @@ It validates the new field value through BC, checks availability, and creates lo
 | 10076108 | codeunit | Svc Loaner Lend Proc ori |
 | 10076109 | codeunit | Svc Loaner Restrict ori |
 | 97766 | codeunit (test subscriber) | Svc Loaner Failure Tst ori |
+
+## Service contract lifecycle (#24)
+
+```json
+{"type":"Service.ContractQuote.MakeContract","data":{"contractQuoteNo":"XQUOTE001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Sign","data":{"contractNo":"XCONTRACT001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Unlock","data":{"contractNo":"XCONTRACT001"}}
+{"type":"Service.Contract.Lock","data":{"contractNo":"XCONTRACT001"}}
+```
+
+Conversion files and removes the quote, using Gunnar's 20 November conversion exception. Native conversion already creates a signed, locked contract with the same number. Sign also supports a separately created unsigned contract. Any initial invoice remains unposted; posting remains a separate permission-gated operation.
+
+All four effects are `write`, following Gunnar's 21 November ruling in #43. The explicit single-contract count required by #24 AC03 is enforced for conversion and signing independently of Foundation's irreversible-effect default. Lock and Unlock require no count, and repeating the target change status is refused.
+
+`createInvoice`, `acceptMissingServiceDate` and `acceptNonMonthEndInvoiceDate` default to true, matching BC's confirmation defaults. False declines the initial invoice or refuses the corresponding date condition before writing. `addLinesStartingLater` defaults to true; false refuses lines beginning after the contract starting date. The sign/convert action itself is confirmed by `expectedCount: 1`. Signed contracts with new lines require the native addendum workflow in the client before locking; these operations do not silently run that additional workflow. Native Status validation already refuses a direct transition to Signed. Generic Change Status writes are restricted with a Lock/Unlock hint.
+
+The processor preserves Omit Commit, catches native failures at an isolated write boundary, and binds the invoice-choice subscriber only for the current operation. No UI objects change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 10076150 | codeunit | Svc Contract Make Impl ori |
+| 10076151 | codeunit | Svc Contract Sign Impl ori |
+| 10076152 | codeunit | Svc Contract Lock Impl ori |
+| 10076153 | codeunit | Svc Contract Unlock Impl ori |
+| 10076154 | enumextension | Svc Contract MsgType ori |
+| 10076155 | codeunit | Svc Contract Proc ori |
+| 10076156 | codeunit | Svc Contract Request ori |
+| 10076157 | codeunit | Svc Contract Options ori |
+| 10076158 | codeunit | Svc Contract Restrict ori |
+| 10076159 | codeunit | Svc Contract Help ori |
+| 97774 | codeunit | Svc Contract Data ori |
+| 97775 | test codeunit | Svc Contract Lifecycle Tst ori |
+| 97776 | test codeunit | Svc Contract Validate Tst ori |
+| 97777 | test codeunit | Svc Contract Perm Tests ori |
+| 97778 | test codeunit | Svc Contract Help Tests ori |
+| 97779 | test permission set | Svc Contract Tst ori |
+
+The app block 10076150–10076159 and test block 97774–97779 avoid the parallel wave-2 allocations in PR #45 (app 10076140–10076142, tests 97770–97773) and PR #46 (app 10076104–10076109, tests 97762–97766).
+
+Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests include native `Service Contract - Edit` through test fixture `Svc Contract Tst ori` (97779), avoiding the tenant-specific legacy role ID `SM-CONTRACT,EDIT`, and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.
