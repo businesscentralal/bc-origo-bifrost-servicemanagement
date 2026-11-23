@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Service Management">
     <body>
@@ -320,6 +320,150 @@
           <target>afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Consumption Undo Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2475122981 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Locks a service contract against changes. Use Service.Contract.Unlock to open it again.</source>
+          <target>Læsir þjónustusamningi fyrir breytingum. Notaðu Service.Contract.Unlock til að opna hann aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Læsir þjónustusamningi fyrir breytingum. Notaðu Service.Contract.Unlock til að opna hann aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Lock Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2475122981 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Lock Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4265856966 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Files a service contract quote and converts it into a signed, locked contract. The quote is removed.</source>
+          <target>Vistar afrit af þjónustusamningstilboði og breytir því í undirritaðan, læstan samning. Tilboðinu er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vistar afrit af þjónustusamningstilboði og breytir því í undirritaðan, læstan samning. Tilboðinu er eytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Make Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4265856966 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Make Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1542941690" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The contract contains a date choice that the request did not accept.</source>
+          <target>Samningurinn inniheldur dagsetningarval sem beiðnin samþykkti ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Samningurinn inniheldur dagsetningarval sem beiðnin samþykkti ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType DateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1412843979" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the contract dates or explicitly accept the documented date choice.</source>
+          <target>Leiðréttu dagsetningar samningsins eða samþykktu sérstaklega dagsetningarvalið sem lýst er í hjálpinni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu dagsetningar samningsins eða samþykktu sérstaklega dagsetningarvalið sem lýst er í hjálpinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType DateNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 94641957" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This signed contract has new lines. Complete the contract addendum in Business Central before locking it.</source>
+          <target>Þessi undirritaði samningur er með nýjar línur. Ljúktu við viðauka samningsins í Business Central áður en honum er læst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þessi undirritaði samningur er með nýjar línur. Ljúktu við viðauka samningsins í Business Central áður en honum er læst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType NewLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 680257497" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the contract. Use Service.Contract.Unlock / Service.Contract.Lock for changes. Review any unposted invoice before Service.Document.Post.</source>
+          <target>Yfirfarðu samninginn. Notaðu Service.Contract.Unlock / Service.Contract.Lock fyrir breytingar. Yfirfarðu óbókaðan reikning áður en Service.Document.Post er notað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirfarðu samninginn. Notaðu Service.Contract.Unlock / Service.Contract.Lock fyrir breytingar. Yfirfarðu óbókaðan reikning áður en Service.Document.Post er notað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType NextStepLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The service contract is already in the requested change status.</source>
+          <target>Þjónustusamningurinn er þegar í umbeðinni breytingastöðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustusamningurinn er þegar í umbeðinni breytingastöðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3764383116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Confirm the operation on one service contract by sending expectedCount: 1.</source>
+          <target>Staðfestu aðgerðina á einum þjónustusamningi með því að senda expectedCount: 1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Staðfestu aðgerðina á einum þjónustusamningi með því að senda expectedCount: 1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType ConfirmLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers refer to different service contracts.</source>
+          <target>Auðkennin vísa í mismunandi þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa í mismunandi þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3071622107" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The expected count does not match the one selected service contract.</source>
+          <target>Áætlaður fjöldi samsvarar ekki einum völdum þjónustusamningi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Áætlaður fjöldi samsvarar ekki einum völdum þjónustusamningi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType CountLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3188110234" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send true or false as a JSON boolean.</source>
+          <target>Sendu true eða false sem JSON-rökgildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu true eða false sem JSON-rökgildi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType FlagLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 has an invalid format.</source>
+          <target>%1 er á ógildu sniði.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er á ógildu sniði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType FormatLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 4264074168" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send contractNo (contractQuoteNo for a quote), systemId or a plain subject identifying one service contract.</source>
+          <target>Sendu contractNo (contractQuoteNo fyrir tilboð), systemId eða númer í subject sem auðkennir einn þjónustusamning.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu contractNo (contractQuoteNo fyrir tilboð), systemId eða númer í subject sem auðkennir einn þjónustusamning.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType IdentityLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A service contract identifier is required.</source>
+          <target>Auðkenni þjónustusamnings vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni þjónustusamnings vantar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The service contract or quote was not found.</source>
+          <target>Þjónustusamningurinn eða tilboðið fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustusamningurinn eða tilboðið fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 2256167925" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifier refers to the wrong kind of service contract document.</source>
+          <target>Auðkennið vísar í ranga tegund þjónustusamningsskjals.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennið vísar í ranga tegund þjónustusamningsskjals.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType WrongScopeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3541747344 - Method 762139347 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Contract.Lock / Service.Contract.Unlock.</source>
+          <target>Notaðu Service.Contract.Lock / Service.Contract.Unlock.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Contract.Lock / Service.Contract.Unlock.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Restrict ori - Method ChangeStatusHint - NamedType HintLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3522842853 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Signs a service contract and optionally creates its first unposted invoice.</source>
+          <target>Undirritar þjónustusamning og stofnar fyrsta óbókaða reikninginn ef þess er óskað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Undirritar þjónustusamning og stofnar fyrsta óbókaða reikninginn ef þess er óskað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Sign Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3522842853 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Sign Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2531559700 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens a service contract for changes. Use Service.Contract.Lock to lock it again.</source>
+          <target>Opnar þjónustusamning fyrir breytingum. Notaðu Service.Contract.Lock til að læsa honum aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opnar þjónustusamning fyrir breytingum. Notaðu Service.Contract.Lock til að læsa honum aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Unlock Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2531559700 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Unlock Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 286836964 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
           <source>service document %1</source>
