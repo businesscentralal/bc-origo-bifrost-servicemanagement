@@ -44,6 +44,7 @@ codeunit 10076108 "Svc Loaner Lend Proc ori"
 
     var
         Parser: Codeunit "Svc Doc Request ori";
+        PermissionLbl: Label 'You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.', Comment = 'is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.';
         MissingLbl: Label 'Send loanerNo and either documentNo with serviceItemLineNo, or the service item line systemId.', Comment = 'is-IS=Sendu loanerNo og annaðhvort documentNo með serviceItemLineNo eða systemId þjónustuvörulínunnar.';
         FindLbl: Label 'The loaner or service order line was not found. Read the available loaners and order lines with Data.Records.Get and retry.', Comment = 'is-IS=Lánstækið eða þjónustupöntunarlínan fannst ekki. Lestu tiltæk lánstæki og pöntunarlínur með Data.Records.Get og reyndu aftur.';
         GuidLbl: Label 'Send systemId as a nonempty service item line GUID.', Comment = 'is-IS=Sendu systemId sem gilt GUID þjónustuvörulínu sem er ekki tómt.';
@@ -55,11 +56,16 @@ codeunit 10076108 "Svc Loaner Lend Proc ori"
     /// <summary>Checks licensing and the write gate and preserves Omit Commit transaction semantics.</summary>
     internal procedure Dispatch(var Argument: Record "Message Argument ori")
     var
+        Gate: Record "Svc Write Gate ori";
         WriteCheck: Codeunit "Svc Write Check ori";
         Processor: Codeunit "Svc Loaner Lend Proc ori";
     begin
         Argument.AssertIsLicensed();
         Argument.AssertVersion1();
+        if not Gate.WritePermission() then begin
+            Parser.Refuse(Argument, "Bifrost Error Code ori"::PermissionDenied, '', PermissionLbl);
+            exit;
+        end;
         WriteCheck.AssertCanWrite('Service.Loaner.Lend');
         Argument.SetErrorContext('', '', NativeLbl);
         ClearLastError();

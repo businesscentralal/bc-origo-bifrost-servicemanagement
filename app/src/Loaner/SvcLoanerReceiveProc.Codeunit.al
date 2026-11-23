@@ -50,6 +50,7 @@ codeunit 10076106 "Svc Loaner Receive Proc ori"
 
     var
         Parser: Codeunit "Svc Doc Request ori";
+        PermissionLbl: Label 'You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.', Comment = 'is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.';
         MissingLbl: Label 'Send documentNo with serviceItemLineNo, postedShipmentNo with lineNo, or loanerNo.', Comment = 'is-IS=Sendu documentNo með serviceItemLineNo, postedShipmentNo með lineNo eða loanerNo.';
         FindLbl: Label 'The loaner or document line was not found. Read the available loaners and document lines with Data.Records.Get and retry.', Comment = 'is-IS=Lánstækið eða skjallínan fannst ekki. Lestu tiltæk lánstæki og skjallínur með Data.Records.Get og reyndu aftur.';
         NotLentLbl: Label 'No open loan matches this identifier. Check that the loaner is lent on this document before receiving it.', Comment = 'is-IS=Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.';
@@ -59,11 +60,16 @@ codeunit 10076106 "Svc Loaner Receive Proc ori"
     /// <summary>Checks licensing and the full-role write gate, preserving the caller transaction when requested.</summary>
     internal procedure Dispatch(var Argument: Record "Message Argument ori")
     var
+        Gate: Record "Svc Write Gate ori";
         WriteCheck: Codeunit "Svc Write Check ori";
         Processor: Codeunit "Svc Loaner Receive Proc ori";
     begin
         Argument.AssertIsLicensed();
         Argument.AssertVersion1();
+        if not Gate.WritePermission() then begin
+            Parser.Refuse(Argument, "Bifrost Error Code ori"::PermissionDenied, '', PermissionLbl);
+            exit;
+        end;
         WriteCheck.AssertCanWrite('Service.Loaner.Receive');
         Argument.SetErrorContext('', '', NativeLbl);
         ClearLastError();

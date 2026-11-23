@@ -831,6 +831,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Aðeins er hægt að lána lánstæki hér á þjónustupöntunarlínum. Veldu þjónustupöntunarlínu.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType OrderLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType PermissionLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 7473088 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
           <source>The loaner is blocked or already lent, or the line already has a loaner. Choose an available loaner and receive any existing loan with Service.Loaner.Receive first.</source>
           <target>Lánstækið er lokað eða þegar í útláni, eða línan hefur þegar lánstæki. Veldu tiltækt lánstæki og taktu fyrst við því sem er í útláni með Service.Loaner.Receive.</target>
@@ -878,6 +884,12 @@
           <target>Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType NotLentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType PermissionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2329835735 - Method 3089344596 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
           <source>Use Service.Loaner.Lend / Service.Loaner.Receive</source>
