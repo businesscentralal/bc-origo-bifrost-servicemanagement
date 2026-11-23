@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="is-IS" original="Bifrost Service Management">
     <body>
@@ -320,6 +320,138 @@
           <target>afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Consumption Undo Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4014656581 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates unposted credit memos for eligible lines of one confirmed service contract.</source>
+          <target>Stofnar óbókaða kreditreikninga fyrir gjaldgengar línur eins staðfests þjónustusamnings.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar óbókaða kreditreikninga fyrir gjaldgengar línur eins staðfests þjónustusamnings.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4014656581 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 436587439 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Proc ori - Method Execute - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2703641065 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates unposted invoices for up to 200 confirmed service contracts.</source>
+          <target>Stofnar óbókaða reikninga fyrir allt að 200 staðfesta þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar óbókaða reikninga fyrir allt að 200 staðfesta þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2703641065 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1240650779 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Proc ori - Method Execute - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 3764383116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the selected contracts and resend expectedCount: %1 to confirm.</source>
+          <target>Yfirfarðu valda samninga og sendu expectedCount: %1 aftur til að staðfesta.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = contract count, is-IS=Yfirfarðu valda samninga og sendu expectedCount: %1 aftur til að staðfesta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ConfirmLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use either contractNos or filters, without a subject, for a batch.</source>
+          <target>Notaðu annaðhvort contractNos eða afmarkanir, án subject, fyrir keyrslu á mörgum samningum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu annaðhvort contractNos eða afmarkanir, án subject, fyrir keyrslu á mörgum samningum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 has an invalid format or range.</source>
+          <target>%1 er á ógildu sniði eða utan leyfilegra marka.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er á ógildu sniði eða utan leyfilegra marka.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType FormatLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 187804697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The scope exceeds 200 service contracts.</source>
+          <target>Valið nær yfir fleiri en 200 þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Valið nær yfir fleiri en 200 þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType LargeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2702731386" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount does not match the selected contract count.</source>
+          <target>expectedCount samsvarar ekki fjölda valinna samninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount samsvarar ekki fjölda valinna samninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType MismatchLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No service contracts were selected.</source>
+          <target>Engir þjónustusamningar voru valdir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engir þjónustusamningar voru valdir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2114252703" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Narrow the contract list or filters to at most 200 contracts.</source>
+          <target>Þrengdu samningalistann eða afmarkanirnar í að hámarki 200 samninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þrengdu samningalistann eða afmarkanirnar í að hámarki 200 samninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType NarrowLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service contract %1 was not found.</source>
+          <target>Þjónustusamningur %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = contract number, is-IS=Þjónustusamningur %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1618117332" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select 1 to 200 service contracts and supply the required dates.</source>
+          <target>Veldu 1 til 200 þjónustusamninga og gefðu upp nauðsynlegar dagsetningar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Veldu 1 til 200 þjónustusamninga og gefðu upp nauðsynlegar dagsetningar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ScopeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Every selected service contract must be signed and locked.</source>
+          <target>Allir valdir þjónustusamningar verða að vera undirritaðir og læstir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Allir valdir þjónustusamningar verða að vera undirritaðir og læstir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1271710774" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sign and lock the selected contracts before running this operation.</source>
+          <target>Undirritaðu og læstu völdum samningum áður en þessi aðgerð er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Undirritaðu og læstu völdum samningum áður en þessi aðgerð er keyrð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType StateNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2351247918 - Method 3851712227 - NamedType 1096104557" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No eligible invoice period or service item line was due in the selected dates.</source>
+          <target>Ekkert gjaldgengt reikningstímabil eða þjónustuvörulína var á gjalddaga á völdum dagsetningum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert gjaldgengt reikningstímabil eða þjónustuvörulína var á gjalddaga á völdum dagsetningum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Jobs ori - Method Run - NamedType SkipLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2351247918 - Method 3851712227 - NamedType 2029447175" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the created documents. Post invoices and credit memos separately with Service.Document.Post after review.</source>
+          <target>Yfirfarðu stofnuð skjöl. Bókaðu reikninga og kreditreikninga sérstaklega með Service.Document.Post að yfirferð lokinni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirfarðu stofnuð skjöl. Bókaðu reikninga og kreditreikninga sérstaklega með Service.Document.Post að yfirferð lokinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Jobs ori - Method Run - NamedType NextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1569906396 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates preventive service orders for up to 200 confirmed service contracts.</source>
+          <target>Stofnar fyrirbyggjandi þjónustupantanir fyrir allt að 200 staðfesta þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar fyrirbyggjandi þjónustupantanir fyrir allt að 200 staðfesta þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1569906396 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3577915370 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Proc ori - Method Execute - NamedType CorrectLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2475122981 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Locks a service contract against changes. Use Service.Contract.Unlock to open it again.</source>

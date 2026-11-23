@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — contract periodic processing (#25)
+
+- Add `Service.Contract.CreateInvoices`, `Service.Contract.CreateServiceOrders` and `Service.Contract.CreateCreditMemo` with bounded scopes, explicit contract-count confirmation, atomic rollback and native service write permissions. Documents remain unposted and contract lines are retained.
+- Include English help and Icelandic discovery/refusals, raw owned fixtures, boundary tests and late native-error rollback tests. No UI changes.
+- App objects 10076160–10076170; tests/helpers 97784–97789 and test permission set 97793.
+
 ## Unreleased — service contract lifecycle (#24)
 
 - Add contract quote conversion, signing, locking and unlocking through the native service contract lifecycle, with explicit caller choices, atomic refusals, write-role checks and English/Icelandic discovery and recovery text.
