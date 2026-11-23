@@ -349,3 +349,5 @@ The processor preserves Omit Commit, catches native failures at an isolated writ
 | 97767 | test codeunit | Svc Contract Help Tests ori |
 
 The app block starts at 10076140 to avoid the independent wave-2 issue allocations below it.
+
+Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests use `SM-CONTRACT,EDIT` and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.

@@ -49,7 +49,7 @@ codeunit 97763 "Svc Contract Data ori"
         CodeValue := CopyStr('X24' + DelChr(Format(CreateGuid(), 0, 4), '=', '-'), 1, MaxStrLen(CodeValue));
         Account.Init();
         Account."No." := 'XS' + CodeValue;
-        Account.Name := 'Owned service billing account';
+        Account.Name := 'X-owned service billing account';
         Account."Account Type" := Account."Account Type"::Posting;
         Account."Direct Posting" := true;
         Account."Gen. Prod. Posting Group" := CodeValue;
@@ -89,18 +89,18 @@ codeunit 97763 "Svc Contract Data ori"
         CustomerGroup.Insert(true);
         Customer.Init();
         Customer."No." := 'XS' + CodeValue;
-        Customer.Name := 'Owned billing test customer';
+        Customer.Name := 'X-owned contract test customer';
         Customer."Gen. Bus. Posting Group" := CodeValue;
         Customer."VAT Bus. Posting Group" := CodeValue;
         Customer."Customer Posting Group" := CodeValue;
         Customer.Insert(true);
         CustomerNo := Customer."No.";
         UOM.Code := CodeValue;
-        UOM.Description := 'Owned unit';
+        UOM.Description := 'X-owned unit';
         UOM.Insert(true);
         Resource.Init();
         Resource."No." := 'XS' + CodeValue;
-        Resource.Name := 'Owned billing resource';
+        Resource.Name := 'X-owned billing resource';
         Resource.Type := Resource.Type::Person;
         Resource."Gen. Prod. Posting Group" := CodeValue;
         Resource."VAT Prod. Posting Group" := CodeValue;
@@ -159,7 +159,7 @@ codeunit 97763 "Svc Contract Data ori"
         Item."No." := CustomerNo;
         Item."Customer No." := CustomerNo;
         Item."Service Item Group Code" := ItemGroup.Code;
-        Item.Description := 'Owned contract service item';
+        Item.Description := 'X-owned contract service item';
         Item.Insert();
         AccountGroup.Code := ItemGroup.Code;
         AccountGroup."Non-Prepaid Contract Acc." := CustomerNo;
@@ -175,7 +175,7 @@ codeunit 97763 "Svc Contract Data ori"
         Header."Bill-to Customer No." := CustomerNo;
         Header.Name := Customer.Name;
         Header."Bill-to Name" := Customer.Name;
-        Header.Description := 'Owned contract lifecycle fixture';
+        Header.Description := 'X-owned contract lifecycle fixture';
         Header."Starting Date" := DMY2Date(1, 1, 2026);
         Header."First Service Date" := Header."Starting Date";
         Header."Next Invoice Date" := DMY2Date(31, 1, 2026);
@@ -258,7 +258,7 @@ codeunit 97763 "Svc Contract Data ori"
         LastEntry: Integer;
     begin
         RestoreSetup();
-        Customer.SetRange(Name, 'Owned billing test customer');
+        Customer.SetFilter(Name, '%1|%2', 'Owned billing test customer', 'X-owned contract test customer');
         Customer.SetFilter("No.", 'XSX24*');
         while Customer.FindFirst() do begin
             CustomerNo := Customer."No.";

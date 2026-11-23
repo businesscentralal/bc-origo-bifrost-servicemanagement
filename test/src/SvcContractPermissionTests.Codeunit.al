@@ -2,6 +2,7 @@ namespace Origo.Bifrost.ServiceManagement.Test;
 
 using Microsoft.Service.Contract;
 using Origo.Bifrost;
+using Origo.Bifrost.ServiceManagement;
 using System.TestLibraries.Security.AccessControl;
 using System.TestLibraries.Utilities;
 
@@ -35,10 +36,13 @@ codeunit 97766 "Svc Contract Perm Tests ori"
     procedure Scenario_AC06_FullRoleWithoutPostingTokenCanSign()
     var
         Header: Record "Service Contract Header";
+        PostingGate: Codeunit "Svc Posting Gate ori";
         Response: JsonObject;
         TypeValue: Enum "Message Type ori";
         Request: JsonObject;
         Pass: Integer;
+        ResponseText: Text;
+        CanPost: Boolean;
     begin
         // Story #24 AC06 | Risk: native signing accidentally requires the separate posting token.
         for Pass := 1 to 2 do begin
@@ -52,10 +56,15 @@ codeunit 97766 "Svc Contract Perm Tests ori"
             LowerPermissions.AddPermissionSet('D365 BASIC');
             LowerPermissions.AddPermissionSet('D365 READ');
             LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
+            // Native filing needs indirect insert rights; this does not grant the Bifrost posting token.
+            LowerPermissions.AddPermissionSet('SM-CONTRACT,EDIT');
             LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
+            CanPost := PostingGate.HasPostingPermission();
             Response := Data.Invoke(TypeValue, Request, '', 1033, false);
             LowerPermissions.SetOutsideO365Scope();
-            Assert.AreEqual('Success', Data.TextValue(Response, 'status'), Data.TextValue(Response, 'status'));
+            Assert.IsFalse(CanPost, 'The native filing role must not grant the Bifrost posting token.');
+            Response.WriteTo(ResponseText);
+            Assert.AreEqual('Success', Data.TextValue(Response, 'status'), ResponseText);
             Header.Get(Header."Contract Type"::Contract, Header."Contract No.");
             Assert.AreEqual(Header.Status::Signed, Header.Status, 'Full role signs without posting token.');
             Fixture.Cleanup();
@@ -89,6 +98,7 @@ codeunit 97766 "Svc Contract Perm Tests ori"
                 LowerPermissions.AddPermissionSet('D365 BASIC');
                 LowerPermissions.AddPermissionSet('D365 READ');
                 LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
+                LowerPermissions.AddPermissionSet('SM-CONTRACT,EDIT');
             end;
             ClearLastError();
             Ran := Runner.Run();

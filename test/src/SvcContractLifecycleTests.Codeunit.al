@@ -187,6 +187,30 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Fixture.Cleanup();
     end;
 
+    [Test]
+    procedure Scenario_AC04_ConversionCollisionRollsBackFiling()
+    var
+        Header: Record "Service Contract Header";
+        Existing: Record "Service Contract Header";
+        Filed: Record "Filed Service Contract Header";
+        Response: JsonObject;
+    begin
+        // Story #24 AC04 | Risk: a failure after filing leaves a partial converted document.
+        Fixture.Create(Header, true);
+        Existing := Header;
+        Existing."Contract Type" := Existing."Contract Type"::Contract;
+        Existing.Insert();
+        Commit();
+        Response := Data.Invoke("Message Type ori"::"Service.ContractQuote.MakeContract", Fixture.Request(Header, true), '', 1033, false);
+        Data.AssertRefusal(Response, 'BusinessCentralError');
+        Assert.IsTrue(Header.Get(Header."Contract Type"::Quote, Existing."Contract No."), 'Quote retained.');
+        Filed.SetRange("Contract No.", Existing."Contract No.");
+        Assert.IsTrue(Filed.IsEmpty(), 'Filing before the collision was rolled back.');
+        Existing.Get(Existing."Contract Type", Existing."Contract No.");
+        Assert.AreEqual(Existing.Status::" ", Existing.Status, 'Existing contract unchanged.');
+        Fixture.Cleanup();
+    end;
+
     local procedure ResponseText(Response: JsonObject): Text
     var
         Result: Text;
