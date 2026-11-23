@@ -55,6 +55,20 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 | `tools/` | Pipeline guard scripts |
 | `.AL-Go/`, `.github/`, `.alpaca/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
 
+## Service.Order.AdjustPrice (#29)
+
+Applies, previews or resets a service price adjustment on one service item line of a service order or quote. Write; read role refused.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076140 | codeunit | Svc Price Adjust Impl ori |
+| 10076141 | codeunit | Svc Price Adjust Proc ori |
+| 10076142 | enumextension | Svc Price MsgType ori |
+| 97770 | codeunit (test) | Svc Price Adjust Tests ori |
+| 97771 | codeunit (test) | Svc Price Perm Tests ori |
+| 97772 | codeunit (test) | Svc Price Contract Tests ori |
+| 97773 | codeunit (test helper) | Svc Price Perm Runner ori |
+
 ## Service.Resource.Suggest (#27)
 
 `Service.Resource.Suggest` is a read. For one service item line of a service order (`documentNo` + `serviceItemLineNo`, or the line `systemId`) and a period of at most 31 days (`dateFrom`, `dateTo`, default the work date), it ranks the resources: qualified first, then in the order service zone, then most available hours (capacity minus active, unposted service order allocations), then resource no. Optional `resourceGroupNo`, `includeUnqualified` (default false) and `top` (default 20, max 100). Qualification is Business Central's own `QualifiedForServiceItemLine`. When Resource Skills Option is Not Used, every resource is returned with `qualified` = null; when Service Zones Option is Not Used or the order has no zone, `inServiceZone` = null. Blocked resources are left out. Nothing is written, so there is no confirmation and no write gate; the type is in `BIFROST SvcRead ori`. A caller without native read access to service headers, service item lines, service setup, resources, skills, service zones, capacity or allocations gets `PermissionDenied` (a standard reader has `D365 READ`).

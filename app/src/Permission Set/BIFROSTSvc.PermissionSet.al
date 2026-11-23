@@ -58,6 +58,8 @@ permissionset 10076036 "BIFROST Svc ori"
         codeunit "Svc Doc Contract ori" = X,
         codeunit "Svc Inv Shipment Impl ori" = X,
         codeunit "Svc Inv Shipment Proc ori" = X,
+        codeunit "Svc Price Adjust Impl ori" = X,
+        codeunit "Svc Price Adjust Proc ori" = X,
         codeunit "Svc Loaner Receive Impl ori" = X,
         codeunit "Svc Loaner Receive Proc ori" = X,
         codeunit "Svc Loaner Lend Impl ori" = X,

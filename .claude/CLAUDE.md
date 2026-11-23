@@ -273,6 +273,32 @@ Object ids: app 10076087–10076093, tests 97751–97756.
 | 97754 | codeunit | Svc Undo Data ori |
 | 97755 | codeunit | Svc Undo Perm Runner ori |
 | 97756 | codeunit | Svc Undo Caller Rollback ori |
+## Service.Order.AdjustPrice (#29)
+
+Applies the fixed, maximum or minimum price of a service price group setup to the service lines of one service item line on a service order or quote, previews it (`preview: true`, nothing written) or restores the normal prices (`reset: true`, Business Central's own `ResetAdjustedLines`). Write; gated by the write gate, the read role is refused (preview included, issue question 2 recommendation).
+
+```json
+{"type":"Service.Order.AdjustPrice","data":{"documentNo":"SO000001","serviceItemLineNo":10000,"preview":true}}
+{"type":"Service.Order.AdjustPrice","data":{"documentNo":"SO000001","serviceItemLineNo":10000,"reset":true}}
+```
+
+- Business Central applies the adjustment only behind a modal page. The type fills **temporary** `Service Line Price Adjmt.` rows (so the real table is never filled or cleared; R1), spreads the amount by weight and writes the prices with its own apply step (rewritten from the standard flow, status `Adjusted`). The last line takes the rounding difference so the lines add up to the target.
+- `AdjustLines` is not called: it asks a confirmation and spreads on the record passed by value; the spread is rebuilt instead.
+- Refusals: no service price group or no matching setup, no covered lines, invoiced lines, nothing to reset → `PreconditionFailed`; BC errors → `BusinessCentralError`, rolled back.
+- `Price Adjmt. Status` stays open to `Data.Records.Set` (optional item of the issue not taken).
+
+Object ids are an offset block (10076140–10076142, tests 97770–97773) because #24, #26 and #29 (wave 2) start in parallel.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076140 | codeunit | Svc Price Adjust Impl ori |
+| 10076141 | codeunit | Svc Price Adjust Proc ori |
+| 10076142 | enumextension | Svc Price MsgType ori |
+| 97770 | codeunit (test) | Svc Price Adjust Tests ori |
+| 97771 | codeunit (test) | Svc Price Perm Tests ori |
+| 97772 | codeunit (test) | Svc Price Contract Tests ori |
+| 97773 | codeunit (test helper) | Svc Price Perm Runner ori |
+
 ## Service.FaultResolution.Suggest (#28)
 
 Ranks the resolution codes that fixed the same fault before (table `Fault/Resol. Cod. Relationship`), most occurrences first. Read only; no confirmation and no gate. Gunnar 20.11.2026: Calculate is dropped (it deletes and rebuilds the table); the table is rebuilt in Business Central by the Insert Fault/Resol. Relations batch job.
