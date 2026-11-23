@@ -224,7 +224,7 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Input: BigText;
         Output: BigText;
         RequestText: Text;
-        ResponseText: Text;
+        LoggedResponseText: Text;
         ContentType: Text[100];
         TaskId: Guid;
         MessageId: Guid;
@@ -240,8 +240,8 @@ codeunit 97764 "Svc Contract Lifecycle Tst ori"
         Dispatcher.EnqueueAndProcess(MessageType, "Message Version ori"::"1.0", CopyStr(Subject, 1, 250),
             'Owned service contract test #24', 'text/json', Input, TaskId, LanguageId, MessageId, Output, ContentType, ResponseTime);
         Assert.IsFalse(IsNullGuid(MessageId), 'Foundation returned the persisted message id.');
-        Output.GetSubText(ResponseText, 1);
-        Assert.IsTrue(Response.ReadFrom(ResponseText), 'Persisted response must be JSON.');
+        Output.GetSubText(LoggedResponseText, 1);
+        Assert.IsTrue(Response.ReadFrom(LoggedResponseText), 'Persisted response must be JSON.');
         if Data.TextValue(Response, 'status') = 'Error' then begin
             // Use Foundation's product API so the assertion also runs without Foundation Tests installed.
             LogRequest.Add('tableName', 'Message ori');
