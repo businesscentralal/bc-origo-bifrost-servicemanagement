@@ -549,6 +549,12 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Post eða Service.Order.PreviewPost fyrir þjónustupantanir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Doc Request ori - Method Find - NamedType OrderLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1003670717 - Method 972979633 - NamedType 3112345243" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send %1 as a positive JSON integer.</source>
+          <target>Sendu %1 sem jákvæða JSON-heiltölu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=Sendu %1 sem jákvæða JSON-heiltölu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Doc Request ori - Method ReadPositiveInteger - NamedType NumberLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1003670717 - Method 11078697 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send %1 as a nonempty string of at most %2 characters.</source>
           <target>Sendu %1 sem streng sem er ekki tómur og er að hámarki %2 stafir.</target>
@@ -920,6 +926,120 @@
           <target>Sendu shipmentNos sem 1 til 200 mismunandi afhendingarnúmer eða allUninvoiced true, en ekki hvort tveggja.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu shipmentNos sem 1 til 200 mismunandi afhendingarnúmer eða allUninvoiced true, en ekki hvort tveggja.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Inv Shipment Proc ori - NamedType SelectionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 563025782 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lends an available loaner on a service order item line and creates its loan history.</source>
+          <target>Lánar tiltækt lánstæki á þjónustupöntunarlínu og skráir lánasögu þess.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánar tiltækt lánstæki á þjónustupöntunarlínu og skráir lánasögu þess.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 563025782 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>lend loaner, issue loaner, replacement during repair</source>
+          <target>lána lánstæki, afhenda lánstæki, staðgengill meðan á viðgerð stendur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lána lánstæki, afhenda lánstæki, staðgengill meðan á viðgerð stendur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers name different service item lines. Send identifiers for the same order line.</source>
+          <target>Auðkennin vísa á mismunandi þjónustuvörulínur. Sendu auðkenni fyrir sömu pöntunarlínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi þjónustuvörulínur. Sendu auðkenni fyrir sömu pöntunarlínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2970038953" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner or service order line was not found. Read the available loaners and order lines with Data.Records.Get and retry.</source>
+          <target>Lánstækið eða þjónustupöntunarlínan fannst ekki. Lestu tiltæk lánstæki og pöntunarlínur með Data.Records.Get og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið eða þjónustupöntunarlínan fannst ekki. Lestu tiltæk lánstæki og pöntunarlínur með Data.Records.Get og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType FindLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send systemId as a nonempty service item line GUID.</source>
+          <target>Sendu systemId sem gilt GUID þjónustuvörulínu sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu systemId sem gilt GUID þjónustuvörulínu sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send loanerNo and either documentNo with serviceItemLineNo, or the service item line systemId.</source>
+          <target>Sendu loanerNo og annaðhvort documentNo með serviceItemLineNo eða systemId þjónustuvörulínunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu loanerNo og annaðhvort documentNo með serviceItemLineNo eða systemId þjónustuvörulínunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2119438125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry lending the loaner. Nothing was changed.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aftur að lána lánstækið. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aftur að lána lánstækið. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType NativeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1210317888" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loaners can only be lent here on service order item lines. Choose a service order line.</source>
+          <target>Aðeins er hægt að lána lánstæki hér á þjónustupöntunarlínum. Veldu þjónustupöntunarlínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðeins er hægt að lána lánstæki hér á þjónustupöntunarlínum. Veldu þjónustupöntunarlínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType OrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType PermissionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner is blocked or already lent, or the line already has a loaner. Choose an available loaner and receive any existing loan with Service.Loaner.Receive first.</source>
+          <target>Lánstækið er lokað eða þegar í útláni, eða línan hefur þegar lánstæki. Veldu tiltækt lánstæki og taktu fyrst við því sem er í útláni með Service.Loaner.Receive.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið er lokað eða þegar í útláni, eða línan hefur þegar lánstæki. Veldu tiltækt lánstæki og taktu fyrst við því sem er í útláni með Service.Loaner.Receive.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1871068542 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Receives a lent loaner from an order, a posted shipment or its loaner number.</source>
+          <target>Tekur við lánstæki úr útláni á pöntun, bókaðri afhendingu eða eftir númeri lánstækis.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tekur við lánstæki úr útláni á pöntun, bókaðri afhendingu eða eftir númeri lánstækis.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1871068542 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>receive loaner, return loaner, loaner availability</source>
+          <target>taka við lánstæki, skila lánstæki, framboð lánstækja</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=taka við lánstæki, skila lánstæki, framboð lánstækja</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers name different loans. Send identifiers for the same loaner and document line.</source>
+          <target>Auðkennin vísa á mismunandi lán. Sendu auðkenni fyrir sama lánstæki og sömu skjallínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi lán. Sendu auðkenni fyrir sama lánstæki og sömu skjallínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2970038953" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner or document line was not found. Read the available loaners and document lines with Data.Records.Get and retry.</source>
+          <target>Lánstækið eða skjallínan fannst ekki. Lestu tiltæk lánstæki og skjallínur með Data.Records.Get og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið eða skjallínan fannst ekki. Lestu tiltæk lánstæki og skjallínur með Data.Records.Get og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType FindLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send documentNo with serviceItemLineNo, postedShipmentNo with lineNo, or loanerNo.</source>
+          <target>Sendu documentNo með serviceItemLineNo, postedShipmentNo með lineNo eða loanerNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentNo með serviceItemLineNo, postedShipmentNo með lineNo eða loanerNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2119438125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry receiving the loaner. Nothing was changed.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aftur að taka við lánstækinu. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aftur að taka við lánstækinu. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType NativeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2775429752" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No open loan matches this identifier. Check that the loaner is lent on this document before receiving it.</source>
+          <target>Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType NotLentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType PermissionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2329835735 - Method 3089344596 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Loaner.Lend / Service.Loaner.Receive</source>
+          <target>Notaðu Service.Loaner.Lend / Service.Loaner.Receive</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Loaner.Lend / Service.Loaner.Receive</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Restrict ori - Method LoanerHint - NamedType HintLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2591205528 - Method 3571782927 - NamedType 3498257463" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the setup or document named by Business Central and send the posting again. Nothing was posted.</source>

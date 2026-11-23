@@ -75,4 +75,21 @@ codeunit 10076099 "Svc Doc Request ori"
         Argument.RespondWithError(Code, Guidance, Parameter, '', '', Guidance);
         exit(false);
     end;
+    /// <summary>Reads an optional positive JSON integer without accepting strings, fractions or overflow.</summary>
+    internal procedure ReadPositiveInteger(var Argument: Record "Message Argument ori"; Request: JsonObject; KeyName: Text; var Number: Integer): Boolean
+    var
+        Token: JsonToken;
+        Raw: Text;
+        NumberLbl: Label 'Send %1 as a positive JSON integer.', Comment = '%1 = parameter, is-IS=Sendu %1 sem jákvæða JSON-heiltölu.';
+    begin
+        Number := 0;
+        if not Request.Get(KeyName, Token) then
+            exit(true);
+        Token.WriteTo(Raw);
+        if (DelChr(Raw, '=', '0123456789') <> '') or not Evaluate(Number, Raw, 9) then
+            exit(Refuse(Argument, "Bifrost Error Code ori"::InvalidParameterFormat, KeyName, StrSubstNo(NumberLbl, KeyName)));
+        if Number <= 0 then
+            exit(Refuse(Argument, "Bifrost Error Code ori"::InvalidParameterFormat, KeyName, StrSubstNo(NumberLbl, KeyName)));
+        exit(true);
+    end;
 }

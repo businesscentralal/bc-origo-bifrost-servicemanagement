@@ -15,6 +15,8 @@
 
 ### Added
 
+- Add `Service.Loaner.Lend` and `Service.Loaner.Receive` for open order lines, posted shipment item lines and loaner numbers, with native BC receipt, matching-identifier checks, write-role enforcement and bilingual discovery/refusals (#26). Dedicated lending is required because the generic field-write probe changed the field without creating loan history. Restrict generic loaner-number writes with a dedicated-path hint. Objects 10076104–10076109; tests/helpers 97762–97766. Loan history is retained; no UI changes.
+
 - Add `Service.Invoice.GetShipmentLines`, `Service.Document.Post` and `Service.Document.PreviewPost` for standalone service billing (#22). Collect compatible shipments on one invoice, preview without changes, and post invoices or credit memos with confirmation and the service posting role. Standard posting cleanup is approved by Gunnar. App objects 10076094–10076103; test objects 97757–97761. English help chapters and Icelandic discovery/refusals are included.
 
 - Add `Service.Shipment.Undo` and `Service.Consumption.Undo` (irreversible, commits on a normal call; under Omit Commit the undo stays in the caller's transaction and rolls back with it, `expectedCount` 1 = the posted shipment) through Business Central's standard undo of service shipment and consumption lines (10076087–10076093) (#20). `documentNo`/`systemId`/subject plus optional `lineNos`; all lines validated before posting; lines whose shipment created service items are refused so no service item is deleted; gated by `BIFROST SvcPost ori`. Tests 97751–97753 with helpers 97754–97755.
