@@ -31,6 +31,37 @@ codeunit 97766 "Svc Contract Perm Tests ori"
         CheckDenied('Svc NoGrant Tst ori');
     end;
 
+    [Test]
+    procedure Scenario_AC06_FullRoleWithoutPostingTokenCanSign()
+    var
+        Header: Record "Service Contract Header";
+        Response: JsonObject;
+        TypeValue: Enum "Message Type ori";
+        Request: JsonObject;
+        Pass: Integer;
+    begin
+        // Story #24 AC06 | Risk: native signing accidentally requires the separate posting token.
+        for Pass := 1 to 2 do begin
+            Fixture.Create(Header, Pass = 1);
+            TypeValue := "Message Type ori"::"Service.Contract.Sign";
+            if Pass = 1 then
+                TypeValue := "Message Type ori"::"Service.ContractQuote.MakeContract";
+            Request := Fixture.Request(Header, true);
+            Commit();
+            LowerPermissions.SetExactPermissionSet('BIFROST Full ori');
+            LowerPermissions.AddPermissionSet('D365 BASIC');
+            LowerPermissions.AddPermissionSet('D365 READ');
+            LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
+            LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
+            Response := Data.Invoke(TypeValue, Request, '', 1033, false);
+            LowerPermissions.SetOutsideO365Scope();
+            Assert.AreEqual('Success', Data.TextValue(Response, 'status'), Data.TextValue(Response, 'status'));
+            Header.Get(Header."Contract Type"::Contract, Header."Contract No.");
+            Assert.AreEqual(Header.Status::Signed, Header.Status, 'Full role signs without posting token.');
+            Fixture.Cleanup();
+        end;
+    end;
+
     local procedure CheckDenied(RoleName: Code[20])
     var
         Header: Record "Service Contract Header";

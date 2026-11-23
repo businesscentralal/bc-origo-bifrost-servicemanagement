@@ -56,6 +56,7 @@ codeunit 10076145 "Svc Contract Proc ori"
         Response.Add('nextInvoicePeriodEnd', Format(Header."Next Invoice Period End", 0, 9));
         Response.Add('invoiceNo', Options.GetInvoiceNo());
         if Rec.Type = Rec.Type::"Service.ContractQuote.MakeContract" then begin
+            FiledHeader.ReadIsolation := IsolationLevel::ReadCommitted;
             FiledHeader.SetLoadFields("Entry No.");
             FiledHeader.SetRange("Contract Type", FiledHeader."Contract Type"::Quote);
             FiledHeader.SetRange("Contract No.", Header."Contract No.");
@@ -111,6 +112,7 @@ codeunit 10076145 "Svc Contract Proc ori"
             Argument.RespondWithError("Bifrost Error Code ori"::PreconditionFailed, StateLbl, '', '', '', NextStepLbl);
             exit(false);
         end;
+        Line.ReadIsolation := IsolationLevel::ReadCommitted;
         Line.SetLoadFields("New Line", "Next Planned Service Date", "Starting Date");
         Line.SetRange("Contract Type", Header."Contract Type");
         Line.SetRange("Contract No.", Header."Contract No.");
