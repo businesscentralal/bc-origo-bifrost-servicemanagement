@@ -374,6 +374,34 @@ Gunnar approved standard posting cleanup for this issue on 20 November 2026 (dec
 | 97760 | codeunit | Svc Doc Fixture ori |
 | 97761 | codeunit | Svc Doc Perm Runner ori |
 
+## Loaner receipt (#26)
+
+`Service.Loaner.Receive` receives a lent loaner using one or more agreeing identifier sets:
+`documentNo` + `serviceItemLineNo`, `postedShipmentNo` + `lineNo`, or `loanerNo`.
+It uses native BC receipt, retains history, and requires the full-role write gate.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076104 | enumextension | Svc Loaner MsgType ori |
+| 10076105 | codeunit | Svc Loaner Receive Impl ori |
+| 10076106 | codeunit | Svc Loaner Receive Proc ori |
+| 97762 | codeunit (test) | Svc Loaner Tests ori |
+| 97763 | codeunit (test) | Svc Loaner Contract Tests ori |
+| 97764 | codeunit (test) | Svc Loaner Perm Tests ori |
+| 97765 | codeunit (test helper) | Svc Loaner Data ori |
+
+`Data.Records.Set` was tested on worker-9 BC 29 with its write guard configured:
+it returned Success and set the field, but created no loan entry in 1033 or 1039.
+The condition in #26 therefore requires the dedicated `Service.Loaner.Lend`.
+It validates the new field value through BC, checks availability, and creates loan history.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076107 | codeunit | Svc Loaner Lend Impl ori |
+| 10076108 | codeunit | Svc Loaner Lend Proc ori |
+| 10076109 | codeunit | Svc Loaner Restrict ori |
+| 97766 | codeunit (test subscriber) | Svc Loaner Failure Tst ori |
+
 ## Service contract lifecycle (#24)
 
 ```json

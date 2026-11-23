@@ -327,6 +327,44 @@ Gunnar approved standard posting cleanup for this issue on 20 November 2026 (dec
 | 97760 | codeunit | Svc Doc Fixture ori |
 | 97761 | codeunit | Svc Doc Perm Runner ori |
 
+## Service.Loaner.Lend and Service.Loaner.Receive (#26)
+
+```json
+{"type":"Service.Loaner.Receive","data":{"documentNo":"XORDER","serviceItemLineNo":10000}}
+```
+
+Receives a lent loaner and keeps its loan history. Alternatively send
+`postedShipmentNo` with `lineNo`, or `loanerNo` alone. Multiple identifier sets
+must name the same open loan. The response includes `loanerNo`, `loanerEntryNo`,
+`documentType`, `documentNo`, `serviceItemLineNo`, `dateReceived`, `timeReceived`
+and `lent: false`. Repeating receipt is refused with `PreconditionFailed`.
+
+Use `Service.Loaner.Lend` with `documentNo` + `serviceItemLineNo` (or the line `systemId`) and `loanerNo`. Generic writes of the loaner number are refused with a dedicated-path hint. The operation requires
+full Bifrost access plus native service data permissions. Receipt is a reversible
+write and needs no `expectedCount`. Nothing is deleted. No UI is changed.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076104 | enumextension | Svc Loaner MsgType ori |
+| 10076105 | codeunit | Svc Loaner Receive Impl ori |
+| 10076106 | codeunit | Svc Loaner Receive Proc ori |
+| 97762 | test codeunit | Svc Loaner Tests ori |
+| 97763 | test codeunit | Svc Loaner Contract Tests ori |
+| 97764 | test codeunit | Svc Loaner Perm Tests ori |
+| 97765 | test helper | Svc Loaner Data ori |
+
+`Data.Records.Set` was tested on worker-9 BC 29 with its write guard configured:
+it returned Success and set the field, but created no loan entry in 1033 or 1039.
+The condition in #26 therefore requires the dedicated `Service.Loaner.Lend`.
+It validates the new field value through BC, checks availability, and creates loan history.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076107 | codeunit | Svc Loaner Lend Impl ori |
+| 10076108 | codeunit | Svc Loaner Lend Proc ori |
+| 10076109 | codeunit | Svc Loaner Restrict ori |
+| 97766 | codeunit (test subscriber) | Svc Loaner Failure Tst ori |
+
 ## Service contract lifecycle (#24)
 
 ```json

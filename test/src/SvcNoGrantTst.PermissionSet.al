@@ -24,5 +24,7 @@ permissionset 97710 "Svc NoGrant Tst ori"
                   codeunit "Svc Price Adjust Tests ori" = X,
                   codeunit "Svc Price Perm Tests ori" = X,
                   codeunit "Svc Price Perm Runner ori" = X,
+                  codeunit "Svc Loaner Data ori" = X,
+                  codeunit "Svc Loaner Perm Tests ori" = X,
                   codeunit "Svc Contract Perm Tests ori" = X;
 }
