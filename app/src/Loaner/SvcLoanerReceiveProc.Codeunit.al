@@ -110,14 +110,11 @@ codeunit 10076106 "Svc Loaner Receive Proc ori"
         if ((DocumentNo <> '') xor (ItemLineNo <> 0)) or ((ShipmentNo <> '') xor (ShipmentLineNo <> 0)) or
            ((DocumentNo = '') and (ShipmentNo = '') and (LoanerNo = '')) then
             exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::MissingParameter, '', MissingLbl));
+        // Resolve every supplied line identity before checking whether its loan is open.
         if DocumentNo <> '' then begin
             OrderLine.ReadIsolation := IsolationLevel::UpdLock;
             if not OrderLine.Get(OrderLine."Document Type"::Order, DocumentNo, ItemLineNo) then
                 exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::RecordNotFound, 'documentNo', FindLbl));
-            if not FindEntry(Argument, OrderLine."Loaner No.", DocumentNo, ItemLineNo, true, Candidate) then
-                exit(false);
-            Entry := Candidate;
-            Mode := 1;
         end;
         if ShipmentNo <> '' then begin
             ShipmentLine.ReadIsolation := IsolationLevel::UpdLock;
@@ -126,6 +123,20 @@ codeunit 10076106 "Svc Loaner Receive Proc ori"
             Shipment.SetLoadFields("Order No.");
             if not Shipment.Get(ShipmentNo) then
                 exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::RecordNotFound, 'postedShipmentNo', FindLbl));
+            if DocumentNo <> '' then
+                if (OrderLine."Document No." <> Shipment."Order No.") or (OrderLine."Line No." <> ShipmentLine."Line No.") then
+                    exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::ConflictingIdentifiers, '', ConflictLbl));
+        end;
+        if LoanerNo <> '' then
+            if not Loaner.Get(LoanerNo) then
+                exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::RecordNotFound, 'loanerNo', FindLbl));
+        if DocumentNo <> '' then begin
+            if not FindEntry(Argument, OrderLine."Loaner No.", DocumentNo, ItemLineNo, true, Candidate) then
+                exit(false);
+            Entry := Candidate;
+            Mode := 1;
+        end;
+        if ShipmentNo <> '' then begin
             if not FindEntry(Argument, ShipmentLine."Loaner No.", Shipment."Order No.", ShipmentLineNo, true, Candidate) then
                 exit(false);
             if not MergeEntry(Argument, Entry, Candidate, Mode) then
@@ -133,8 +144,6 @@ codeunit 10076106 "Svc Loaner Receive Proc ori"
             Mode := 2;
         end;
         if LoanerNo <> '' then begin
-            if not Loaner.Get(LoanerNo) then
-                exit(Parser.Refuse(Argument, "Bifrost Error Code ori"::RecordNotFound, 'loanerNo', FindLbl));
             if not FindEntry(Argument, LoanerNo, '', 0, false, Candidate) then
                 exit(false);
             if not MergeEntry(Argument, Entry, Candidate, Mode) then

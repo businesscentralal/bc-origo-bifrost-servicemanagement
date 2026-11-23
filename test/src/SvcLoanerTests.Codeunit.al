@@ -362,6 +362,30 @@ codeunit 97762 "Svc Loaner Tests ori"
         Fixture.Cleanup();
     end;
 
+    [Test]
+    procedure Scenario_AC03_ConflictingUnlentLines_StillConflict()
+    var
+        Line: Record "Service Item Line";
+        OtherLine: Record "Service Item Line";
+        Loaner: Record Loaner;
+        OtherLoaner: Record Loaner;
+        ShipmentLine: Record "Service Shipment Item Line";
+        Entry: Record "Loaner Entry";
+        Request: JsonObject;
+    begin
+        Fixture.Create(Line, Loaner);
+        Fixture.Create(OtherLine, OtherLoaner);
+        Fixture.Shipment(OtherLine, ShipmentLine);
+        Commit();
+        Request := Fixture.Request(Line);
+        Request.Add('postedShipmentNo', ShipmentLine."No.");
+        Request.Add('lineNo', ShipmentLine."Line No.");
+        Data.AssertRefusal(Send(Request, 1033), 'ConflictingIdentifiers');
+        Entry.SetFilter("Loaner No.", '%1|%2', Loaner."No.", OtherLoaner."No.");
+        Assert.IsTrue(Entry.IsEmpty(), 'No loan history created by conflicting identifiers.');
+        Fixture.Cleanup();
+    end;
+
     local procedure LendFixture(var Line: Record "Service Item Line"; var Loaner: Record Loaner)
     begin
         Fixture.Create(Line, Loaner);
