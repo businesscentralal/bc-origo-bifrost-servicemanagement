@@ -1,8 +1,29 @@
 # Changelog
 
+## Unreleased — contract periodic processing (#25)
+
+- Add `Service.Contract.CreateInvoices`, `Service.Contract.CreateServiceOrders` and `Service.Contract.CreateCreditMemo` with bounded scopes, explicit contract-count confirmation, atomic rollback and native service write permissions. Documents remain unposted and contract lines are retained.
+- Include English help and Icelandic discovery/refusals, raw owned fixtures, boundary tests and late native-error rollback tests. No UI changes.
+- App objects 10076160–10076170; tests/helpers 97784–97789 and test permission set 97793.
+- Test fixture 97784 seeds owned `Contract Invoice Nos.` and `Contract Credit Memo Nos.` series and restores them; 97785 proves crediting when both start blank.
+
+## Unreleased — service contract lifecycle (#24)
+
+- Add contract quote conversion, signing, locking and unlocking through the native service contract lifecycle, with explicit caller choices, atomic refusals, write-role checks and English/Icelandic discovery and recovery text.
+- Protect Change Status from generic writes. Conversion files and removes the quote under Gunnar's approved conversion exception. Initial invoices remain unposted.
+- Use a test-only native contract permission set (97779) so permission checks also run on CI tenants without the legacy `SM-CONTRACT,EDIT` role. The posting-token and read/no-grant refusal assertions remain enforced.
+- New app objects 10076150–10076159; test objects 97774–97779. No UI changes.
+
 ## Unreleased
 
+### Changed
+
+- `Service.Quote.MakeOrder` effect is now `write` instead of `irreversible` (#43, Gunnar 21.11.2026: only posting is irreversible). It no longer asks for `expectedCount`; the parameter is still accepted and ignored. Help says "Writes."/"Skrifar." in 1033/1039. Removed codeunit 10076052 (`Svc Confirm ori`). `Service.Document.Post`, `Service.Order.Post`, `Service.Shipment.Undo` and `Service.Consumption.Undo` stay `irreversible`. Test 97716 now covers the ignored count.
+
 ### Added
+
+- Add `Service.Order.AdjustPrice` (write; 10076140-10076142): applies the Fixed, Maximum or Minimum price of a service price group setup to the service lines of one service item line on a service order or quote, with `preview` (nothing written) and `reset` (standard reset of adjusted prices). Working rows are temporary, so no `Service Line Price Adjmt.` rows are created or deleted; the last line takes the rounding difference. Refusals for missing group/setup, invoiced lines, no covered lines and nothing to reset; read role refused (#29). Tests 97770-97772 with helper 97773 cover the spread, cap, preview, reset, quotes, refusals, permissions and help in 1033/1039.
+- Add `Service.Loaner.Lend` and `Service.Loaner.Receive` for open order lines, posted shipment item lines and loaner numbers, with native BC receipt, matching-identifier checks, write-role enforcement and bilingual discovery/refusals (#26). Dedicated lending is required because the generic field-write probe changed the field without creating loan history. Restrict generic loaner-number writes with a dedicated-path hint. Objects 10076104–10076109; tests/helpers 97762–97766. Loan history is retained; no UI changes.
 
 - Add `Service.Invoice.GetShipmentLines`, `Service.Document.Post` and `Service.Document.PreviewPost` for standalone service billing (#22). Collect compatible shipments on one invoice, preview without changes, and post invoices or credit memos with confirmation and the service posting role. Standard posting cleanup is approved by Gunnar. App objects 10076094–10076103; test objects 97757–97761. English help chapters and Icelandic discovery/refusals are included.
 

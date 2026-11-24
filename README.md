@@ -55,6 +55,20 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 | `tools/` | Pipeline guard scripts |
 | `.AL-Go/`, `.github/`, `.alpaca/` | AL-Go for GitHub / COSMO Alpaca pipeline configuration |
 
+## Service.Order.AdjustPrice (#29)
+
+Applies, previews or resets a service price adjustment on one service item line of a service order or quote. Write; read role refused.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076140 | codeunit | Svc Price Adjust Impl ori |
+| 10076141 | codeunit | Svc Price Adjust Proc ori |
+| 10076142 | enumextension | Svc Price MsgType ori |
+| 97770 | codeunit (test) | Svc Price Adjust Tests ori |
+| 97771 | codeunit (test) | Svc Price Perm Tests ori |
+| 97772 | codeunit (test) | Svc Price Contract Tests ori |
+| 97773 | codeunit (test helper) | Svc Price Perm Runner ori |
+
 ## Service.Resource.Suggest (#27)
 
 `Service.Resource.Suggest` is a read. For one service item line of a service order (`documentNo` + `serviceItemLineNo`, or the line `systemId`) and a period of at most 31 days (`dateFrom`, `dateTo`, default the work date), it ranks the resources: qualified first, then in the order service zone, then most available hours (capacity minus active, unposted service order allocations), then resource no. Optional `resourceGroupNo`, `includeUnqualified` (default false) and `top` (default 20, max 100). Qualification is Business Central's own `QualifiedForServiceItemLine`. When Resource Skills Option is Not Used, every resource is returned with `qualified` = null; when Service Zones Option is Not Used or the order has no zone, `inServiceZone` = null. Blocked resources are left out. Nothing is written, so there is no confirmation and no write gate; the type is in `BIFROST SvcRead ori`. A caller without native read access to service headers, service item lines, service setup, resources, skills, service zones, capacity or allocations gets `PermissionDenied` (a standard reader has `D365 READ`).
@@ -156,12 +170,12 @@ verification evidence, not inferred from this source inventory.
 ## Service.Quote.MakeOrder (#5)
 
 ```json
-{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001","expectedCount":1}}
+{"type":"Service.Quote.MakeOrder","data":{"no":"SQ000001"}}
 ```
 
-Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit, and cannot be undone. A retry after success returns `RecordNotFound`.
+Converts an accepted service quote with BC codeunit 5923, deletes the quote and returns the new order identity, customer, date and row counts. A plain `subject` or `data.systemId` can identify the quote; all supplied identifiers must agree. This call commits, even with Omit Commit. A retry after success returns `RecordNotFound`.
 
-Call without `expectedCount` to obtain `ConfirmationRequired` with count 1 and the quote summary, then confirm that count. An administrator may turn required confirmation off per company; any supplied count is still validated. A wrong count returns `ConfirmationMismatch` without converting the quote.
+The effect is `write`: no confirmation is required, with or without Require Confirmation for Irreversible Messages. `expectedCount` is accepted and ignored for existing callers.
 
 Allocations moved by BC with `Reallocation Needed` are counted in `allocationsToReallocate`; `nextStep` names `Service.Allocation.Allocate` when needed, otherwise `Service.Order.Release` / `Service.Order.Post`. Missing customer, bill-to customer or Service Order Nos. is `PreconditionFailed`. BC conversion errors are returned unchanged as `BusinessCentralError` and roll back the conversion.
 
@@ -173,7 +187,6 @@ Foundation dependency: published 28.0.11 (`28.0.11.669`), the first containing `
 | --- | --- | --- |
 | 10076050 | enumextension | Svc Quote MsgType ori |
 | 10076051 | codeunit | Svc Quote MakeOrder Impl ori |
-| 10076052 | codeunit | Svc Confirm ori |
 | 97716 | codeunit (test) | Svc Quote Confirm Tests ori |
 | 97717 | codeunit (test) | Svc Quote Contract Tests ori |
 | 97718 | codeunit (test) | Svc Quote Perm Tests ori |
@@ -313,3 +326,121 @@ Gunnar approved standard posting cleanup for this issue on 20 November 2026 (dec
 | 97759 | test codeunit | Svc Doc Contract Tests ori |
 | 97760 | codeunit | Svc Doc Fixture ori |
 | 97761 | codeunit | Svc Doc Perm Runner ori |
+
+## Service.Loaner.Lend and Service.Loaner.Receive (#26)
+
+```json
+{"type":"Service.Loaner.Receive","data":{"documentNo":"XORDER","serviceItemLineNo":10000}}
+```
+
+Receives a lent loaner and keeps its loan history. Alternatively send
+`postedShipmentNo` with `lineNo`, or `loanerNo` alone. Multiple identifier sets
+must name the same open loan. The response includes `loanerNo`, `loanerEntryNo`,
+`documentType`, `documentNo`, `serviceItemLineNo`, `dateReceived`, `timeReceived`
+and `lent: false`. Repeating receipt is refused with `PreconditionFailed`.
+
+Use `Service.Loaner.Lend` with `documentNo` + `serviceItemLineNo` (or the line `systemId`) and `loanerNo`. Generic writes of the loaner number are refused with a dedicated-path hint. The operation requires
+full Bifrost access plus native service data permissions. Receipt is a reversible
+write and needs no `expectedCount`. Nothing is deleted. No UI is changed.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076104 | enumextension | Svc Loaner MsgType ori |
+| 10076105 | codeunit | Svc Loaner Receive Impl ori |
+| 10076106 | codeunit | Svc Loaner Receive Proc ori |
+| 97762 | test codeunit | Svc Loaner Tests ori |
+| 97763 | test codeunit | Svc Loaner Contract Tests ori |
+| 97764 | test codeunit | Svc Loaner Perm Tests ori |
+| 97765 | test helper | Svc Loaner Data ori |
+
+`Data.Records.Set` was tested on worker-9 BC 29 with its write guard configured:
+it returned Success and set the field, but created no loan entry in 1033 or 1039.
+The condition in #26 therefore requires the dedicated `Service.Loaner.Lend`.
+It validates the new field value through BC, checks availability, and creates loan history.
+
+| Id | Object | Name |
+| --- | --- | --- |
+| 10076107 | codeunit | Svc Loaner Lend Impl ori |
+| 10076108 | codeunit | Svc Loaner Lend Proc ori |
+| 10076109 | codeunit | Svc Loaner Restrict ori |
+| 97766 | codeunit (test subscriber) | Svc Loaner Failure Tst ori |
+
+## Service contract lifecycle (#24)
+
+```json
+{"type":"Service.ContractQuote.MakeContract","data":{"contractQuoteNo":"XQUOTE001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Sign","data":{"contractNo":"XCONTRACT001","expectedCount":1,"createInvoice":false}}
+{"type":"Service.Contract.Unlock","data":{"contractNo":"XCONTRACT001"}}
+{"type":"Service.Contract.Lock","data":{"contractNo":"XCONTRACT001"}}
+```
+
+Conversion files and removes the quote, using Gunnar's 20 November conversion exception. Native conversion already creates a signed, locked contract with the same number. Sign also supports a separately created unsigned contract. Any initial invoice remains unposted; posting remains a separate permission-gated operation.
+
+All four effects are `write`, following Gunnar's 21 November ruling in #43. The explicit single-contract count required by #24 AC03 is enforced for conversion and signing independently of Foundation's irreversible-effect default. Lock and Unlock require no count, and repeating the target change status is refused.
+
+`createInvoice`, `acceptMissingServiceDate` and `acceptNonMonthEndInvoiceDate` default to true, matching BC's confirmation defaults. False declines the initial invoice or refuses the corresponding date condition before writing. `addLinesStartingLater` defaults to true; false refuses lines beginning after the contract starting date. The sign/convert action itself is confirmed by `expectedCount: 1`. Signed contracts with new lines require the native addendum workflow in the client before locking; these operations do not silently run that additional workflow. Native Status validation already refuses a direct transition to Signed. Generic Change Status writes are restricted with a Lock/Unlock hint.
+
+The processor preserves Omit Commit, catches native failures at an isolated write boundary, and binds the invoice-choice subscriber only for the current operation. No UI objects change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 10076150 | codeunit | Svc Contract Make Impl ori |
+| 10076151 | codeunit | Svc Contract Sign Impl ori |
+| 10076152 | codeunit | Svc Contract Lock Impl ori |
+| 10076153 | codeunit | Svc Contract Unlock Impl ori |
+| 10076154 | enumextension | Svc Contract MsgType ori |
+| 10076155 | codeunit | Svc Contract Proc ori |
+| 10076156 | codeunit | Svc Contract Request ori |
+| 10076157 | codeunit | Svc Contract Options ori |
+| 10076158 | codeunit | Svc Contract Restrict ori |
+| 10076159 | codeunit | Svc Contract Help ori |
+| 97774 | codeunit | Svc Contract Data ori |
+| 97775 | test codeunit | Svc Contract Lifecycle Tst ori |
+| 97776 | test codeunit | Svc Contract Validate Tst ori |
+| 97777 | test codeunit | Svc Contract Perm Tests ori |
+| 97778 | test codeunit | Svc Contract Help Tests ori |
+| 97779 | test permission set | Svc Contract Tst ori |
+
+The app block 10076150–10076159 and test block 97774–97779 avoid the parallel wave-2 allocations in PR #45 (app 10076140–10076142, tests 97770–97773) and PR #46 (app 10076104–10076109, tests 97762–97766).
+
+Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests include native `Service Contract - Edit` through test fixture `Svc Contract Tst ori` (97779), avoiding the tenant-specific legacy role ID `SM-CONTRACT,EDIT`, and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.
+
+
+## Contract periodic processing (#25)
+
+```json
+{"type":"Service.Contract.CreateInvoices","data":{"contractNos":["XCONTRACT001"],"postingDate":"2026-01-31","invoiceToDate":"2026-01-31","expectedCount":1}}
+{"type":"Service.Contract.CreateServiceOrders","data":{"customerNo":"XCUSTOMER001","startingDate":"2026-01-01","endingDate":"2026-01-31","expectedCount":1}}
+{"type":"Service.Contract.CreateCreditMemo","data":{"contractNo":"XCONTRACT001","creditMemoDateTo":"2026-01-31","expectedCount":1}}
+```
+
+The three operations create unposted documents through standard contract processing. They are `write` effects under #43, with the explicit confirmation required by #25: `expectedCount` counts distinct selected contracts, including those with no eligible work. Omission returns `ConfirmationRequired`, `count` and `contractNos`; a wrong count returns `ConfirmationMismatch`. Neither changes data.
+
+Batch requests use 1–200 `contractNos` or exact `customerNo` / `nextInvoiceDateTo` filters. Lists and filters cannot be combined. All contracts must be signed and locked. Service order dates are inclusive, cannot reach the one-year anniversary of startingDate, and must also satisfy the company maximum period. Credit memo requests accept agreeing `contractNo`, `systemId` and plain subject; cutoff defaults to work date and cannot exceed it. Unknown keys and malformed identifiers/dates are refused.
+
+Invoices are processed separately per contract, so combining across selected contracts is not performed. The result lists created invoices with customer and amount, each item line on new orders, lines added to existing pending orders, credited contract lines and skipped contracts with reasons. Native service order processing updates the company last contract service date. Credit processing retains every contract line and marks only successful credits. Failed processing rolls back all writes, and Omit Commit preserves the caller transaction.
+
+Callers need the Bifröst full/write role plus native service contract/document permissions. Posting remains separate through `Service.Document.Post` and its posting role. Help chapters stay English; discovery, refusals and nextStep are translated. No pages or actions change.
+
+| ID | Object | Name |
+| --- | --- | --- |
+| 97784 | codeunit | Svc Contr Job Data ori |
+| 97785 | codeunit | Svc Contr Job Tests ori |
+| 97786 | codeunit | Svc Contr Job Validate Tst ori |
+| 97787 | codeunit | Svc Contr Job Perm Tests ori |
+| 97788 | codeunit | Svc Contr Job Help Tests ori |
+| 97789 | codeunit | Svc Contr Job Failure ori |
+| 10076160 | codeunit | Svc Contr Invoice Impl ori |
+| 10076161 | codeunit | Svc Contr Order Impl ori |
+| 10076162 | codeunit | Svc Contr Credit Impl ori |
+| 10076163 | codeunit | Svc Contr Invoice Proc ori |
+| 10076164 | codeunit | Svc Contr Order Proc ori |
+| 10076165 | codeunit | Svc Contr Credit Proc ori |
+| 10076166 | enumextension | Svc Contr Jobs MsgType ori |
+| 10076167 | codeunit | Svc Contr Job Scope ori |
+| 10076168 | codeunit | Svc Contr Jobs ori |
+| 10076169 | codeunit | Svc Contr Job Events ori |
+| 10076170 | codeunit | Svc Contr Job Help ori |
+| 97793 | permissionset (test) | Svc Jobs Tst ori |
+
+The periodic-job role tests include native `Service Documents - Edit` through the test-only permission set, in addition to native contract editing. This supplies the interaction-log insertion rights used by standard service document creation; it does not grant the Bifröst posting token.

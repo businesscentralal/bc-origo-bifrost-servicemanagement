@@ -309,12 +309,6 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu þjónustupöntunina eða þjónustuvörulínuna sem er lokið og reyndu aftur.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Allocation Proc ori - NamedType FinishedNextLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3137329348 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
-          <source>service quote %1 to a service order</source>
-          <target>þjónustutilboð %1 í þjónustupöntun</target>
-          <note from="Developer" annotates="general" priority="2">%1 = quote number, is-IS=þjónustutilboð %1 í þjónustupöntun</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Confirm ori - Method GetConfirmCount - NamedType SummaryLbl</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3694755481 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
           <source>Undoes the consumption on posted service shipment lines that were not invoiced: posts correcting entries and puts the consumed quantity back on the service order. Commits and cannot be undone.</source>
           <target>Afturkallar notkun á bókuðum þjónustuafhendingarlínum sem hafa ekki verið reikningsfærðar: bókar leiðréttingarfærslur og setur notaða magnið aftur á þjónustupöntunina. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
@@ -326,6 +320,282 @@
           <target>afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</target>
           <note from="Developer" annotates="general" priority="2">is-IS=afturkalla þjónustunotkun, afturkalla notkunarlínu, bakfæra þjónustunotkun, leiðrétta notað magn</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Consumption Undo Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4014656581 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates unposted credit memos for eligible lines of one confirmed service contract.</source>
+          <target>Stofnar óbókaða kreditreikninga fyrir gjaldgengar línur eins staðfests þjónustusamnings.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar óbókaða kreditreikninga fyrir gjaldgengar línur eins staðfests þjónustusamnings.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4014656581 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 436587439 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Credit Proc ori - Method Execute - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2703641065 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates unposted invoices for up to 200 confirmed service contracts.</source>
+          <target>Stofnar óbókaða reikninga fyrir allt að 200 staðfesta þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar óbókaða reikninga fyrir allt að 200 staðfesta þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2703641065 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1240650779 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Invoice Proc ori - Method Execute - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 3764383116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the selected contracts and resend expectedCount: %1 to confirm.</source>
+          <target>Yfirfarðu valda samninga og sendu expectedCount: %1 aftur til að staðfesta.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = contract count, is-IS=Yfirfarðu valda samninga og sendu expectedCount: %1 aftur til að staðfesta.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ConfirmLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use either contractNos or filters, without a subject, for a batch.</source>
+          <target>Notaðu annaðhvort contractNos eða afmarkanir, án subject, fyrir keyrslu á mörgum samningum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu annaðhvort contractNos eða afmarkanir, án subject, fyrir keyrslu á mörgum samningum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 has an invalid format or range.</source>
+          <target>%1 er á ógildu sniði eða utan leyfilegra marka.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er á ógildu sniði eða utan leyfilegra marka.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType FormatLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 187804697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The scope exceeds 200 service contracts.</source>
+          <target>Valið nær yfir fleiri en 200 þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Valið nær yfir fleiri en 200 þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType LargeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2702731386" size-unit="char" translate="yes" xml:space="preserve">
+          <source>expectedCount does not match the selected contract count.</source>
+          <target>expectedCount samsvarar ekki fjölda valinna samninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=expectedCount samsvarar ekki fjölda valinna samninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType MismatchLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No service contracts were selected.</source>
+          <target>Engir þjónustusamningar voru valdir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Engir þjónustusamningar voru valdir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 2114252703" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Narrow the contract list or filters to at most 200 contracts.</source>
+          <target>Þrengdu samningalistann eða afmarkanirnar í að hámarki 200 samninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þrengdu samningalistann eða afmarkanirnar í að hámarki 200 samninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType NarrowLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service contract %1 was not found.</source>
+          <target>Þjónustusamningur %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = contract number, is-IS=Þjónustusamningur %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1618117332" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select 1 to 200 service contracts and supply the required dates.</source>
+          <target>Veldu 1 til 200 þjónustusamninga og gefðu upp nauðsynlegar dagsetningar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Veldu 1 til 200 þjónustusamninga og gefðu upp nauðsynlegar dagsetningar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType ScopeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Every selected service contract must be signed and locked.</source>
+          <target>Allir valdir þjónustusamningar verða að vera undirritaðir og læstir.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Allir valdir þjónustusamningar verða að vera undirritaðir og læstir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2130989205 - NamedType 1271710774" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sign and lock the selected contracts before running this operation.</source>
+          <target>Undirritaðu og læstu völdum samningum áður en þessi aðgerð er keyrð.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Undirritaðu og læstu völdum samningum áður en þessi aðgerð er keyrð.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Job Scope ori - NamedType StateNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2351247918 - Method 3851712227 - NamedType 1096104557" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No eligible invoice period or service item line was due in the selected dates.</source>
+          <target>Ekkert gjaldgengt reikningstímabil eða þjónustuvörulína var á gjalddaga á völdum dagsetningum.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert gjaldgengt reikningstímabil eða þjónustuvörulína var á gjalddaga á völdum dagsetningum.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Jobs ori - Method Run - NamedType SkipLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2351247918 - Method 3851712227 - NamedType 2029447175" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the created documents. Post invoices and credit memos separately with Service.Document.Post after review.</source>
+          <target>Yfirfarðu stofnuð skjöl. Bókaðu reikninga og kreditreikninga sérstaklega með Service.Document.Post að yfirferð lokinni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirfarðu stofnuð skjöl. Bókaðu reikninga og kreditreikninga sérstaklega með Service.Document.Post að yfirferð lokinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Jobs ori - Method Run - NamedType NextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1569906396 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Creates preventive service orders for up to 200 confirmed service contracts.</source>
+          <target>Stofnar fyrirbyggjandi þjónustupantanir fyrir allt að 200 staðfesta þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Stofnar fyrirbyggjandi þjónustupantanir fyrir allt að 200 staðfesta þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1569906396 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, recurring invoices, preventive maintenance, credit memo</source>
+          <target>þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, reglulegir reikningar, fyrirbyggjandi viðhald, kreditreikningur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3577915370 - Method 1561766673 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contr Order Proc ori - Method Execute - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2475122981 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Locks a service contract against changes. Use Service.Contract.Unlock to open it again.</source>
+          <target>Læsir þjónustusamningi fyrir breytingum. Notaðu Service.Contract.Unlock til að opna hann aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Læsir þjónustusamningi fyrir breytingum. Notaðu Service.Contract.Unlock til að opna hann aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Lock Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2475122981 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Lock Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4265856966 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Files a service contract quote and converts it into a signed, locked contract. The quote is removed.</source>
+          <target>Vistar afrit af þjónustusamningstilboði og breytir því í undirritaðan, læstan samning. Tilboðinu er eytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Vistar afrit af þjónustusamningstilboði og breytir því í undirritaðan, læstan samning. Tilboðinu er eytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Make Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4265856966 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Make Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the field or setup named by Business Central and retry. Nothing was changed.</source>
+          <target>Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu reitinn eða uppsetninguna sem Business Central nefnir og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1542941690" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The contract contains a date choice that the request did not accept.</source>
+          <target>Samningurinn inniheldur dagsetningarval sem beiðnin samþykkti ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Samningurinn inniheldur dagsetningarval sem beiðnin samþykkti ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType DateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1412843979" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the contract dates or explicitly accept the documented date choice.</source>
+          <target>Leiðréttu dagsetningar samningsins eða samþykktu sérstaklega dagsetningarvalið sem lýst er í hjálpinni.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu dagsetningar samningsins eða samþykktu sérstaklega dagsetningarvalið sem lýst er í hjálpinni.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType DateNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 94641957" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This signed contract has new lines. Complete the contract addendum in Business Central before locking it.</source>
+          <target>Þessi undirritaði samningur er með nýjar línur. Ljúktu við viðauka samningsins í Business Central áður en honum er læst.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þessi undirritaði samningur er með nýjar línur. Ljúktu við viðauka samningsins í Business Central áður en honum er læst.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType NewLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 680257497" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Review the contract. Use Service.Contract.Unlock / Service.Contract.Lock for changes. Review any unposted invoice before Service.Document.Post.</source>
+          <target>Yfirfarðu samninginn. Notaðu Service.Contract.Unlock / Service.Contract.Lock fyrir breytingar. Yfirfarðu óbókaðan reikning áður en Service.Document.Post er notað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Yfirfarðu samninginn. Notaðu Service.Contract.Unlock / Service.Contract.Lock fyrir breytingar. Yfirfarðu óbókaðan reikning áður en Service.Document.Post er notað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType NextStepLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2166595146 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The service contract is already in the requested change status.</source>
+          <target>Þjónustusamningurinn er þegar í umbeðinni breytingastöðu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustusamningurinn er þegar í umbeðinni breytingastöðu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Proc ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3764383116" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Confirm the operation on one service contract by sending expectedCount: 1.</source>
+          <target>Staðfestu aðgerðina á einum þjónustusamningi með því að senda expectedCount: 1.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Staðfestu aðgerðina á einum þjónustusamningi með því að senda expectedCount: 1.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType ConfirmLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers refer to different service contracts.</source>
+          <target>Auðkennin vísa í mismunandi þjónustusamninga.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa í mismunandi þjónustusamninga.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3071622107" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The expected count does not match the one selected service contract.</source>
+          <target>Áætlaður fjöldi samsvarar ekki einum völdum þjónustusamningi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Áætlaður fjöldi samsvarar ekki einum völdum þjónustusamningi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType CountLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 3188110234" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send true or false as a JSON boolean.</source>
+          <target>Sendu true eða false sem JSON-rökgildi.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu true eða false sem JSON-rökgildi.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType FlagLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 has an invalid format.</source>
+          <target>%1 er á ógildu sniði.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er á ógildu sniði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType FormatLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 4264074168" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send contractNo (contractQuoteNo for a quote), systemId or a plain subject identifying one service contract.</source>
+          <target>Sendu contractNo (contractQuoteNo fyrir tilboð), systemId eða númer í subject sem auðkennir einn þjónustusamning.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu contractNo (contractQuoteNo fyrir tilboð), systemId eða númer í subject sem auðkennir einn þjónustusamning.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType IdentityLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>A service contract identifier is required.</source>
+          <target>Auðkenni þjónustusamnings vantar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkenni þjónustusamnings vantar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 704880291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The service contract or quote was not found.</source>
+          <target>Þjónustusamningurinn eða tilboðið fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þjónustusamningurinn eða tilboðið fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType NotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 926775731 - NamedType 2256167925" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifier refers to the wrong kind of service contract document.</source>
+          <target>Auðkennið vísar í ranga tegund þjónustusamningsskjals.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennið vísar í ranga tegund þjónustusamningsskjals.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Request ori - NamedType WrongScopeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3541747344 - Method 762139347 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Contract.Lock / Service.Contract.Unlock.</source>
+          <target>Notaðu Service.Contract.Lock / Service.Contract.Unlock.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Contract.Lock / Service.Contract.Unlock.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Restrict ori - Method ChangeStatusHint - NamedType HintLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3522842853 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Signs a service contract and optionally creates its first unposted invoice.</source>
+          <target>Undirritar þjónustusamning og stofnar fyrsta óbókaða reikninginn ef þess er óskað.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Undirritar þjónustusamning og stofnar fyrsta óbókaða reikninginn ef þess er óskað.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Sign Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3522842853 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Sign Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2531559700 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens a service contract for changes. Use Service.Contract.Lock to lock it again.</source>
+          <target>Opnar þjónustusamning fyrir breytingum. Notaðu Service.Contract.Lock til að læsa honum aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Opnar þjónustusamning fyrir breytingum. Notaðu Service.Contract.Lock til að læsa honum aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Unlock Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2531559700 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service contract, contract quote, sign, lock, unlock</source>
+          <target>þjónustusamningur, samningstilboð, undirrita, læsa, opna</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=þjónustusamningur, samningstilboð, undirrita, læsa, opna</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Contract Unlock Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 286836964 - Method 3507224617 - NamedType 3337375434" size-unit="char" translate="yes" xml:space="preserve">
           <source>service document %1</source>
@@ -410,6 +680,12 @@
           <target>Notaðu Service.Order.Post eða Service.Order.PreviewPost fyrir þjónustupantanir.</target>
           <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Order.Post eða Service.Order.PreviewPost fyrir þjónustupantanir.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Doc Request ori - Method Find - NamedType OrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1003670717 - Method 972979633 - NamedType 3112345243" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send %1 as a positive JSON integer.</source>
+          <target>Sendu %1 sem jákvæða JSON-heiltölu.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=Sendu %1 sem jákvæða JSON-heiltölu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Doc Request ori - Method ReadPositiveInteger - NamedType NumberLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 1003670717 - Method 11078697 - NamedType 2588563411" size-unit="char" translate="yes" xml:space="preserve">
           <source>Send %1 as a nonempty string of at most %2 characters.</source>
@@ -783,6 +1059,120 @@
           <note from="Developer" annotates="general" priority="2">is-IS=Sendu shipmentNos sem 1 til 200 mismunandi afhendingarnúmer eða allUninvoiced true, en ekki hvort tveggja.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Inv Shipment Proc ori - NamedType SelectionLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 563025782 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lends an available loaner on a service order item line and creates its loan history.</source>
+          <target>Lánar tiltækt lánstæki á þjónustupöntunarlínu og skráir lánasögu þess.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánar tiltækt lánstæki á þjónustupöntunarlínu og skráir lánasögu þess.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 563025782 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>lend loaner, issue loaner, replacement during repair</source>
+          <target>lána lánstæki, afhenda lánstæki, staðgengill meðan á viðgerð stendur</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=lána lánstæki, afhenda lánstæki, staðgengill meðan á viðgerð stendur</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers name different service item lines. Send identifiers for the same order line.</source>
+          <target>Auðkennin vísa á mismunandi þjónustuvörulínur. Sendu auðkenni fyrir sömu pöntunarlínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi þjónustuvörulínur. Sendu auðkenni fyrir sömu pöntunarlínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2970038953" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner or service order line was not found. Read the available loaners and order lines with Data.Records.Get and retry.</source>
+          <target>Lánstækið eða þjónustupöntunarlínan fannst ekki. Lestu tiltæk lánstæki og pöntunarlínur með Data.Records.Get og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið eða þjónustupöntunarlínan fannst ekki. Lestu tiltæk lánstæki og pöntunarlínur með Data.Records.Get og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType FindLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send systemId as a nonempty service item line GUID.</source>
+          <target>Sendu systemId sem gilt GUID þjónustuvörulínu sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu systemId sem gilt GUID þjónustuvörulínu sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send loanerNo and either documentNo with serviceItemLineNo, or the service item line systemId.</source>
+          <target>Sendu loanerNo og annaðhvort documentNo með serviceItemLineNo eða systemId þjónustuvörulínunnar.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu loanerNo og annaðhvort documentNo með serviceItemLineNo eða systemId þjónustuvörulínunnar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2119438125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry lending the loaner. Nothing was changed.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aftur að lána lánstækið. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aftur að lána lánstækið. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType NativeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1210317888" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loaners can only be lent here on service order item lines. Choose a service order line.</source>
+          <target>Aðeins er hægt að lána lánstæki hér á þjónustupöntunarlínum. Veldu þjónustupöntunarlínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Aðeins er hægt að lána lánstæki hér á þjónustupöntunarlínum. Veldu þjónustupöntunarlínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType OrderLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType PermissionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 7473088 - NamedType 1298965759" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner is blocked or already lent, or the line already has a loaner. Choose an available loaner and receive any existing loan with Service.Loaner.Receive first.</source>
+          <target>Lánstækið er lokað eða þegar í útláni, eða línan hefur þegar lánstæki. Veldu tiltækt lánstæki og taktu fyrst við því sem er í útláni með Service.Loaner.Receive.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið er lokað eða þegar í útláni, eða línan hefur þegar lánstæki. Veldu tiltækt lánstæki og taktu fyrst við því sem er í útláni með Service.Loaner.Receive.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Lend Proc ori - NamedType StateLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1871068542 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Receives a lent loaner from an order, a posted shipment or its loaner number.</source>
+          <target>Tekur við lánstæki úr útláni á pöntun, bókaðri afhendingu eða eftir númeri lánstækis.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Tekur við lánstæki úr útláni á pöntun, bókaðri afhendingu eða eftir númeri lánstækis.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1871068542 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>receive loaner, return loaner, loaner availability</source>
+          <target>taka við lánstæki, skila lánstæki, framboð lánstækja</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=taka við lánstæki, skila lánstæki, framboð lánstækja</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The identifiers name different loans. Send identifiers for the same loaner and document line.</source>
+          <target>Auðkennin vísa á mismunandi lán. Sendu auðkenni fyrir sama lánstæki og sömu skjallínu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Auðkennin vísa á mismunandi lán. Sendu auðkenni fyrir sama lánstæki og sömu skjallínu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2970038953" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The loaner or document line was not found. Read the available loaners and document lines with Data.Records.Get and retry.</source>
+          <target>Lánstækið eða skjallínan fannst ekki. Lestu tiltæk lánstæki og skjallínur með Data.Records.Get og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lánstækið eða skjallínan fannst ekki. Lestu tiltæk lánstæki og skjallínur með Data.Records.Get og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType FindLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send documentNo with serviceItemLineNo, postedShipmentNo with lineNo, or loanerNo.</source>
+          <target>Sendu documentNo með serviceItemLineNo, postedShipmentNo með lineNo eða loanerNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu documentNo með serviceItemLineNo, postedShipmentNo með lineNo eða loanerNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2119438125" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry receiving the loaner. Nothing was changed.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aftur að taka við lánstækinu. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aftur að taka við lánstækinu. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType NativeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2775429752" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No open loan matches this identifier. Check that the loaner is lent on this document before receiving it.</source>
+          <target>Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert opið lán passar við auðkennið. Gakktu úr skugga um að lánstækið sé í útláni á þessu skjali áður en þú tekur við því.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType NotLentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2809595496 - NamedType 2009142491" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You cannot lend or receive loaners. Ask an administrator for full Bifrost access and permission to update service data.</source>
+          <target>Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Þú hefur ekki heimild til að lána eða taka við lánstækjum. Biddu kerfisstjóra um fullan aðgang að Bifröst og heimild til að uppfæra þjónustugögn.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Receive Proc ori - NamedType PermissionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2329835735 - Method 3089344596 - NamedType 232473427" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Use Service.Loaner.Lend / Service.Loaner.Receive</source>
+          <target>Notaðu Service.Loaner.Lend / Service.Loaner.Receive</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Notaðu Service.Loaner.Lend / Service.Loaner.Receive</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Loaner Restrict ori - Method LoanerHint - NamedType HintLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2591205528 - Method 3571782927 - NamedType 3498257463" size-unit="char" translate="yes" xml:space="preserve">
           <source>Correct the setup or document named by Business Central and send the posting again. Nothing was posted.</source>
           <target>Leiðréttu uppsetninguna eða skjalið sem Business Central nefnir og sendu bókunina aftur. Ekkert var bókað.</target>
@@ -993,6 +1383,204 @@
           <note from="Developer" annotates="general" priority="2">%1 = permission set name, is-IS=Biddu stjórnanda um að úthluta heimildasettinu %1.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Posting Gate ori - Method AssertCanPost - NamedType PostingDeniedNextStepLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 650235816" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 does not match the service item line (%2).</source>
+          <target>%1 passar ekki við þjónustuvörulínuna (%2).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = value on the line, is-IS=%1 passar ekki við þjónustuvörulínuna (%2).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType ConflictLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 3299433917" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send either systemId or documentNo and serviceItemLineNo, or values that match the line.</source>
+          <target>Sendu annaðhvort systemId eða documentNo og serviceItemLineNo, eða gildi sem passa við línuna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu annaðhvort systemId eða documentNo og serviceItemLineNo, eða gildi sem passa við línuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType ConflictNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 3208438856" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the value in the documented format and retry.</source>
+          <target>Sendu gildið á sniðinu sem lýst er og reyndu aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu gildið á sniðinu sem lýst er og reyndu aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType CorrectLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2636616999" size-unit="char" translate="yes" xml:space="preserve">
+          <source>documentType must be Order or Quote.</source>
+          <target>documentType verður að vera Order eða Quote.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=documentType verður að vera Order eða Quote.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType DocumentTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2572614026" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Correct the Business Central error and retry. Nothing was changed.</source>
+          <target>Leiðréttu villuna í Business Central og reyndu aftur. Engu var breytt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu villuna í Business Central og reyndu aftur. Engu var breytt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType FailedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 212328767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>systemId must be a nonempty GUID.</source>
+          <target>systemId verður að vera gilt GUID sem er ekki tómt.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=systemId verður að vera gilt GUID sem er ekki tómt.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType GuidLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 893396801" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be true or false.</source>
+          <target>%1 verður að vera true eða false.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 verður að vera true eða false.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType InvalidBooleanLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 3728047871" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a whole number from %2 to %3.</source>
+          <target>%1 verður að vera heiltala frá %2 til %3.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = minimum, %3 = maximum, is-IS=%1 verður að vera heiltala frá %2 til %3.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType InvalidIntegerLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 4175382522" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 must be a nonempty JSON string of at most %2 characters.</source>
+          <target>%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, %2 = maximum length, is-IS=%1 verður að vera JSON-strengur sem er ekki tómur og er að hámarki %2 stafir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType InvalidTextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 740720393" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 was not found.</source>
+          <target>Þjónustuvörulína %1 fannst ekki.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Þjónustuvörulína %1 fannst ekki.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType LineNotFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2128777440" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 has %2 service item lines.</source>
+          <target>Þjónustuskjal %1 er með %2 þjónustuvörulínur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = line count, is-IS=Þjónustuskjal %1 er með %2 þjónustuvörulínur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType ManyLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 3218661525" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send serviceItemLineNo to choose the service item line.</source>
+          <target>Sendu serviceItemLineNo til að velja þjónustuvörulínuna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu serviceItemLineNo til að velja þjónustuvörulínuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType ManyLinesNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 1128910002" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send the service item line: documentNo and serviceItemLineNo, or systemId.</source>
+          <target>Sendu þjónustuvörulínuna: documentNo og serviceItemLineNo, eða systemId.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu þjónustuvörulínuna: documentNo og serviceItemLineNo, eða systemId.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType MissingLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 3129818787" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Read the service item lines with Data.Records.Get (table Service Item Line) and send documentNo and serviceItemLineNo.</source>
+          <target>Lestu þjónustuvörulínurnar með Data.Records.Get (tafla Service Item Line) og sendu documentNo og serviceItemLineNo.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Lestu þjónustuvörulínurnar með Data.Records.Get (tafla Service Item Line) og sendu documentNo og serviceItemLineNo.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType MissingNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2658168242" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service document %1 was not found or has no service item lines.</source>
+          <target>Þjónustuskjal %1 fannst ekki eða er ekki með neinar þjónustuvörulínur.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, is-IS=Þjónustuskjal %1 fannst ekki eða er ekki með neinar þjónustuvörulínur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType NoLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2252324695" size-unit="char" translate="yes" xml:space="preserve">
+          <source>preview and reset cannot both be true.</source>
+          <target>preview og reset geta ekki bæði verið true.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=preview og reset geta ekki bæði verið true.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType PreviewResetLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 1061301390" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send preview to see the new prices, or reset to restore the prices of adjusted lines.</source>
+          <target>Sendu preview til að sjá nýju verðin, eða reset til að endurheimta verð leiðréttra lína.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Sendu preview til að sjá nýju verðin, eða reset til að endurheimta verð leiðréttra lína.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType PreviewResetNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 1773691126" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 is not a parameter here.</source>
+          <target>%1 er ekki færibreyta hér.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=%1 er ekki færibreyta hér.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType UnknownLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 2001379935" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove %1. The parameters are documentNo, documentType, serviceItemLineNo, systemId, preview and reset.</source>
+          <target>Fjarlægðu %1. Færibreyturnar eru documentNo, documentType, serviceItemLineNo, systemId, preview og reset.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = parameter, is-IS=Fjarlægðu %1. Færibreyturnar eru documentNo, documentType, serviceItemLineNo, systemId, preview og reset.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType UnknownNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 1523666714" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 is not on a service order or service quote.</source>
+          <target>Þjónustuvörulína %1 er ekki á þjónustupöntun eða þjónustutilboði.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = identifier, is-IS=Þjónustuvörulína %1 er ekki á þjónustupöntun eða þjónustutilboði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType WrongDocumentLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - NamedType 365612843" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adjust prices on a service order or service quote.</source>
+          <target>Leiðréttu verð á þjónustupöntun eða þjónustutilboði.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu verð á þjónustupöntun eða þjónustutilboði.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - NamedType WrongDocumentNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Applies the fixed, maximum or minimum price of a service price adjustment group to the lines of a service item line, or previews or resets it.</source>
+          <target>Beitir föstu, hámarks- eða lágmarksverði verðleiðréttingarflokks þjónustu á línur þjónustuvörulínu, eða forskoðar eða endurstillir það.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Beitir föstu, hámarks- eða lágmarksverði verðleiðréttingarflokks þjónustu á línur þjónustuvörulínu, eða forskoðar eða endurstillir það.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 131047790 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
+          <source>service price adjustment, fixed price repair, price cap, reset adjusted prices</source>
+          <target>verðleiðrétting þjónustu, viðgerð á föstu verði, verðþak, endurstilla leiðrétt verð</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=verðleiðrétting þjónustu, viðgerð á föstu verði, verðþak, endurstilla leiðrétt verð</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Impl ori - Method GetKeywords - NamedType KeywordsLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 2431676065" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service line %1 on %2 is already invoiced, so its price cannot be adjusted.</source>
+          <target>Þjónustulína %1 á %2 hefur þegar verið reikningsfærð og því er ekki hægt að leiðrétta verð hennar.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = line number, %2 = document number, is-IS=Þjónustulína %1 á %2 hefur þegar verið reikningsfærð og því er ekki hægt að leiðrétta verð hennar.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType InvoicedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 1961377812" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adjust prices only before invoicing. Correct invoiced amounts with a service credit memo.</source>
+          <target>Leiðréttu verð aðeins fyrir reikningsfærslu. Leiðréttu reikningsfærðar upphæðir með kreditreikningi þjónustu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Leiðréttu verð aðeins fyrir reikningsfærslu. Leiðréttu reikningsfærðar upphæðir með kreditreikningi þjónustu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType InvoicedNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 3857350328" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 %2 has no service price group.</source>
+          <target>Þjónustuvörulína %1 %2 er ekki með þjónustuverðflokk.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = line number, is-IS=Þjónustuvörulína %1 %2 er ekki með þjónustuverðflokk.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoGroupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 33031629" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set Service Price Group Code on the service item line with Data.Records.Set (table Service Item Line), then retry.</source>
+          <target>Settu Service Price Group Code á þjónustuvörulínuna með Data.Records.Set (tafla Service Item Line) og reyndu svo aftur.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Settu Service Price Group Code á þjónustuvörulínuna með Data.Records.Set (tafla Service Item Line) og reyndu svo aftur.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoGroupNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 2658168242" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 %2 has no service lines that the price adjustment group covers.</source>
+          <target>Þjónustuvörulína %1 %2 er ekki með neinar þjónustulínur sem verðleiðréttingarflokkurinn nær yfir.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = line number, is-IS=Þjónustuvörulína %1 %2 er ekki með neinar þjónustulínur sem verðleiðréttingarflokkurinn nær yfir.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoLinesLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 3511091107" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add item, resource, cost or G/L account lines to the service item line with Data.Records.Set (table Service Line), or check the adjustment group details.</source>
+          <target>Bættu vöru-, forða-, kostnaðar- eða fjárhagslykilslínum við þjónustuvörulínuna með Data.Records.Set (tafla Service Line), eða athugaðu nánari upplýsingar leiðréttingarflokksins.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu vöru-, forða-, kostnaðar- eða fjárhagslykilslínum við þjónustuvörulínuna með Data.Records.Set (tafla Service Line), eða athugaðu nánari upplýsingar leiðréttingarflokksins.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoLinesNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 704061912" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service price group %1 has no price adjustment setup for this document (adjustment group, customer price group, currency and starting date).</source>
+          <target>Þjónustuverðflokkur %1 er ekki með verðleiðréttingaruppsetningu sem á við þetta skjal (leiðréttingarflokkur, verðflokkur viðskiptamanns, gjaldmiðill og upphafsdagsetning).</target>
+          <note from="Developer" annotates="general" priority="2">%1 = service price group, is-IS=Þjónustuverðflokkur %1 er ekki með verðleiðréttingaruppsetningu sem á við þetta skjal (leiðréttingarflokkur, verðflokkur viðskiptamanns, gjaldmiðill og upphafsdagsetning).</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoSetupLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 4040801069" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a price group setup row with an adjustment group with Data.Records.Set (table Serv. Price Group Setup), then set the service price group on the service item line again.</source>
+          <target>Bættu við uppsetningarlínu verðflokks með leiðréttingarflokki með Data.Records.Set (tafla Serv. Price Group Setup) og settu svo þjónustuverðflokkinn aftur á þjónustuvörulínuna.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Bættu við uppsetningarlínu verðflokks með leiðréttingarflokki með Data.Records.Set (tafla Serv. Price Group Setup) og settu svo þjónustuverðflokkinn aftur á þjónustuvörulínuna.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NoSetupNextLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 3551592934" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Service item line %1 %2 has no adjusted service lines to reset.</source>
+          <target>Þjónustuvörulína %1 %2 er ekki með neinar leiðréttar þjónustulínur til að endurstilla.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = document number, %2 = line number, is-IS=Þjónustuvörulína %1 %2 er ekki með neinar leiðréttar þjónustulínur til að endurstilla.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NothingResetLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 690613816 - NamedType 1770498319" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nothing to do. Send reset only after a price adjustment.</source>
+          <target>Ekkert að gera. Sendu reset aðeins eftir verðleiðréttingu.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Ekkert að gera. Sendu reset aðeins eftir verðleiðréttingu.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Price Adjust Proc ori - NamedType NothingResetNextLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 3303280095 - NamedType 152929028" size-unit="char" translate="yes" xml:space="preserve">
           <source>The order has %1 allocations that need a resource again. Use Service.Allocation.Allocate.</source>
           <target>Pöntunin er með %1 úthlutanir sem þurfa forða aftur. Notaðu Service.Allocation.Allocate.</target>
@@ -1042,9 +1630,9 @@
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method ExecuteBifrostTask - NamedType ConversionNextLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 4077369804 - NamedType 3569966352" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits and cannot be undone.</source>
-          <target>Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</target>
-          <note from="Developer" annotates="general" priority="2">is-IS=Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit og ekki er hægt að afturkalla.</note>
+          <source>Writes. Converts a service quote into a service order, as the Make Order action on the quote does. The quote is removed. Commits.</source>
+          <target>Skrifar. Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.</target>
+          <note from="Developer" annotates="general" priority="2">is-IS=Skrifar. Breytir þjónustutilboði í þjónustupöntun, eins og aðgerðin Gera pöntun á tilboðinu. Tilboðinu er eytt. Framkvæmir Commit.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Svc Quote MakeOrder Impl ori - Method GetDescription - NamedType DescriptionLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 3257175344 - Method 1027590672 - NamedType 1290244428" size-unit="char" translate="yes" xml:space="preserve">
