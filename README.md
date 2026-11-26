@@ -1,7 +1,7 @@
 # Bifröst Service Management
 
 **App name:** Bifrost Service Management
-**Publisher:** Origo — **Version:** 28.0.0.0 — **Target:** Cloud (BC 28.5, runtime 17.0)
+**Publisher:** Origo — **Version:** 28.0.0.0 — **Target:** Cloud (BC 28.0, runtime 17.0)
 **App ID:** `f74e6852-7965-4c14-afb7-1102e080cda7` — **Test app ID:** `d39af77f-6b49-426f-a2ba-830ec3f35e21`
 **Object ID range:** 10076035–10076184 (tests 97700–97799) — **Namespace:** `Origo.Bifrost.ServiceManagement`
 
@@ -42,7 +42,7 @@ site repository and is published at <https://docs.bifrost.origo.is>.
 | App | ID | Publisher | Version |
 | --- | --- | --- | --- |
 | Bifrost Foundation | `7505e808-6e52-4b96-a328-82573391297a` | Origo | 28.0.11.669 |
-| Base Application | | Microsoft | 28.5.0.0 (application floor) |
+| Base Application | | Microsoft | 28.0.0.0 (application floor) |
 
 ---
 
