@@ -22,6 +22,7 @@ codeunit 97709 "Svc Release Perm Tests ori"
         Header: Record "Service Header";
         Request: JsonObject;
         Response: JsonObject;
+        ResponseText: Text;
     begin
         // BIFROST SvcFull is a permission-set extension, so assign the actual BIFROST Full base role.
         Data.CreateDocument(Header, Header."Document Type"::Order);
@@ -29,14 +30,18 @@ codeunit 97709 "Svc Release Perm Tests ori"
         Commit();
         LowerPermissions.SetExactPermissionSet('BIFROST Full ori');
         AddNativePermissions();
+        AddBc29NativeGaps();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Release", Request, '', 1033, false);
         LowerPermissions.SetOutsideO365Scope();
-        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role releases.');
+        Response.WriteTo(ResponseText);
+        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role releases: ' + ResponseText);
         LowerPermissions.SetExactPermissionSet('BIFROST Full ori');
         AddNativePermissions();
+        AddBc29NativeGaps();
         Response := Data.Invoke("Message Type ori"::"Service.Order.Reopen", Request, '', 1033, false);
         LowerPermissions.SetOutsideO365Scope();
-        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role reopens.');
+        Response.WriteTo(ResponseText);
+        Assert.AreEqual('Success', Data.TextValue(Response, 'status'), 'Full role reopens: ' + ResponseText);
     end;
 
     [Test]
@@ -97,5 +102,11 @@ codeunit 97709 "Svc Release Perm Tests ori"
         LowerPermissions.AddPermissionSet('D365 BASIC');
         LowerPermissions.AddPermissionSet('D365PREM SMG, EDIT');
         LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
+    end;
+
+    local procedure AddBc29NativeGaps()
+    begin
+        // BC 29 D365PREM SMG, EDIT lacks these base-app grants (#51); a real user needs them from another native set.
+        LowerPermissions.AddPermissionSet('Svc BC29 Gap Tst ori');
     end;
 }
