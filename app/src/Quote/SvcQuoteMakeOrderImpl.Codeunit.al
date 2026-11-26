@@ -208,7 +208,7 @@ codeunit 10076051 "Svc Quote MakeOrder Impl ori" implements "Msg Interface ori",
     /// <summary>Explains quote scope and transaction semantics.</summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'This call commits, including when Omit Commit is requested. Not retry-safe: the deleted quote answers RecordNotFound after success. Quote fields remain editable through Data.Records.Set because conversion owns no field end to end. Service.Order.Post appears in related when issue #7 registers that type; Foundation refuses unregistered related names. Contract quotes, archiving, loaners and optional chaining are outside scope.';
+        Notes := 'This call commits, including when Omit Commit is requested. Not retry-safe: the deleted quote answers RecordNotFound after success. Quote fields remain editable through Data.Records.Set because conversion owns no field end to end. Service.Order.Post appears in related when issue #7 registers that type; Foundation refuses unregistered related names. Contract quotes, archiving, loaners and optional chaining are outside scope. On BC 29, D365PREM SMG, EDIT does not grant insert on Interaction Log Entry, which standard conversion writes; the caller also needs a native set that does, for example D365 SALES or D365 BUS FULL ACCESS. Without it the type answers BusinessCentralError with "Sorry, the current permissions prevented the action. (TableData 5065 Interaction Log Entry IndirectInsert: Base Application)" and nothing is changed.';
         exit(true);
     end;
 

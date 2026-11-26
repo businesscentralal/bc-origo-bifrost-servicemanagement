@@ -405,6 +405,8 @@ The app block 10076150–10076159 and test block 97774–97779 avoid the paralle
 
 Contract callers need native contract editing and filing rights alongside the Bifröst full role. The role tests include native `Service Contract - Edit` through test fixture `Svc Contract Tst ori` (97779), avoiding the tenant-specific legacy role ID `SM-CONTRACT,EDIT`, and assert that `BIFROST SvcPost ori` is still absent; `D365PREM SMG, EDIT` alone does not grant insertion of filed contract lines. No native data permissions are added to the product permission sets.
 
+BC 29 native gap (#51): Microsoft's `D365PREM SMG, EDIT` (in the separate Service Management app on BC 29) grants neither `Warehouse Request` read (direct read in standard service release) nor `Interaction Log Entry` insert (standard quote conversion). A user of `Service.Order.Release` or `Service.Quote.MakeOrder` therefore also needs a native set that grants them, for example `D365 SALES` or `D365 BUS FULL ACCESS`, next to `D365PREM SMG, EDIT`. Otherwise the type answers `BusinessCentralError` with "Sorry, the current permissions prevented the action. (TableData 5765 Warehouse Request Read: Base Application)" or "(TableData 5065 Interaction Log Entry IndirectInsert: Base Application)". The Bifröst sets do not widen BC data access (AppSourceCop AS0110/AS0112), so the role tests 97709 and 97718 add test fixture `Svc BC29 Gap Tst ori` (97794) with exactly 5065 `i` and 5765 `R` (Architect ruling 26.11.2026, option 1).
+
 
 ## Contract periodic processing (#25)
 
@@ -442,5 +444,6 @@ Callers need the Bifröst full/write role plus native service contract/document 
 | 10076169 | codeunit | Svc Contr Job Events ori |
 | 10076170 | codeunit | Svc Contr Job Help ori |
 | 97793 | permissionset (test) | Svc Jobs Tst ori |
+| 97794 | permissionset (test) | Svc BC29 Gap Tst ori |
 
 The periodic-job role tests include native `Service Documents - Edit` through the test-only permission set, in addition to native contract editing. This supplies the interaction-log insertion rights used by standard service document creation; it does not grant the Bifröst posting token.

@@ -4,6 +4,11 @@
 
 - Requires Business Central 28.0 or later (was 28.5): `application` lowered to 28.0.0.0 in the app and test app, and the Application Test Library dependency minimum to 28.0.0.0. Platform and version unchanged.
 
+## Unreleased — BC 29 full-role native gaps (#51)
+
+- On BC 29, `D365PREM SMG, EDIT` lacks `Warehouse Request` read (service release) and `Interaction Log Entry` insert (quote conversion). Users of `Service.Order.Release` and `Service.Quote.MakeOrder` also need a native set such as `D365 SALES` or `D365 BUS FULL ACCESS`; the help notes name the refusal text. The Bifröst permission sets are unchanged (AppSourceCop AS0110/AS0112).
+- Role tests 97709 and 97718 add test-only permission set `Svc BC29 Gap Tst ori` (97794) with exactly 5065 `i` and 5765 `R`; no Bifröst assertion is removed or weakened. No UI changes.
+
 ## Unreleased — contract periodic processing (#25)
 
 - Add `Service.Contract.CreateInvoices`, `Service.Contract.CreateServiceOrders` and `Service.Contract.CreateCreditMemo` with bounded scopes, explicit contract-count confirmation, atomic rollback and native service write permissions. Documents remain unposted and contract lines are retained.

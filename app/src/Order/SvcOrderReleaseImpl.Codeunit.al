@@ -156,7 +156,7 @@ codeunit 10076042 "Svc Order Release Impl ori" implements "Msg Interface ori", "
     /// <summary>Explains the order-only scope and transaction semantics.</summary>
     procedure GetNotes(var Notes: Text): Boolean
     begin
-        Notes := 'Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status.';
+        Notes := 'Only service orders are supported. Repeating an operation in its target state is refused. Omit Commit keeps the caller transaction. This changes Release Status, not the separate service Status. On BC 29, D365PREM SMG, EDIT does not grant read on Warehouse Request, which standard release reads directly; the caller also needs a native set that does, for example D365 SALES or D365 BUS FULL ACCESS. Without it the type answers BusinessCentralError with "Sorry, the current permissions prevented the action. (TableData 5765 Warehouse Request Read: Base Application)" and nothing is released.';
         exit(true);
     end;
 

@@ -31,6 +31,7 @@ codeunit 97718 "Svc Quote Perm Tests ori"
         Commit();
         LowerPermissions.SetExactPermissionSet('BIFROST Full ori');
         AddNativePermissions();
+        AddBc29NativeGaps();
         Response := Data.Invoke("Message Type ori"::"Service.Quote.MakeOrder", Request, '', 1033, false);
         LowerPermissions.SetOutsideO365Scope();
         Response.WriteTo(ResponseText);
@@ -99,5 +100,11 @@ codeunit 97718 "Svc Quote Perm Tests ori"
         // Give the same read-only native baseline to both Bifrost role scenarios.
         LowerPermissions.AddPermissionSet('D365 READ');
         LowerPermissions.AddPermissionSet('Svc NoGrant Tst ori');
+    end;
+
+    local procedure AddBc29NativeGaps()
+    begin
+        // BC 29 D365PREM SMG, EDIT lacks these base-app grants (#51); a real user needs them from another native set.
+        LowerPermissions.AddPermissionSet('Svc BC29 Gap Tst ori');
     end;
 }
