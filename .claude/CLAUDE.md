@@ -50,7 +50,7 @@ app's module id, its display name and its setup page id (`0` while the app has n
 `app/src/Common/SubRegistration.Codeunit.al` in Bifrost Subscription Billing.
 
 ## Target BC Version
-28.5 (application 28.5.0.0, platform 28.0.0.0, runtime 17.0)
+28.0 (application 28.0.0.0, platform 28.0.0.0, runtime 17.0)
 
 ## Source Control
 Platform: GitHub
@@ -59,7 +59,7 @@ Repository: bc-origo-bifrost-servicemanagement
 Default branch: main
 
 ## Dependencies
-- Base Application (application floor 28.5.0.0)
+- Base Application (application floor 28.0.0.0)
 - Bifrost Foundation (`7505e808-6e52-4b96-a328-82573391297a`, 28.0.11.669, same floor as Bifrost Subscription Billing)
 
 ## Naming Rules

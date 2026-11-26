@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased — application requirement 28.0 (#49)
+
+- Requires Business Central 28.0 or later (was 28.5): `application` lowered to 28.0.0.0 in the app and test app, and the Application Test Library dependency minimum to 28.0.0.0. Platform and version unchanged.
+
 ## Unreleased — contract periodic processing (#25)
 
 - Add `Service.Contract.CreateInvoices`, `Service.Contract.CreateServiceOrders` and `Service.Contract.CreateCreditMemo` with bounded scopes, explicit contract-count confirmation, atomic rollback and native service write permissions. Documents remain unposted and contract lines are retained.
